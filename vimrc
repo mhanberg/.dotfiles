@@ -5,6 +5,8 @@ set shiftwidth=4
 set expandtab
 set number
 set termguicolors
+set backupdir=~/.tmp
+set directory=~/.tmp
 
 execute pathogen#infect()
 colorscheme slate
