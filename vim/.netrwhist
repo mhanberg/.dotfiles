@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/mitchell/Development/lunch'
+let g:netrw_dirhist_2='/Users/mitchell/Development/lunch/app'
+let g:netrw_dirhist_3='/Users/mitchell/Development/lunch/app/views'
+let g:netrw_dirhist_4='/Users/mitchell/Development/project-euler/ruby'
+let g:netrw_dirhist_5='/Users/mitchell/Development/lunch'
+let g:netrw_dirhist_6='/Users/mitchell/Development/lunch/app'
+let g:netrw_dirhist_7='/Users/mitchell/Development/lunch/app/views'
+let g:netrw_dirhist_8='/Users/mitchell/Development/lunch'
+let g:netrw_dirhist_9='/Users/mitchell/.rbenv/versions/2.4.0/lib/ruby/gems/2.4.0/gems/rubocop-0.49.1'
