@@ -7,7 +7,6 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(rbenv init -)"
 export JAVA_HOME="$(/usr/libexec/java_home)"
 
 source /usr/local/opt/asdf/asdf.sh

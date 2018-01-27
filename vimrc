@@ -30,4 +30,5 @@ nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
 nmap <leader>l :TestLast<CR>
 nmap <leader>g :TestVisit<CR>
+let g:vim_markdown_preview_hotkey='<C-m>'
 nmap <leader>m :call Vim_Markdown_Preview()<CR>
