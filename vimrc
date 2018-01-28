@@ -8,7 +8,29 @@ set termguicolors
 set backupdir=~/.tmp
 set directory=~/.tmp
 
-execute pathogen#infect()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundle')
+Plug 'slashmili/alchemist.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-dispatch'
+Plug 'elixir-editors/vim-elixir'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-sensible'
+Plug 'janko-m/vim-test'
+Plug 'christoomey/vim-tmux-navigator'
+call plug#end()
+
 colorscheme slate
 let g:NERDTreeWinPos = "right"
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
