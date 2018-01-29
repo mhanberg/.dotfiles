@@ -29,6 +29,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-sensible'
 Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-liquid'
 call plug#end()
 
 colorscheme slate
