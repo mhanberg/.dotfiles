@@ -33,9 +33,6 @@ Plug 'tpope/vim-liquid'
 call plug#end()
 
 colorscheme slate
-let g:NERDTreeWinPos = "right"
-autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType eruby setlocal expandtab shiftwidth=2 tabstop=2
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 if executable('ag')
