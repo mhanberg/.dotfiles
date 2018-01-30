@@ -34,6 +34,7 @@ Plug 'tpope/vim-sensible'
 Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-liquid'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 colorscheme slate
@@ -51,6 +52,7 @@ if executable('ag')
 endif
 
 let test#strategy = "dispatch"
+let g:test#javascript#mocha#file_pattern = '\.spec\.js$'
 nmap <leader>n :TestNearest<CR> 
 nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
