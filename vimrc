@@ -8,6 +8,10 @@ set termguicolors
 set backupdir=~/.tmp
 set directory=~/.tmp
 
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
