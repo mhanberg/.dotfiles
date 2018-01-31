@@ -24,3 +24,5 @@
 	trustExitCode = true
 [commit]
 	template = ~/.stCommitMsg
+[include]
+  path = ~/.gitconfig.local
