@@ -21,6 +21,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'slashmili/alchemist.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-dispatch'
 Plug 'elixir-editors/vim-elixir'
@@ -66,6 +67,10 @@ let g:ale_fixers = {
 \}
 let g:ale_fix_on_save = 1
 
+" Airline conf
+let g:airline#extensions#tabline#enabled = 1
+
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
