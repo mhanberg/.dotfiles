@@ -7,9 +7,8 @@ set number
 set termguicolors
 set backupdir=~/.tmp
 set directory=~/.tmp
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
+colorscheme slate
+set splitbelow " Open new split panes to right and bottom, which feels more natural
 set splitright
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -37,8 +36,6 @@ Plug 'tpope/vim-liquid'
 Plug 'pangloss/vim-javascript'
 call plug#end()
 
-colorscheme slate
-
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 if executable('ag')
   " Use ag over grep
@@ -52,7 +49,6 @@ if executable('ag')
 endif
 
 let test#strategy = "dispatch"
-let g:test#javascript#mocha#file_pattern = '\.spec\.js$'
 nmap <leader>n :TestNearest<CR> 
 nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
@@ -60,3 +56,7 @@ nmap <leader>l :TestLast<CR>
 nmap <leader>g :TestVisit<CR>
 let g:vim_markdown_preview_hotkey='<C-m>'
 nmap <leader>m :call Vim_Markdown_Preview()<CR>
+
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
