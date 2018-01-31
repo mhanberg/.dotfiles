@@ -34,8 +34,10 @@ Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-liquid'
 Plug 'pangloss/vim-javascript'
+Plug 'w0rp/ale'
 call plug#end()
 
+" Ctrlp conf
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 if executable('ag')
   " Use ag over grep
@@ -48,6 +50,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" vim-test conf
 let test#strategy = "dispatch"
 nmap <leader>n :TestNearest<CR> 
 nmap <leader>f :TestFile<CR>
@@ -56,6 +59,12 @@ nmap <leader>l :TestLast<CR>
 nmap <leader>g :TestVisit<CR>
 let g:vim_markdown_preview_hotkey='<C-m>'
 nmap <leader>m :call Vim_Markdown_Preview()<CR>
+
+" ALE conf
+let g:ale_fixers = {
+\  'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
