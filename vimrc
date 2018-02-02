@@ -35,7 +35,9 @@ Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-liquid'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " Ctrlp conf
@@ -70,6 +72,8 @@ let g:ale_fix_on_save = 1
 " Airline conf
 let g:airline#extensions#tabline#enabled = 1
 
+" vim-jsx conf
+let g:jsx_ext_required = 0
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
