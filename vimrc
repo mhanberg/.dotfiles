@@ -38,6 +38,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 " Ctrlp conf
@@ -51,6 +52,9 @@ if executable('ag')
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+
+  " use ag for ack.vim
+  let g:ackprg = 'ag --vimgrep'
 endif
 
 " vim-test conf
