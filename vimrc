@@ -67,11 +67,9 @@ nmap <leader>g :TestVisit<CR>
 let g:vim_markdown_preview_hotkey='<C-m>'
 nmap <leader>m :call Vim_Markdown_Preview()<CR>
 
-" ALE conf
-let g:ale_fixers = {
-\  'javascript': ['eslint'],
-\}
-let g:ale_fix_on_save = 1
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_pattern_options = {'\.ex$': {'ale_enabled': 0}, '\.exs$': {'ale_enabled': 0}}
 
 " Airline conf
 let g:airline#extensions#tabline#enabled = 1
