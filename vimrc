@@ -40,6 +40,7 @@ Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mileszs/ack.vim'
 Plug 'ElmCast/elm-vim'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 " Ctrlp conf
