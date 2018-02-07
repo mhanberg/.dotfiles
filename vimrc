@@ -39,6 +39,7 @@ Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mileszs/ack.vim'
+Plug 'ElmCast/elm-vim'
 call plug#end()
 
 " Ctrlp conf
