@@ -40,6 +40,7 @@ Plug 'mileszs/ack.vim'
 Plug 'ElmCast/elm-vim'
 Plug 'tpope/vim-surround'
 Plug 'nanotech/jellybeans.vim'
+Plug 'tpope/vim-eunuch'
 call plug#end()
 
 colorscheme jellybeans
