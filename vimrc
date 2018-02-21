@@ -7,7 +7,6 @@ set number
 set termguicolors
 set backupdir=~/.tmp
 set directory=~/.tmp
-colorscheme slate
 set splitbelow " Open new split panes to right and bottom, which feels more natural
 set splitright
 
@@ -40,8 +39,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mileszs/ack.vim'
 Plug 'ElmCast/elm-vim'
 Plug 'tpope/vim-surround'
+Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
+colorscheme jellybeans
 " Ctrlp conf
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 if executable('ag')
