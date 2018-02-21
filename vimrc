@@ -50,6 +50,10 @@ command! QA qall
 command! E e
 command! W w
 command! Wq wq
+
+" Disable K looking stuff up
+map K <Nop>
+
 " Ctrlp conf
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 if executable('ag')
