@@ -7,7 +7,7 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 if [ -f /usr/libeexec/java_home ]; then
-export JAVA_HOME="$(/usr/libexec/java_home)"
+  export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
 if [ -f /usr/local/opt/asdf/asdf.sh ]; then

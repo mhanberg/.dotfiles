@@ -54,6 +54,9 @@ command! Wq wq
 " Disable K looking stuff up
 map K <Nop>
 
+" Spell check for text files
+autocmd BufRead,BufNewFile *.md setlocal spell
+
 " Ctrlp conf
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 if executable('ag')
