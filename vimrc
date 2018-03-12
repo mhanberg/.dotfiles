@@ -55,6 +55,9 @@ command! Wq wq
 " Disable K looking stuff up
 map K <Nop>
 
+" Indent whole file
+nnoremap <leader>i mzgg=G`z
+
 " Spell check for text files
 autocmd BufRead,BufNewFile *.md setlocal spell
 
