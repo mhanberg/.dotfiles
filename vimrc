@@ -41,6 +41,7 @@ Plug 'ElmCast/elm-vim'
 Plug 'tpope/vim-surround'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-eunuch'
+Plug 'ervandew/supertab'
 call plug#end()
 
 colorscheme jellybeans
