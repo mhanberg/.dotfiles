@@ -27,5 +27,5 @@
 [include]
   path = ~/.gitconfig.local
 [alias]
-	next = !git checkout `git rev-list HEAD..demo-end | tail -1`
+	next = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
 	prev = checkout HEAD^
