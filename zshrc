@@ -10,8 +10,8 @@ if [ -f /usr/libeexec/java_home ]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
-if [ -f /usr/local/opt/asdf/asdf.sh ]; then
-  source /usr/local/opt/asdf/asdf.sh
+if [ -f $HOME/.asdf/asdf.sh ]; then
+  source $HOME/.asdf/asdf.sh
 fi
 
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"

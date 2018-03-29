@@ -29,3 +29,4 @@
 [alias]
 	next = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
 	prev = checkout HEAD^
+  empty = !git checkout . && git clean -fd
