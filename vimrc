@@ -90,6 +90,7 @@ nmap <leader>m :call Vim_Markdown_Preview()<CR>
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint']
 let g:ale_fixers.elm = ['format']
+let g:ale_fixers.scss = ['prettier']
 let g:ale_pattern_options = {'\.ex$': {'ale_enabled': 0}, '\.exs$': {'ale_enabled': 0}}
 
 " Airline conf
