@@ -1,0 +1,49 @@
+#!/usr/bin/ruby
+require 'optparse'
+require 'Date'
+
+journal_path = "#{Dir.home}/Dropbox/journal"
+
+raise "Journal directory does not exist: #{journal_path}" unless Dir.exist? journal_path
+
+def empties(path)
+  Dir.entries(path)
+     .select { |entry| File.size?("#{path}/#{entry}").nil? }
+     .map { |empty| "#{path}/#{empty}" }
+end
+
+def clean(empties, dry_run = false)
+  puts 'Deleting:'
+  empties.each { |e| puts e }
+
+  File.delete(*empties) unless dry_run
+end
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: note [options]'
+
+  opts.on('--clean', 'Delete all empty journal entries.') do
+    empties = empties(journal_path)
+    abort if empties.empty?
+
+    clean empties(journal_path)
+
+    abort
+  end
+
+  opts.on('--dry-clean', 'Delete all empty journal entries -- dry run.') do
+    empties = empties(journal_path)
+    abort if empties.empty?
+
+    clean empties(journal_path), true
+
+    abort
+  end
+end.parse!
+
+date = Date.today
+entry_path = "#{journal_path}/#{date}.md"
+
+File.new(entry_path, 'w').close unless File.exist? entry_path
+
+system "vim #{entry_path}"
