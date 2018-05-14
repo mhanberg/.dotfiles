@@ -93,6 +93,7 @@ let g:ale_fixers.elm = ['format']
 let g:ale_fixers.scss = ['prettier']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_pattern_options = {'\.ex$': {'ale_enabled': 0}, '\.exs$': {'ale_enabled': 0}}
+let g:ale_fix_on_save = 1
 
 " Airline conf
 let g:airline#extensions#tabline#enabled = 1
