@@ -22,6 +22,12 @@ end
 OptionParser.new do |opts|
   opts.banner = 'Usage: note [options]'
 
+  opts.on('-l', '--list', 'List all journal entries') do
+    system "vim #{journal_path}"
+
+    abort
+  end
+
   opts.on('--clean', 'Delete all empty journal entries.') do
     empties = empties(journal_path)
     abort if empties.empty?
