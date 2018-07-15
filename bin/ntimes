@@ -1,0 +1,28 @@
+#!/bin/bash
+
+successes=0
+failures=0
+
+for ((n=0; n < $1; n++)); do
+  # run all arguments except for the count as new command
+  "${@:2}"
+
+  if [[ $? == 0 ]]; then
+    # no need to say success, that should be more common
+    successes=$[successes + 1]
+  else
+    failures=$[failures + 1]
+    say -v Zarvox -r400 "failed"
+  fi
+
+  echo -e "\nSuccesses: $successes"
+  echo -e "Failures: $failures\n"
+done
+
+sleep 1
+
+if [[ 0 -eq $failures ]]; then
+  say -v Alex -r200 "Success!"
+else
+  say -v Zarvox -r200 "At least some failed..."
+fi
