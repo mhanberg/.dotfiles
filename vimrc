@@ -44,6 +44,14 @@ Plug 'tpope/vim-eunuch'
 Plug 'ervandew/supertab'
 call plug#end()
 
+if has('gui_macvim')
+  set guioptions=
+  set macligatures
+  set guifont=Fira\ Code\ Retina:h12
+
+  set cursorline
+endif
+
 colorscheme jellybeans
 command! Q q " Bind :Q to :q
 command! Qall qall
