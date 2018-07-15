@@ -94,8 +94,6 @@ nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
 nmap <leader>l :TestLast<CR>
 nmap <leader>g :TestVisit<CR>
-let g:vim_markdown_preview_hotkey='<C-m>'
-nmap <leader>m :call Vim_Markdown_Preview()<CR>
 
 let g:ale_linters = {}
 let g:ale_linters.scss = ['stylelint']
@@ -107,9 +105,6 @@ let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elm = ['format']
 let g:ale_fixers.ruby = ['rubocop']
-
-" Airline conf
-let g:airline#extensions#tabline#enabled = 1
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fix_on_save=1
 
