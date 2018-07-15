@@ -24,6 +24,8 @@ fi
 
 alias blog="cd ~/Development/blog"
 alias dotfiles="cd ~/.dotfiles"
+alias dev="cd ~/Development"
+alias planet="cd ~/Development/planet"
 alias v="vim ."
 
 if [ -f ~/.zshrc.local ]; then
