@@ -42,6 +42,7 @@ Plug 'tpope/vim-surround'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'ervandew/supertab'
+Plug 'avakhov/vim-yaml'
 call plug#end()
 
 if has('gui_macvim')
