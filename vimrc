@@ -97,15 +97,21 @@ nmap <leader>g :TestVisit<CR>
 let g:vim_markdown_preview_hotkey='<C-m>'
 nmap <leader>m :call Vim_Markdown_Preview()<CR>
 
+let g:ale_linters = {}
+let g:ale_linters.scss = ['stylelint']
+let g:ale_linters.css = ['stylelint']
+
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.scss = ['stylelint']
+let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elm = ['format']
 let g:ale_fixers.ruby = ['rubocop']
-let g:ale_pattern_options = {'\.ex$': {'ale_enabled': 0}, '\.exs$': {'ale_enabled': 0}, '\.scss$': {'ale_enabled': 0}}
-let g:ale_fix_on_save = 1
 
 " Airline conf
 let g:airline#extensions#tabline#enabled = 1
+let g:ale_fixers.elixir = ['mix_format']
+let g:ale_fix_on_save=1
 
 " vim-jsx conf
 let g:jsx_ext_required = 0
