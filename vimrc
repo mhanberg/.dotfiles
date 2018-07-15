@@ -11,6 +11,7 @@ set backupdir=~/.tmp
 set directory=~/.tmp
 set splitbelow " Open new split panes to right and bottom, which feels more natural
 set splitright
+set lazyredraw
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
