@@ -54,6 +54,7 @@ if has('gui_macvim')
 endif
 
 colorscheme jellybeans
+
 command! Q q " Bind :Q to :q
 command! Qall qall
 command! QA qall
@@ -87,7 +88,7 @@ if executable('ag')
 endif
 
 " vim-test conf
-let test#strategy = "dispatch"
+let test#strategy = 'dispatch'
 nmap <leader>n :TestNearest<CR> 
 nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
