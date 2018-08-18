@@ -1,0 +1,6 @@
+gc() { git commit $@ }
+gco() { git checkout $@ }
+gpull() { git pull $@ }
+gpush() { git push $@ }
+gd() { git diff $@ }
+gs() { git status $@ }

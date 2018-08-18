@@ -22,11 +22,13 @@ if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
   . ~/.config/exercism/exercism_completion.zsh
 fi
 
-alias blog="cd ~/Development/blog"
-alias dotfiles="cd ~/.dotfiles"
-alias dev="cd ~/Development"
-alias planet="cd ~/Development/planet"
-alias v="vim ."
+if [ -f ~/.zsh/aliases ]; then
+  source ~/.zsh/aliases
+fi
+
+if [ -f ~/.zsh/funcs ]; then
+  source ~/.zsh/funcs
+fi
 
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
