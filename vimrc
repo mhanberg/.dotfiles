@@ -106,7 +106,6 @@ let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elm = ['format']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.elixir = ['mix_format']
-let g:ale_fix_on_save=1
 
 " vim-jsx conf
 let g:jsx_ext_required = 0
