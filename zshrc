@@ -3,10 +3,10 @@ export ZSH=~/.oh-my-zsh
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="steeef"
-plugins=(git)
 disable r
 
 source $ZSH/oh-my-zsh.sh
+
 if [ -f /usr/libeexec/java_home ]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
