@@ -48,7 +48,7 @@ call plug#end()
 if has('gui_macvim')
   set guioptions=
   set macligatures
-  set guifont=Fira\ Code\ Retina:h12
+  set guifont=Fira\ Code\ Retina:h14
 
   set cursorline
 endif
