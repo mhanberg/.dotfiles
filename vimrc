@@ -43,6 +43,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'ervandew/supertab'
 Plug 'avakhov/vim-yaml'
+Plug 'chr4/nginx.vim'
 call plug#end()
 
 if has('gui_macvim')
