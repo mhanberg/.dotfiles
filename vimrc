@@ -19,7 +19,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
-Plug 'slashmili/alchemist.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-dispatch'
@@ -95,6 +94,8 @@ nmap <leader>s :TestSuite<CR>
 nmap <leader>l :TestLast<CR>
 nmap <leader>g :TestVisit<CR>
 
+let g:ale_completion_enabled = 1
+autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
 let g:ale_linters = {}
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.css = ['stylelint']
@@ -106,6 +107,8 @@ let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elm = ['format']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.elixir = ['mix_format']
+
+let g:ale_elixir_elixir_ls_release = '/Users/mitchell/Development/elixir-ls/rel'
 
 " vim-jsx conf
 let g:jsx_ext_required = 0
