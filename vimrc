@@ -60,9 +60,12 @@ command! QA qall
 command! E e
 command! W w
 command! Wq wq
-let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'vim']
+let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh']
 " Disable K looking stuff up
 map K <Nop>
+
+nnoremap <leader><space> :set hls!<cr>
+nnoremap <leader>a :Ack<space>
 
 " Indent whole file
 nnoremap <leader>i mzgg=G`z
@@ -112,7 +115,7 @@ let g:ale_elixir_elixir_ls_release = '/Users/mitchell/Development/elixir-ls/rel'
 
 " vim-jsx conf
 let g:jsx_ext_required = 0
-if filereadable(expand("~/.vimrc.local"))
+if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
 
