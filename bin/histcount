@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Written by Chris Keathley
+#
+# Counts up history commands. I use this to find commands that I would like to
+# alias.
+#   $ histcount
+
+set -e
+
+HISTFILE=~/.local/share/fish/fish_history
+
+     # Tail the file
+tail -n 1000 $HISTFILE            `# Tail the history file for fish` \
+  | sed 's/^- cmd://'             `# Strip the command line to only have commands` \
+  | sed 's/when\: [[:digit:]]*//' `# Remove the 'when' line`\
+  | awk 'length($0)>4'            `# Only show commands that are over 4 characters` \
+  | sort                          `# Pre-sort the list so we can remove duplicates` \
+  | uniq                          `# Return only a list of uniq commands` \
+  | while read command; do        `# Count how many times the command has been called` \
+      echo `grep "\b$command\b" $HISTFILE | wc -l` $command
+    done \
+  | awk '$1 >= 4' \
+  | sort -n                       `# Sort by highest occuring`
