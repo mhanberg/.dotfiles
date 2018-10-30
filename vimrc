@@ -67,7 +67,7 @@ command! QA qall
 command! E e
 command! W w
 command! Wq wq
-let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh']
+let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript']
 " Disable K looking stuff up
 map K <Nop>
 
