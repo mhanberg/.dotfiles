@@ -72,7 +72,7 @@ let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', '
 map K <Nop>
 
 nnoremap <leader><space> :set hls!<cr>
-nnoremap <leader>a :Ack<space>
+nnoremap <leader>a :Ack!<space>
 
 " Indent whole file
 nnoremap <leader>i mzgg=G`z
