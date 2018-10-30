@@ -43,7 +43,14 @@ Plug 'tpope/vim-eunuch'
 Plug 'ervandew/supertab'
 Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
+Plug 'mrtazz/simplenote.vim'
 call plug#end()
+
+source ~/.simplenoterc
+let g:SimplenoteVertical = 1
+let g:SimplenoteListSize = 30
+let g:SimplenoteFiletype = 'markdown'
+let g:SimplenoteSingleWindow = 1
 
 if has('gui_macvim')
   set guioptions=
