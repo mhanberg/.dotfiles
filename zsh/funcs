@@ -1,10 +1,12 @@
-ga() { git add "$@" }
-gc() { git commit "$@" }
-gcb() { git checkout -b ""$@"" }
-gco() { git checkout "$@" }
-gcm() { git checkout master }
-gl() { git log "$@" }
-gpull() { git pull "$@" }
-gpush() { git push "$@" }
-gd() { git diff "$@" }
-gs() { git status "$@" }
+#!/usr/bin/env zsh
+
+ga() { git add "$@"; }
+gc() { git commit "$@"; }
+gcb() { git checkout -b "$@"; }
+gco() { git checkout "$@"; }
+gcm() { git checkout master; }
+gl() { git log "$@"; }
+gpull() { git pull "$@"; }
+gpush() { git push "$@"; }
+gd() { git diff "$@"; }
+gs() { git status "$@"; }

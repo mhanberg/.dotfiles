@@ -19,7 +19,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-dispatch'
 Plug 'mhanberg/vim-elixir'
@@ -46,11 +46,13 @@ Plug 'chr4/nginx.vim'
 Plug 'mrtazz/simplenote.vim'
 call plug#end()
 
-source ~/.simplenoterc
-let g:SimplenoteVertical = 1
-let g:SimplenoteListSize = 30
-let g:SimplenoteFiletype = 'markdown'
-let g:SimplenoteSingleWindow = 1
+if (glob('~/.simplenotrc'))
+  source ~/.simplenoterc
+  let g:SimplenoteVertical = 1
+  let g:SimplenoteListSize = 30
+  let g:SimplenoteFiletype = 'markdown'
+  let g:SimplenoteSingleWindow = 1
+endif
 
 if has('gui_macvim')
   set guioptions=
@@ -73,6 +75,7 @@ map K <Nop>
 
 nnoremap <leader><space> :set hls!<cr>
 nnoremap <leader>a :Ack!<space>
+nnoremap <leader>e :Explore<cr>
 
 " Indent whole file
 nnoremap <leader>i mzgg=G`z
@@ -80,14 +83,14 @@ nnoremap <leader>i mzgg=G`z
 " Spell check for text files
 autocmd BufRead,BufNewFile *.md setlocal spell
 
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " Ctrlp conf
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|\.git'
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden --ignore=".git" -g  "" %s'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -119,6 +122,8 @@ let g:ale_fixers.ruby = ['rubocop']
 let g:ale_fixers.elixir = ['mix_format']
 
 let g:ale_elixir_elixir_ls_release = '/Users/mitchell/Development/elixir-ls/rel'
+
+nnoremap df :ALEFix<cr>
 
 " vim-jsx conf
 let g:jsx_ext_required = 0
