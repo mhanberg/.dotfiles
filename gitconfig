@@ -14,7 +14,7 @@
 [color]
 	branch = auto
 [core]
-	excludesfile = /Users/mitchell/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
