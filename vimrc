@@ -108,6 +108,7 @@ nmap <leader>s :TestSuite<CR>
 nmap <leader>l :TestLast<CR>
 nmap <leader>g :TestVisit<CR>
 
+set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
 autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
 let g:ale_linters = {}
