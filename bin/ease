@@ -1,36 +1,65 @@
-#!/usr/bin/env elixir
+#! /usr/bin/env elixir
+#
+# Created by Mitchell Hanberg, and is based on histcount (https://github.com/keathley/dotfiles/blob/master/bin/histcount) by Chris Keathley.
+#
+# This script is intentionally written with gratuitous usage of the pipeline (|>) operator, because I found it humorous.
 
-histfile = List.first(System.argv)
+seconds_in_day = 86400
+histfile = List.first(System.argv())
+
 unless histfile do
-  IO.puts """
-  ease - Make you life easier by finding what shell aliases you should make!
+  IO.puts("""
+  ease - Make your life easier by finding what shell aliases you should make!
 
-  usage: ease HISTFILE [NUMBER OF RESULTS]
-  """
+  usage: ease HISTFILE [DAYS]
+  """)
 else
-  how_many = Enum.at(System.argv, 1) 
-
-  take = fn enum ->
-    case how_many do
-      nil ->
-        enum
-      _ -> 
-        enum |> Enum.reverse |> Enum.take(String.to_integer(how_many))
-    end
-  end
-
   histfile
   |> File.stream!([:read])
-  |> Stream.map(fn(line) ->
-    line
-    |> String.replace(~r/: .*:0;/, "") 
-    |> String.trim
+  |> Stream.map(fn line ->
+    ~r/: (?<timestamp>\d+):\d+;(?<command>.*)/
+    |> Regex.named_captures(
+      line
+      |> String.trim()
+    )
   end)
-  |> Stream.filter(fn command -> String.length(command) > 4 end)
-  |> take.()
-  |> Enum.reduce(Map.new, &(Map.update(&2, &1, 1, fn(v) -> v + 1 end)))
-  |> Map.to_list
-  |> Enum.sort(fn({_, a}, {_, b}) -> a >= b end)
+  |> Stream.filter(fn
+    nil -> false
+    _ -> true
+  end)
+  |> Stream.map(fn command ->
+    command
+    |> Map.update!("timestamp", &String.to_integer/1)
+  end)
+  |> Stream.filter(fn %{"command" => command, "timestamp" => timestamp} ->
+    command
+    |> String.length()
+    |> Kernel.>(4)
+    |> Kernel.and(
+      timestamp
+      |> Kernel.>(
+        System.argv()
+        |> Enum.at(1)
+        |> case do
+          nil ->
+            0
+
+          days ->
+            DateTime.utc_now()
+            |> DateTime.to_unix()
+            |> Kernel.-(
+              days
+              |> String.to_integer()
+              |> Kernel.*(seconds_in_day)
+            )
+        end
+      )
+    )
+  end)
+  |> Stream.map(&Map.fetch!(&1, "command"))
+  |> Enum.reduce(Map.new(), &Map.update(&2, &1, 1, fn v -> v |> Kernel.+(1) end))
+  |> Map.to_list()
+  |> Enum.sort(fn {_, a}, {_, b} -> a |> Kernel.>=(b) end)
   |> Enum.take(50)
-  |> Enum.map(fn ({name, count}) -> IO.puts("#{count} --- #{name}") end)
+  |> Enum.map(fn {name, count} -> IO.puts("#{count} --- #{name}") end)
 end
