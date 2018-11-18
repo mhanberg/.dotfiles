@@ -10,3 +10,13 @@ gpull() { git pull "$@"; }
 gpush() { git push "$@"; }
 gd() { git diff "$@"; }
 gs() { git status "$@"; }
+
+aliases() {
+  if [ -f ~/.zsh/aliases ]; then
+    cat ~/.zsh/aliases
+  fi
+
+  if [ -f ~/.zsh/aliases.local ]; then
+    cat ~/.zsh/aliases.local
+  fi
+}

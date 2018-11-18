@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-alias aliases="cat ~/.zsh/aliases"
 alias blog="cd ~/Development/blog"
 alias dev="cd ~/Development"
 alias dotfiles="cd ~/.dotfiles"
@@ -10,7 +9,7 @@ alias eal="vim ~/.zsh/aliases.local"
 alias ef="vim ~/.zsh/funcs"
 alias ev="vim ~/.vimrc"
 alias ez="vim ~/.zshrc"
-alias gbl="git branch -l"
+alias gbl="git --no-pager branch -l"
 alias home="cd $HOME"
 alias journal="dropbox && cd journal"
 alias m="mvim ."
