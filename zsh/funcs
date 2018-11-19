@@ -5,7 +5,7 @@ gc() { git commit "$@"; }
 gcb() { git checkout -b "$@"; }
 gco() { git checkout "$@"; }
 gcm() { git checkout master; }
-gl() { git log "$@"; }
+gl() { git log --graph "$@"; }
 gpull() { git pull "$@"; }
 gpush() { git push "$@"; }
 gd() { git diff "$@"; }
