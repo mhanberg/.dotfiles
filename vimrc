@@ -21,6 +21,7 @@ endif
 call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'mhanberg/vim-elixir'
@@ -33,6 +34,7 @@ Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-liquid'
 Plug 'pangloss/vim-javascript'
+Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
@@ -45,6 +47,7 @@ Plug 'ervandew/supertab'
 Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
 Plug 'mrtazz/simplenote.vim'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 if (glob('~/.simplenotrc'))
@@ -114,13 +117,16 @@ autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
 let g:ale_linters = {}
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.css = ['stylelint']
+let g:ale_linters.elixir = ['elixir-ls', 'credo']
+let g:ale_linters.ruby = ['rubocop', 'ruby']
 
-let g:ale_fixers = {}
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fixers.javascript = ['eslint']
 let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elm = ['format']
 let g:ale_fixers.ruby = ['rubocop']
+let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_fixers.elixir = ['mix_format']
 
 let g:ale_elixir_elixir_ls_release = '/Users/mitchell/Development/elixir-ls/rel'

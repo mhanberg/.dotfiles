@@ -12,11 +12,13 @@ alias ez="vim ~/.zshrc"
 alias gbl="git --no-pager branch -l"
 alias home="cd $HOME"
 alias journal="dropbox && cd journal"
+alias jts="cd ~/Development/jekyll-tailwind-starter"
 alias m="mvim ."
 alias l1="ls -1"
 alias planet="cd ~/Development/planet_ex"
 alias sn="mvim -c 'SimplenoteList'"
 alias sz="source ~/.zshrc"
 alias v="vim ."
+alias vi="vim ."
 
 source $HOME/.zsh/aliases.local

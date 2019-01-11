@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+export EDITOR="vim"
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="mah"
