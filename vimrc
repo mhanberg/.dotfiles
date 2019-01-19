@@ -49,6 +49,7 @@ Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
 Plug 'mrtazz/simplenote.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'rhysd/vim-crystal'
 call plug#end()
 
 if (glob('~/.simplenotrc'))
