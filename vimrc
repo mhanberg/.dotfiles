@@ -12,6 +12,7 @@ set directory=~/.tmp
 set splitbelow " Open new split panes to right and bottom, which feels more natural
 set splitright
 set lazyredraw
+set noshowmode
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -19,6 +20,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -68,6 +70,7 @@ if has('gui_macvim')
 endif
 
 colorscheme jellybeans
+let g:lightline = { 'colorscheme': 'jellybeans' }
 
 command! Q q " Bind :Q to :q
 command! Qall qall
