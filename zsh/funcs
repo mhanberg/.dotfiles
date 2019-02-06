@@ -11,6 +11,22 @@ gpush() { git push "$@"; }
 gd() { git diff "$@"; }
 gs() { git status "$@"; }
 
+fv() {
+  file="$(fzf)"
+  case "$file" in
+    "") echo "fv cancelled";;
+    *) vim "$file";;
+  esac
+}
+
+fmv() {
+  file="$(fzf)"
+  case "$file" in
+    "") echo "fv cancelled";;
+    *) mvim "$file";;
+  esac
+}
+
 aliases() {
   if [ -f ~/.zsh/aliases ]; then
     cat ~/.zsh/aliases

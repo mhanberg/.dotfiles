@@ -20,6 +20,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
+Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -49,18 +50,11 @@ Plug 'tpope/vim-eunuch'
 Plug 'ervandew/supertab'
 Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
-Plug 'mrtazz/simplenote.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'rhysd/vim-crystal'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-markdown'
 call plug#end()
-
-if (glob('~/.simplenotrc'))
-  source ~/.simplenoterc
-  let g:SimplenoteVertical = 1
-  let g:SimplenoteListSize = 30
-  let g:SimplenoteFiletype = 'markdown'
-  let g:SimplenoteSingleWindow = 1
-endif
 
 if has('gui_macvim')
   set guioptions=
@@ -86,6 +80,18 @@ nnoremap <leader><space> :set hls!<cr>
 nnoremap <leader>a :Ack!<space>
 nnoremap <leader>e :Explore<cr>
 
+" Script line fixer
+function FixLines()
+  let @a = 'mzgg/# Script2j0r0'
+  normal! @a
+
+  let @b = 'Y4jVp@b'
+  normal! @b
+
+  let @c = '`z'
+  normal! @c
+endfunction
+
 " Indent whole file
 nnoremap <leader>i mzgg=G`z
 
@@ -110,15 +116,21 @@ endif
 
 " vim-test conf
 let test#strategy = 'dispatch'
-nmap <leader>n :TestNearest<CR> 
+nmap <leader>n :TestNearest<CR>
 nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
 nmap <leader>l :TestLast<CR>
 nmap <leader>g :TestVisit<CR>
 
+"ALE conf"
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
-autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
+
+augroup elixir
+  nnoremap <leader>r :! elixir %<cr>
+  autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
+augroup END
+
 let g:ale_linters = {}
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.css = ['stylelint']
@@ -135,6 +147,7 @@ let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_fixers.elixir = ['mix_format']
 
 let g:ale_elixir_elixir_ls_release = '/Users/mitchell/Development/elixir-ls/rel'
+let g:ale_sign_column_always = 1
 
 nnoremap df :ALEFix<cr>
 
@@ -144,3 +157,5 @@ if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
 
+"Goyo conf"
+nnoremap <leader>gg :Goyo<CR>
