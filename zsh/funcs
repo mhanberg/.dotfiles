@@ -10,6 +10,10 @@ gpull() { git pull "$@"; }
 gpush() { git push "$@"; }
 gd() { git diff "$@"; }
 gs() { git status "$@"; }
+path() {
+  echo $PATH | sed 's/:/\
+/g'
+}
 
 fv() {
   file="$(fzf)"

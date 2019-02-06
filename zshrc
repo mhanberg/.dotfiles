@@ -5,6 +5,8 @@ export EDITOR="vim"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="mah"
 
+plugins=(zsh-autosuggestions)
+
 source $ZSH/oh-my-zsh.sh
 
 disable r
