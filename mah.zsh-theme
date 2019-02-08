@@ -1,3 +1,10 @@
+# This theme is modified from the steeef theme provided by oh-my-zsh
+#
+# This theme is meant to be used with the Jelly Beans iterm2colorscheme
+#
+# The exec time of last command is stolen from the zsh theme refined,
+# which is based of off sindresorhuses pure theme.
+#
 # prompt style and colors based on Steve Losh's Prose theme:
 # https://github.com/sjl/oh-my-zsh/blob/master/themes/prose.zsh-theme
 #
@@ -18,21 +25,6 @@ setopt prompt_subst
 
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
-
-#use extended color palette if available
-# if [[ $terminfo[colors] -ge 256 ]]; then
-#     turquoise="%F{81}"
-#     orange="%F{166}"
-#     purple="%F{135}"
-#     hotpink="%F{161}"
-#     limegreen="%F{118}"
-# else
-#     turquoise="%F{cyan}"
-#     orange="%F{yellow}"
-#     purple="%F{magenta}"
-#     hotpink="%F{red}"
-#     limegreen="%F{green}"
-# fi
 
 # enable VCS systems you use
 zstyle ':vcs_info:*' enable git svn
