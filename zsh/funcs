@@ -40,3 +40,10 @@ aliases() {
     cat ~/.zsh/aliases.local
   fi
 }
+
+routes() {
+  case "$#" in
+    0) bin/rails routes;;
+    *) bin/rails routes | ag "$@";;
+  esac
+}
