@@ -2,6 +2,8 @@
 
 # Write a code snippet in your preferred editor, upload to a GitHub Gist,
 # and then open the snippet in Carbon with the gist url in your clipboard.
+#
+# Remember to login first with `gist --login`
 
 hash gist || exit 1
 
@@ -11,7 +13,7 @@ file_path="$temp_dir/$file_name"
 
 mkdir -p $temp_dir
 
-$EDITOR "$file_path"
+$EDITOR "$file_path" || exit 1
 
 printf "==> Uploading to a gist and saving url to clipboard...\n\n"
 gist_url=$(gist --copy "$file_path")
