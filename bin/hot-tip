@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+# Write a code snippet in your preferred editor, upload to a GitHub Gist,
+# and then open the snippet in Carbon with the gist url in your clipboard.
+
+require "fileutils"
+
+unless system("which gist")
+  puts "gist is not in your path"
+  exit 1 
+end
+
+FILE_NAME = ARGV[0]
+TEMP_DIR = "/tmp/hot-tip"
+FILE_PATH = "#{TEMP_DIR}/#{FILE_NAME}"
+
+FileUtils.mkdir_p TEMP_DIR
+
+system "#{ENV["EDITOR"]} #{FILE_PATH}"
+
+puts "Uploading to a gist and saving url to clipboard...\n\n"
+gist_url = `gist --copy #{FILE_PATH}`
+
+puts "Opening carbon.now...\n\n"
+system "open https://carbon.now.sh/#{gist_url}"
+
+FileUtils.rm FILE_PATH
