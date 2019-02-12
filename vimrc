@@ -54,6 +54,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'rhysd/vim-crystal'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-markdown'
+Plug 'matze/vim-move'
 call plug#end()
 
 if has('gui_macvim')
@@ -61,6 +62,7 @@ if has('gui_macvim')
   set guifont=Fira\ Code\ Retina:h14
 
   set cursorline
+  set macmeta
 endif
 
 colorscheme jellybeans
