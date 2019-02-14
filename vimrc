@@ -13,6 +13,7 @@ set splitbelow " Open new split panes to right and bottom, which feels more natu
 set splitright
 set lazyredraw
 set noshowmode
+autocmd VimResized * :wincmd =
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -50,7 +51,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'ervandew/supertab'
 Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'rhysd/vim-crystal'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-markdown'

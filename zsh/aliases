@@ -22,6 +22,7 @@ alias planet="cd ~/Development/planet_ex"
 alias ps="iex -S mix phx.server"
 alias sn="mvim -c 'SimplenoteList'"
 alias sz="source ~/.zshrc"
+alias tree="tree | less"
 alias v="vim ."
 alias vi="vim ."
 
