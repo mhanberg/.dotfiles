@@ -21,6 +21,8 @@
 --exclude=bower_components
 --exclude=node_modules
 --exclude=vendor
+--exclude=public
+--exclude=tmp
 
 --langmap=javascript:.js.es6.es.jsx
 --javascript-kinds=-c-f-m-p-v

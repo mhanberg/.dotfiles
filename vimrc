@@ -13,6 +13,9 @@ set splitbelow " Open new split panes to right and bottom, which feels more natu
 set splitright
 set lazyredraw
 set noshowmode
+set incsearch
+set ignorecase
+set smartcase
 autocmd VimResized * :wincmd =
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -24,7 +27,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
@@ -55,6 +58,9 @@ Plug 'rhysd/vim-crystal'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-markdown'
 Plug 'matze/vim-move'
+Plug 'Yggdroot/indentLine'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 if has('gui_macvim')
@@ -100,17 +106,19 @@ nnoremap <leader>i mzgg=G`z
 " Spell check for text files
 autocmd BufRead,BufNewFile *.md setlocal spell
 
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+nnoremap <c-p> :GFiles<cr>
+let g:fzf_layout = { 'up': '~40%' }
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " Ctrlp conf
 if executable('ag')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  " set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden --ignore=".git" -g  "" %s'
+  " let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden --ignore=".git" -g  "" %s'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  " let g:ctrlp_use_caching = 0
 
   " use ag for ack.vim
   let g:ackprg = 'ag --vimgrep'
@@ -147,10 +155,12 @@ let g:ale_fixers.elm = ['format']
 let g:ale_fixers.ruby = ['rubocop']
 let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_fixers.elixir = ['mix_format']
+let g:ale_fixers.xml = ['xmllint']
 
 let g:ale_elixir_elixir_ls_release = '/Users/mitchell/Development/elixir-ls/rel'
 let g:ale_sign_column_always = 1
 
+nnoremap dt :ALEGoToDefinition<cr>
 nnoremap df :ALEFix<cr>
 
 " vim-jsx conf
@@ -161,3 +171,5 @@ endif
 
 "Goyo conf"
 nnoremap <leader>gg :Goyo<CR>
+
+let g:markdown_syntax_conceal = 0
