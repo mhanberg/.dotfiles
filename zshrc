@@ -50,3 +50,6 @@ fi
 
 export PATH="/Users/mahanberg/.asdf/installs/nodejs/10.13.0/.npm/bin:$PATH"
 export PATH="/Users/mahanberg/.asdf/installs/nodejs/11.0.0/.npm/bin:$PATH"
+
+# Enable shell history in iex
+export ERL_AFLAGS="-kernel shell_history enabled"
