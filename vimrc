@@ -16,6 +16,8 @@ set noshowmode
 set incsearch
 set ignorecase
 set smartcase
+set undofile
+set undodir=~/.tmp
 autocmd VimResized * :wincmd =
 
 if empty(glob('~/.vim/autoload/plug.vim'))
