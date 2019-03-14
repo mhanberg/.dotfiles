@@ -106,7 +106,9 @@ endfunction
 nnoremap <leader>i mzgg=G`z
 
 " Spell check for text files
-autocmd BufRead,BufNewFile *.md setlocal spell
+augroup markdown
+  autocmd BufRead,BufNewFile *.md setlocal spell
+augroup END
 
 nnoremap <c-p> :GFiles<cr>
 let g:fzf_layout = { 'up': '~40%' }

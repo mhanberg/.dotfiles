@@ -41,9 +41,26 @@ aliases() {
   fi
 }
 
-routes() {
+funcs() {
+  if [ -f ~/.zsh/funcs ]; then
+    cat ~/.zsh/funcs
+  fi
+
+  if [ -f ~/.zsh/funcs.local ]; then
+    cat ~/.zsh/funcs.local
+  fi
+}
+
+rr() {
   case "$#" in
     0) bin/rails routes;;
     *) bin/rails routes | ag "$@";;
+  esac
+}
+
+pr() {
+  case "$#" in
+    0) mix phx.routes;;
+    *) mix phx.routes | ag "$@";;
   esac
 }
