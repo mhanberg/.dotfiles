@@ -48,7 +48,6 @@ Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'jiangmiao/auto-pairs'
-Plug 'mileszs/ack.vim'
 Plug 'ElmCast/elm-vim'
 Plug 'tpope/vim-surround'
 Plug 'nanotech/jellybeans.vim'
@@ -85,23 +84,8 @@ command! W w
 command! Wq wq
 let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript']
 " Disable K looking stuff up
-map K <Nop>
 
 nnoremap <leader><space> :set hls!<cr>
-nnoremap <leader>a :Ack!<space>
-nnoremap <leader>e :Explore<cr>
-
-" Script line fixer
-function FixLines()
-  let @a = 'mzgg/# Script2j0r0'
-  normal! @a
-
-  let @b = 'Y4jVp@b'
-  normal! @b
-
-  let @c = '`z'
-  normal! @c
-endfunction
 
 " Indent whole file
 nnoremap <leader>i mzgg=G`z
@@ -111,23 +95,10 @@ augroup markdown
   autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
-nnoremap <c-p> :GFiles<cr>
+silent! nnoremap <c-p> :GFiles --exclude-standard --others --cached<cr>
+nnoremap bl :BLines<cr>
+nnoremap <leader>a :Ag<space>
 let g:fzf_layout = { 'up': '~40%' }
-" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-" Ctrlp conf
-if executable('ag')
-  " Use ag over grep
-  " set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  " let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden --ignore=".git" -g  "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  " let g:ctrlp_use_caching = 0
-
-  " use ag for ack.vim
-  let g:ackprg = 'ag --vimgrep'
-endif
 
 " vim-test conf
 let test#strategy = 'dispatch'
@@ -167,6 +138,7 @@ let g:ale_sign_column_always = 1
 
 nnoremap dt :ALEGoToDefinition<cr>
 nnoremap df :ALEFix<cr>
+nnoremap K :ALEHover<cr>
 
 " vim-jsx conf
 let g:jsx_ext_required = 0
