@@ -150,5 +150,3 @@ endif
 nnoremap <leader>gg :Goyo<CR>
 
 let g:markdown_syntax_conceal = 0
-
-call ch_logfile(expand('~/channel.log'), 'w')
