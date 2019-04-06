@@ -19,6 +19,8 @@ set smartcase
 set undofile
 set undodir=~/.tmp
 autocmd VimResized * :wincmd =
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -96,7 +98,7 @@ augroup markdown
 augroup END
 
 silent! nnoremap <c-p> :GFiles --exclude-standard --others --cached<cr>
-nnoremap bl :BLines<cr>
+nnoremap gl :BLines<cr>
 nnoremap <leader>a :Ag<space>
 let g:fzf_layout = { 'up': '~40%' }
 
