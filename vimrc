@@ -152,3 +152,5 @@ endif
 nnoremap <leader>gg :Goyo<CR>
 
 let g:markdown_syntax_conceal = 0
+
+nmap <leader>hl :w<cr> :!highlight -s dusk -O rtf % \| pbcopy<cr>
