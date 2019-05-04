@@ -18,6 +18,7 @@ set ignorecase
 set smartcase
 set undofile
 set undodir=~/.tmp
+set mouse=a
 autocmd VimResized * :wincmd =
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
@@ -31,7 +32,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
@@ -71,10 +71,10 @@ if has('gui_macvim')
   set guioptions=
   set guifont=Fira\ Code\ Retina:h14
 
-  set cursorline
   set macmeta
 endif
 
+set cursorline
 colorscheme jellybeans
 let g:lightline = { 'colorscheme': 'jellybeans' }
 
