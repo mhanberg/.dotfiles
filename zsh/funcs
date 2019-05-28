@@ -10,6 +10,15 @@ gpull() { git pull "$@"; }
 gpush() { git push "$@"; }
 gd() { git diff "$@"; }
 gs() { git status "$@"; }
+gwip() {
+  git add .
+  git commit -m "WIP"
+}
+pull-with-changes() {
+  gwip
+  git pull -r
+  unwrap-last-commit
+}
 path() {
   echo $PATH | sed 's/:/\
 /g'

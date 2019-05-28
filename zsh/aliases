@@ -22,7 +22,7 @@ alias mdkir="mkdir"
 alias planet="cd ~/Development/planet_ex"
 alias sz="source ~/.zshrc"
 alias tree="tree | less"
-alias unwrap-last-commit="git reset --soft HEAD~1"
+alias unwrap-last-commit="git reset HEAD~1"
 alias v="vim ."
 alias vi="vim ."
 
