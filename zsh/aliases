@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-alias vim="FZF_DEFAULT_OPTS=--reverse nvim"
 alias blog="cd ~/Development/blog"
 alias dev="cd ~/Development"
 alias dotfiles="cd ~/.dotfiles"
@@ -20,10 +19,12 @@ alias lib="cd ~/libcasts"
 alias m="FZF_DEFAULT_OPTS=--reverse mvim -g ."
 alias mdkir="mkdir"
 alias planet="cd ~/Development/planet_ex"
+alias sc-notes="vim ~/Dropbox/SEP/scout/notes"
 alias sz="source ~/.zshrc"
 alias tree="tree | less"
 alias unwrap-last-commit="git reset HEAD~1"
 alias v="vim ."
 alias vi="vim ."
+alias vim="FZF_DEFAULT_OPTS=--reverse nvim"
 
 source $HOME/.zsh/aliases.local
