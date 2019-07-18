@@ -29,6 +29,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
+Plug 'git@github.com:OrangeT/vim-csharp.git'
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
@@ -137,7 +138,6 @@ let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fixers.xml = ['xmllint']
 
-let g:ale_elixir_elixir_ls_release = '/Users/mitchell/Development/elixir-ls/rel'
 let g:ale_sign_column_always = 1
 
 nnoremap dt :ALEGoToDefinition<cr>
