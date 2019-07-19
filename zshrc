@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export EDITOR="nvim"
+export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="mah"

@@ -100,7 +100,7 @@ augroup markdown
   autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
-silent! nnoremap <c-p> :GFiles --exclude-standard --others --cached<cr>
+silent! nnoremap <c-p> :Files<cr>
 nnoremap gl :BLines<cr>
 nnoremap <leader>a :Ag<space>
 let g:fzf_layout = { 'up': '~40%' }
