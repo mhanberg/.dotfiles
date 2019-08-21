@@ -29,7 +29,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
-Plug 'git@github.com:OrangeT/vim-csharp.git'
+Plug 'mbbill/undotree'
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
@@ -52,7 +52,7 @@ Plug 'tpope/vim-liquid'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ElmCast/elm-vim'
 Plug 'tpope/vim-surround'
