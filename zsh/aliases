@@ -26,5 +26,6 @@ alias unwrap-last-commit="git reset HEAD~1"
 alias v="vim ."
 alias vi="vim ."
 alias vim="FZF_DEFAULT_OPTS=--reverse nvim"
+alias oni="/Applications/Onivim2.App/Contents/MacOS/Oni2"
 
 source $HOME/.zsh/aliases.local
