@@ -14,6 +14,10 @@ gwip() {
   git add .
   git commit -m "WIP"
 }
+netlines() {
+  git --no-pager diff --numstat $1 | \
+  awk '{sum += ($1 - $2)} END{print sum;}'
+}
 pull-with-changes() {
   gwip
   git pull -r

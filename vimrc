@@ -35,6 +35,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-ruby/vim-ruby'
@@ -129,7 +130,7 @@ let g:ale_linters.elixir = ['elixir-ls', 'credo']
 let g:ale_linters.ruby = ['rubocop', 'ruby', 'solargraph']
 
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.javascript = ['eslint', 'prettier']
 let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elm = ['format']
@@ -143,6 +144,9 @@ let g:ale_sign_column_always = 1
 nnoremap dt :ALEGoToDefinition<cr>
 nnoremap df :ALEFix<cr>
 nnoremap K :ALEHover<cr>
+
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
 
 " vim-jsx conf
 let g:jsx_ext_required = 0
