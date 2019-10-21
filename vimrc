@@ -39,6 +39,7 @@ function! BuildComposer(info)
 endfunction
 
 call plug#begin('~/.vim/bundle')
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'mbbill/undotree'
 Plug 'alvan/vim-closetag'
@@ -171,3 +172,12 @@ nnoremap <leader>gg :Goyo<CR>
 let g:markdown_syntax_conceal = 0
 
 nmap <leader>hl :w<cr> :!highlight -s dusk -O rtf % \| pbcopy<cr>
+
+let g:Hexokinase_optInPatterns = [
+\     'full_hex',
+\     'triple_hex',
+\     'rgb',
+\     'rgba',
+\     'hsl',
+\     'hsla'
+\ ]
