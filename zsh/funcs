@@ -12,7 +12,7 @@ gd() { git diff "$@"; }
 gs() { git status "$@"; }
 gwip() {
   git add .
-  git commit -m "WIP"
+  git commit -m "WIP" "$@"
 }
 netlines() {
   git --no-pager diff --numstat $1 | \
