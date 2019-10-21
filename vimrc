@@ -160,7 +160,7 @@ nnoremap dt :ALEGoToDefinition<cr>
 nnoremap df :ALEFix<cr>
 nnoremap K :ALEHover<cr>
 
-set grepprg=ag\ --vimgrep\ $*
+set grepprg=ag\ --vimgrep\ -Q\ $*
 set grepformat=%f:%l:%c:%m
 
 " vim-jsx conf
