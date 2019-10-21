@@ -145,6 +145,7 @@ let g:ale_linters.ruby = ['rubocop', 'ruby', 'solargraph']
 
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 let g:ale_fixers.javascript = ['eslint', 'prettier']
+let g:ale_fixers.html = ['prettier']
 let g:ale_fixers.scss = ['stylelint']
 let g:ale_fixers.css = ['stylelint']
 let g:ale_fixers.elm = ['format']
