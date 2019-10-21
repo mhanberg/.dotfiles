@@ -40,6 +40,7 @@ endfunction
 
 call plug#begin('~/.vim/bundle')
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'mhanberg/night-owl.vim', { 'branch': 'lightline' }
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'mbbill/undotree'
 Plug 'alvan/vim-closetag'
@@ -91,8 +92,8 @@ if has('gui_macvim')
 endif
 
 set cursorline
-colorscheme jellybeans
-let g:lightline = { 'colorscheme': 'jellybeans' }
+colorscheme night-owl
+let g:lightline = { 'colorscheme': 'nightowl' }
 
 command! Q q " Bind :Q to :q
 command! Qall qall
