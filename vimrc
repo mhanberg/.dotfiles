@@ -86,7 +86,8 @@ call plug#end()
 
 if has('gui_macvim')
   set guioptions=
-  set guifont=Fira\ Code\ Retina:h14
+  set guifont=Hack:h14
+  set linespace=1
 
   set macmeta
 endif
