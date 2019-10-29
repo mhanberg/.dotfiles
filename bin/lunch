@@ -1,0 +1,72 @@
+#! /usr/bin/env elixir
+
+{opts, _, _} = OptionParser.parse(System.argv(), strict: [carbs: :boolean])
+
+[
+  %{
+    name: "Chipotle",
+    carbs: false
+  },
+  %{
+    name: "Fat Dan's",
+    carbs: false
+  },
+  %{
+    name: "Sun King",
+    carbs: false
+  },
+  %{
+    name: "Kroger",
+    carbs: false
+  },
+  %{
+    name: "Jamaican",
+    carbs: true
+  },
+  %{
+    name: "HotBox",
+    carbs: true
+  },
+  %{
+    name: "Fork 'n' Ale",
+    carbs: false
+  },
+  %{
+    name: "Cancun",
+    carbs: false
+  },
+  %{
+    name: "Bubs",
+    carbs: false
+  },
+  %{
+    name: "Bazbeaux",
+    carbs: true
+  },
+  %{
+    name: "Adel's",
+    carbs: false
+  },
+  %{
+    name: "Mellow Mushroom",
+    carbs: true
+  },
+  %{
+    name: "The Egg and I",
+    carbs: false
+  },
+  %{
+    name: "Penn Station",
+    carbs: false
+  }
+]
+|> Enum.reject(fn %{carbs: carbs} -> 
+  if opts[:carbs] do
+    carbs
+  else
+    false
+  end
+end)
+|> Enum.random()
+|> Map.fetch!(:name)
+|> IO.inspect()
