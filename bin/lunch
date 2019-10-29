@@ -69,4 +69,4 @@ end
 |> reject_carbs.(opts[:no_carbs])
 |> Enum.random()
 |> Map.fetch!(:name)
-|> IO.inspect()
+|> IO.puts()
