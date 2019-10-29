@@ -1,9 +1,17 @@
 #!/usr/bin/env zsh
 
+g() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+compdef g=git
+
 ga() { git add "$@"; }
 gc() { git commit "$@"; }
 gcb() { git checkout -b "$@"; }
-gco() { git checkout "$@"; }
 gcm() { git checkout master; }
 gl() { git log --graph "$@"; }
 gpull() { git pull "$@"; }
