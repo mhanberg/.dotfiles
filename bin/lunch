@@ -1,6 +1,12 @@
 #! /usr/bin/env elixir
 
-{opts, _, _} = OptionParser.parse(System.argv(), strict: [carbs: :boolean])
+reject_carbs = fn
+  list, true ->
+    Enum.reject(list, & &1[:carbs])
+  list, _ -> list
+end
+
+{opts, _, _} = OptionParser.parse(System.argv(), strict: [no_carbs: :boolean])
 
 [
   %{
@@ -60,13 +66,7 @@
     carbs: false
   }
 ]
-|> Enum.reject(fn %{carbs: carbs} -> 
-  if opts[:carbs] do
-    carbs
-  else
-    false
-  end
-end)
+|> reject_carbs.(opts[:no_carbs])
 |> Enum.random()
 |> Map.fetch!(:name)
 |> IO.inspect()
