@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+set -e
+
+echo "==> Installing dotfiles"
+rcup -U Brewfile -x README.md -x mitch-preonic.json -x install -x rcup -v
