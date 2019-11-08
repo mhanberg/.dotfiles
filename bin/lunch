@@ -10,6 +10,14 @@ end
 
 [
   %{
+    name: "Punch Burger",
+    carbs: false
+  },
+  %{
+    name: "Yats",
+    carbs: true
+  },
+  %{
     name: "Chipotle",
     carbs: false
   },
@@ -24,10 +32,6 @@ end
   %{
     name: "Kroger",
     carbs: false
-  },
-  %{
-    name: "Jamaican",
-    carbs: true
   },
   %{
     name: "HotBox",
@@ -56,10 +60,6 @@ end
   %{
     name: "Mellow Mushroom",
     carbs: true
-  },
-  %{
-    name: "The Egg and I",
-    carbs: false
   },
   %{
     name: "Penn Station",
