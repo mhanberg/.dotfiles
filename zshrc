@@ -1,14 +1,31 @@
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="mah"
+if [ ! -f "$HOME/.zsh/aliases.local" ]; then
+  touch "$HOME/.zsh/aliases.local" 
+fi
 
-plugins=(zsh-autosuggestions)
+if [ ! -f "$HOME/.zsh/zshrc.local" ]; then
+  touch "$HOME/.zsh/zshrc.local" 
+fi
 
-source $ZSH/oh-my-zsh.sh
+for file (~/.zsh/*); do
+  source $file
+done
+
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
 
 disable r
 setopt nohistignoredups
@@ -39,17 +56,6 @@ function () {
   fi
 }
 
-if [ -f ~/.zsh/aliases ]; then
-  source ~/.zsh/aliases
-fi
-
-if [ -f ~/.zsh/funcs ]; then
-  source ~/.zsh/funcs
-fi
-
-if [ -f ~/.zshrc.local ]; then
-  source ~/.zshrc.local
-fi
 
 export PATH="/Users/mahanberg/.asdf/installs/nodejs/10.13.0/.npm/bin:$PATH"
 export PATH="/Users/mahanberg/.asdf/installs/nodejs/11.0.0/.npm/bin:$PATH"

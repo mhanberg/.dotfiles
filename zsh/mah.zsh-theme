@@ -53,16 +53,12 @@ zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
 zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
 # Displays the exec time of the last command if set threshold was exceeded
-#
 cmd_exec_time() {
     local stop=`date +%s`
     local start=${cmd_timestamp:-$stop}
     let local elapsed=$stop-$start
     [ $elapsed -gt 5 ] && echo ${elapsed}s
 }
-
-# Get the initial timestamp for cmd_exec_time
-#
 
 function steeef_preexec {
     case "$2" in
@@ -77,6 +73,7 @@ function steeef_preexec {
             ;;
     esac
 
+    # Get the initial timestamp for cmd_exec_time
     cmd_timestamp=`date +%s`
 }
 add-zsh-hook preexec steeef_preexec
