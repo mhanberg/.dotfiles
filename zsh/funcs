@@ -85,3 +85,16 @@ pr() {
     *) mix phx.routes | ag "$@";;
   esac
 }
+
+brew-outdated() {
+  echo "==> Running brew update..."
+  brew update >/dev/null
+
+  echo "\n==> Outdated brews"
+  brew outdated
+
+  echo "\n==> Outdated casks"
+  brew cask outdated
+}
+
+alias bo="brew-outdated"
