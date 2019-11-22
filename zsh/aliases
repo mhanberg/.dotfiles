@@ -28,5 +28,6 @@ alias v="vim ."
 alias vi="vim ."
 alias vim="FZF_DEFAULT_OPTS=--reverse nvim"
 alias oni="/Applications/Onivim2.App/Contents/MacOS/Oni2"
+alias gg="smerge ."
 
 source $HOME/.zsh/aliases.local
