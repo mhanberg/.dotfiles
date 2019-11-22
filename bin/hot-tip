@@ -3,9 +3,11 @@
 # Write a code snippet in your preferred editor, upload to a GitHub Gist,
 # and then open the snippet in Carbon with the gist url in your clipboard.
 #
-# Remember to login first with `gist --login`
+# Remember to authenticate with GitHub first
 
-hash gist || exit 1
+set -e
+
+command -v hub >/dev/null
 
 file_name=$1
 temp_dir="/tmp/hot-tip"
@@ -16,9 +18,11 @@ mkdir -p $temp_dir
 $EDITOR "$file_path" || exit 1
 
 printf "==> Uploading to a gist and saving url to clipboard...\n\n"
-gist_url=$(gist --copy "$file_path")
+hub gist create --copy --public "$file_path"
+
+gist_id=$(pbpaste | ruby -e "puts \$stdin.read.match(/https:\/\/gist\.github\.com\/(.*)/)[1]")
 
 printf "==> Opening carbon.now.sh...\n"
-open "https://carbon.now.sh/$gist_url"
+open "https://carbon.now.sh/$gist_id"
 
 rm "$file_path"
