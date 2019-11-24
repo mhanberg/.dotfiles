@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+alias ..="cd .."
 alias blog="cd ~/Development/blog"
 alias dev="cd ~/Development"
 alias dotfiles="cd ~/.dotfiles"
