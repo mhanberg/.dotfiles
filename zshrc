@@ -56,4 +56,6 @@ fi
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+. /usr/local/etc/profile.d/z.sh
+
 autoload -U compinit && compinit
