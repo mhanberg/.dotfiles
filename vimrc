@@ -19,9 +19,19 @@ set smartcase
 set undofile
 set undodir=~/.tmp
 set mouse=a
-autocmd VimResized * :wincmd =
 set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
+augroup all
+  autocmd!
+
+  autocmd VimResized * :wincmd =
+  autocmd GUIEnter * set visualbell t_vb=
+augroup END
+
+augroup clojure
+  autocmd!
+
+  au BufWritePost *.clj :silent Require
+augroup END
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs

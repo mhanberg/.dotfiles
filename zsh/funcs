@@ -98,3 +98,15 @@ brew-outdated() {
 }
 
 alias bo="brew-outdated"
+
+gg() {
+  if [ -d .git ]; then
+    if [ $(ls .git | wc -l) -gt '0' ]; then
+      smerge .
+    else
+      (cd .. && gg)
+    fi
+  else
+    (cd .. && gg)
+  fi
+}
