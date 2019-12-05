@@ -25,6 +25,7 @@ augroup all
 
   autocmd VimResized * :wincmd =
   autocmd GUIEnter * set visualbell t_vb=
+  autocmd BufWinEnter *.json :set conceallevel=0
 augroup END
 
 augroup clojure
