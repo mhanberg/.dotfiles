@@ -3,6 +3,8 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+autoload -U compinit && compinit
+
 if [ ! -f "$HOME/.zsh/aliases.local" ]; then
   touch "$HOME/.zsh/aliases.local" 
 fi
@@ -38,9 +40,9 @@ if [ -f /usr/libeexec/java_home ]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
-if [ -f $HOME/.asdf/asdf.sh ]; then
-  source $HOME/.asdf/asdf.sh
-  source $HOME/.asdf/completions/asdf.bash
+if [ -f $(brew --prefix asdf)/asdf.sh ]; then
+  source $(brew --prefix asdf)/asdf.sh
+  source $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 fi
 
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
@@ -59,4 +61,3 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 . /usr/local/etc/profile.d/z.sh
 
-autoload -U compinit && compinit
