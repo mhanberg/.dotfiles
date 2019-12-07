@@ -97,7 +97,16 @@ brew-outdated() {
   brew cask outdated
 }
 
+brew-upgrade() {
+  echo "\n==> brew upgrade"
+  brew upgrade
+
+  echo "\n==> brew cask upgrade"
+  brew cask upgrade
+}
+
 alias bo="brew-outdated"
+alias bu="brew-upgrade"
 
 gg() {
   if [ -d .git ]; then
