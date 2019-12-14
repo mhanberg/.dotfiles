@@ -40,24 +40,16 @@ if [ -f /usr/libeexec/java_home ]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
-if [ -f $(brew --prefix asdf)/asdf.sh ]; then
-  source $(brew --prefix asdf)/asdf.sh
-  source $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+if [ -f /usr/local/opt/asdf/asdf.sh ]; then
+  source /usr/local/opt/asdf/asdf.sh
+  source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 fi
 
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-export PATH="$HOME/nushell-0.5.0:$PATH"
-
-
-if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
-  . ~/.config/exercism/exercism_completion.zsh
-fi
-
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 . /usr/local/etc/profile.d/z.sh
-
