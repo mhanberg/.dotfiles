@@ -39,20 +39,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release --locked
-    else
-      !cargo build --release --locked --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-
 call plug#begin('~/.vim/bundle')
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'mhanberg/night-owl.vim', { 'branch': 'lightline' }
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'mbbill/undotree'
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
