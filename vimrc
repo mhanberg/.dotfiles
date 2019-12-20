@@ -40,6 +40,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
+Plug 'christoomey/vim-tmux-runner'
+Plug 'vim/killersheep'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'mhanberg/night-owl.vim', { 'branch': 'lightline' }
 Plug 'mbbill/undotree'
