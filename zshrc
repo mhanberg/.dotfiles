@@ -1,3 +1,10 @@
+#                   __
+#     ____   _____ / /_   _____ _____
+#    /_  /  / ___// __ \ / ___// ___/
+#  _  / /_ (__  )/ / / // /   / /__
+# (_)/___//____//_/ /_//_/    \___/
+#
+
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ZPLUG_HOME=/usr/local/opt/zplug
@@ -6,11 +13,11 @@ source $ZPLUG_HOME/init.zsh
 autoload -U compinit && compinit
 
 if [ ! -f "$HOME/.zsh/aliases.local" ]; then
-  touch "$HOME/.zsh/aliases.local" 
+  touch "$HOME/.zsh/aliases.local"
 fi
 
 if [ ! -f "$HOME/.zsh/zshrc.local" ]; then
-  touch "$HOME/.zsh/zshrc.local" 
+  touch "$HOME/.zsh/zshrc.local"
 fi
 
 for file (~/.zsh/*); do

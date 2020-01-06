@@ -1,5 +1,11 @@
 #! /usr/bin/env elixir
 #
+#   ___   ____ _ _____ ___
+#  / _ \ / __ `// ___// _ \
+# /  __// /_/ /(__  )/  __/
+# \___/ \__,_//____/ \___/
+#
+#
 # Created by Mitchell Hanberg, and is based on histcount (https://github.com/keathley/dotfiles/blob/master/bin/histcount) by Chris Keathley.
 #
 # This script is intentionally written with gratuitous usage of the pipeline (|>) operator, because I found it humorous.
