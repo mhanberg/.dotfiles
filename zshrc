@@ -10,7 +10,6 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-autoload -U compinit && compinit
 
 if [ ! -f "$HOME/.zsh/aliases.local" ]; then
   touch "$HOME/.zsh/aliases.local"
@@ -27,7 +26,8 @@ done
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
+zplug "lib/history", from:oh-my-zsh
+zplug "lib/key-bindings", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 
@@ -39,6 +39,8 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+
+autoload -U compinit && compinit
 
 disable r
 setopt nohistignoredups

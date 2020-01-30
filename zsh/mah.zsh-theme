@@ -61,18 +61,6 @@ cmd_exec_time() {
 }
 
 function steeef_preexec {
-    case "$2" in
-        *git*)
-            PR_GIT_UPDATE=1
-            ;;
-        *hub*)
-            PR_GIT_UPDATE=1
-            ;;
-        *svn*)
-            PR_GIT_UPDATE=1
-            ;;
-    esac
-
     # Get the initial timestamp for cmd_exec_time
     cmd_timestamp=`date +%s`
 }
@@ -86,7 +74,6 @@ add-zsh-hook chpwd steeef_chpwd
 function steeef_precmd {
     # check for untracked files or updated submodules, since vcs_info doesn't
     if git ls-files --other --exclude-standard 2> /dev/null | grep -q "."; then
-        PR_GIT_UPDATE=1
         FMT_BRANCH="(%F{yellow}%b%u%c%F{magenta}●${PR_RST})"
     else
         FMT_BRANCH="(%F{yellow}%b%u%c${PR_RST})"
@@ -99,4 +86,4 @@ add-zsh-hook precmd steeef_precmd
 
 PROMPT=$'
 %F{blue}%~${PR_RST} $vcs_info_msg_0_$(virtualenv_info) %B%F{cyan}$(cmd_exec_time)${PR_RST}
-$ '
+⚡︎'

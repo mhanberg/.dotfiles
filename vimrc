@@ -48,7 +48,6 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'christoomey/vim-tmux-runner'
-Plug 'vim/killersheep'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'mhanberg/night-owl.vim', { 'branch': 'lightline' }
 Plug 'mbbill/undotree'
@@ -81,7 +80,7 @@ Plug 'tpope/vim-surround'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-projectionist'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
 Plug 'rhysd/vim-crystal'
@@ -91,7 +90,9 @@ Plug 'matze/vim-move'
 Plug 'Yggdroot/indentLine'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
+Plug 'liuchengxu/vim-clap', { 'do': function('clap#helper#build_all') }
+Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
 if has('gui_macvim')
@@ -117,17 +118,18 @@ let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', '
 
 nnoremap <leader><space> :set hls!<cr>
 
-" Indent whole file
-nnoremap <leader>i mzgg=G`z
-
 " Spell check for text files
 augroup markdown
   autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
+let g:clap_layout = { 'relative': 'editor' }
 silent! nnoremap <c-p> :Files<cr>
 nnoremap gl :BLines<cr>
-nnoremap <leader>a :Ag<space>
+nnoremap <leader>a :Clap grep<cr>
+silent! nnoremap <leader>gr :grep<space>
+nnoremap <leader>c :botright copen 20<cr>
+
 let g:fzf_layout = { 'up': '~40%' }
 
 " vim-test conf
@@ -136,7 +138,6 @@ nmap <leader>n :TestNearest<CR>
 nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
 nmap <leader>l :TestLast<CR>
-nmap <leader>g :TestVisit<CR>
 
 "ALE conf"
 set completeopt=menu,menuone,preview,noselect,noinsert
@@ -180,7 +181,7 @@ if filereadable(expand('~/.vimrc.local'))
 endif
 
 "Goyo conf"
-nnoremap <leader>gg :Goyo<CR>
+nnoremap <leader>gy :Goyo<CR>
 
 let g:markdown_syntax_conceal = 0
 
