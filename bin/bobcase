@@ -1,0 +1,9 @@
+#! /usr/bin/env elixir
+#
+System.argv()
+|> Enum.join(" ")
+|> String.graphemes()
+|> Enum.with_index()
+|> Enum.map(fn {letter, idx} -> if(rem(idx, 2) == 0, do: String.upcase(letter), else: letter) end)
+|> Enum.join()
+|> IO.puts
