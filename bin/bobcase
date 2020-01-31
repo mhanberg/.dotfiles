@@ -1,9 +1,24 @@
 #! /usr/bin/env elixir
-#
+
+#     __            __                           
+#    / /_   ____   / /_   _____ ____ _ _____ ___ 
+#   / __ \ / __ \ / __ \ / ___// __ `// ___// _ \
+#  / /_/ // /_/ // /_/ // /__ / /_/ /(__  )/  __/
+# /_.___/ \____//_.___/ \___/ \__,_//____/ \___/ 
+
+
+encode = fn letter, position ->
+  if rem(position, 2) == 0 do
+    String.upcase(letter)
+  else
+    String.downcase(letter)
+  end
+end
+
 System.argv()
 |> Enum.join(" ")
 |> String.graphemes()
 |> Enum.with_index()
-|> Enum.map(fn {letter, idx} -> if(rem(idx, 2) == 0, do: String.upcase(letter), else: letter) end)
+|> Enum.map(fn {letter, idx} -> encode.(letter, idx) end)
 |> Enum.join()
 |> IO.puts
