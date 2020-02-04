@@ -80,7 +80,6 @@ Plug 'tpope/vim-surround'
 Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-projectionist'
-" Plug 'ervandew/supertab'
 Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
 Plug 'rhysd/vim-crystal'
@@ -90,8 +89,6 @@ Plug 'matze/vim-move'
 Plug 'Yggdroot/indentLine'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-" Plug 'terryma/vim-multiple-cursors'
-Plug 'liuchengxu/vim-clap', { 'do': function('clap#helper#build_all') }
 Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
@@ -123,10 +120,19 @@ augroup markdown
   autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
-let g:clap_layout = { 'relative': 'editor' }
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
 silent! nnoremap <c-p> :Files<cr>
 nnoremap gl :BLines<cr>
-nnoremap <leader>a :Clap grep<cr>
+nnoremap <leader>a :RG<cr>
 silent! nnoremap <leader>gr :grep<space>
 nnoremap <leader>c :botright copen 20<cr>
 
