@@ -11,6 +11,7 @@ compdef g=git
 
 ga() { git add "$@"; }
 gc() { git commit "$@"; }
+gco() { git checkout $(gbl | fzf); }
 gcb() { git checkout -b "$@"; }
 gcm() { git checkout master; }
 gl() { git log --graph "$@"; }
