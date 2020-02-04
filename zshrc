@@ -62,3 +62,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 . /usr/local/etc/profile.d/z.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

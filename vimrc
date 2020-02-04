@@ -91,7 +91,7 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-markdown'
 Plug 'matze/vim-move'
 Plug 'Yggdroot/indentLine'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'farmergreg/vim-lastplace'
 call plug#end()
@@ -128,7 +128,7 @@ function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command], 'window': { 'width': 0.9, 'height': 0.6 }}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
@@ -140,7 +140,7 @@ nnoremap <leader>a :RG<cr>
 silent! nnoremap <leader>gr :grep<space>
 nnoremap <leader>c :botright copen 20<cr>
 
-let g:fzf_layout = { 'up': '~40%' }
+let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.6 } }
 
 " vim-test conf
 let test#strategy = 'dispatch'
