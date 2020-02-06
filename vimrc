@@ -95,6 +95,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'farmergreg/vim-lastplace'
+Plug 'lifepillar/vim-solarized8'
+Plug 'justinmk/vim-sneak'
 call plug#end()
 
 if has('gui_macvim')
@@ -106,8 +108,11 @@ if has('gui_macvim')
 endif
 
 set cursorline
-colorscheme night-owl
-let g:lightline = { 'colorscheme': 'nightowl' }
+set background=dark
+colorscheme solarized8_flat
+let g:lightline = { 'colorscheme': 'solarized' }
+
+let g:sneak#label = 1
 
 command! Q q " Bind :Q to :q
 command! Qall qall

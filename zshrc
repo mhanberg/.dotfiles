@@ -23,6 +23,7 @@ for file (~/.zsh/*); do
   source $file
 done
 
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"

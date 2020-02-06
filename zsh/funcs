@@ -18,7 +18,6 @@ gl() { git log --graph "$@"; }
 gpull() { git pull "$@"; }
 gpush() { git push "$@"; }
 alias gpu="git push -u origin"
-__git_complete gpu _git_push
 gd() { git diff "$@"; }
 gs() { git status "$@"; }
 gwip() {
