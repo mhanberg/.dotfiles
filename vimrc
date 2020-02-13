@@ -112,6 +112,8 @@ colorscheme night-owl
 let g:lightline = { 'colorscheme': 'nightowl' }
 
 let g:sneak#label = 1
+let g:indentLine_fileTypeExclude = ['json']
+let g:indentLine_char = '│'
 
 command! Q q " Bind :Q to :q
 command! Qall qall
