@@ -95,7 +95,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'farmergreg/vim-lastplace'
-Plug 'lifepillar/vim-solarized8'
 Plug 'justinmk/vim-sneak'
 call plug#end()
 
@@ -109,8 +108,8 @@ endif
 
 set cursorline
 set background=dark
-colorscheme solarized8_flat
-let g:lightline = { 'colorscheme': 'solarized' }
+colorscheme night-owl
+let g:lightline = { 'colorscheme': 'nightowl' }
 
 let g:sneak#label = 1
 
