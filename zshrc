@@ -30,6 +30,7 @@ zplug "lib/history", from:oh-my-zsh
 zplug "lib/key-bindings", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
+zplug "MichaelAquilina/zsh-you-should-use"
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
