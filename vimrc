@@ -54,7 +54,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'keith/swift.vim'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'mhanberg/night-owl.vim', { 'branch': 'lightline' }
+Plug 'haishanh/night-owl.vim'
 Plug 'mbbill/undotree'
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
