@@ -29,7 +29,6 @@ alias unwrap-last-commit="git reset HEAD~1"
 alias v="vim ."
 alias vi="vim ."
 alias vim="FZF_DEFAULT_OPTS=--reverse nvim"
-alias oni="/Applications/Onivim2.App/Contents/MacOS/Oni2"
 alias hide-desktop="defaults write com.apple.finder CreateDesktop false; killall Finder"
 alias show-desktop="defaults write com.apple.finder CreateDesktop true; killall Finder"
 
