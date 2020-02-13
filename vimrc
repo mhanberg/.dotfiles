@@ -51,6 +51,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
+Plug 'sainnhe/vim-color-forest-night'
 Plug 'keith/swift.vim'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -108,8 +109,11 @@ endif
 
 set cursorline
 set background=dark
-colorscheme night-owl
-let g:lightline = { 'colorscheme': 'nightowl' }
+let g:forest_night_enable_italic = 1
+let g:forest_night_disable_italic_comment = 1
+
+colorscheme forest-night
+let g:lightline = { 'colorscheme': 'forest_night' }
 
 let g:sneak#label = 1
 let g:indentLine_fileTypeExclude = ['json']
