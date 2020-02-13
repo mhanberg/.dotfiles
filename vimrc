@@ -125,6 +125,8 @@ let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', '
 " Disable K looking stuff up
 
 nnoremap <leader><space> :set hls!<cr>
+nnoremap <leader>ev :vsplit ~/.vimrc<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Spell check for text files
 augroup markdown
