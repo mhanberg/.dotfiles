@@ -27,7 +27,6 @@ set undofile
 set undodir=~/.tmp
 set mouse=a
 set noerrorbells visualbell t_vb=
-set hidden
 augroup all
   autocmd!
 
