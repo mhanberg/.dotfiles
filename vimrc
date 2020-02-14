@@ -27,7 +27,8 @@ set undofile
 set undodir=~/.tmp
 set mouse=a
 set noerrorbells visualbell t_vb=
-augroup all
+
+augroup random
   autocmd!
 
   autocmd VimResized * :wincmd =
