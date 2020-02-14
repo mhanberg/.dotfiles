@@ -41,8 +41,9 @@ augroup clojure
   au BufWritePost *.clj :silent Require
 augroup END
 
-augroup md
-  autocmd BufWinEnter *.md :set linebreak
+augroup markdown
+  autocmd BufRead,BufNewFile *.md setlocal spell
+  autocmd BufRead,BufNewFile *.md setlocal linebreak
 augroup END
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -131,11 +132,6 @@ let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', '
 nnoremap <leader><space> :set hls!<cr>
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" Spell check for text files
-augroup markdown
-  autocmd BufRead,BufNewFile *.md setlocal spell
-augroup END
 
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
