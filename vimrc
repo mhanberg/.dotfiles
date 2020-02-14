@@ -32,6 +32,7 @@ augroup all
 
   autocmd VimResized * :wincmd =
   autocmd GUIEnter * set visualbell t_vb=
+  autocmd FileType netrw unmap <buffer> <C-l>
 augroup END
 
 augroup clojure
