@@ -42,6 +42,7 @@ brew "selenium-server-standalone", restart_service: true
 brew "shellcheck"
 brew "the_silver_searcher"
 brew "tmux"
+brew "tmuxinator"
 brew "tokei"
 brew "travis"
 brew "up"
