@@ -52,7 +52,12 @@ augroup END
 augroup markdown
   autocmd BufRead,BufNewFile *.md setlocal spell
   autocmd BufRead,BufNewFile *.md setlocal linebreak
+  autocmd BufRead,BufNewFile,BufWritePost *.md let b:word_count = WordCount(expand("%:p"))
 augroup END
+
+function! WordCount(file)
+  return trim(system("cat " . a:file . " | wc -w"))
+endfunction
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -122,7 +127,27 @@ let g:forest_night_enable_italic = 1
 let g:forest_night_disable_italic_comment = 1
 
 colorscheme forest-night
-let g:lightline = { 'colorscheme': 'forest_night' }
+let g:lightline = {
+  \ 'colorscheme': 'forest_night',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \           [ 'readonly', 'relativepath', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \            [ 'percent' ],
+  \            [ 'fileformat', 'fileencoding', 'filetype', 'wordcount' ] ] },
+  \ 'component_function': {
+  \   'wordcount': 'GetWordCount' },
+  \ 'component_visible_condition': {
+  \   'wordcount': '&spell' }
+  \ }
+
+function! GetWordCount()
+  if &spell ==? "1"
+    return b:word_count
+  else
+    return ""
+  end
+endfunction
 
 let g:sneak#label = 1
 let g:indentLine_fileTypeExclude = ['json']
