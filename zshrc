@@ -32,6 +32,7 @@ zplug "lib/key-bindings", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 zplug "MichaelAquilina/zsh-you-should-use"
+zplug "br/br-gitflow-completion"
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
