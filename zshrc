@@ -52,7 +52,6 @@ fi
 
 if [ -f /usr/local/opt/asdf/asdf.sh ]; then
   source /usr/local/opt/asdf/asdf.sh
-  source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 fi
 
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
