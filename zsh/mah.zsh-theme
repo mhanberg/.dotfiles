@@ -19,7 +19,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('%F{blue}`basename $VIRTUAL_ENV`%f') '
 }
-PR_GIT_UPDATE=1
 
 setopt prompt_subst
 
@@ -60,18 +59,12 @@ cmd_exec_time() {
     [ $elapsed -gt 5 ] && echo ${elapsed}s
 }
 
-function steeef_preexec {
+function calculate_command_time {
     # Get the initial timestamp for cmd_exec_time
     cmd_timestamp=`date +%s`
 }
-add-zsh-hook preexec steeef_preexec
 
-function steeef_chpwd {
-    PR_GIT_UPDATE=1
-}
-add-zsh-hook chpwd steeef_chpwd
-
-function steeef_precmd {
+function format_vcs_info {
     # check for untracked files or updated submodules, since vcs_info doesn't
     if git ls-files --other --exclude-standard 2> /dev/null | grep -q "."; then
         FMT_BRANCH="(%F{yellow}%b%u%c%F{magenta}●${PR_RST})"
@@ -82,7 +75,9 @@ function steeef_precmd {
 
     vcs_info 'prompt'
 }
-add-zsh-hook precmd steeef_precmd
+
+add-zsh-hook preexec calculate_command_time
+add-zsh-hook precmd format_vcs_info
 
 PROMPT=$'
 %F{blue}%~${PR_RST} $vcs_info_msg_0_$(virtualenv_info) %B%F{cyan}$(cmd_exec_time)${PR_RST}
