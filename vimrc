@@ -34,6 +34,7 @@ augroup random
   autocmd VimResized * :wincmd =
   autocmd GUIEnter * set visualbell t_vb=
   autocmd FileType netrw call s:RemoveNetrwMap()
+  autocmd BufRead,BufNewFile *.zsh-theme set filetype=zsh
 augroup END
 
 function s:RemoveNetrwMap()
