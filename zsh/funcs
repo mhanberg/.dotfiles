@@ -121,3 +121,22 @@ gg() {
     (cd .. && gg)
   fi
 }
+
+tp() {
+  session="$(tmux ls | fzf | awk '{ print $1 }' | sed 's/://g')"
+  echo $session
+
+  if [ -n "$session" ] && tmux attach -t "$session"
+}
+
+dev() {
+  if [ -z "$1" ]; then
+    cd ~/Development
+  else
+    if [ -d ~/Development/"$1" ]; then
+      mux start code "$1"
+    else
+      echo "~/Development/$1 does not exist"
+    fi
+  fi
+}

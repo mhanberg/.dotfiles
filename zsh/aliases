@@ -2,7 +2,6 @@
 
 alias ..="cd .."
 alias blog="cd ~/Development/blog"
-alias dev="cd ~/Development"
 alias dotfiles="cd ~/.dotfiles"
 alias dropbox="cd ~/Dropbox"
 alias ea="vim ~/.zsh/aliases"
