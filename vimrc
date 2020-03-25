@@ -197,7 +197,6 @@ let g:ale_completion_enabled = 1
 
 augroup elixir
   nnoremap <leader>r :! elixir %<cr>
-  autocmd FileType elixir nnoremap <c-]> :ALEGoToDefinition<cr>
 augroup END
 
 let g:ale_linters = {}
