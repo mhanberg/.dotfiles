@@ -11,6 +11,7 @@ export ZPLUG_PROTOCOL="SSH"
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+unset -v GEM_HOME
 
 if [ ! -f "$HOME/.zsh/aliases.local" ]; then
   touch "$HOME/.zsh/aliases.local"
