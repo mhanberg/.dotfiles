@@ -39,4 +39,7 @@ case "$SHELL" in
     ;;
 esac
 
+echo "==> Installing a terminfo file for tmux that supports italics"
+tic -x tmux-terminfo.txt
+
 source ./rcup
