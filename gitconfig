@@ -4,7 +4,7 @@
 	smudge = git media smudge %f
 [user]
 	name = Mitchell Hanberg
-	email = mitch@mitchellhanberg.com
+	email = mitchell.hanberg@bleacherreport.com
 [filter "hawser"]
 	clean = git hawser clean %f
 	smudge = git hawser smudge %f
