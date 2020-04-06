@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#    __                               
+#   / /_  ____ _____  ____  ___  _____
+#  / __ \/ __ `/ __ \/ __ \/ _ \/ ___/
+# / /_/ / /_/ / / / / / / /  __/ /    
+#/_.___/\__,_/_/ /_/_/ /_/\___/_/     
+
+set -e
+
+command -v figlet >/dev/null
+
+ban=$(figlet -f slant "$@")
+
+echo "$ban" | pbcopy
+
+echo "$ban"
