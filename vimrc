@@ -66,7 +66,6 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'sainnhe/vim-color-forest-night'
-Plug 'keith/swift.vim'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'haishanh/night-owl.vim'
