@@ -140,3 +140,7 @@ dev() {
     fi
   fi
 }
+
+_dev() { _arguments "1: :($(ls ~/Development))" }
+
+compdef _dev dev
