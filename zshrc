@@ -21,10 +21,6 @@ if [ ! -f "$HOME/.zsh/zshrc.local" ]; then
   touch "$HOME/.zsh/zshrc.local"
 fi
 
-for file (~/.zsh/*); do
-  source $file
-done
-
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -45,6 +41,10 @@ fi
 zplug load
 
 autoload -U compinit && compinit
+
+for file (~/.zsh/*); do
+  source $file
+done
 
 disable r
 setopt nohistignoredups
