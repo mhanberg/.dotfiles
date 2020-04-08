@@ -35,4 +35,8 @@ alias vi="vim ."
 alias vim="FZF_DEFAULT_OPTS=--reverse nvim"
 alias vr="FZF_DEFAULT_OPTS=--reverse vimr . --cur-env"
 
+# wallaby
+alias mtc="WALLABY_DRIVER=chrome mix test"
+alias mts="WALLABY_DRIVER=selenium mix test"
+
 source $HOME/.zsh/aliases.local
