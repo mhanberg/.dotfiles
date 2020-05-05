@@ -34,6 +34,7 @@ alias v="vim ."
 alias vi="vim ."
 alias vim="FZF_DEFAULT_OPTS=--reverse nvim"
 alias vr="FZF_DEFAULT_OPTS=--reverse vimr . --cur-env"
+alias rebuild-blog='curl -X POST -d {} https://api.netlify.com/build_hooks/"$NETLIFY_BLOG_ID"'
 
 # wallaby
 alias mtc="WALLABY_DRIVER=chrome mix test"
