@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-set -e
 
 echo "==> Installing XCode"
 xcode-select --install
+
+set -e
 
 echo "==> Generating an SSH key"
 
