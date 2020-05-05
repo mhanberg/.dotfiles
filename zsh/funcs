@@ -34,8 +34,7 @@ pull-with-changes() {
   unwrap-last-commit
 }
 path() {
-  echo $PATH | sed 's/:/\
-/g'
+  echo $PATH | tr ':' '\n'
 }
 
 fv() {
