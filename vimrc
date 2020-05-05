@@ -35,6 +35,7 @@ augroup random
   autocmd GUIEnter * set visualbell t_vb=
   autocmd FileType netrw call s:RemoveNetrwMap()
   autocmd BufRead,BufNewFile *.zsh-theme set filetype=zsh
+  autocmd BufRead,BufNewFile *.lexs set filetype=elixir
 augroup END
 
 function s:RemoveNetrwMap()
