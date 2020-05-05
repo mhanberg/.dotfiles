@@ -37,21 +37,36 @@ path() {
   echo $PATH | tr ':' '\n'
 }
 
-fv() {
-  file="$(fzf)"
+execute-fzf() {
+  if [ -z "$1" ]; then
+    file="$(fzf)"
+  else
+    file=$(eval "$1 | fzf")
+  fi
+
   case "$file" in
-    "") echo "fv cancelled";;
-    *) vim "$file";;
+    "") echo "fzf cancelled";;
+    *) eval "$2" "$file";;
   esac
 }
 
-fmv() {
-  file="$(fzf)"
-  case "$file" in
-    "") echo "fv cancelled";;
-    *) mvim "$file";;
-  esac
+fv() {
+  execute-fzf "" "vim"
 }
+
+fmv() {
+  execute-fzf "" "mvim"
+}
+
+brew-uninstall() {
+  execute-fzf "brew list" "brew uninstall"
+}
+alias bun='brew-uninstall'
+
+brew-cask-uninstall() {
+  execute-fzf "brew cask list" "brew cask uninstall"
+}
+alias bcun='brew-cask-uninstall'
 
 aliases() {
   if [ -f ~/.zsh/aliases ]; then
