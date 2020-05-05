@@ -12,6 +12,12 @@ read -r -p "Email: " email
 
 ssh-keygen -t rsa -b 4096 -C \""$email"\"
 
+echo "==> Copying public key to clipboard"
+cat ~/.ssh/id_rsa.pub | pbcopy
+
+echo "==> Upload to GitHub now"
+read -r -p "Press enter to continue" tmp
+
 echo "==> Starting ssh-agent"
 eval "$(ssh-agent -s)"
 
