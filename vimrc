@@ -66,6 +66,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
+Plug 'pgdouyon/vim-yin-yang'
+Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'sainnhe/vim-color-forest-night'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -107,10 +109,11 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-markdown'
 Plug 'matze/vim-move'
 Plug 'Yggdroot/indentLine'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'justinmk/vim-sneak'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 if has('gui_macvim')
