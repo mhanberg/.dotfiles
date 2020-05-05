@@ -118,7 +118,7 @@ call plug#end()
 
 if has('gui_macvim')
   set guioptions=
-  set guifont=Hack:h14
+  set guifont=JetBrains\ Mono:h14
   set linespace=1
 
   set macmeta
@@ -194,13 +194,14 @@ nmap <leader>f :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
 nmap <leader>l :TestLast<CR>
 
+" ctags
+nnoremap <leader>ct :!ctags -R .<cr>
+nnoremap <leader>t :Tags<cr>
+nnoremap <leader>r :BTags<cr>
+
 "ALE conf"
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
-
-augroup elixir
-  nnoremap <leader>r :! elixir %<cr>
-augroup END
 
 let g:ale_linters = {}
 let g:ale_linters.scss = ['stylelint']
