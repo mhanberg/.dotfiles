@@ -222,6 +222,10 @@ let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fixers.xml = ['xmllint']
 
 let g:ale_sign_column_always = 1
+let g:ale_elixir_credo_strict = 1
+
+let g:ale_elixir_elixir_ls_release = expand("~/Development/elixir-ls/rel")
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
 
 nnoremap dt :ALEGoToDefinition<cr>
 nnoremap df :ALEFix<cr>
