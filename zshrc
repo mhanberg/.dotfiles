@@ -69,3 +69,5 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source "$HOME"/.zshrc.local
+
+eval "$(direnv hook zsh)"
