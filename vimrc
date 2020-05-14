@@ -179,6 +179,7 @@ endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 let g:fzf_preview_window = ''
+call setenv("FZF_DEFAULT_OPTS", "--reverse")
 silent! nnoremap <c-p> :Files<cr>
 nnoremap gl :BLines<cr>
 nnoremap <leader>a :RG<cr>
