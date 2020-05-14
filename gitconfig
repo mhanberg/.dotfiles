@@ -16,8 +16,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = nvim
-[commit]
-	template = ~/.stCommitMsg
 [include]
   path = ~/.gitconfig.local
 [alias]
