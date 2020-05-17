@@ -3,3 +3,4 @@
 .vim-test
 tags
 .elixir_ls
+.envrc

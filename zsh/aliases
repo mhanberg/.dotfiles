@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+alias tmux='direnv exec / tmux'
 alias ..="cd .."
 alias blog="cd ~/Development/blog"
 alias brn="cd ~/Dropbox/br/notes && v"
