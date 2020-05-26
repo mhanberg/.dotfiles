@@ -4,8 +4,5 @@ name: dotfiles
 root: ~/.dotfiles
 
 windows:
-  - editor:
-      layout: main-vertical
-      panes:
-        - v
-        - 
+  - editor: v
+  - shell: 
