@@ -242,6 +242,8 @@ endif
 
 "Goyo conf"
 nnoremap <leader>gy :Goyo<CR>
+let g:goyo_width = 120
+let g:goyo_height = 100
 
 let g:markdown_syntax_conceal = 0
 
