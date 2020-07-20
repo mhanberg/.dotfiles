@@ -155,6 +155,6 @@ dev() {
   fi
 }
 
-_dev() { _arguments "1: :($(ls ~/Development))" }
+_dev() { _arguments "1: :($(ls $HOME/Development))" }
 
 compdef _dev dev
