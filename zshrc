@@ -60,6 +60,8 @@ fi
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/Library/Python/3.7/bin:$PATH"
+export PATH="$(yarn global bin):$PATH"
 
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
