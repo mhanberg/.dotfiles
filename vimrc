@@ -105,6 +105,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'amiralies/vim-textobj-elixir'
 call plug#end()
 
 if has('gui_macvim')
