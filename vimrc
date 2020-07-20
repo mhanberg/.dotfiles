@@ -108,6 +108,16 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'amiralies/vim-textobj-elixir'
+
+if has("nvim-0.5.0")
+echom "nvim 5!"
+Plug 'neovim/nvim-lsp'
+Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/diagnostic-nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+endif
+
 call plug#end()
 
 if has('gui_macvim')
@@ -194,14 +204,63 @@ nnoremap <leader>ct :!ctags -R .<cr>
 nnoremap <leader>t :Tags<cr>
 nnoremap <leader>r :BTags<cr>
 
-"ALE conf"
-set completeopt=menu,menuone,preview,noselect,noinsert
-let g:ale_completion_enabled = 1
-
 let g:ale_linters = {}
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.css = ['stylelint']
+
+if has("nvim-0.5.0")
+let g:ale_linters.elixir = ['credo']
+set completeopt=menuone,noinsert,noselect
+
+let g:completion_enable_snippet = 'vim-vsnip'
+let g:diagnostic_enable_virtual_text = 1
+
+lua << elixirLS
+local on_attach_vim = function()
+  require'completion'.on_attach()
+  require'diagnostic'.on_attach()
+end
+require'nvim_lsp'.elixirls.setup{
+  on_attach = on_attach_vim;
+  settings = {
+    elixirLS = {
+      dialyzerEnabled = false;
+    };
+  };
+}
+elixirLS
+
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> dt <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K  <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0 <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+imap <expr> <C-j> vsnip#available(1) ? '<Plug>(vsnip-expand)' : '<C-j>'
+imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+imap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+smap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+imap <expr> <S-Tab> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+
+else
+let g:ale_completion_enabled = 1
+set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_linters.elixir = ['elixir-ls', 'credo']
+
+let g:ale_elixir_elixir_ls_release = expand("~/Development/elixir-ls/rel")
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
+
+nnoremap dt :ALEGoToDefinition<cr>
+nnoremap K :ALEHover<cr>
+endif
+
+nnoremap df :ALEFix<cr>
 let g:ale_linters.ruby = ['rubocop', 'ruby', 'solargraph']
 
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
@@ -218,12 +277,6 @@ let g:ale_fixers.xml = ['xmllint']
 let g:ale_sign_column_always = 1
 let g:ale_elixir_credo_strict = 1
 
-let g:ale_elixir_elixir_ls_release = expand("~/Development/elixir-ls/rel")
-let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
-
-nnoremap dt :ALEGoToDefinition<cr>
-nnoremap df :ALEFix<cr>
-nnoremap K :ALEHover<cr>
 
 set grepprg=ag\ --vimgrep\ -Q\ $*
 set grepformat=%f:%l:%c:%m
