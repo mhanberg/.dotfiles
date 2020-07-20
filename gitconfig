@@ -16,6 +16,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = nvim
+	pager = "delta --plus-color=\"#333B2F\" --minus-color=\"#382F32\" --theme='Forest Night'"
 [include]
   path = ~/.gitconfig.local
 [alias]
@@ -30,3 +31,5 @@
 	required = true
 [mergetool]
 	keepBackup = false
+[interactive]
+	diffFilter = delta --color-only
