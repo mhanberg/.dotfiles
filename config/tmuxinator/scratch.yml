@@ -4,4 +4,4 @@ name: scratch
 root: ~/
 
 windows:
-  - scratch:
+  - scratch: clear
