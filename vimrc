@@ -14,8 +14,8 @@ set shiftwidth=2
 set expandtab
 set number
 set termguicolors
-set backupdir=~/.tmp
-set directory=~/.tmp
+set backupdir=~/.tmp/backup
+set directory=~/.tmp/swp
 set splitbelow " Open new split panes to right and bottom, which feels more natural
 set splitright
 set lazyredraw
