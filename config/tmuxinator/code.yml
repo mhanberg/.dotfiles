@@ -1,6 +1,6 @@
 # /Users/mitchellhanberg/.config/tmuxinator/code.yml
 
-name: <%= @args[0] %>
+name: <%= @args[0].gsub("\.", "") %>
 root: ~/Development/<%= @args[0] %>
 
 windows:
