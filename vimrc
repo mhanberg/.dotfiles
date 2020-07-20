@@ -66,19 +66,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
-Plug 'pgdouyon/vim-yin-yang'
-Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'sainnhe/vim-color-forest-night'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'haishanh/night-owl.vim'
-Plug 'mbbill/undotree'
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'vim-ruby/vim-ruby'
@@ -97,14 +92,11 @@ Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
-Plug 'ElmCast/elm-vim'
 Plug 'tpope/vim-surround'
-Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-projectionist'
 Plug 'avakhov/vim-yaml'
 Plug 'chr4/nginx.vim'
-Plug 'rhysd/vim-crystal'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-markdown'
 Plug 'matze/vim-move'
@@ -112,7 +104,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'farmergreg/vim-lastplace'
-Plug 'justinmk/vim-sneak'
 Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
