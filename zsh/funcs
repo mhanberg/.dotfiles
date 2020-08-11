@@ -39,9 +39,9 @@ path() {
 
 execute-fzf() {
   if [ -z "$1" ]; then
-    file="$(fzf)"
+    file="$(fzf --multi)"
   else
-    file=$(eval "$1 | fzf")
+    file=$(eval "$1 | fzf --multi")
   fi
 
   case "$file" in
