@@ -57,7 +57,7 @@ augroup markdown
 augroup END
 
 function! WordCount(file)
-  return trim(system("cat " . a:file . " | wc -w"))
+  return trim(system('cat ' . a:file . ' | wc -w'))
 endfunction
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -104,13 +104,13 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'farmergreg/vim-lastplace'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'amiralies/vim-textobj-elixir'
 
-if has("nvim-0.5.0")
-echom "nvim 5!"
+if has('nvim-0.5.0')
+echom 'nvim 5!'
 Plug 'neovim/nvim-lsp'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
@@ -148,10 +148,10 @@ let g:lightline = {
   \ }
 
 function! GetWordCount()
-  if &spell ==? "1"
+  if &spell ==? '1'
     return b:word_count
   else
-    return ""
+    return ''
   end
 endfunction
 
@@ -168,12 +168,13 @@ command! Wq wq
 let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'elixir', 'bash=sh', 'javascript']
 " Disable K looking stuff up
 
+nnoremap cn :cnext<cr>
 nnoremap <leader><space> :set hls!<cr>
 nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let command_fmt = 'rg --glob ''!yarn.lock'' --glob ''!package-lock.json'' --column --line-number --no-heading --color=always --smart-case %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command], 'window': { 'width': 0.9, 'height': 0.6 }}
@@ -183,7 +184,7 @@ endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 let g:fzf_preview_window = ''
-call setenv("FZF_DEFAULT_OPTS", "--reverse")
+call setenv('FZF_DEFAULT_OPTS', '--reverse')
 silent! nnoremap <c-p> :Files<cr>
 nnoremap gl :BLines<cr>
 nnoremap <leader>a :RG<cr>
@@ -193,6 +194,7 @@ nnoremap <leader>c :botright copen 20<cr>
 let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.6 } }
 
 " vim-test conf
+let g:dispatch_handlers = ['job']
 let test#strategy = 'dispatch'
 nmap <leader>n :TestNearest<CR>
 nmap <leader>f :TestFile<CR>
@@ -208,7 +210,7 @@ let g:ale_linters = {}
 let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.css = ['stylelint']
 
-if has("nvim-0.5.0")
+if has('nvim-0.5.0')
 let g:ale_linters.elixir = ['credo']
 set completeopt=menuone,noinsert,noselect
 
@@ -253,7 +255,7 @@ let g:ale_completion_enabled = 1
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_linters.elixir = ['elixir-ls', 'credo']
 
-let g:ale_elixir_elixir_ls_release = expand("~/Development/elixir-ls/rel")
+let g:ale_elixir_elixir_ls_release = expand('~/Development/elixir-ls/rel')
 let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
 
 nnoremap dt :ALEGoToDefinition<cr>
