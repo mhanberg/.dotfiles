@@ -6,8 +6,7 @@
 #  / /_/ // /_/ // /_/ // /__ / /_/ /(__  )/  __/
 # /_.___/ \____//_.___/ \___/ \__,_//____/ \___/ 
 
-
-encode = fn letter, position ->
+encode = fn {letter, position} ->
   if rem(position, 2) == 0 do
     String.upcase(letter)
   else
@@ -15,10 +14,15 @@ encode = fn letter, position ->
   end
 end
 
+slurp = fn
+  [] -> IO.read(:stdio, :all)
+  text -> text |> Enum.join(" ")
+end
+
 System.argv()
-|> Enum.join(" ")
+|> slurp.()
 |> String.graphemes()
 |> Enum.with_index()
-|> Enum.map(fn {letter, idx} -> encode.(letter, idx) end)
+|> Enum.map(encode)
 |> Enum.join()
-|> IO.puts
+|> IO.write()
