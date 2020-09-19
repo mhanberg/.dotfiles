@@ -137,7 +137,7 @@ gg() {
 }
 
 tp() {
-  session="$(tmux ls | fzf | awk '{ print $1 }' | sed 's/://g')"
+  session="$(tmux ls | fzf --reverse | awk '{ print $1 }' | sed 's/://g')"
   echo $session
 
   if [ -n "$session" ] && tmux attach -t "$session"
