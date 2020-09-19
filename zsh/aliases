@@ -43,6 +43,8 @@ alias mxi='mix'
 alias stable-nvim='asdf global neovim 0.4.3'
 alias nightly-nvim='asdf global neovim nightly'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
+alias clapped='sed "s/ / 👏 /g"'
+alias clap!='pbpaste | clapped | pbcopy'
 
 # gh aliases
 
