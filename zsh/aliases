@@ -38,9 +38,13 @@ alias set-git-email-personal='git config user.email "$PERSONAL_EMAIL"'
 alias set-git-email-work='git config user.email "$WORK_EMAIL"'
 alias lsf='ls | fzf'
 alias mxi='mix'
-alias stable-nvim='asdf global neovim 0.4.3'
+alias stable-nvim='asdf global neovim stable'
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
 alias nightly-nvim='asdf global neovim nightly'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
+
+# docker
+alias dc='docker-compose'
 
 # gh aliases
 
