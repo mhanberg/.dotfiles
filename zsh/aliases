@@ -24,8 +24,6 @@ alias lib="cd ~/libcasts"
 alias m="mvim -g ."
 alias mdkir="mkdir"
 alias mux="tmuxinator"
-alias planet="cd ~/Development/planet_ex"
-alias sc-notes="mvim ~/Dropbox/SEP/scout/notes"
 alias scratch="tmuxinator start scratch"
 alias show-desktop="defaults write com.apple.finder CreateDesktop true; killall Finder"
 alias sz="source ~/.zshrc"
@@ -40,11 +38,15 @@ alias set-git-email-personal='git config user.email "$PERSONAL_EMAIL"'
 alias set-git-email-work='git config user.email "$WORK_EMAIL"'
 alias lsf='ls | fzf-tmux -p -- --reverse'
 alias mxi='mix'
-alias stable-nvim='asdf global neovim 0.4.3'
+alias stable-nvim='asdf global neovim stable'
+alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
 alias nightly-nvim='asdf global neovim nightly'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
 alias clapped='sed "s/ / 👏 /g"'
 alias clap!='pbpaste | clapped | pbcopy'
+
+# docker
+alias dc='docker-compose'
 
 # gh aliases
 

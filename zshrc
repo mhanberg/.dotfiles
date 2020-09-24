@@ -5,6 +5,20 @@
 # (_)/___//____//_/ /_//_/    \___/
 #
 
+# zmodload zsh/zprof
+# profiling start
+# zmodload zsh/datetime
+# setopt PROMPT_SUBST
+# PS4='+$EPOCHREALTIME %N:%i> '
+
+# logfile=$(mktemp zsh_profile.XXXXXXXX)
+# echo "Logging to $logfile"
+# exec 3>&2 2>$logfile
+
+# setopt XTRACE
+# profiling end
+
+# date
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ZPLUG_PROTOCOL="SSH"
@@ -21,6 +35,7 @@ if [ ! -f "$HOME/.zsh/zshrc.local" ]; then
   touch "$HOME/.zsh/zshrc.local"
 fi
 
+# echo "starting zplug"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -42,6 +57,7 @@ zplug load
 
 autoload -U compinit && compinit
 
+# echo "sourcing zsh files"
 for file (~/.zsh/*); do
   source $file
 done
@@ -60,16 +76,26 @@ fi
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/Library/Python/3.7/bin:$PATH"
+export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 export PATH="$(yarn global bin):$PATH"
 
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+# echo "sourcing z.sh"
 . /usr/local/etc/profile.d/z.sh
 
+# echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source "$HOME"/.zshrc.local
+source "$HOME"/.zsh/aliases.local
 
+# echo "eval direnv"
 eval "$(direnv hook zsh)"
+# date
+# profiling start
+# unsetopt XTRACE
+# exec 2>&3 3>&-
+# profiling end
+# zprof
