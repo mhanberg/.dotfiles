@@ -110,7 +110,7 @@ brew-outdated() {
   brew outdated
 
   echo "\n==> Outdated casks"
-  brew cask outdated
+  brew outdated --cask
 }
 
 brew-upgrade() {
@@ -118,7 +118,7 @@ brew-upgrade() {
   brew upgrade
 
   echo "\n==> brew cask upgrade"
-  brew cask upgrade
+  brew upgrade --cask
 }
 
 alias bo="brew-outdated"
@@ -148,7 +148,7 @@ dev() {
     cd ~/Development
   else
     if [ -d ~/Development/"$1" ]; then
-      mux start code "$1"
+      mux start code "$1" --suppress-tmux-version-warning=0 
     else
       echo "~/Development/$1 does not exist"
     fi
