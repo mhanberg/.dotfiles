@@ -17,7 +17,7 @@
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo '('%F{blue}`basename $VIRTUAL_ENV`%f') '
+	[ $VIRTUAL_ENV ] && echo '('%F{blue}$(basename $VIRTUAL_ENV)%f') '
 }
 
 setopt prompt_subst
@@ -45,35 +45,35 @@ FMT_ACTION="(%F{cyan}%a${PR_RST})"
 FMT_UNSTAGED="%F{red}●"
 FMT_STAGED="%F{cyan}●"
 
-zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
-zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
+zstyle ':vcs_info:*:prompt:*' unstagedstr "${FMT_UNSTAGED}"
+zstyle ':vcs_info:*:prompt:*' stagedstr "${FMT_STAGED}"
 zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
-zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
-zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
+zstyle ':vcs_info:*:prompt:*' nvcsformats ""
 
 # Displays the exec time of the last command if set threshold was exceeded
 cmd_exec_time() {
-    local stop=`date +%s`
-    local start=${cmd_timestamp:-$stop}
-    let local elapsed=$stop-$start
-    [ $elapsed -gt 5 ] && echo ${elapsed}s
+	local stop=$(date +%s)
+	local start=${cmd_timestamp:-$stop}
+	let local elapsed=stop-start
+	[ $elapsed -gt 5 ] && echo ${elapsed}s
 }
 
 function calculate_command_time {
-    # Get the initial timestamp for cmd_exec_time
-    cmd_timestamp=`date +%s`
+	# Get the initial timestamp for cmd_exec_time
+	cmd_timestamp=$(date +%s)
 }
 
 function format_vcs_info {
-    # check for untracked files or updated submodules, since vcs_info doesn't
-    if git ls-files --other --exclude-standard 2> /dev/null | grep -q "."; then
-        FMT_BRANCH="(%F{yellow}%b%u%c%F{magenta}●${PR_RST})"
-    else
-        FMT_BRANCH="(%F{yellow}%b%u%c${PR_RST})"
-    fi
-    zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH} "
+	# check for untracked files or updated submodules, since vcs_info doesn't
+	if git ls-files --other --exclude-standard 2>/dev/null | grep -q "."; then
+		FMT_BRANCH="(%F{yellow}%b%u%c%F{magenta}●${PR_RST})"
+	else
+		FMT_BRANCH="(%F{yellow}%b%u%c${PR_RST})"
+	fi
+	zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH} "
 
-    vcs_info 'prompt'
+	vcs_info 'prompt'
 }
 
 add-zsh-hook preexec calculate_command_time

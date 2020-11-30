@@ -3,6 +3,6 @@
 instances=$(nvr --serverlist)
 
 for inst in $instances; do
-  echo "==> Quitting $inst"
-  nvr --servername "$inst" --remote-send ':wqa<cr>'
+	echo "==> Quitting $inst"
+	nvr --servername "$inst" --remote-send ':wqa<cr>'
 done
