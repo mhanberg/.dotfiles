@@ -1,10 +1,12 @@
 #!/usr/bin/env zsh
 
+alias wtf='wtfutil'
 alias tmux='direnv exec / tmux'
+alias mux="tmuxinator"
 alias ..="cd .."
 alias blog="cd ~/Development/blog"
 alias brn="cd ~/Dropbox/br/notes && v"
-alias dotfiles="tmuxinator start dotfiles"
+alias dotfiles="mux start dotfiles"
 alias dropbox="cd ~/Dropbox"
 alias ea="vim ~/.zsh/aliases"
 alias eal="vim ~/.zsh/aliases.local"
@@ -23,8 +25,7 @@ alias l1="ls -1"
 alias lib="cd ~/libcasts"
 alias m="mvim -g ."
 alias mdkir="mkdir"
-alias mux="tmuxinator"
-alias scratch="tmuxinator start scratch"
+alias scratch="mux start scratch"
 alias show-desktop="defaults write com.apple.finder CreateDesktop true; killall Finder"
 alias sz="source ~/.zshrc"
 alias tree="tree | less"
@@ -42,6 +43,8 @@ alias stable-nvim='asdf global neovim stable'
 alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
 alias nightly-nvim='asdf global neovim nightly'
 alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
+alias master-nvim='asdf global neovim ref:master'
+alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
 alias clapped='sed "s/ / 👏 /g"'
 alias clap!='pbpaste | clapped | pbcopy'
 

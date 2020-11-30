@@ -19,6 +19,7 @@
 # profiling end
 
 # date
+export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ZPLUG_PROTOCOL="SSH"
@@ -78,6 +79,7 @@ export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 export PATH="$(yarn global bin):$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"

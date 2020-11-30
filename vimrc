@@ -26,13 +26,13 @@ endif
 
 call plug#begin('~/.vim/bundle')
 Plug 'Olical/aniseed', { 'branch': 'develop' }
-Plug 'Olical/conjure', {'tag': 'v4.4.0'}
+Plug 'Olical/conjure', {'tag': 'v4.5.0'}
 Plug 'norcalli/nvim.lua'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-repeat'
 Plug 'bakpakin/fennel.vim'
-Plug 'sainnhe/vim-color-forest-night'
+Plug 'sainnhe/vim-color-forest-night', 
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'alvan/vim-closetag'
@@ -56,7 +56,6 @@ Plug 'tpope/vim-liquid'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
-Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'
@@ -74,13 +73,19 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'amiralies/vim-textobj-elixir'
+Plug 'stsewd/fzf-checkout.vim'
+Plug 'reedes/vim-wordy'
 
 if has('nvim-0.5.0')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
-  Plug 'nvim-lua/diagnostic-nvim'
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
+
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-lua/telescope.nvim'
+  " Plug 'nvim-treesitter/nvim-treesitter'
 endif
 
 call plug#end()

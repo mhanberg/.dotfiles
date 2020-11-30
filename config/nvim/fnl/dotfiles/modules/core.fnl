@@ -23,7 +23,6 @@
 
 (set nvim.o.syntax "true")
 (set nvim.o.splitbelow true)
-(set nvim.o.termguicolors true)
 (set nvim.o.foldmethod "syntax")
 (set nvim.o.foldlevelstart 99)
 (set nvim.o.smartindent true)
@@ -47,7 +46,9 @@
 (set nvim.o.visualbell true)
 (set nvim.o.t_vb "")
 (set nvim.o.cursorline true)
+(set nvim.o.inccommand :nosplit)
 (set nvim.o.background "dark")
+(set nvim.o.autoread true)
 (nvim.ex.colorscheme "forest-night")
 
 (set nvim.g.lightline
@@ -101,12 +102,13 @@
 (nvim.set_keymap :n "<leader>a" ":RG<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>gr" ":grep<cr>" {:silent true :noremap true})
 (nvim.set_keymap :n "<leader>c" ":botright copen 20<cr>" {:noremap true})
+(nvim.set_keymap :n "<leader>gd" ":G diff %<cr>" {:noremap true})
 
 ; vim-test conf
 (set nvim.g.dispatch_handlers ["job"])
 (set nvim.g.test#strategy "dispatch")
 (nvim.set_keymap :n "<leader>n" ":TestNearest<cr>" {:noremap true})
-(nvim.set_keymap :n "<leader>f " ":TestFile<cr>" {:noremap true})
+(nvim.set_keymap :n "<leader>f" ":TestFile<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>s" ":TestSuite<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>l" ":TestLast<cr>" {:noremap true})
 
@@ -115,62 +117,44 @@
 (nvim.set_keymap :n "<leader>t" ":Tags<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>r" ":BTags" {:noremap true})
 
-; ale
-(set nvim.g.ale_linters {:scss ["stylelint"] :css ["stylelint"]})
+(vim.fn.mkdir (vim.fn.stdpath :data) :p)
+
+(defn path_join [...]
+  (table.concat (vim.tbl_flatten [...]) "/"))
 
 (if (= 5 (util.nvim-version))
   (do
-    (print "nvim 5")
-    (set nvim.g.ale_linters.elixir ["credo"])
     (set nvim.o.completeopt "menuone,noinsert,noselect")
     (set nvim.g.completion_enable_snippet "vim-vsnip")
-    (set nvim.g.diagnostic_enable_virtual_text 1)
-    (setup-lsp :elixirls
-      { :settings {:elixirLS {:dializerEnabled false }}
-        :log_level vim.lsp.protocol.MessageType.Log})
-    (nvim.set_keymap :n "gd" "<cmd>lua vim.lsp.buf.declaration()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "dt" "<cmd>lua vim.lsp.buf.definition()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "K " "<cmd>lua vim.lsp.buf.hover()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "gD" "<cmd>lua vim.lsp.buf.implementation()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "<c-k>" "<cmd>lua vim.lsp.buf.signature_help()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "1gD" "<cmd>lua vim.lsp.buf.type_definition()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "gr" "<cmd>lua vim.lsp.buf.references()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "g0" "<cmd>lua vim.lsp.buf.document_symbol()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :n "gW" "<cmd>lua vim.lsp.buf.workspace_symbol()<cr>" {:noremap true :silent true})
-    (nvim.set_keymap :i "<expr> <C-j>" "vsnip#available(1) ? '<Plug>(vsnip-expand)' : '<C-j>'" {})
-    (nvim.set_keymap :i "<expr> <C-l>" "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" {})
-    (nvim.set_keymap :s "<expr> <C-l>" "vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'" {})
-    (nvim.set_keymap :i "<expr> <Tab>" "vsnip#available(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'" {})
-    (nvim.set_keymap :s "<expr> <Tab>" "vsnip#available(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'" {})
-    (nvim.set_keymap :i "<expr> <S-Tab>" "vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'" {})
-    (nvim.set_keymap :s "<expr> <S-Tab>" "vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'" {}))
-  (do
-    (print "nvim 4")
-    (set nvim.g.ale_completion_enabled 1)
-    (set nvim.o.completeopt "menu,menuone,preview,noselect,noinsert")
-    (set nvim.g.ale_linters.elixir ["elixir-ls" "credo"])
-    (set nvim.g.ale_elixir_elixir_ls_release (util.expand "~/Development/elixir-ls/rel"))
-    (set nvim.g.ale_elixir_elixir_ls_config {:elixirLS {:dialyzerEnabled false}})
-    (nvim.set_keymap :n "dt" ":ALEGoToDefinition<cr>" {:noremap true})
-    (nvim.set_keymap :n "K" ":ALEHover<cr>" {:noremap true})))
+    (setup-lsp :elixirls {:settings {:elixirLS {:dialyzerEnabled false}}})
+    (setup-lsp :efm {})
+    (setup-lsp :rust_analyzer {})
+    (setup-lsp :solargraph {})
+    (setup-lsp :omnisharp {})
+    (setup-lsp :tsserver {})
+    (setup-lsp :sumneko_lua {})
+    (setup-lsp :vimls {})))
+    ;(let [ts (require "nvim-treesitter.configs")]
+    ;  (ts.setup
+    ;    {:ensure_installed :all :highlight {:enable true}})))
 
+; (nvim.set_keymap :n "df" ":ALEFix<cr>" {:noremap true})
+; (set nvim.g.ale_linters.ruby [:rubocop :ruby :solargraph])
+; (set nvim.g.ale_fixers
+;  {:* [:remove_trailing_lines :trim_whitespace]
+;   :javascript [:eslint :prettier]
+;   :html [:prettier]
+;   :scss [:stylelint]
+;   :css [:stylelint]
+;   :elm [:format]
+;   :ruby [:rubocop]
+;   :elixir [:mix_format]
+;   :rust [:rustfmt]
+;   :xml [:xmllint]
+;  })
 
-(nvim.set_keymap :n "df" ":ALEFix<cr>" {:noremap true})
-(set nvim.g.ale_linters.ruby [:rubocop :ruby :solargraph])
-(set nvim.g.ale_fixers
- {:* [:remove_trailing_lines :trim_whitespace]
-  :javascript [:eslint :prettier]
-  :html [:prettier]
-  :scss [:stylelint]
-  :css [:stylelint]
-  :elm [:format]
-  :ruby [:rubocop]
-  :elixir [:mix_format]
-  :xml [:xmllint]
- })
-
-(set nvim.g.ale_sign_column_always 1)
-(set nvim.g.ale_elixir_credo_strict 1)
+; (set nvim.g.ale_sign_column_always 1)
+; (set nvim.g.ale_elixir_credo_strict 1)
 (set nvim.o.grepprg "ag --vimgrep -Q $*")
 (set nvim.o.grepformat "%f:%l:%c:%m")
 
