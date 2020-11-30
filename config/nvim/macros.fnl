@@ -15,15 +15,15 @@
       (core.merge
         {:message_level vim.lsp.protocol.MessageType.Log
          :log_level vim.lsp.protocol.MessageType.Log
-         :handlers {:window/logMessage
-                    (fn [err# method# params# client_id#]
-                      (print "im in my handler")
-                      (if (and params# (<= params#.type vim.lsp.protocol.MessageType.Log))
-                        (let [filename# (path_join (vim.fn.stdpath :data) :lsp.log)]
-                          (with-open [logfile# (io.open filename :w)]
-                                     (logfile#:write (vim.inspect params#.message {:newline ""}))
-                                     (logfile#:write "this is mitch")
-                                     ))))}
+         ; :handlers {:window/logMessage
+         ;            (fn [err# method# params# client_id#]
+         ;              (print "im in my handler")
+         ;              (if (and params# (<= params#.type vim.lsp.protocol.MessageType.Log))
+         ;                (let [filename# (path_join (vim.fn.stdpath :data) :lsp.log)]
+         ;                  (with-open [logfile# (io.open filename :w)]
+         ;                             (logfile#:write (vim.inspect params#.message {:newline ""}))
+         ;                             (logfile#:write "this is mitch")
+         ;                             ))))}
          :on_attach
            (fn []
              (print (.. "attaching to " ,name))

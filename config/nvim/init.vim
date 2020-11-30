@@ -7,7 +7,7 @@ source ~/.vimrc
 lua vim.lsp.set_log_level(0)
 lua require('aniseed.env').init({force = true})
 
-highlight! link LspDiagnosticsDefaultError Red
-highlight! link LspDiagnosticsDefaultWarning Yellow
-highlight! link LspDiagnosticsDefaultInformation Blue
-highlight! link LspDiagnosticsDefaultHint Aqua
+highlight! link LspDiagnosticsVirtualTextError Red
+highlight! link LspDiagnosticsVirtualTextWarning Yellow
+highlight! link LspDiagnosticsVirtualTextInformation Blue
+highlight! link LspDiagnosticsVirtualTextHint Aqua

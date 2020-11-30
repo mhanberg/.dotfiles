@@ -106,11 +106,8 @@ brew-outdated() {
   echo "==> Running brew update..."
   brew update >/dev/null
 
-  echo "\n==> Outdated brews"
+  echo "\n==> Outdated brews and casks"
   brew outdated
-
-  echo "\n==> Outdated casks"
-  brew outdated --cask
 }
 
 brew-upgrade() {
