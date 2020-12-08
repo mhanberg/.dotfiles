@@ -49,6 +49,7 @@
 (set nvim.o.inccommand :nosplit)
 (set nvim.o.background "dark")
 (set nvim.o.autoread true)
+(set nvim.g.forest_night_enable_italic 1)
 (nvim.ex.colorscheme "forest-night")
 
 (set nvim.g.lightline
@@ -102,7 +103,8 @@
 (nvim.set_keymap :n "<leader>a" ":RG<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>gr" ":grep<cr>" {:silent true :noremap true})
 (nvim.set_keymap :n "<leader>c" ":botright copen 20<cr>" {:noremap true})
-(nvim.set_keymap :n "<leader>gd" ":G diff %<cr>" {:noremap true})
+(nvim.set_keymap :n "<leader>gd" ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git diff'<cr>" {:noremap true})
+(nvim.set_keymap :n "<leader>gs" ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git status'<cr>" {:noremap true})
 
 ; vim-test conf
 (set nvim.g.dispatch_handlers ["job"])
