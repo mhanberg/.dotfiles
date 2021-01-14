@@ -85,7 +85,7 @@
   (let [command-fmt "rg --glob '!yarn.lock' --glob '!package-lock.json' --column --line-number --no-heading --color=always --smart-case %s || true"
         initial-command (nvim.fn.printf command-fmt (nvim.fn.shellescape query))
         reload-command (nvim.fn.printf command-fmt "{q}")
-        spec {:options ["--phony" "--query" query "--bind" (.. "change:reload:" reload-command)]
+        spec {:options ["--disabled" "--query" query "--bind" (.. "change:reload:" reload-command)]
               :window {:width 0.9
                        :height 0.6
                        :yoffset 0
@@ -128,13 +128,26 @@
   (do
     (set nvim.o.completeopt "menuone,noinsert,noselect")
     (set nvim.g.completion_enable_snippet "vim-vsnip")
-    (setup-lsp :elixirls {:settings {:elixirLS {:dialyzerEnabled false}}})
+    (setup-lsp :elixirls
+               {:settings {:elixirLS {:dialyzerEnabled false :fetchDeps false}}
+                :cmd [(util.expand "~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")]})
     (setup-lsp :efm {})
     (setup-lsp :rust_analyzer {})
     (setup-lsp :solargraph {})
     (setup-lsp :omnisharp {})
     (setup-lsp :tsserver {})
-    (setup-lsp :sumneko_lua {})
+    (setup-lsp :sumneko_lua
+                 {:cmd
+                   (let [base (util.expand "~/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/")]
+                     [(.. base "bin/macOS/lua-language-server")
+                      "-E"
+                      (.. base "main.lua")])
+                   :settings {:Lua
+                               {:runtime
+                                 {:version :LuaJIT :path (vim.split package.path ";")}}
+                                :diagnostics {:globals [:vim :use]}
+                                :workspace {:library {(vim.fn.expand "$VIMRUNTIME/lua") true 
+                                                      (vim.fn.expand "$VIMRUNTIME/lua/vim/lsp") true}}}})
     (setup-lsp :vimls {})))
     ;(let [ts (require "nvim-treesitter.configs")]
     ;  (ts.setup
@@ -175,9 +188,10 @@
 (set nvim.g.Hexokinase_optInPatterns [:full_hex :triple_hex :rgb :rgba :hsl :hsla])
 
 (augroup :random
+   (autocmd "BufWritePost init.lua PackerCompile")
   (autocmd "VimResized * :wincmd =")
   (autocmd "GUIEnter * set visualbell t_vb=")
-  (autocmd "FileType netrw call RemoveNetrwMap()")
+  (autocmd "FileType netrw :lua RemoveNetrwMap()")
   (autocmd "BufRead,BufNewFile *.zsh-theme set filetype=zsh")
   (autocmd "BufRead,BufNewFile *.lexs set filetype=elixir"))
 

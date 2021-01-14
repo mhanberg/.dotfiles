@@ -19,6 +19,7 @@
 # profiling end
 
 # date
+printf '\033]2;%s\033\' 'motch'
 export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
@@ -37,6 +38,7 @@ if [ ! -f "$HOME/.zsh/zshrc.local" ]; then
 fi
 
 # echo "starting zplug"
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"

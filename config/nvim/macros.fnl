@@ -8,7 +8,7 @@
 (fn autocmd [cmd]
   `(nvim.command (.. "autocmd " ,cmd)))
 
-(fn setup-lsp [name settings]
+(fn setup-lsp [name opts]
   `(let [lsp# (require "lspconfig")
         comp# (require "completion")]
     ((. lsp# ,name :setup)
@@ -28,7 +28,7 @@
            (fn []
              (print (.. "attaching to " ,name))
              (comp#.on_attach)
-             (nvim.set_keymap :n "df" "<cmd>lua vim.lsp.buf.formatting_sync()<cr>" {:noremap true :silent true})
+             (nvim.set_keymap :n "df" "<cmd>lua vim.lsp.buf.formatting()<cr>" {:noremap true :silent true})
 
              (nvim.set_keymap :n "gd" "<cmd>lua vim.lsp.buf.declaration()<cr>" {:noremap true :silent true})
              (nvim.set_keymap :n "dt" "<cmd>lua vim.lsp.buf.definition()<cr>" {:noremap true :silent true})
@@ -46,7 +46,7 @@
              (nvim.set_keymap :s "<expr> <Tab>" "vsnip#available(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'" {})
              (nvim.set_keymap :i "<expr> <S-Tab>" "vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'" {})
              (nvim.set_keymap :s "<expr> <S-Tab>" "vsnip#available(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'" {}))}
-        ,settings))))
+        ,opts))))
 
 {:augroup augroup
  :autocmd autocmd

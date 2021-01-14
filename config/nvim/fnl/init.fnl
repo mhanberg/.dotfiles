@@ -3,6 +3,8 @@
             nvim aniseed.nvim
             util dotfiles.util}})
 
+(print "in init.fnl")
+
 ;; Load all modules in no particular order.
 (->> (util.glob (.. util.config-path "/lua/dotfiles/modules/*.lua"))
      (core.run! (fn [path]
