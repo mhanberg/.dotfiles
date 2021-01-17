@@ -1,6 +1,5 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
-nvim = require("nvim")
 
 local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
@@ -16,8 +15,9 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
-require('packer').startup(function()
+require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
+  use 'tjdevries/nlua.nvim'
   use {"Olical/aniseed", tag = "v3.12.0"}
   use "norcalli/nvim.lua"
   use "guns/vim-sexp"
@@ -59,7 +59,7 @@ require('packer').startup(function()
   use "matze/vim-move"
   use "Yggdroot/indentLine"
   use {"junegunn/fzf",
-        run = function() 
+        run = function()
           vim.fn['fzf#install']()
         end}
   use "junegunn/fzf.vim"
@@ -96,11 +96,31 @@ require('packer').startup(function()
     end}
 end)
 
+nvim = require("nvim")
 require('lspfuzzy').setup {}
 
 vim.lsp.set_log_level(0)
 
--- this is necessary to use aniseed with packer as of now
+get_lua_runtime = function()
+    local result = {};
+    for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
+        local lua_path = path .. "/lua/";
+        if vim.fn.isdirectory(lua_path) then
+            result[lua_path] = true
+        end
+    end
+
+    -- This loads the `lua` files from nvim into the runtime.
+    result[vim.fn.expand("$VIMRUNTIME/lua")] = true
+
+    -- TODO: Figure out how to get these to work...
+    --  Maybe we need to ship these instead of putting them in `src`?...
+    result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
+
+    nvim.print(result)
+    return result;
+    -- this is necessary to use aniseed with packer as of now
+end
 vim.cmd [[packadd aniseed]]
 require('aniseed.env').init({force = true})
 

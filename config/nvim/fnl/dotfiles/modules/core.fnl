@@ -144,10 +144,15 @@
                       (.. base "main.lua")])
                    :settings {:Lua
                                {:runtime
-                                 {:version :LuaJIT :path (vim.split package.path ";")}}
-                                :diagnostics {:globals [:vim :use]}
-                                :workspace {:library {(vim.fn.expand "$VIMRUNTIME/lua") true 
-                                                      (vim.fn.expand "$VIMRUNTIME/lua/vim/lsp") true}}}})
+                                 {:version :LuaJIT
+                                  ; :path (vim.split package.path ";")
+                                  }}
+                                :completion {:keywordSnippet "Disable"}
+                                :diagnostics
+                                  {:enable true
+                                   :globals [:vim]}
+                                :workspace
+                                  {:library (get_lua_runtime) :maxPreload 1000 :preloadFileSize 1000}}})
     (setup-lsp :vimls {})))
     ;(let [ts (require "nvim-treesitter.configs")]
     ;  (ts.setup
@@ -188,7 +193,7 @@
 (set nvim.g.Hexokinase_optInPatterns [:full_hex :triple_hex :rgb :rgba :hsl :hsla])
 
 (augroup :random
-   (autocmd "BufWritePost init.lua PackerCompile")
+  (autocmd "BufWritePost init.lua PackerCompile")
   (autocmd "VimResized * :wincmd =")
   (autocmd "GUIEnter * set visualbell t_vb=")
   (autocmd "FileType netrw :lua RemoveNetrwMap()")

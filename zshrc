@@ -47,7 +47,6 @@ zplug "lib/key-bindings", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 zplug "MichaelAquilina/zsh-you-should-use"
-zplug "br/br-gitflow-completion"
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -80,6 +79,7 @@ export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.8/bin:$PATH"
+export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$(yarn global bin):$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
