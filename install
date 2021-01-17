@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+dirname="$(dirname "$0")"
+
 if ! command -v brew >/dev/null; then
   echo "==> Installing Homebrew ..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -34,13 +36,18 @@ case "$SHELL" in
 esac
 
 echo "==> Installing a terminfo file for tmux that supports italics"
-tic -x tmux-terminfo.txt
-tic -x tmux-256color.terminfo
-tic -x xterm-256color.terminfo
+tic -x "$dirname"/tmux-terminfo.txt
+tic -x "$dirname"/tmux-256color.terminfo
+tic -x "$dirname"/xterm-256color.terminfo
 
 source ./rcup
 
 echo "==> Installing languages, tmux, and neovim"
+for plugin in erlang elixir nodejs ruby neovim tmux; do
+  echo "==> Installing asdf plugin: $plugin"
+
+  asdf plugin add "$plugin"
+done
 (cd "$HOME" && asdf install)
 
 echo "==> Install extra remaining apps..."

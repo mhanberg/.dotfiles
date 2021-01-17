@@ -117,7 +117,7 @@ get_lua_runtime = function()
     --  Maybe we need to ship these instead of putting them in `src`?...
     result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
 
-    nvim.print(result)
+    -- nvim.print(result)
     return result;
     -- this is necessary to use aniseed with packer as of now
 end

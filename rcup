@@ -3,4 +3,13 @@
 set -e
 
 echo "==> Installing dotfiles"
-rcup -U Brewfile -x README.md -x mitch-preonic.json -x install -x rcup -x tmux-terminfo.txt -v
+rcup \
+  -U Brewfile \
+  -x README.md \
+  -x mitch-preonic.json \
+  -x install \
+  -x rcup \
+  -x tmux-terminfo.txt \
+  -x tmux-256color.terminfo \
+  -x xterm-256color.terminfo \
+  -v
