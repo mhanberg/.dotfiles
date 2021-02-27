@@ -106,6 +106,8 @@ languages:
     - <<: *prettier
   html:
     - <<: *prettier
+  liquid:
+    - <<: *prettier
   scss:
     - <<: *prettier
   css:

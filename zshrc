@@ -27,6 +27,10 @@ export ZPLUG_PROTOCOL="SSH"
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc ]; then
+  source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+fi
+
 unset -v GEM_HOME
 
 if [ ! -f "$HOME/.zsh/aliases.local" ]; then
@@ -78,6 +82,7 @@ fi
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$(yarn global bin):$PATH"

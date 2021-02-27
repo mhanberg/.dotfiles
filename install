@@ -50,6 +50,12 @@ for plugin in erlang elixir nodejs ruby neovim tmux; do
 done
 (cd "$HOME" && asdf install)
 
+echo "==> Installing neovim-remote"
+pip3 install --user neovim-remote
+
+echo "==> You might need to run stuff from this article"
+echo "https://stephencharlesweiss.com/zsh-compinit-insecure-directories/"
+
 echo "==> Install extra remaining apps..."
 echo " - [] Shush.app (https://mizage.com/shush/)"
 echo " - [] Magnet (App Store)"

@@ -15,9 +15,9 @@
  (set nvim.b.word_count count)))
 
 (defn get-word-count []
- (if nvim.wo.spell
-     nvim.b.word_count
-     ""))
+  (if nvim.wo.spell
+    nvim.b.word_count
+    ""))
 
 (nvim-util.fn-bridge "GetWordCount" :dotfiles.module.core :get-word-count {:return true})
 
@@ -50,6 +50,8 @@
 (set nvim.o.background "dark")
 (set nvim.o.autoread true)
 (set nvim.g.forest_night_enable_italic 1)
+(set nvim.g.forest_night_diagnostic_text_highlight 1)
+
 (nvim.ex.colorscheme "forest-night")
 
 (set nvim.g.lightline
@@ -78,11 +80,11 @@
 (nvim.ex.command_ "Wq wq")
 
 (set nvim.env.FZF_DEFAULT_OPTS "--reverse")
-(set nvim.g.fzf_preview_window "")
-(set nvim.g.fzf_layout {:window {:width 0.5 :height 0.6 :yoffset 0 :highlight "Normal"}})
+(set nvim.g.fzf_preview_window [])
+(set nvim.g.fzf_layout {:window {:width 119 :height 0.6 :yoffset 0 :highlight "Normal"}})
 
 (defn ripgrep-fzf [query fullscreen]
-  (let [command-fmt "rg --glob '!yarn.lock' --glob '!package-lock.json' --column --line-number --no-heading --color=always --smart-case %s || true"
+  (let [command-fmt "rg --glob '!yarn.lock' --glob '!package-lock.json' --glob '!.git' --hidden --column --line-number --no-heading --color=always --smart-case %s || true"
         initial-command (nvim.fn.printf command-fmt (nvim.fn.shellescape query))
         reload-command (nvim.fn.printf command-fmt "{q}")
         spec {:options ["--disabled" "--query" query "--bind" (.. "change:reload:" reload-command)]
@@ -90,14 +92,14 @@
                        :height 0.6
                        :yoffset 0
                        :highlight "Normal"}}]
-    (nvim.fn.fzf#vim#grep initial-command 1 (nvim.fn.fzf#vim#with_preview spec) fullscreen)))
+    (nvim.fn.fzf#vim#grep initial-command 1 (nvim.fn.fzf#vim#with_preview spec :right) fullscreen)))
 
 (nvim.ex.command_ "-nargs=* -bang RG lua require'dotfiles.module.core'['ripgrep-fzf'](<q-args>, <bang>0)")
 
 (nvim.set_keymap :n "cn" ":cnext<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader><space>" ":set hls!<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>ev" ":vsplit ~/.vimrc<cr>" {:noremap true})
-(nvim.set_keymap :n "<leader>sv" ":source $MYVIMRC<cr>" {:noremap true})
+(nvim.set_keymap :n "<leader>sv" ":luafile ~/.config/nvim/init.lua<cr>" {:noremap true})
 (nvim.set_keymap :n "<c-p>" ":Files<cr>" {:silent true :noremap true})
 (nvim.set_keymap :n "gl" ":BLines<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>a" ":RG<cr>" {:noremap true})
@@ -109,6 +111,7 @@
 ; vim-test conf
 (set nvim.g.dispatch_handlers ["job"])
 (set nvim.g.test#strategy "dispatch")
+
 (nvim.set_keymap :n "<leader>n" ":TestNearest<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>f" ":TestFile<cr>" {:noremap true})
 (nvim.set_keymap :n "<leader>s" ":TestSuite<cr>" {:noremap true})
@@ -124,57 +127,38 @@
 (defn path_join [...]
   (table.concat (vim.tbl_flatten [...]) "/"))
 
-(if (= 5 (util.nvim-version))
-  (do
-    (set nvim.o.completeopt "menuone,noinsert,noselect")
-    (set nvim.g.completion_enable_snippet "vim-vsnip")
-    (setup-lsp :elixirls
-               {:settings {:elixirLS {:dialyzerEnabled false :fetchDeps false}}
-                :cmd [(util.expand "~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")]})
-    (setup-lsp :efm {})
-    (setup-lsp :rust_analyzer {})
-    (setup-lsp :solargraph {})
-    (setup-lsp :omnisharp {})
-    (setup-lsp :tsserver {})
-    (setup-lsp :sumneko_lua
-                 {:cmd
-                   (let [base (util.expand "~/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/")]
-                     [(.. base "bin/macOS/lua-language-server")
-                      "-E"
-                      (.. base "main.lua")])
-                   :settings {:Lua
-                               {:runtime
-                                 {:version :LuaJIT
-                                  ; :path (vim.split package.path ";")
-                                  }}
-                                :completion {:keywordSnippet "Disable"}
-                                :diagnostics
-                                  {:enable true
-                                   :globals [:vim]}
-                                :workspace
-                                  {:library (get_lua_runtime) :maxPreload 1000 :preloadFileSize 1000}}})
-    (setup-lsp :vimls {})))
-    ;(let [ts (require "nvim-treesitter.configs")]
-    ;  (ts.setup
-    ;    {:ensure_installed :all :highlight {:enable true}})))
+(set nvim.o.completeopt "menuone,noinsert,noselect")
+(set nvim.g.completion_enable_snippet "vim-vsnip")
+(setup-lsp :elixirls
+           {:settings {:elixirLS {:dialyzerEnabled false :fetchDeps false}}
+            :cmd [(util.expand "~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")]})
+(setup-lsp :efm {})
+(setup-lsp :rust_analyzer {})
+(setup-lsp :solargraph {})
+(setup-lsp :omnisharp {})
+(setup-lsp :tsserver {})
+(setup-lsp :sumneko_lua
+             {:cmd
+               (let [base (util.expand "~/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/")]
+                 [(.. base "bin/macOS/lua-language-server")
+                  "-E"
+                  (.. base "main.lua")])
+               :settings {:Lua
+                           {:runtime
+                             {:version :LuaJIT
+                              ; :path (vim.split package.path ";")
+                              }}
+                            :completion {:keywordSnippet "Disable"}
+                            :diagnostics
+                              {:enable true
+                               :globals [:vim]}
+                            :workspace
+                              {:library (get_lua_runtime) :maxPreload 1000 :preloadFileSize 1000}}})
+(setup-lsp :vimls {})
+(let [ts (require "nvim-treesitter.configs")]
+  {:highlight {:enable true}
+   :indent {:enable false}})
 
-; (nvim.set_keymap :n "df" ":ALEFix<cr>" {:noremap true})
-; (set nvim.g.ale_linters.ruby [:rubocop :ruby :solargraph])
-; (set nvim.g.ale_fixers
-;  {:* [:remove_trailing_lines :trim_whitespace]
-;   :javascript [:eslint :prettier]
-;   :html [:prettier]
-;   :scss [:stylelint]
-;   :css [:stylelint]
-;   :elm [:format]
-;   :ruby [:rubocop]
-;   :elixir [:mix_format]
-;   :rust [:rustfmt]
-;   :xml [:xmllint]
-;  })
-
-; (set nvim.g.ale_sign_column_always 1)
-; (set nvim.g.ale_elixir_credo_strict 1)
 (set nvim.o.grepprg "ag --vimgrep -Q $*")
 (set nvim.o.grepformat "%f:%l:%c:%m")
 
@@ -198,6 +182,7 @@
   (autocmd "GUIEnter * set visualbell t_vb=")
   (autocmd "FileType netrw :lua RemoveNetrwMap()")
   (autocmd "BufRead,BufNewFile *.zsh-theme set filetype=zsh")
+  (autocmd "BufRead,BufNewFile aliases.local set filetype=zsh")
   (autocmd "BufRead,BufNewFile *.lexs set filetype=elixir"))
 
 (augroup :clojure

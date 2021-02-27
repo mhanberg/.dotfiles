@@ -13,12 +13,15 @@ function RemoveNetrwMap()
   end
 end
 
+
+vim.g["aniseed#env"] = {force = true}
+
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
   use 'tjdevries/nlua.nvim'
-  use {"Olical/aniseed", tag = "v3.12.0"}
+  use {"Olical/aniseed", tag = "v3.15.0"}
   use "norcalli/nvim.lua"
   use "guns/vim-sexp"
   use "tpope/vim-sexp-mappings-for-regular-people"
@@ -39,6 +42,7 @@ require('packer').startup(function(use)
   use "elixir-editors/vim-elixir"
   use "tpope/vim-endwise"
   use "tpope/vim-fugitive"
+  use "junegunn/gv.vim"
   use "airblade/vim-gitgutter"
   use "tpope/vim-rails"
   use "tpope/vim-sensible"
@@ -47,7 +51,7 @@ require('packer').startup(function(use)
   use "tpope/vim-liquid"
   use "pangloss/vim-javascript"
   use "isRuslan/vim-es6"
-  use "mxw/vim-jsx"
+  -- use "mxw/vim-jsx"
   use "jiangmiao/auto-pairs"
   use "tpope/vim-surround"
   use "tpope/vim-eunuch"
@@ -79,7 +83,7 @@ require('packer').startup(function(use)
   use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
   use "nvim-lua/telescope.nvim"
-  use "ttys3/nvim-blamer.lua"
+  use "APZelos/blamer.nvim"
   use "hashivim/vim-terraform"
   use "pwntester/octo.nvim"
   use {
@@ -94,9 +98,26 @@ require('packer').startup(function(use)
     run = function()
       vim.fn["firenvim#install"](0)
     end}
+
+  use "powerman/vim-plugin-AnsiEsc"
+  -- use "leafgarland/typescript-vim"
+  -- use "MaxMEllon/vim-jsx-pretty"
+  -- use "peitalin/vim-jsx-typescript"
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      vim.cmd [[TSUpdate]]
+    end}
 end)
 
+vim.g.blamer_enabled = 1
+vim.g.blamer_relative_time = 1
+
 nvim = require("nvim")
+
+nvim.print("init.lua")
+
+foobar = "alicebob"
 require('lspfuzzy').setup {}
 
 vim.lsp.set_log_level(0)
@@ -121,10 +142,36 @@ get_lua_runtime = function()
     return result;
     -- this is necessary to use aniseed with packer as of now
 end
-vim.cmd [[packadd aniseed]]
-require('aniseed.env').init({force = true})
 
-vim.cmd [[highlight! link LspDiagnosticsVirtualTextError Red]]
-vim.cmd [[highlight! link LspDiagnosticsVirtualTextWarning Yellow]]
-vim.cmd [[highlight! link LspDiagnosticsVirtualTextInformation Blue]]
-vim.cmd [[highlight! link LspDiagnosticsVirtualTextHint Aqua]]
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+vim.cmd [[let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']]
+
+-- vim.cmd [[highlight! link LspDiagnosticsFloatingError ErrorFloat]]
+-- vim.cmd [[highlight! link LspDiagnosticsFloatingWarning WarningFloat]]
+-- vim.cmd [[highlight! link LspDiagnosticsFloatingInformation InfoFloat]]
+-- vim.cmd [[highlight! link LspDiagnosticsFloatingHint HintFloat]]
+-- vim.cmd [[highlight! link LspDiagnosticsDefaultError ErrorText]]
+-- vim.cmd [[highlight! link LspDiagnosticsDefaultWarning WarningText]]
+-- vim.cmd [[highlight! link LspDiagnosticsDefaultInformation InfoText]]
+-- vim.cmd [[highlight! link LspDiagnosticsDefaultHint HintText]]
+-- vim.cmd [[highlight! link LspDiagnosticsVirtualTextError ErrorText]]
+-- vim.cmd [[highlight! link LspDiagnosticsVirtualTextWarning WarningText]]
+-- vim.cmd [[highlight! link LspDiagnosticsVirtualTextInformation InformationText]]
+-- vim.cmd [[highlight! link LspDiagnosticsVirtualTextHint HintText]]
+-- vim.cmd [[highlight! link LspDiagnosticsUnderlineError ErrorText]]
+-- vim.cmd [[highlight! link LspDiagnosticsUnderlineWarning WarningText]]
+-- vim.cmd [[highlight! link LspDiagnosticsUnderlineInformation InfoText]]
+-- vim.cmd [[highlight! link LspDiagnosticsUnderlineHint HintText]]
+-- vim.cmd [[highlight! link LspDiagnosticsSignError RedSign]]
+-- vim.cmd [[highlight! link LspDiagnosticsSignWarning YellowSign]]
+-- vim.cmd [[highlight! link LspDiagnosticsSignInformation BlueSign]]
+-- vim.cmd [[highlight! link LspDiagnosticsSignHint AquaSign]]
+-- vim.cmd [[highlight! link LspReferenceText CurrentWord]]
+-- vim.cmd [[highlight! link LspReferenceRead CurrentWord]]
+-- vim.cmd [[highlight! link LspReferenceWrite CurrentWord]]
+-- vim.cmd [[highlight! link TermCursor Cursor]]
+-- vim.cmd [[highlight! link healthError Red]]
+-- vim.cmd [[highlight! link healthSuccess Green]]
+-- vim.cmd [[highlight! link healthWarning Yellow]]

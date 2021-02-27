@@ -25,5 +25,3 @@ end)
 hs.hotkey.bind({"cmd", "alt"}, "D", function()
   hs.application.open("Discord")
 end)
-
-BrewInfo:bindHotKeys({show_brew_info = {"cmd", "alt", "B"}})
