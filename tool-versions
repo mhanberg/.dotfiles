@@ -1,9 +1,10 @@
 elixir 1.11.2-otp-22
-erlang 22.1.7
-ruby 2.6.5
-nodejs 10.13.0
+ruby 3.0.0
+nodejs lts
 clojure 1.10.1
 java openjdk-11.0.1
 tmux 3.2-rc
 neovim nightly
 rebar 3.14.2
+rust 1.50.0
+erlang 23.2.6

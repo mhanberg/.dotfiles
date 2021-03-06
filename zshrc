@@ -19,12 +19,19 @@
 # profiling end
 
 # date
-printf '\033]2;%s\033\' 'motch'
+eval $(/opt/homebrew/bin/brew shellenv)
+
+if [ $(arch) = "arm64" ]; then
+  brew_prefix='/opt/homebrew'
+else
+  brew_prefix='/usr/local'
+fi
+
 export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ZPLUG_PROTOCOL="SSH"
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME="$brew_prefix"/opt/zplug 
 source $ZPLUG_HOME/init.zsh
 
 if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc ]; then
@@ -39,6 +46,10 @@ fi
 
 if [ ! -f "$HOME/.zsh/zshrc.local" ]; then
   touch "$HOME/.zsh/zshrc.local"
+fi
+
+if [ ! -f "$HOME/.zsh/aliases.local" ]; then
+  source "$HOME"/.zsh/aliases.local
 fi
 
 # echo "starting zplug"
@@ -75,11 +86,7 @@ if [ -f /usr/libeexec/java_home ]; then
   export JAVA_HOME="$(/usr/libexec/java_home)"
 fi
 
-if [ -f /usr/local/opt/asdf/asdf.sh ]; then
-  source /usr/local/opt/asdf/asdf.sh
-fi
-
-export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
+export PATH="/opt/homebrew/bin/qt@5.5/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
@@ -92,13 +99,10 @@ export PATH="$HOME/go/bin:$PATH"
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # echo "sourcing z.sh"
-. /usr/local/etc/profile.d/z.sh
+. "$brew_prefix"/etc/profile.d/z.sh
 
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-source "$HOME"/.zshrc.local
-source "$HOME"/.zsh/aliases.local
 
 # echo "eval direnv"
 eval "$(direnv hook zsh)"
@@ -108,3 +112,8 @@ eval "$(direnv hook zsh)"
 # exec 2>&3 3>&-
 # profiling end
 # zprof
+
+if [ -f "$brew_prefix"/opt/asdf/asdf.sh ]; then
+  . "$brew_prefix"/opt/asdf/asdf.sh
+fi
+
