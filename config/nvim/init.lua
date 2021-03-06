@@ -1,177 +1,198 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-	execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
-end
+local augroup = require("utils").augroup
+local nnoremap = require("utils").nnoremap
+local opt = require("utils").opt
 
 function RemoveNetrwMap()
-  if fn.hasmapto("<Plug>NetrwRefresh") > 0 then
-    vim.cmd("unmap <buffer> <C-l>")
+  if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
+    vim.cmd [[unmap <buffer> <C-l>]]
   end
 end
 
+function SetWordCount(file_name)
+  local file = vim.fn.expand(file_name)
+  local count = vim.trim(vim.fn.system("cat " .. file .. ", | wc -w"))
 
-vim.g["aniseed#env"] = {force = true}
-
-vim.cmd [[packadd packer.nvim]]
-
-require('packer').startup(function(use)
-  use {'wbthomason/packer.nvim', opt = true}
-  use 'tjdevries/nlua.nvim'
-  use {"Olical/aniseed", tag = "v3.15.0"}
-  use "norcalli/nvim.lua"
-  use "guns/vim-sexp"
-  use "tpope/vim-sexp-mappings-for-regular-people"
-  use "tpope/vim-repeat"
-  use "bakpakin/fennel.vim"
-  use "sainnhe/vim-color-forest-night"
-  use "christoomey/vim-tmux-runner"
-  use {"rrethy/vim-hexokinase", run = "make hexokinase" }
-  use "alvan/vim-closetag"
-  use "itchyny/lightline.vim"
-  use "junegunn/goyo.vim"
-  use "AndrewRadev/splitjoin.vim"
-  use "tpope/vim-vinegar"
-  use "tpope/vim-commentary"
-  use "tpope/vim-dispatch"
-  use "vim-ruby/vim-ruby"
-  use "tpope/vim-rsi"
-  use "elixir-editors/vim-elixir"
-  use "tpope/vim-endwise"
-  use "tpope/vim-fugitive"
-  use "junegunn/gv.vim"
-  use "airblade/vim-gitgutter"
-  use "tpope/vim-rails"
-  use "tpope/vim-sensible"
-  use "vim-test/vim-test"
-  use "christoomey/vim-tmux-navigator"
-  use "tpope/vim-liquid"
-  use "pangloss/vim-javascript"
-  use "isRuslan/vim-es6"
-  -- use "mxw/vim-jsx"
-  use "jiangmiao/auto-pairs"
-  use "tpope/vim-surround"
-  use "tpope/vim-eunuch"
-  use "tpope/vim-projectionist"
-  use "avakhov/vim-yaml"
-  use "chr4/nginx.vim"
-  use "mattn/emmet-vim"
-  use "tpope/vim-markdown"
-  use "matze/vim-move"
-  use "Yggdroot/indentLine"
-  use {"junegunn/fzf",
-        run = function()
-          vim.fn['fzf#install']()
-        end}
-  use "junegunn/fzf.vim"
-  use "farmergreg/vim-lastplace"
-  use {"mg979/vim-visual-multi", branch = "master"}
-  use "ekalinin/Dockerfile.vim"
-  use "kana/vim-textobj-user"
-  use "amiralies/vim-textobj-elixir"
-  use "stsewd/fzf-checkout.vim"
-  use "reedes/vim-wordy"
-
-  use "neovim/nvim-lspconfig"
-  use "nvim-lua/completion-nvim"
-  use "hrsh7th/vim-vsnip"
-  use "hrsh7th/vim-vsnip-integ"
-
-  use "nvim-lua/popup.nvim"
-  use "nvim-lua/plenary.nvim"
-  use "nvim-lua/telescope.nvim"
-  use "APZelos/blamer.nvim"
-  use "hashivim/vim-terraform"
-  use "pwntester/octo.nvim"
-  use {
-    'ojroques/nvim-lspfuzzy',
-    requires = {
-      {'junegunn/fzf'},
-      {'junegunn/fzf.vim'},  -- to enable preview (optional)
-    },
-  }
-  use {
-    "glacambre/firenvim",
-    run = function()
-      vim.fn["firenvim#install"](0)
-    end}
-
-  use "powerman/vim-plugin-AnsiEsc"
-  -- use "leafgarland/typescript-vim"
-  -- use "MaxMEllon/vim-jsx-pretty"
-  -- use "peitalin/vim-jsx-typescript"
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = function()
-      vim.cmd [[TSUpdate]]
-    end}
-end)
-
-vim.g.blamer_enabled = 1
-vim.g.blamer_relative_time = 1
-
-nvim = require("nvim")
-
-nvim.print("init.lua")
-
-foobar = "alicebob"
-require('lspfuzzy').setup {}
-
-vim.lsp.set_log_level(0)
-
-get_lua_runtime = function()
-    local result = {};
-    for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
-        local lua_path = path .. "/lua/";
-        if vim.fn.isdirectory(lua_path) then
-            result[lua_path] = true
-        end
-    end
-
-    -- This loads the `lua` files from nvim into the runtime.
-    result[vim.fn.expand("$VIMRUNTIME/lua")] = true
-
-    -- TODO: Figure out how to get these to work...
-    --  Maybe we need to ship these instead of putting them in `src`?...
-    result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
-
-    -- nvim.print(result)
-    return result;
-    -- this is necessary to use aniseed with packer as of now
+  opt.b("word_count", count)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+function GetWordCount()
+  return vim.b.word_count or ""
+end
+
+require("plugins")
+
+NVIM = require("nvim")
+
+opt.o("foldmethod", "syntax")
+opt.o("foldlevelstart", 99)
+opt.o("smartindent", true)
+opt.b("tabstop", 2)
+opt.b("shiftwidth", 2)
+opt.b("expandtab", true)
+opt.w("number", true)
+opt.o("termguicolors", true)
+opt.o("backupdir", vim.fn.expand("~/.tmp/backup"))
+opt.o("directory", vim.fn.expand("~/.tmp/swp"))
+opt.o("splitbelow", true)
+opt.o("splitright", true)
+opt.o("lazyredraw", true)
+opt.o("showmode", false)
+opt.o("incsearch", true)
+opt.o("ignorecase", true)
+opt.o("smartcase", true)
+opt.o("undofile", true)
+opt.o("undodir", vim.fn.expand("~/.tmp"))
+opt.o("mouse", "a")
+opt.o("errorbells", false)
+opt.o("visualbell", true)
+opt.o("t_vb", "")
+opt.o("cursorline", true)
+opt.o("inccommand", "nosplit")
+opt.o("background", "dark")
+opt.o("autoread", true)
+opt.g("forest_night_enable_italic", 1)
+opt.g("forest_night_diagnostic_text_highlight", 1)
+
+vim.cmd [[color forest-night]]
+
+opt.g(
+  "lightline",
+  {
+    colorscheme = "forest_night",
+    active = {
+      left = {{"mode", "paste"}, {"readonly", "relativepath", "modified"}},
+      right = {{"lineinfo"}, {"percent"}, {"fileformat", "fileencoding", "filetype", "wordcount"}}
+    },
+    component_function = {wordcount = "GetWordCount"},
+    component_visible_condition = {wordcount = "&spell"}
+  }
+)
+
+opt.g("indentLine_fileTypeExclude", {"json"})
+opt.g("indentLine_char", "│")
+
+vim.cmd [[command! Q q]]
+vim.cmd [[command! Qall qall]]
+vim.cmd [[command! QA qall]]
+vim.cmd [[command! E e]]
+vim.cmd [[command! W w]]
+vim.cmd [[command! Wq wq]]
+
+vim.env.FZF_DEFAULT_OPTS = "--reverse"
+opt.g("fzf_preview_window", {})
+opt.g(
+  "fzf_layout",
+  {
+    window = {
+      width = 119,
+      height = 0.6,
+      yoffset = 0,
+      highlight = "Normal"
+    }
+  }
+)
+
+nnoremap("cn", ":cnext<cr>")
+nnoremap("<leader><space>", ":set hls!<cr>")
+nnoremap("<leader>ev", ":vsplit ~/.vimrc<cr>")
+nnoremap("<leader>sv", ":luafile ~/.config/nvim/init.lua<cr>")
+nnoremap("<c-p>", ":Files<cr>")
+nnoremap("gl", ":BLines<cr>")
+nnoremap("<leader>a", ":RG<cr>")
+nnoremap("<leader>gr", ":grep<cr>")
+nnoremap("<leader>c", ":botright copen 20<cr>")
+nnoremap("<leader>gd", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git diff'<cr>")
+nnoremap("<leader>gs", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git status'<cr>")
+
+opt.g("dispatch_handlers", {"job"})
+opt.g("test#strategy", "floaterm")
+opt.g("floaterm_wintype", "split")
+opt.g("floaterm_height", 0.3)
+opt.g("floaterm_autoclose", 1)
+opt.g("floaterm_autoinsert", false)
+
+nnoremap("<leader>n", ":TestNearest<cr>")
+nnoremap("<leader>f", ":TestFile<cr>")
+nnoremap("<leader>s", ":TestSuite<cr>")
+nnoremap("<leader>l", ":TestLast<cr>")
+
+-- ctags
+nnoremap("<leader>ct", ":!ctags -R .<cr>")
+nnoremap("<leader>t", ":Tags<cr>")
+nnoremap("<leader>r", ":BTags")
+
+opt.o("completeopt", "menuone,noinsert,noselect")
+opt.g("completion_enable_snippet", "vim-vsnip")
+
+opt.g("blamer_enabled", 1)
+opt.g("blamer_relative_time", 1)
+
+require("treesitter")
+
+opt.o("grepprg", "ag --vimgrep -Q $*")
+opt.o("grepformat", "%f:%l:%c:%m")
+
+opt.g("jsx_ext_required", 0)
+
+nnoremap("<leader>gy", ":Goyo<cr>")
+opt.g("goyo_width", 120)
+opt.g("goyo_height", 100)
+
+opt.g("markdown_syntax_conceal", 0)
+
+opt.g("Hexokinase_optInPatterns", {"full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla"})
+
+local LSP = require("lsp")
+
+local path_to_elixirls = vim.fn.expand("~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")
+LSP.setup(
+  "elixirls",
+  {
+    settings = {
+      elixirLS = {
+        dialyzerEnabled = false,
+        fetchDeps = false
+      }
+    },
+    cmd = {path_to_elixirls}
+  }
+)
+
+LSP.setup("efm", {})
+LSP.setup("rust_analyzer", {})
+LSP.setup("solargraph", {})
+LSP.setup("omnisharp", {})
+LSP.setup("tsserver", {})
+LSP.setup("vimls", {})
+
+augroup(
+  "random",
+  function(autocmd)
+    autocmd "User FloatermOpen wincmd p"
+    autocmd "BufWritePost init.lua PackerCompile"
+    autocmd "VimResized * :wincmd ="
+    autocmd "GUIEnter * set visualbell t_vb="
+    autocmd "FileType netrw :lua RemoveNetrwMap()"
+    autocmd "BufRead,BufNewFile *.zsh-theme set filetype=zsh"
+    autocmd "BufRead,BufNewFile aliases.local set filetype=zsh"
+    autocmd "BufRead,BufNewFile *.lexs set filetype=elixir"
+  end
+)
+
+augroup(
+  "clojure",
+  function(autocmd)
+    autocmd "BufWritePost *.clj :silent Require"
+  end
+)
+
+augroup(
+  "markdown",
+  function(autocmd)
+    autocmd "BufRead,BufNewFile *.md setlocal spell"
+    autocmd "BufRead,BufNewFile *.md setlocal linebreak"
+    autocmd "BufRead,BufNewFile,BufWritePost *.md lua SetWordCount('%:p')"
+  end
+)
 
 vim.cmd [[let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']]
-
--- vim.cmd [[highlight! link LspDiagnosticsFloatingError ErrorFloat]]
--- vim.cmd [[highlight! link LspDiagnosticsFloatingWarning WarningFloat]]
--- vim.cmd [[highlight! link LspDiagnosticsFloatingInformation InfoFloat]]
--- vim.cmd [[highlight! link LspDiagnosticsFloatingHint HintFloat]]
--- vim.cmd [[highlight! link LspDiagnosticsDefaultError ErrorText]]
--- vim.cmd [[highlight! link LspDiagnosticsDefaultWarning WarningText]]
--- vim.cmd [[highlight! link LspDiagnosticsDefaultInformation InfoText]]
--- vim.cmd [[highlight! link LspDiagnosticsDefaultHint HintText]]
--- vim.cmd [[highlight! link LspDiagnosticsVirtualTextError ErrorText]]
--- vim.cmd [[highlight! link LspDiagnosticsVirtualTextWarning WarningText]]
--- vim.cmd [[highlight! link LspDiagnosticsVirtualTextInformation InformationText]]
--- vim.cmd [[highlight! link LspDiagnosticsVirtualTextHint HintText]]
--- vim.cmd [[highlight! link LspDiagnosticsUnderlineError ErrorText]]
--- vim.cmd [[highlight! link LspDiagnosticsUnderlineWarning WarningText]]
--- vim.cmd [[highlight! link LspDiagnosticsUnderlineInformation InfoText]]
--- vim.cmd [[highlight! link LspDiagnosticsUnderlineHint HintText]]
--- vim.cmd [[highlight! link LspDiagnosticsSignError RedSign]]
--- vim.cmd [[highlight! link LspDiagnosticsSignWarning YellowSign]]
--- vim.cmd [[highlight! link LspDiagnosticsSignInformation BlueSign]]
--- vim.cmd [[highlight! link LspDiagnosticsSignHint AquaSign]]
--- vim.cmd [[highlight! link LspReferenceText CurrentWord]]
--- vim.cmd [[highlight! link LspReferenceRead CurrentWord]]
--- vim.cmd [[highlight! link LspReferenceWrite CurrentWord]]
--- vim.cmd [[highlight! link TermCursor Cursor]]
--- vim.cmd [[highlight! link healthError Red]]
--- vim.cmd [[highlight! link healthSuccess Green]]
--- vim.cmd [[highlight! link healthWarning Yellow]]
