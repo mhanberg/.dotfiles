@@ -153,6 +153,20 @@ LSP.setup("omnisharp", {})
 LSP.setup("tsserver", {})
 LSP.setup("vimls", {})
 
+RG = function(query, fullscreen)
+  command_format = "rg --glob '!yarn.lock' --glob '!package-lock.json' --glob '!.git' --hidden --column --line-number --no-heading --color=always --smart-case %s || true"
+  initial_command = vim.fn.printf(command_format, vim.fn.shellescape(query))
+  reload_command = vim.fn.printf(command_format, "{q}")
+  spec = {
+    options = {"--disabled", "--query", query, "--bind", "change:reload:"..reload_command},
+    window = {width = 0.9, height = 0.6, yoffset = 0, highlight = "Normal"}
+  }
+
+  vim.fn["fzf#vim#grep"](initial_command, 1, vim.fn["fzf#vim#with_preview"](spec, "right"), fullscreen)
+end
+
+vim.cmd [[command! -nargs=* -bang RG lua RG(<q-args>, <bang>0)]]
+
 augroup(
   "random",
   function(autocmd)
