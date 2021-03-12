@@ -1,3 +1,5 @@
+require("plugins")
+
 local augroup = require("utils").augroup
 local nnoremap = require("utils").nnoremap
 local opt = require("utils").opt
@@ -18,8 +20,6 @@ end
 function GetWordCount()
   return vim.b.word_count or ""
 end
-
-require("plugins")
 
 NVIM = require("nvim")
 
@@ -53,20 +53,8 @@ opt.o("autoread", true)
 opt.g("forest_night_enable_italic", 1)
 opt.g("forest_night_diagnostic_text_highlight", 1)
 
-vim.cmd [[color forest-night]]
-
-opt.g(
-  "lightline",
-  {
-    colorscheme = "forest_night",
-    active = {
-      left = {{"mode", "paste"}, {"readonly", "relativepath", "modified"}},
-      right = {{"lineinfo"}, {"percent"}, {"fileformat", "fileencoding", "filetype", "wordcount"}}
-    },
-    component_function = {wordcount = "GetWordCount"},
-    component_visible_condition = {wordcount = "&spell"}
-  }
-)
+-- vim.cmd [[color forest-night]]
+vim.cmd [[color thicc_forest]]
 
 opt.g("indentLine_fileTypeExclude", {"json"})
 opt.g("indentLine_char", "│")
@@ -95,7 +83,7 @@ opt.g(
 nnoremap("cn", ":cnext<cr>")
 nnoremap("<leader><space>", ":set hls!<cr>")
 nnoremap("<leader>ev", ":vsplit ~/.vimrc<cr>")
-nnoremap("<leader>sv", ":luafile ~/.config/nvim/init.lua<cr>")
+nnoremap("<leader>sv", [[:luafile $MYVIMRC<cr> | echo "Sourced $MYVIMRC"]])
 nnoremap("<c-p>", ":Files<cr>")
 nnoremap("gl", ":BLines<cr>")
 nnoremap("<leader>a", ":RG<cr>")
@@ -169,7 +157,6 @@ augroup(
   "random",
   function(autocmd)
     autocmd "User FloatermOpen wincmd p"
-    autocmd "BufWritePost init.lua PackerCompile"
     autocmd "VimResized * :wincmd ="
     autocmd "GUIEnter * set visualbell t_vb="
     autocmd "FileType netrw :lua RemoveNetrwMap()"
@@ -194,5 +181,19 @@ augroup(
     autocmd "BufRead,BufNewFile,BufWritePost *.md lua SetWordCount('%:p')"
   end
 )
+
+-- vim.fn["cyclist#add_listchar_option_set"](
+--   "default",
+--   {
+--     eol = "↲",
+--     tab = "» ",
+--     space = "",
+--     trail = "𝁢",
+--     extends = "…",
+--     precedes = "…",
+--     conceal = "┊",
+--     nbsp = "☠"
+--   }
+-- )
 
 vim.cmd [[let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']]

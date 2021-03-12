@@ -31,8 +31,12 @@ export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ZPLUG_PROTOCOL="SSH"
-export ZPLUG_HOME="$brew_prefix"/opt/zplug 
+export ZPLUG_HOME="$brew_prefix"/opt/zplug
 source $ZPLUG_HOME/init.zsh
+
+if [ -f "$brew_prefix"/opt/asdf/asdf.sh ]; then
+  . "$brew_prefix"/opt/asdf/asdf.sh
+fi
 
 if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc ]; then
   source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
@@ -113,7 +117,4 @@ eval "$(direnv hook zsh)"
 # profiling end
 # zprof
 
-if [ -f "$brew_prefix"/opt/asdf/asdf.sh ]; then
-  . "$brew_prefix"/opt/asdf/asdf.sh
-fi
 
