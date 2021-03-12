@@ -63,4 +63,9 @@ alias ghv='gh repo view -w'
 alias mtc="WALLABY_DRIVER=chrome mix test"
 alias mts="WALLABY_DRIVER=selenium mix test"
 
+# tt
+alias standup="tt review | fzf-tmux -p -- --reverse"
+ttrs() { tt "[review][start] $1"; }
+ttrd() { tt "[review][done] $1"; }
+
 source $HOME/.zsh/aliases.local

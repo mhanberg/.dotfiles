@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e
+
+ex() {
+ echo "$1"
+
+ exit 1
+}
+
+file_path="$HOME/Dropbox/stord/tt.txt"
+
+[[ ! -f "$file_path" ]] && ex "$file_path does not exist"
+
+case "$1" in
+  review)
+    tac "$file_path";;
+  *)
+    echo "$(gdate) - $1" >> "$file_path";;
+esac
