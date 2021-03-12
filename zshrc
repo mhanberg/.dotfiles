@@ -19,10 +19,11 @@
 # profiling end
 
 # date
-eval $(/opt/homebrew/bin/brew shellenv)
 
 if [ $(arch) = "arm64" ]; then
   brew_prefix='/opt/homebrew'
+
+  eval $(/opt/homebrew/bin/brew shellenv)
 else
   brew_prefix='/usr/local'
 fi
