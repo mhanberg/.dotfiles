@@ -33,7 +33,7 @@ tools:
       - '%f:%l:%c: %tote: %m'
 
   shfmt: &shfmt
-    format-command: 'shfmt -ci -s -bn'
+    format-command: 'shfmt -ci -s -bn -i 2'
     format-stdin: true
 
 languages:

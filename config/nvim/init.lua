@@ -139,7 +139,10 @@ LSP.setup(
     filetypes = {
       "elixir",
       "javascript",
-      "lua"
+      "lua",
+      "bash",
+      "zsh",
+      "sh"
     }
   }
 )

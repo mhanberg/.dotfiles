@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 ls ~/Development \
-	| fzf --reverse \
-	| xargs tmuxinator start code
+  | fzf --reverse \
+  | xargs tmuxinator start code

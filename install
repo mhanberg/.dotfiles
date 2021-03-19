@@ -11,11 +11,11 @@ echo "==> Install Homebrew dependencies"
 brew bundle
 
 update_shell() {
-  local shell_path;
+  local shell_path
   shell_path="$(command -v zsh)"
 
   echo "==> Changing your shell to zsh ..."
-  if ! grep "$shell_path" /etc/shells > /dev/null 2>&1 ; then
+  if ! grep "$shell_path" /etc/shells >/dev/null 2>&1; then
     echo "==> Adding '$shell_path' to /etc/shells"
     sudo sh -c "echo $shell_path >> /etc/shells"
   fi
@@ -24,7 +24,7 @@ update_shell() {
 
 case "$SHELL" in
   */zsh)
-    if [ "$(command -v zsh)" != '/usr/local/bin/zsh' ] ; then
+    if [ "$(command -v zsh)" != '/usr/local/bin/zsh' ]; then
       echo "==> Updating shell to ZSH"
       update_shell
     fi

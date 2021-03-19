@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 echo "==> Installing XCode"
 xcode-select --install
 
@@ -23,26 +22,26 @@ eval "$(ssh-agent -s)"
 
 echo "==> Adding ssh keys to Keychain"
 
-cat << EOF > ~/.ssh/config
+cat <<EOF >~/.ssh/config
 Host *
 AddKeysToAgent yes
 UseKeychain yes
-IdentityFile ~/.ssh/id_rsa 
+IdentityFile ~/.ssh/id_rsa
 EOF
 
 echo "==> Adding key to agent"
 ssh-add -K ~/.ssh/id_rsa
 
 (
-cd ~
+  cd ~
 
-echo "==> Cloning dotfiles"
-git clone git@github.com:mhanberg/.dotfiles.git
+  echo "==> Cloning dotfiles"
+  git clone git@github.com:mhanberg/.dotfiles.git
 
-cd .dotfiles
+  cd .dotfiles
 
-echo "==> Running the install script"
-./install
+  echo "==> Running the install script"
+  ./install
 )
 
 echo "🍻 Done!"

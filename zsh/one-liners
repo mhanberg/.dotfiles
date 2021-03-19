@@ -1,5 +1,0 @@
-#!/usr/bin/env zsh
-
-# docker
-
-alias docker-image-remove='docker image rm $(docker image ls -q) --force'

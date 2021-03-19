@@ -10,7 +10,7 @@
 ((count = 0))
 
 until "$@"; do
-	((count++))
+  ((count++))
 done
 
 echo "Count: $count"

@@ -48,9 +48,11 @@ alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovi
 alias clapped='sed "s/ / 👏 /g"'
 alias clap!='pbpaste | clapped | pbcopy'
 alias localnvim="/Users/mitchell/localnvim/bin/nvim"
+alias shfmt="shfmt -i 2"
 
 # docker
 alias dc='docker-compose'
+alias docker-image-remove='docker image rm $(docker image ls -q) --force'
 
 # gh aliases
 

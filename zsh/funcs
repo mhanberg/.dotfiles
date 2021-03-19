@@ -145,7 +145,7 @@ dev() {
     cd ~/Development
   else
     if [ -d ~/Development/"$1" ]; then
-      mux start --suppress-tmux-version-warning=0 code "$1"  
+      mux start --suppress-tmux-version-warning=0 code "$1"
     else
       echo "~/Development/$1 does not exist"
     fi
