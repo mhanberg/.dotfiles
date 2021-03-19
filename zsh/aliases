@@ -64,8 +64,13 @@ alias mtc="WALLABY_DRIVER=chrome mix test"
 alias mts="WALLABY_DRIVER=selenium mix test"
 
 # tt
-alias standup="tt review | fzf-tmux -p -- --reverse"
-ttrs() { tt "[review][start] $1"; }
-ttrd() { tt "[review][done] $1"; }
+standup() {
+  echo '[work]\n[review]\n[meeting]\n[other]' | \
+    fzf-tmux -p 90% -- --preview-window=down:85% --reverse --disabled --preview='echo "$(tt review)" | rg --fixed-strings {}';
+}
+ttr() { tt "[review] $1"; }
+ttw() { tt "[work] $1"; }
+ttm() { tt "[meeting] $1"; }
+tto() { tt "[other] $1"; }
 
 source $HOME/.zsh/aliases.local
