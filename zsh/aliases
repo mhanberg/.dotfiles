@@ -47,6 +47,7 @@ alias master-nvim='asdf global neovim ref:master'
 alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
 alias clapped='sed "s/ / 👏 /g"'
 alias clap!='pbpaste | clapped | pbcopy'
+alias localnvim="/Users/mitchell/localnvim/bin/nvim"
 
 # docker
 alias dc='docker-compose'

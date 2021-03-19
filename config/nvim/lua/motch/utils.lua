@@ -1,5 +1,14 @@
 M = {}
 
+if pcall(require, 'plenary') then
+  RELOAD = require('plenary.reload').reload_module
+
+  R = function(name)
+    RELOAD(name)
+    return require(name)
+  end
+end
+
 M.augroup = function(name, callback)
   vim.cmd("augroup " .. name)
   vim.cmd("autocmd!")
@@ -42,6 +51,11 @@ end
 
 M.imap = function(from, to, opts)
   vim.api.nvim_set_keymap("i", from, to, opts or {})
+end
+
+M.inoremap = function(from, to, opts)
+  opts = vim.tbl_extend("force", {noremap = true, silent = true}, opts or {})
+  vim.api.nvim_set_keymap("i", from, to, opts)
 end
 
 M.smap = function(from, to, opts)

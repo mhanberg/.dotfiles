@@ -1,8 +1,8 @@
-require("plugins")
+require("motch.plugins")
 
-local augroup = require("utils").augroup
-local nnoremap = require("utils").nnoremap
-local opt = require("utils").opt
+local augroup = require("motch.utils").augroup
+local nnoremap = require("motch.utils").nnoremap
+local opt = require("motch.utils").opt
 
 function RemoveNetrwMap()
   if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
@@ -10,19 +10,7 @@ function RemoveNetrwMap()
   end
 end
 
-function SetWordCount(file_name)
-  local file = vim.fn.expand(file_name)
-  local count = vim.trim(vim.fn.system("cat " .. file .. ", | wc -w"))
-
-  opt.b("word_count", count)
-end
-
-function GetWordCount()
-  return vim.b.word_count or ""
-end
-
 NVIM = require("nvim")
-
 opt.o("foldmethod", "syntax")
 opt.o("foldlevelstart", 99)
 opt.o("smartindent", true)
@@ -83,7 +71,7 @@ opt.g(
 nnoremap("cn", ":cnext<cr>")
 nnoremap("<leader><space>", ":set hls!<cr>")
 nnoremap("<leader>ev", ":vsplit ~/.vimrc<cr>")
-nnoremap("<leader>sv", [[:luafile $MYVIMRC<cr> | echo "Sourced $MYVIMRC"]])
+nnoremap("<leader>sv", [[:luafile $MYVIMRC<cr>]])
 nnoremap("<c-p>", ":Files<cr>")
 nnoremap("gl", ":BLines<cr>")
 nnoremap("<leader>a", ":RG<cr>")
@@ -115,7 +103,7 @@ opt.g("completion_enable_snippet", "vim-vsnip")
 opt.g("blamer_enabled", 1)
 opt.g("blamer_relative_time", 1)
 
-require("treesitter")
+require("motch.treesitter")
 
 opt.o("grepprg", "ag --vimgrep -Q $*")
 opt.o("grepformat", "%f:%l:%c:%m")
@@ -130,7 +118,7 @@ opt.g("markdown_syntax_conceal", 0)
 
 opt.g("Hexokinase_optInPatterns", {"full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla"})
 
-local LSP = require("lsp")
+local LSP = require("motch.lsp")
 
 local path_to_elixirls = vim.fn.expand("~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")
 LSP.setup(
@@ -145,8 +133,16 @@ LSP.setup(
     cmd = {path_to_elixirls}
   }
 )
-
-LSP.setup("efm", {})
+LSP.setup(
+  "efm",
+  {
+    filetypes = {
+      "elixir",
+      "javascript",
+      "lua"
+    }
+  }
+)
 LSP.setup("rust_analyzer", {})
 LSP.setup("solargraph", {})
 LSP.setup("omnisharp", {})
@@ -154,11 +150,12 @@ LSP.setup("tsserver", {})
 LSP.setup("vimls", {})
 
 RG = function(query, fullscreen)
-  command_format = "rg --glob '!yarn.lock' --glob '!package-lock.json' --glob '!.git' --hidden --column --line-number --no-heading --color=always --smart-case %s || true"
-  initial_command = vim.fn.printf(command_format, vim.fn.shellescape(query))
-  reload_command = vim.fn.printf(command_format, "{q}")
-  spec = {
-    options = {"--disabled", "--query", query, "--bind", "change:reload:"..reload_command},
+  local command_format =
+    "rg --glob '!yarn.lock' --glob '!package-lock.json' --glob '!.git' --hidden --column --line-number --no-heading --color=always --smart-case %s || true"
+  local initial_command = vim.fn.printf(command_format, vim.fn.shellescape(query))
+  local reload_command = vim.fn.printf(command_format, "{q}")
+  local spec = {
+    options = {"--disabled", "--query", query, "--bind", "change:reload:" .. reload_command},
     window = {width = 0.9, height = 0.6, yoffset = 0, highlight = "Normal"}
   }
 
@@ -170,44 +167,30 @@ vim.cmd [[command! -nargs=* -bang RG lua RG(<q-args>, <bang>0)]]
 augroup(
   "random",
   function(autocmd)
-    autocmd "User FloatermOpen wincmd p"
-    autocmd "VimResized * :wincmd ="
-    autocmd "GUIEnter * set visualbell t_vb="
-    autocmd "FileType netrw :lua RemoveNetrwMap()"
-    autocmd "BufRead,BufNewFile *.zsh-theme set filetype=zsh"
-    autocmd "BufRead,BufNewFile aliases.local set filetype=zsh"
-    autocmd "BufRead,BufNewFile *.lexs set filetype=elixir"
+    autocmd [[BufWritePost plugins.lua PackerCompile]]
+    autocmd [[User FloatermOpen execute "normal G" | wincmd p]]
+    autocmd [[VimResized * :wincmd =]]
+    autocmd [[GUIEnter * set visualbell t_vb=]]
+    autocmd [[FileType netrw :lua RemoveNetrwMap()]]
+    autocmd [[BufRead,BufNewFile *.zsh-theme set filetype=zsh]]
+    autocmd [[BufRead,BufNewFile aliases.local set filetype=zsh]]
+    autocmd [[BufRead,BufNewFile *.lexs set filetype=elixir]]
   end
 )
 
 augroup(
   "clojure",
   function(autocmd)
-    autocmd "BufWritePost *.clj :silent Require"
+    autocmd [[BufWritePost *.clj :silent Require]]
   end
 )
 
 augroup(
   "markdown",
   function(autocmd)
-    autocmd "BufRead,BufNewFile *.md setlocal spell"
-    autocmd "BufRead,BufNewFile *.md setlocal linebreak"
-    autocmd "BufRead,BufNewFile,BufWritePost *.md lua SetWordCount('%:p')"
+    autocmd [[BufRead,BufNewFile *.md setlocal spell]]
+    autocmd [[BufRead,BufNewFile *.md setlocal linebreak]]
   end
 )
-
--- vim.fn["cyclist#add_listchar_option_set"](
---   "default",
---   {
---     eol = "↲",
---     tab = "» ",
---     space = "",
---     trail = "𝁢",
---     extends = "…",
---     precedes = "…",
---     conceal = "┊",
---     nbsp = "☠"
---   }
--- )
 
 vim.cmd [[let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']]

@@ -11,8 +11,6 @@ require("packer").startup(
     use {"wbthomason/packer.nvim", opt = true}
     use "tjdevries/nlua.nvim"
     use "norcalli/nvim.lua"
-    use "guns/vim-sexp"
-    use "tpope/vim-sexp-mappings-for-regular-people"
     use "tpope/vim-repeat"
     use "bakpakin/fennel.vim"
     use "sainnhe/vim-color-forest-night"
@@ -27,7 +25,7 @@ require("packer").startup(
     use "vim-ruby/vim-ruby"
     use "tpope/vim-rsi"
     use "elixir-editors/vim-elixir"
-    use "tpope/vim-endwise"
+    -- use "tpope/vim-endwise"
     use "tpope/vim-fugitive"
     use "junegunn/gv.vim"
     use "airblade/vim-gitgutter"
@@ -39,7 +37,7 @@ require("packer").startup(
     use "pangloss/vim-javascript"
     use "isRuslan/vim-es6"
     -- use "mxw/vim-jsx"
-    use "jiangmiao/auto-pairs"
+    -- use "jiangmiao/auto-pairs"
     use "tpope/vim-surround"
     use "tpope/vim-eunuch"
     use "tpope/vim-projectionist"
@@ -65,7 +63,8 @@ require("packer").startup(
     use "reedes/vim-wordy"
 
     use "neovim/nvim-lspconfig"
-    use "nvim-lua/completion-nvim"
+    use "hrsh7th/nvim-compe"
+    -- use "nvim-lua/completion-nvim"
     use "hrsh7th/vim-vsnip"
     use "hrsh7th/vim-vsnip-integ"
 
@@ -123,7 +122,5 @@ require("packer").startup(
 )
 
 require("packer.luarocks").setup_paths()
-
-vim.cmd [[PackerCompile]]
 
 _ = require("underscore")
