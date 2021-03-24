@@ -40,7 +40,7 @@ local on_attach = function(_, bufnr)
   vim.cmd [[inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })]]
 end
 
-vim.lsp.handlers["window/logMessage"] = vim.lsp.handlers["window/showMessage"]
+-- vim.lsp.handlers["window/logMessage"] = vim.lsp.handlers["window/showMessage"]
 
 require "compe".setup {
   enabled = true,

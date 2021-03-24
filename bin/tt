@@ -15,6 +15,8 @@ file_path="$HOME/Dropbox/stord/tt.txt"
 case "$1" in
   review)
     tac "$file_path";;
+  edit)
+    nvim "$file_path";;
   *)
     echo "$(gdate) - $1" >> "$file_path";;
 esac

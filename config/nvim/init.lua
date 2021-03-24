@@ -34,7 +34,7 @@ opt.o("mouse", "a")
 opt.o("errorbells", false)
 opt.o("visualbell", true)
 opt.o("t_vb", "")
-opt.o("cursorline", true)
+opt.w("cursorline", true)
 opt.o("inccommand", "nosplit")
 opt.o("background", "dark")
 opt.o("autoread", true)
@@ -99,9 +99,6 @@ nnoremap("<leader>r", ":BTags")
 
 opt.o("completeopt", "menuone,noinsert,noselect")
 opt.g("completion_enable_snippet", "vim-vsnip")
-
-opt.g("blamer_enabled", 1)
-opt.g("blamer_relative_time", 1)
 
 require("motch.treesitter")
 
