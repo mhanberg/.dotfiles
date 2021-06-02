@@ -2,7 +2,8 @@ require("motch.plugins")
 
 local augroup = require("motch.utils").augroup
 local nnoremap = require("motch.utils").nnoremap
-local opt = require("motch.utils").opt
+-- local opt = require("motch.utils").opt
+local opt = vim.opt
 
 function RemoveNetrwMap()
   if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
@@ -11,41 +12,41 @@ function RemoveNetrwMap()
 end
 
 NVIM = require("nvim")
-opt.o("foldmethod", "syntax")
-opt.o("foldlevelstart", 99)
-opt.o("smartindent", true)
-opt.b("tabstop", 2)
-opt.b("shiftwidth", 2)
-opt.b("expandtab", true)
-opt.w("number", true)
-opt.o("termguicolors", true)
-opt.o("backupdir", vim.fn.expand("~/.tmp/backup"))
-opt.o("directory", vim.fn.expand("~/.tmp/swp"))
-opt.o("splitbelow", true)
-opt.o("splitright", true)
-opt.o("lazyredraw", true)
-opt.o("showmode", false)
-opt.o("incsearch", true)
-opt.o("ignorecase", true)
-opt.o("smartcase", true)
-opt.o("undofile", true)
-opt.o("undodir", vim.fn.expand("~/.tmp"))
-opt.o("mouse", "a")
-opt.o("errorbells", false)
-opt.o("visualbell", true)
-opt.o("t_vb", "")
-opt.w("cursorline", true)
-opt.o("inccommand", "nosplit")
-opt.o("background", "dark")
-opt.o("autoread", true)
-opt.g("forest_night_enable_italic", 1)
-opt.g("forest_night_diagnostic_text_highlight", 1)
+opt.foldmethod = "syntax"
+opt.foldlevelstart = 99
+opt.smartindent = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.number = true
+opt.termguicolors = true
+opt.backupdir = vim.fn.expand("~/.tmp/backup")
+opt.directory = vim.fn.expand("~/.tmp/swp")
+opt.splitbelow = true
+opt.splitright = true
+opt.lazyredraw = true
+opt.showmode = false
+opt.incsearch = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.undofile = true
+opt.undodir = vim.fn.expand("~/.tmp")
+opt.mouse = "a"
+opt.errorbells = false
+opt.visualbell = true
+-- opt.t_vb = ""
+opt.cursorline = true
+opt.inccommand = "nosplit"
+opt.background = "dark"
+opt.autoread = true
+vim.g.forest_night_enable_italic = 1
+vim.g.forest_night_diagnostic_text_highlight = 1
 
 -- vim.cmd [[color forest-night]]
 vim.cmd [[color thicc_forest]]
 
-opt.g("indentLine_fileTypeExclude", {"json"})
-opt.g("indentLine_char", "│")
+vim.g.indentLine_fileTypeExclude = {"json"}
+vim.g.indentLine_char = "│"
 
 vim.cmd [[command! Q q]]
 vim.cmd [[command! Qall qall]]
@@ -80,12 +81,12 @@ nnoremap("<leader>c", ":botright copen 20<cr>")
 nnoremap("<leader>gd", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git diff'<cr>")
 nnoremap("<leader>gs", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git status'<cr>")
 
-opt.g("dispatch_handlers", {"job"})
-opt.g("test#strategy", "floaterm")
-opt.g("floaterm_wintype", "split")
-opt.g("floaterm_height", 0.3)
-opt.g("floaterm_autoclose", 1)
-opt.g("floaterm_autoinsert", false)
+vim.g.dispatch_handlers = {"job"}
+vim.g["test#strategy"] = "floaterm"
+vim.g.floaterm_wintype = "split"
+vim.g.floaterm_height = 0.3
+vim.g.floaterm_autoclose = 1
+vim.g.floaterm_autoinsert = false
 
 nnoremap("<leader>n", ":TestNearest<cr>")
 nnoremap("<leader>f", ":TestFile<cr>")
@@ -97,23 +98,26 @@ nnoremap("<leader>ct", ":!ctags -R .<cr>")
 nnoremap("<leader>t", ":Tags<cr>")
 nnoremap("<leader>r", ":BTags")
 
-opt.o("completeopt", "menuone,noinsert,noselect")
-opt.g("completion_enable_snippet", "vim-vsnip")
+opt.completeopt = {"menuone", "noinsert", "noselect"}
+vim.g.completion_enable_snippet = "vim-vsnip"
+
+vim.g.blamer_enabled = 1
+vim.g.blamer_relative_time = 1
 
 require("motch.treesitter")
 
-opt.o("grepprg", "ag --vimgrep -Q $*")
-opt.o("grepformat", "%f:%l:%c:%m")
+opt.grepprg = "ag --vimgrep -Q $*"
+opt.grepformat = "%f:%l:%c:%m"
 
-opt.g("jsx_ext_required", 0)
+vim.g.jsx_ext_required = 0
 
 nnoremap("<leader>gy", ":Goyo<cr>")
-opt.g("goyo_width", 120)
-opt.g("goyo_height", 100)
+vim.g.goyo_width = 120
+vim.g.goyo_height = 100
 
-opt.g("markdown_syntax_conceal", 0)
+vim.g.markdown_syntax_conceal = 0
 
-opt.g("Hexokinase_optInPatterns", {"full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla"})
+vim.g.Hexokinase_optInPatterns = {"full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla"}
 
 local LSP = require("motch.lsp")
 
