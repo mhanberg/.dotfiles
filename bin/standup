@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# requires the `tt` script
+
+echo '[work]\n[review]\n[meeting]\n[other]' | \
+  fzf --preview-window=down:85% --reverse --disabled --preview='echo "$(tt review)" | rg --fixed-strings {}'
