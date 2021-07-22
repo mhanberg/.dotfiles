@@ -13,7 +13,13 @@ ga() { git add "$@"; }
 gc() { git commit "$@"; }
 gco() { git checkout $(gbl | fzf); }
 gcb() { git checkout -b "$@"; }
-gcm() { git checkout master; }
+gdb() {
+	REMOTE=${1:-origin}
+	git remote show $REMOTE | grep "HEAD branch" | sed 's/.*: //'
+}
+gcm() {
+  git checkout $(gdb $1)
+}
 gl() { git log --graph "$@"; }
 gpull() { git pull "$@"; }
 gpush() { git push "$@"; }

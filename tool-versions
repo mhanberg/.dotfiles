@@ -1,10 +1,12 @@
-elixir 1.11.3
+elixir 1.12.0
 ruby 3.0.0
 nodejs lts
 clojure 1.10.1
 java openjdk-11.0.1
-tmux 3.2-rc
-neovim nightly
+tmux 3.2a
+neovim ref:stable
 rebar 3.14.2
 rust 1.50.0
-erlang 23.2.6
+erlang 24.0.1
+racket 8.0
+zig 0.8.0

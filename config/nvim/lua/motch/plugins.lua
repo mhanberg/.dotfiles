@@ -6,7 +6,9 @@ end
 
 vim.cmd [[packadd packer.nvim]]
 
-require("packer").startup(
+local startup = require("packer").startup
+
+startup(
   function(use, use_rocks)
     use {"wbthomason/packer.nvim", opt = true}
     use "tjdevries/nlua.nvim"
@@ -46,7 +48,8 @@ require("packer").startup(
     use "mattn/emmet-vim"
     use "tpope/vim-markdown"
     use "matze/vim-move"
-    use "Yggdroot/indentLine"
+    -- use "Yggdroot/indentLine"
+    use {"lukas-reineke/indent-blankline.nvim"}
     use {
       "junegunn/fzf",
       run = function()
@@ -64,9 +67,10 @@ require("packer").startup(
 
     use "neovim/nvim-lspconfig"
     use "hrsh7th/nvim-compe"
-    -- use "nvim-lua/completion-nvim"
     use "hrsh7th/vim-vsnip"
     use "hrsh7th/vim-vsnip-integ"
+
+    use "kabouzeid/nvim-lspinstall"
 
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
@@ -74,21 +78,21 @@ require("packer").startup(
     use "APZelos/blamer.nvim"
     use "hashivim/vim-terraform"
     use "pwntester/octo.nvim"
-    use {
-      "ojroques/nvim-lspfuzzy",
-      requires = {
-        {"junegunn/fzf"},
-        {"junegunn/fzf.vim"} -- to enable preview (optional)
-      }
-    }
-    use {
-      "glacambre/firenvim",
-      run = function()
-        vim.fn["firenvim#install"](0)
-      end
-    }
+    -- use {
+    --   "ojroques/nvim-lspfuzzy",
+    --   requires = {
+    --     {"junegunn/fzf"},
+    --     {"junegunn/fzf.vim"} -- to enable preview (optional)
+    --   }
+    -- }
+    -- use {
+      -- "glacambre/firenvim",
+      -- run = function()
+       --  vim.fn["firenvim#install"](0)
+     --  end
+   --  }
 
-    use "powerman/vim-plugin-AnsiEsc"
+    -- use "powerman/vim-plugin-AnsiEsc"
     use {
       "nvim-treesitter/nvim-treesitter",
       run = function()
@@ -111,11 +115,24 @@ require("packer").startup(
 
     use "mjlbach/neovim-ui"
 
-    -- use "~/Development/thicc-forest"
+    use "~/Development/thicc-forest"
 
     use {"ojroques/nvim-hardline"}
 
     use {"tjdevries/astronauta.nvim"}
+    use {
+      "megalithic/zk.nvim",
+      requires = {{"vijaymarupudi/nvim-fzf"}}
+    }
+
+    -- use {"Olical/conjure"}
+    use {"wlangstroth/vim-racket"}
+    use {
+      "jpalardy/vim-slime",
+      run = function()
+        vim.cmd [[let g:slime_target = "neovim"]]
+      end
+    }
 
     use_rocks {"underscore"}
   end

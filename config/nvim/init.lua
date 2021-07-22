@@ -55,20 +55,6 @@ vim.cmd [[command! E e]]
 vim.cmd [[command! W w]]
 vim.cmd [[command! Wq wq]]
 
-vim.env.FZF_DEFAULT_OPTS = "--reverse"
-opt.g("fzf_preview_window", {})
-opt.g(
-  "fzf_layout",
-  {
-    window = {
-      width = 119,
-      height = 0.6,
-      yoffset = 0,
-      highlight = "Normal"
-    }
-  }
-)
-
 nnoremap("cn", ":cnext<cr>")
 nnoremap("<leader><space>", ":set hls!<cr>")
 nnoremap("<leader>ev", ":vsplit ~/.vimrc<cr>")
@@ -81,17 +67,9 @@ nnoremap("<leader>c", ":botright copen 20<cr>")
 nnoremap("<leader>gd", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git diff'<cr>")
 nnoremap("<leader>gs", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git status'<cr>")
 
-vim.g.dispatch_handlers = {"job"}
-vim.g["test#strategy"] = "floaterm"
-vim.g.floaterm_wintype = "split"
-vim.g.floaterm_height = 0.3
-vim.g.floaterm_autoclose = 1
-vim.g.floaterm_autoinsert = false
+vim.cmd [[tnoremap <esc> <C-\><C-n>]]
 
-nnoremap("<leader>n", ":TestNearest<cr>")
-nnoremap("<leader>f", ":TestFile<cr>")
-nnoremap("<leader>s", ":TestSuite<cr>")
-nnoremap("<leader>l", ":TestLast<cr>")
+vim.g.dispatch_handlers = {"job"}
 
 -- ctags
 nnoremap("<leader>ct", ":!ctags -R .<cr>")
@@ -128,7 +106,8 @@ LSP.setup(
     settings = {
       elixirLS = {
         dialyzerEnabled = false,
-        fetchDeps = false
+        fetchDeps = false,
+        enableTestLenses = true
       }
     },
     cmd = {path_to_elixirls}
@@ -152,30 +131,55 @@ LSP.setup("solargraph", {})
 LSP.setup("omnisharp", {})
 LSP.setup("tsserver", {})
 LSP.setup("vimls", {})
+LSP.setup(
+  "zk",
+  {
+    on_attach = function(client, bufnr)
+      local function buf_set_keymap(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+      end
+      local opts = {noremap = true, silent = true}
 
-RG = function(query, fullscreen)
-  local command_format =
-    "rg --glob '!yarn.lock' --glob '!package-lock.json' --glob '!.git' --hidden --column --line-number --no-heading --color=always --smart-case %s || true"
-  local initial_command = vim.fn.printf(command_format, vim.fn.shellescape(query))
-  local reload_command = vim.fn.printf(command_format, "{q}")
-  local spec = {
-    options = {"--disabled", "--query", query, "--bind", "change:reload:" .. reload_command},
-    window = {width = 0.9, height = 0.6, yoffset = 0, highlight = "Normal"}
+      LSP.on_attach(client, bufnr)
+      buf_set_keymap("v", "<leader>zn", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
+      buf_set_keymap("n", "<leader>zn", ":ZkNew {title = vim.fn.input('Title: ')}<CR>", opts)
+      buf_set_keymap("n", "<leader>zl", ":ZkNew {dir = 'log'}<CR>", opts)
+    end
   }
+)
 
-  vim.fn["fzf#vim#grep"](initial_command, 1, vim.fn["fzf#vim#with_preview"](spec, "right"), fullscreen)
-end
+local lsputil = require("lspinstall.util")
+local default_tailwind_config = lsputil.extract_config("tailwindcss")
 
-vim.cmd [[command! -nargs=* -bang RG lua RG(<q-args>, <bang>0)]]
+LSP.setup(
+  "tailwindcss",
+  vim.tbl_extend(
+    "force",
+    {
+      settings = {
+        tailwindCSS = {
+          experimental = {
+            classRegex = {
+              [[class: "([^"]*)]]
+            }
+          }
+        }
+      },
+      filetypes = {"elixir", "eelixir"}
+    },
+    default_tailwind_config
+  )
+)
 
 augroup(
   "random",
   function(autocmd)
     autocmd [[BufWritePost plugins.lua PackerCompile]]
-    autocmd [[User FloatermOpen execute "normal G" | wincmd p]]
+    -- autocmd [[User FloatermOpen execute "normal G" | wincmd p]]
     autocmd [[VimResized * :wincmd =]]
     autocmd [[GUIEnter * set visualbell t_vb=]]
     autocmd [[FileType netrw :lua RemoveNetrwMap()]]
+    autocmd [[FileType fzf :tnoremap <buffer> <esc> <C-c>]]
     autocmd [[BufRead,BufNewFile *.zsh-theme set filetype=zsh]]
     autocmd [[BufRead,BufNewFile aliases.local set filetype=zsh]]
     autocmd [[BufRead,BufNewFile *.lexs set filetype=elixir]]

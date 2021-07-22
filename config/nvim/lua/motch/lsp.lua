@@ -1,5 +1,47 @@
 local lspconfig = require("lspconfig")
 
+local configs = require("lspconfig/configs")
+
+require("lspinstall").setup()
+
+configs.zk = {
+  default_config = {
+    cmd = {"zk", "lsp"},
+    filetypes = {"markdown", "liquid"},
+    root_dir = lspconfig.util.root_pattern(".zk"),
+    settings = {}
+  }
+}
+
+configs.zk.index = function()
+  vim.lsp.buf.execute_command(
+    {
+      command = "zk.index",
+      arguments = {vim.api.nvim_buf_get_name(0)}
+    }
+  )
+end
+
+configs.zk.new = function(...)
+  vim.lsp.buf_request(
+    0,
+    "workspace/executeCommand",
+    {
+      command = "zk.new",
+      arguments = {
+        vim.api.nvim_buf_get_name(0),
+        ...
+      }
+    },
+    function(_, _, result)
+      if not (result and result.path) then
+        return
+      end
+      vim.cmd("edit " .. result.path)
+    end
+  )
+end
+
 M = {}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -7,14 +49,13 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local has_run = {}
 
-local on_attach = function(_, bufnr)
-  -- require("completion").on_attach()
+M.on_attach = function(_, bufnr)
   local function map(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
   local map_opts = {noremap = true, silent = true}
 
-  map("n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
+  map("n", "df", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<cr>", map_opts)
   map("n", "gd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", map_opts)
   map("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
   map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
@@ -47,7 +88,7 @@ require "compe".setup {
   autocomplete = true,
   debug = false,
   min_length = 1,
-  preselect = "disabeld",
+  preselect = "disabled",
   throttle_time = 80,
   source_timeout = 200,
   incomplete_delay = 400,
@@ -78,7 +119,7 @@ M.setup = function(name, opts)
           log_level = vim.lsp.protocol.MessageType.Log,
           message_level = vim.lsp.protocol.MessageType.Log,
           capabilities = capabilities,
-          on_attach = on_attach
+          on_attach = M.on_attach
         },
         opts
       )
@@ -89,12 +130,12 @@ end
 require("nlua.lsp.nvim").setup(
   require("lspconfig"),
   {
-    on_attach = on_attach,
+    on_attach = M.on_attach,
     globals = {"vim"}
   }
 )
 
-require("lspfuzzy").setup {}
+-- require("lspfuzzy").setup {}
 vim.lsp.set_log_level(0)
 
 return M

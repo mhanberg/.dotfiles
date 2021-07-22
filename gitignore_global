@@ -1,7 +1,7 @@
 *~
 .DS_Store
 .vim-test
-tags
+./tags
 .elixir_ls
 .envrc
 .projections.json

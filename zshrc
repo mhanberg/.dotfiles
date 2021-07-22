@@ -92,6 +92,7 @@ if [ -f /usr/libeexec/java_home ]; then
 fi
 
 export PATH="/opt/homebrew/bin/qt@5.5/bin:$PATH"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
