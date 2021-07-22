@@ -119,6 +119,7 @@ LSP.setup(
     filetypes = {
       "elixir",
       "javascript",
+      "typescript",
       "lua",
       "bash",
       "zsh",
@@ -183,6 +184,9 @@ augroup(
     autocmd [[BufRead,BufNewFile *.zsh-theme set filetype=zsh]]
     autocmd [[BufRead,BufNewFile aliases.local set filetype=zsh]]
     autocmd [[BufRead,BufNewFile *.lexs set filetype=elixir]]
+    autocmd [[BufRead,BufNewFile *.exs set filetype=elixir]]
+    autocmd [[BufRead,BufNewFile *.ex set filetype=elixir]]
+    autocmd [[FileType elixir setlocal commentstring=#\ %s]]
   end
 )
 
@@ -201,4 +205,4 @@ augroup(
   end
 )
 
-vim.cmd [[let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']]
+vim.cmd [[let g:test#javascript#jest#file_pattern = '\v(.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']]

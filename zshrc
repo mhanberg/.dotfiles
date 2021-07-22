@@ -68,6 +68,8 @@ zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 zplug "MichaelAquilina/zsh-you-should-use"
 
+# zplug "stordco/stordcli", as:command
+
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
@@ -100,6 +102,7 @@ export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$(yarn global bin):$PATH"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -107,6 +110,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # echo "sourcing z.sh"
 . "$brew_prefix"/etc/profile.d/z.sh
 
+source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

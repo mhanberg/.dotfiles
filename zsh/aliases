@@ -58,6 +58,13 @@ alias docker-image-remove='docker image rm $(docker image ls -q) --force'
 
 alias ghc='gh repo clone'
 alias ghv='gh repo view -w'
+open-pr() {
+  pr="$(gh pr list | fzf | awk '{ print $1 }')"
+
+  echo "$pr"
+
+  [[ -z $pr ]] && gh pr view -w "$pr"
+}
 
 # wallaby
 alias mtc="WALLABY_DRIVER=chrome mix test"
@@ -65,12 +72,13 @@ alias mts="WALLABY_DRIVER=selenium mix test"
 
 # tt
 standup() {
-  echo '[work]\n[review]\n[meeting]\n[other]' | \
-    fzf-tmux -p 90% -- --preview-window=down:85% --reverse --disabled --preview='echo "$(tt review)" | rg --fixed-strings {}';
+  echo '[todo]\n[work]\n[review]\n[meeting]\n[other]' | \
+    fzf-tmux -p 90% -- --preview-window=down:80% --reverse --disabled --preview='echo "$(tt review)" | rg --fixed-strings {}';
 }
 ttr() { tt "[review] $1"; }
 ttw() { tt "[work] $1"; }
 ttm() { tt "[meeting] $1"; }
 tto() { tt "[other] $1"; }
+ttt() { tt "[todo] $1"; }
 
 source $HOME/.zsh/aliases.local
