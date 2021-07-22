@@ -83,21 +83,21 @@ startup(
         require "octo".setup()
       end
     }
-    use {
-      "ojroques/nvim-lspfuzzy",
-      requires = {
-        {"junegunn/fzf"},
-        {"junegunn/fzf.vim"} -- to enable preview (optional)
-      }
-    }
-    use {
-      "glacambre/firenvim",
-      run = function()
-        vim.fn["firenvim#install"](0)
-      end
-    }
+    -- use {
+    --   "ojroques/nvim-lspfuzzy",
+    --   requires = {
+    --     {"junegunn/fzf"},
+    --     {"junegunn/fzf.vim"} -- to enable preview (optional)
+    --   }
+    -- }
+    -- use {
+    --   "glacambre/firenvim",
+    --   run = function()
+    --     vim.fn["firenvim#install"](0)
+    --   end
+    -- }
 
-    use "powerman/vim-plugin-AnsiEsc"
+    -- use "powerman/vim-plugin-AnsiEsc"
     use {
       "nvim-treesitter/nvim-treesitter",
       run = function()
