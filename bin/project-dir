@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+case "$1" in
+  .dotfiles)
+    echo "$HOME/.dotfiles"
+    ;;
+
+  notes)
+    echo "$HOME/Dropbox/notes/zk"
+    ;;
+
+  work-notes)
+    echo "$HOME/Dropbox/stord/notes"
+    ;;
+  *)
+
+    echo "$HOME/Development/$1"
+    ;;
+esac

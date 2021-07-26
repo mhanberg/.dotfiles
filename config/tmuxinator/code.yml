@@ -1,7 +1,7 @@
 # /Users/mitchellhanberg/.config/tmuxinator/code.yml
 
 name: <%= @args[0].gsub("\.", "") %>
-root: ~/Development/<%= @args[0] %>
+root: <%= `project-dir #{@args[0]}` %>
 
 windows:
   - editor: v
