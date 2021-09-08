@@ -6,11 +6,11 @@ case "$1" in
     ;;
 
   notes)
-    echo "$HOME/Dropbox/notes/zk"
+    echo "$ICLOUD/notes/zk"
     ;;
 
   work-notes)
-    echo "$HOME/Dropbox/stord/notes"
+    echo "$ICLOUD/stord/notes"
     ;;
   *)
 

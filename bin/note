@@ -2,7 +2,7 @@
 require 'optparse'
 require 'Date'
 
-journal_path = "#{Dir.home}/Dropbox/journal"
+journal_path = "#{ENV["ICLOUD"]}/journal"
 
 raise "Journal directory does not exist: #{journal_path}" unless Dir.exist? journal_path
 

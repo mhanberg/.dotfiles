@@ -1,6 +1,6 @@
-require("nvim-treesitter.configs").setup {
-  highlight = {enable = true},
-  indent = {enable = true},
+require("nvim-treesitter.configs").setup({
+  highlight = { enable = true },
+  indent = { enable = true },
   playground = {
     enable = true,
     disable = {},
@@ -16,10 +16,10 @@ require("nvim-treesitter.configs").setup {
       unfocus_language = "F",
       update = "R",
       goto_node = "<cr>",
-      show_help = "?"
-    }
-  }
-}
+      show_help = "?",
+    },
+  },
+})
 
-vim.cmd [[set foldmethod=expr]]
-vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
+vim.cmd([[set foldmethod=expr]])
+vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])

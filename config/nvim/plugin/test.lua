@@ -5,7 +5,7 @@ nnoremap("<leader>f", ":TestFile<cr>")
 nnoremap("<leader>s", ":TestSuite<cr>")
 nnoremap("<leader>l", ":TestLast<cr>")
 
-vim.cmd [[
+vim.cmd([[
 function! MotchStrategy(cmd) abort
   " autocmd User FloatermOpen ++once execute "normal G" | wincmd p
 
@@ -14,6 +14,6 @@ endfunction
 
 let g:test#custom_strategies = {'motch': function('MotchStrategy')}
 let g:test#strategy = 'motch'
-]]
+]])
 
 vim.g["test#strategy"] = "motch"

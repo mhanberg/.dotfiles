@@ -1,7 +1,7 @@
 M = {}
 
-if pcall(require, 'plenary') then
-  RELOAD = require('plenary.reload').reload_module
+if pcall(require, "plenary") then
+  RELOAD = require("plenary.reload").reload_module
 
   R = function(name)
     RELOAD(name)
@@ -12,15 +12,13 @@ end
 M.augroup = function(name, callback)
   vim.cmd("augroup " .. name)
   vim.cmd("autocmd!")
-  callback(
-    function(cmd)
-      vim.cmd("autocmd " .. cmd)
-    end
-  )
+  callback(function(cmd)
+    vim.cmd("autocmd " .. cmd)
+  end)
   vim.cmd("augroup END")
 end
 
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo, g = vim.g}
+local scopes = { o = vim.o, b = vim.bo, w = vim.wo, g = vim.g }
 
 local set_opt = function(scope, key, value)
   scopes[scope][key] = value
@@ -41,12 +39,17 @@ M.opt = {
   end,
   g = function(key, value)
     set_opt("g", key, value)
-  end
+  end,
 }
 
 M.nnoremap = function(from, to, opts)
-  opts = vim.tbl_extend("force", {noremap = true, silent = true}, opts or {})
+  opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
   vim.api.nvim_set_keymap("n", from, to, opts)
+end
+
+M.bufnnoremap = function(from, to, opts)
+  opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
+  vim.api.nvim_buf_set_keymap(0, "n", from, to, opts)
 end
 
 M.imap = function(from, to, opts)
@@ -54,7 +57,7 @@ M.imap = function(from, to, opts)
 end
 
 M.inoremap = function(from, to, opts)
-  opts = vim.tbl_extend("force", {noremap = true, silent = true}, opts or {})
+  opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
   vim.api.nvim_set_keymap("i", from, to, opts)
 end
 

@@ -31,6 +31,7 @@ fi
 export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
+export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 export ZPLUG_PROTOCOL="SSH"
 export ZPLUG_HOME="$brew_prefix"/opt/zplug
 source $ZPLUG_HOME/init.zsh

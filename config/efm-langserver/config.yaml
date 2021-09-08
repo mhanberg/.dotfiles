@@ -29,6 +29,14 @@ tools:
     format-command: 'luafmt --indent-count 2 --stdin'
     format-stdin: true
 
+  stylua: &stylua
+    format-command: 'stylua -'
+    format-stdin: true
+
+  pg_format: &pg_format
+    format-command: 'pg_format -'
+    format-stdin: true
+
   shellcheck: &shellcheck
     lint-command: 'shellcheck -f gcc -x -'
     lint-stdin: true
@@ -69,7 +77,7 @@ languages:
   markdown:
     - <<: *prettier
   lua:
-    - <<: *luafmt
+    - <<: *stylua
   sh:
     - <<: *shellcheck
     - <<: *shfmt
@@ -77,3 +85,5 @@ languages:
     - <<: *shfmt
   elixir:
     - <<: *mix_credo
+  sql:
+    - <<: *pg_format

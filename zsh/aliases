@@ -5,7 +5,6 @@ alias tmux='direnv exec / tmux'
 alias mux="tmuxinator"
 alias ..="cd .."
 alias blog="cd ~/Development/blog"
-alias brn="cd ~/Dropbox/br/notes && v"
 alias dotfiles="mux start dotfiles --suppress-tmux-version-warning"
 alias dropbox="cd ~/Dropbox"
 alias ea="vim ~/.zsh/aliases"
@@ -80,5 +79,8 @@ ttw() { tt "[work] $1"; }
 ttm() { tt "[meeting] $1"; }
 tto() { tt "[other] $1"; }
 ttt() { tt "[todo] $1"; }
+
+alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
+alias nvim-plugins="cd ~/.local/share/nvim/site/pack/packer/start"
 
 source $HOME/.zsh/aliases.local

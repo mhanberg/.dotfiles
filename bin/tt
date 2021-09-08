@@ -8,7 +8,7 @@ ex() {
  exit 1
 }
 
-file_path="$HOME/Dropbox/stord/tt.txt"
+file_path="$ICLOUD/stord/tt.txt"
 
 [[ ! -f "$file_path" ]] && ex "$file_path does not exist"
 
