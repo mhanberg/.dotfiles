@@ -19,7 +19,7 @@ hs.hotkey.bind({ "cmd", "alt" }, "N", function()
 end)
 
 hs.hotkey.bind({ "cmd", "alt" }, "K", function()
-  hs.application.open("Google Chrome")
+  hs.application.open("Firefox Developer Edition")
 end)
 
 hs.hotkey.bind({ "cmd", "alt" }, "L", function()

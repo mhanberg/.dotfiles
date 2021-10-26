@@ -16,4 +16,8 @@ let g:test#custom_strategies = {'motch': function('MotchStrategy')}
 let g:test#strategy = 'motch'
 ]])
 
+vim.g["test#neovim#start_normal"] = 1
+
+vim.g["test#javascript#jest#executable"] = "bin/test"
+
 vim.g["test#strategy"] = "motch"

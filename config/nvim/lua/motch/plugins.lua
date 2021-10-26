@@ -26,7 +26,7 @@ startup(function(use, use_rocks)
   use("elixir-editors/vim-elixir")
   use("tpope/vim-fugitive")
   use("junegunn/gv.vim")
-  use("airblade/vim-gitgutter")
+  -- use("airblade/vim-gitgutter")
   use("tpope/vim-sensible")
   use("vim-test/vim-test")
   use("christoomey/vim-tmux-navigator")
@@ -72,7 +72,7 @@ startup(function(use, use_rocks)
   use("nvim-lua/plenary.nvim")
   use("nvim-lua/telescope.nvim")
   use("APZelos/blamer.nvim")
-
+  use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
   use({
     "nvim-treesitter/nvim-treesitter",
     run = function()

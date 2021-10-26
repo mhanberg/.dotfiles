@@ -119,9 +119,6 @@ brew-outdated() {
 brew-upgrade() {
   echo "\n==> brew upgrade"
   brew upgrade
-
-  echo "\n==> brew cask upgrade"
-  brew upgrade --cask
 }
 
 alias bo="brew-outdated"
