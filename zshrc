@@ -30,6 +30,7 @@ fi
 
 export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
+export CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 export ZPLUG_PROTOCOL="SSH"
@@ -104,6 +105,7 @@ export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$(yarn global bin):$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+export PATH="$HOME/zls/zig-out/bin:$PATH"
 
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -125,3 +127,5 @@ eval "$(direnv hook zsh)"
 # zprof
 
 
+
+alias luamake=/Users/mitchell/.cache/nvim/nlua/sumneko_lua/lua-language-server/3rd/luamake/luamake

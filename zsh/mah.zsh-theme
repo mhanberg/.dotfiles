@@ -81,4 +81,4 @@ add-zsh-hook precmd format_vcs_info
 
 PROMPT=$'
 %F{blue}%~${PR_RST} $vcs_info_msg_0_$(virtualenv_info) %B%F{cyan}$(cmd_exec_time)${PR_RST}
-⚡︎'
+ '

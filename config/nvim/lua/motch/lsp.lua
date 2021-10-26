@@ -1,40 +1,6 @@
 local lspconfig = require("lspconfig")
--- vim.notify = require("notify")
-
-local configs = require("lspconfig/configs")
 
 require("lspinstall").setup()
-
-configs.zk = {
-  default_config = {
-    cmd = { "zk", "lsp" },
-    filetypes = { "markdown", "liquid" },
-    root_dir = lspconfig.util.root_pattern(".zk"),
-    settings = {},
-  },
-}
-
-configs.zk.index = function()
-  vim.lsp.buf.execute_command({
-    command = "zk.index",
-    arguments = { vim.api.nvim_buf_get_name(0) },
-  })
-end
-
-configs.zk.new = function(...)
-  vim.lsp.buf_request(0, "workspace/executeCommand", {
-    command = "zk.new",
-    arguments = {
-      vim.api.nvim_buf_get_name(0),
-      ...,
-    },
-  }, function(_, _, result)
-    if not (result and result.path) then
-      return
-    end
-    vim.cmd("edit " .. result.path)
-  end)
-end
 
 M = {}
 
@@ -63,55 +29,57 @@ M.on_attach = function(_, bufnr)
   vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
   vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
 
-  vim.cmd([[imap <expr> <Tab> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>']])
-  vim.cmd([[smap <expr> <Tab> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>']])
-  vim.cmd([[imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']])
-  vim.cmd([[smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']])
-
-  vim.cmd([[inoremap <silent><expr> <C-Space> compe#complete()]])
-  vim.cmd([[inoremap <silent><expr> <CR> compe#confirm('<CR>')]])
-  vim.cmd([[inoremap <silent><expr> <C-e> compe#close('<C-e>')]])
-  vim.cmd([[inoremap <silent><expr> <C-f> compe#scroll({ 'delta': +4 })]])
-  vim.cmd([[inoremap <silent><expr> <C-d> compe#scroll({ 'delta': -4 })]])
+  require("cmp_nvim_lsp").update_capabilities(capabilities)
 end
 
-vim.lsp.handlers["window/logMessage"] = function(_, _, log)
-  if log.type == 4 then
-    -- vim.notify(log.message, "info", {icon = ""})
-    print(log.message)
-  end
-end
+local cmp = require("cmp")
 
-require("compe").setup({
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "disabled",
-  throttle_time = 80,
-  source_timeout = 200,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = true,
-  source = {
-    path = true,
-    buffer = true,
-    calc = true,
-    vsnip = true,
-    nvim_lsp = true,
-    nvim_lua = true,
-    spell = true,
-    tags = true,
-    treesitter = true,
-    vim_dadbod_completion = true,
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      -- For `vsnip` user.
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = "nvim_lua" },
+    { name = "nvim_lsp" },
+    { name = "vsnip" },
+    { name = "vim-dadbod-completion" },
+    { name = "spell" },
+    { name = "buffer" },
+    { name = "emoji" },
+    { name = "path" },
+    { name = "gh_issues" },
+  },
+  formatting = {
+    format = require("lspkind").cmp_format({
+      with_text = true,
+      menu = {
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]",
+        emoji = "[Emoji]",
+        spell = "[Spell]",
+        path = "[Path]",
+      },
+    }),
   },
 })
 
 M.setup = function(name, opts)
   if not has_run[name] then
     has_run[name] = true
+
     lspconfig[name].setup(vim.tbl_extend("force", {
       log_level = vim.lsp.protocol.MessageType.Log,
       message_level = vim.lsp.protocol.MessageType.Log,
@@ -126,11 +94,11 @@ if
 then
   require("nlua.lsp.nvim").setup(require("lspconfig"), {
     on_attach = M.on_attach,
-    globals = { "vim" },
+    globals = { "vim", "hs" },
+    library = { [vim.fn.expand("~/.hammerspoon/Spoons/EmmyLua.spoon/annotations")] = true },
   })
 end
 
--- require("lspfuzzy").setup {}
 vim.lsp.set_log_level(0)
 
 return M

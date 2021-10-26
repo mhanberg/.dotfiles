@@ -13,11 +13,21 @@ function RemoveNetrwMap()
   end
 end
 
-if vim.fn.executable("nvr") then
-  vim.env.EDITOR = [[nvr --remote]]
-end
+vim.api.nvim_exec(
+  [[
+function! FzfWrapHelper(opts)
+  call fzf#run(fzf#wrap(a:opts))
+endfunction
+]],
+  false
+)
+
+FZF = vim.fn["FzfWrapHelper"]
+
+vim.env.WALLABY_DRIVER = "chrome"
 
 NVIM = require("nvim")
+opt.guifont = "JetBrains Mono"
 opt.foldmethod = "syntax"
 opt.foldlevelstart = 99
 opt.smartindent = true
@@ -45,10 +55,12 @@ opt.cursorline = true
 opt.inccommand = "nosplit"
 opt.background = "dark"
 opt.autoread = true
+
+opt.title = true
+
 vim.g.forest_night_enable_italic = 1
 vim.g.forest_night_diagnostic_text_highlight = 1
 
--- vim.cmd [[color forest-night]]
 vim.cmd([[color thicc_forest]])
 
 vim.g.indentLine_fileTypeExclude = { "json" }
@@ -67,8 +79,8 @@ nnoremap("<leader><space>", ":set hls!<cr>")
 nnoremap("<leader>ev", ":vsplit ~/.vimrc<cr>")
 nnoremap("<leader>sv", [[:luafile $MYVIMRC<cr>]])
 nnoremap("<c-p>", ":Files<cr>")
+nnoremap("<space>fp", ":Files ~/.local/share/nvim/site/pack/packer/start<cr>")
 nnoremap("<space>df", ":Files ~/Development<cr>")
-nnoremap("<space>fp", ":lua motch.change_project()<cr>")
 nnoremap("gl", ":BLines<cr>")
 nnoremap("<leader>a", ":LocalProjectSearch<cr>")
 nnoremap("<space>a", ":GlobalProjectSearch<cr>")
@@ -86,11 +98,12 @@ nnoremap("<leader>ct", ":!ctags -R .<cr>")
 -- nnoremap("<leader>t", ":Tags<cr>")
 -- nnoremap("<leader>r", ":BTags")
 
-opt.completeopt = { "menuone", "noinsert", "noselect" }
-vim.g.completion_enable_snippet = "vim-vsnip"
+opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.g.blamer_enabled = 1
 vim.g.blamer_relative_time = 1
+
+vim.g.zig_fmt_autosave = 0
 
 require("motch.treesitter")
 
@@ -108,8 +121,8 @@ vim.g.markdown_syntax_conceal = 0
 vim.g.Hexokinase_optInPatterns = { "full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla" }
 
 local LSP = require("motch.lsp")
+local lsputil = require("lspinstall.util")
 
-local path_to_elixirls = vim.fn.expand("~/.cache/nvim/lspconfig/elixirls/elixir-ls/release/language_server.sh")
 LSP.setup("elixirls", {
   settings = {
     elixirLS = {
@@ -118,7 +131,7 @@ LSP.setup("elixirls", {
       enableTestLenses = true,
     },
   },
-  cmd = { path_to_elixirls },
+  cmd = { lsputil.install_path("elixir") .. "/elixir-ls/language_server.sh" },
 })
 LSP.setup("efm", {
   filetypes = {
@@ -151,7 +164,9 @@ LSP.setup("zk", {
   end,
 })
 
-local lsputil = require("lspinstall.util")
+LSP.setup("zls", {})
+LSP.setup("gopls", {})
+
 local default_tailwind_config = lsputil.extract_config("tailwindcss")
 
 LSP.setup(
