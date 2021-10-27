@@ -38,4 +38,13 @@ _G.motch.global_project_search = function(query, fullscreen)
   live_grep(query, fullscreen, "~/Development")
 end
 
+_G.motch.projects = function()
+  FZF({
+    source = [[fd --type d --hidden --glob ".git" /Users/mitchellhanberg/Development --exec echo {} | rev | cut -c 6- - | rev]],
+    sink = function(selection)
+      vim.api.nvim_set_current_dir(selection)
+    end
+  })
+end
+
 vim.cmd([[command! -nargs=* -bang GlobalProjectSearch lua motch.global_project_search(<q-args>, <bang>0)]])
