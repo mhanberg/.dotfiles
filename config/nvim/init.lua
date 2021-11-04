@@ -4,7 +4,6 @@ require("motch.plugins")
 
 local augroup = require("motch.utils").augroup
 local nnoremap = require("motch.utils").nnoremap
--- local opt = require("motch.utils").opt
 local opt = vim.opt
 
 function RemoveNetrwMap()
@@ -27,6 +26,7 @@ FZF = vim.fn["FzfWrapHelper"]
 vim.env.WALLABY_DRIVER = "chrome"
 
 NVIM = require("nvim")
+opt.colorcolumn = "99999"
 opt.guifont = "JetBrains Mono"
 opt.foldmethod = "syntax"
 opt.foldlevelstart = 99
@@ -61,7 +61,7 @@ opt.title = true
 vim.g.forest_night_enable_italic = 1
 vim.g.forest_night_diagnostic_text_highlight = 1
 
-vim.cmd([[color thicc_forest]])
+-- vim.cmd([[color thicc_forest]])
 
 vim.g.indentLine_fileTypeExclude = { "json" }
 vim.g.indentLine_char = "│"
@@ -151,6 +151,7 @@ LSP.setup("omnisharp", {})
 LSP.setup("tsserver", {})
 LSP.setup("vimls", {})
 LSP.setup("zk", {
+  filetypes = { "markdown", "liquid" },
   on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
       vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -181,7 +182,7 @@ LSP.setup(
         },
       },
     },
-    filetypes = { "elixir", "eelixir" },
+    filetypes = { "elixir", "eelixir", "html", "liquid" },
   }, default_tailwind_config)
 )
 

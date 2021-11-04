@@ -14,7 +14,7 @@ zk.note_picker = function(source)
     notes = "[]"
   end
 
-  notes = vim.fn.json_decode(notes)
+  notes = vim.json.decode(notes)
 
   notes = _.map(notes, function(n)
     local tags = _.join(

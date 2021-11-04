@@ -43,7 +43,22 @@ _G.motch.projects = function()
     source = [[fd --type d --hidden --glob ".git" /Users/mitchellhanberg/Development --exec echo {} | rev | cut -c 6- - | rev]],
     sink = function(selection)
       vim.api.nvim_set_current_dir(selection)
-    end
+    end,
+  })
+end
+
+_G.motch.swp = function()
+  FZF({
+    source = [[ls -lrt -d -1 ~/.tmp/swp/*]],
+    sinklist = function(selection)
+      local action = selection[1]
+      local file = selection[2]
+
+      if action == "ctrl-d" then
+        vim.fn.system([[rm ]] .. file)
+      end
+    end,
+    options = { "--expect", "ctrl-d" },
   })
 end
 
