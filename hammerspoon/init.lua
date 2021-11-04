@@ -2,9 +2,8 @@
 -- Load the information from the Alfred configuration.
 --
 require("hs.ipc")
-require("alfred")
 
-hs.loadSpoon("EmmyLua")
+-- hs.loadSpoon("EmmyLua")
 
 hs.hotkey.bind({ "cmd", "alt", "control" }, "\\", function()
   hs.application.open("Alacritty")
@@ -33,10 +32,3 @@ end)
 hs.hotkey.bind({ "cmd", "alt" }, "D", function()
   hs.application.open("Discord")
 end)
-hs.audiodevice.findDeviceByName("LG Ultra HD")
-
---
--- Turn off Animations.
---
-hs.window.animationDuration = 0
-

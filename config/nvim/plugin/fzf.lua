@@ -43,6 +43,7 @@ _G.motch.projects = function()
     source = [[fd --type d --hidden --glob ".git" /Users/mitchellhanberg/Development --exec echo {} | rev | cut -c 6- - | rev]],
     sink = function(selection)
       vim.api.nvim_set_current_dir(selection)
+      vim.cmd([[Files]])
     end,
   })
 end
