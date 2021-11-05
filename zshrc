@@ -28,6 +28,11 @@ else
   brew_prefix='/usr/local'
 fi
 
+if ! command -v starship >/dev/null; then
+  echo "==> starship.rs not installed. Installing now..."
+  brew install starship
+fi
+
 export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
 export CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
@@ -129,3 +134,5 @@ eval "$(direnv hook zsh)"
 
 
 alias luamake=/Users/mitchell/.cache/nvim/nlua/sumneko_lua/lua-language-server/3rd/luamake/luamake
+
+eval "$(starship init zsh)"
