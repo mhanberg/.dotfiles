@@ -2,6 +2,8 @@ _G.motch = {}
 
 require("motch.plugins")
 
+_ = require("underscore")
+
 local augroup = require("motch.utils").augroup
 local nnoremap = require("motch.utils").nnoremap
 local opt = vim.opt
