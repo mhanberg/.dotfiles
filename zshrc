@@ -5,21 +5,6 @@
 # (_)/___//____//_/ /_//_/    \___/
 #
 
-# zmodload zsh/zprof
-# profiling start
-# zmodload zsh/datetime
-# setopt PROMPT_SUBST
-# PS4='+$EPOCHREALTIME %N:%i> '
-
-# logfile=$(mktemp zsh_profile.XXXXXXXX)
-# echo "Logging to $logfile"
-# exec 3>&2 2>$logfile
-
-# setopt XTRACE
-# profiling end
-
-# date
-
 if [ $(arch) = "arm64" ]; then
   brew_prefix='/opt/homebrew'
 
@@ -64,7 +49,6 @@ if [ ! -f "$HOME/.zsh/aliases.local" ]; then
   source "$HOME"/.zsh/aliases.local
 fi
 
-# echo "starting zplug"
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
@@ -74,8 +58,6 @@ zplug "lib/key-bindings", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/fzf", from:oh-my-zsh
 zplug "MichaelAquilina/zsh-you-should-use"
-
-# zplug "stordco/stordcli", as:command
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -122,17 +104,8 @@ source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# echo "eval direnv"
-eval "$(direnv hook zsh)"
-# date
-# profiling start
-# unsetopt XTRACE
-# exec 2>&3 3>&-
-# profiling end
-# zprof
-
-
-
 alias luamake=/Users/mitchell/.cache/nvim/nlua/sumneko_lua/lua-language-server/3rd/luamake/luamake
 
 eval "$(starship init zsh)"
+
+# eval "$(direnv hook zsh)"

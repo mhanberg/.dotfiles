@@ -38,12 +38,6 @@ alias set-git-email-personal='git config user.email "$PERSONAL_EMAIL"'
 alias set-git-email-work='git config user.email "$WORK_EMAIL"'
 alias lsf='ls | fzf-tmux -p -- --reverse'
 alias mxi='mix'
-alias stable-nvim='asdf global neovim stable'
-alias update-nvim-stable='asdf uninstall neovim stable && asdf install neovim stable'
-alias nightly-nvim='asdf global neovim nightly'
-alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
-alias master-nvim='asdf global neovim ref:master'
-alias update-nvim-master='asdf uninstall neovim ref:master && asdf install neovim ref:master'
 alias localnvim="/Users/mitchell/localnvim/bin/nvim"
 alias shfmt="shfmt -i 2"
 
@@ -83,9 +77,8 @@ ttm() { tt "[meeting] $1"; }
 tto() { tt "[other] $1"; }
 ttt() { tt "[todo] $1"; }
 
-alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
 alias nvim-plugins="cd ~/.local/share/nvim/site/pack/packer/start"
 
-alias icloud="cd /Users/mitchell/Library/Mobile\ Documents/com~apple~CloudDocs"
+alias icloud="cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
 
 source $HOME/.zsh/aliases.local

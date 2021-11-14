@@ -76,6 +76,8 @@ startup({
     use({ "nvim-treesitter/playground" })
     use({ "rrethy/vim-hexokinase", run = "make hexokinase" })
 
+    use("lukas-reineke/cmp-rg")
+
     use_rocks({ "underscore" })
     use_rocks({ "ansicolors" })
   end,
