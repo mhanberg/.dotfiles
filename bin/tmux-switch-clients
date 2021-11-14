@@ -3,5 +3,5 @@
 tmux list-sessions \
   | sed -E 's/:.*$//' \
   | grep -v "^$(tmux display-message -p '#S')\$" \
-  | fzf --reverse --prompt='Go to> ' \
+  | fzf-alacritty --reverse --prompt='Go to> ' \
   | xargs tmux switch-client -t

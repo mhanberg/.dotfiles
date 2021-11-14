@@ -8,5 +8,5 @@ work-notes
 notes"
 
 echo "$projects" \
-  | fzf --reverse --prompt='> ' \
+  | fzf-alacritty --reverse --prompt='> ' \
   | xargs tmuxinator start code

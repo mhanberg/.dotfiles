@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+# This script opens a fzf in an alacritty window.
+# 
+# Some of this code was taken and inspired by the fzf-tmux script
+# created by [junegunn](https://github.com/junegunn) in the amazing
+# [fzf](https://github.com/junegunn/fzf) library.
+
+# Please be aware that I barely understand unix named pipes work and the
+# various bash features used in this script, please use this script at your own risk.
+
+set -e
+
+tmpdir="${TMPDIR:-/tmp}/fzf-alacritty"
+mkdir -p "$tmpdir"
+
+args=()
+
+if [[ $# -gt 0 ]]; then
+  while [[ $# -gt 0 ]]; do
+    arg="$1"
+    shift
+    args+=("$arg")
+  done
+  opts=$(printf "%q " "${args[@]}")
+else
+  opts=""
+fi
+
+id="$RANDOM"
+
+fifo1="$tmpdir/$id-fifo1"
+if tty >/dev/null; then
+  input=""
+else
+  mkfifo "$fifo1"
+  cat <&0 >"$fifo1" &
+
+  input="< $fifo1"
+fi
+
+fifo2="$tmpdir/$id-fifo2"
+fifo3="$tmpdir/$id-fifo3"
+
+cleanup() {
+  \rm -f $fifo1 $fifo2 $fifo3
+
+  if [[ $# -gt 0 ]]; then
+    trap - EXIT
+    exit 130
+  fi
+}
+
+trap 'cleanup 1' SIGUSR1
+trap 'cleanup' EXIT
+
+mkfifo "$fifo2"
+
+cat "$fifo2" &
+
+cat <<<"fzf $opts $input > $fifo2" >>"$fifo3"
+
+alacritty --working-directory "$PWD" --command bash -c "exec -a fzf bash $fifo3"
