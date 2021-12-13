@@ -12,6 +12,7 @@ startup({
   function(use, use_rocks)
     use({ "wbthomason/packer.nvim", opt = true })
 
+    use("elixir-editors/vim-elixir")
     use("APZelos/blamer.nvim")
     use("AndrewRadev/splitjoin.vim")
     use("alvan/vim-closetag")
@@ -29,7 +30,7 @@ startup({
     use("hrsh7th/vim-vsnip")
     use("junegunn/fzf.vim")
     use("junegunn/goyo.vim")
-    use("kabouzeid/nvim-lspinstall")
+    use("williamboman/nvim-lsp-installer")
     use("kristijanhusak/vim-dadbod-completion")
     use("kristijanhusak/vim-dadbod-ui")
     use("mattn/emmet-vim")

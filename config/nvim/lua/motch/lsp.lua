@@ -1,6 +1,6 @@
 local lspconfig = require("lspconfig")
 
-require("lspinstall").setup()
+local lsp_installer = require("nvim-lsp-installer")
 
 M = {}
 
@@ -101,5 +101,9 @@ then
 end
 
 vim.lsp.set_log_level(0)
+
+M.default_config = function(name)
+  return require("lspconfig.server_configurations."..name).default_config
+end
 
 return M

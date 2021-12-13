@@ -123,7 +123,6 @@ vim.g.markdown_syntax_conceal = 0
 vim.g.Hexokinase_optInPatterns = { "full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla" }
 
 local LSP = require("motch.lsp")
-local lsputil = require("lspinstall.util")
 
 LSP.setup("elixirls", {
   settings = {
@@ -133,7 +132,7 @@ LSP.setup("elixirls", {
       enableTestLenses = true,
     },
   },
-  cmd = { lsputil.install_path("elixir") .. "/elixir-ls/language_server.sh" },
+  cmd = { vim.fn.stdpath("data") .. "/lsp_servers/elixir/elixir-ls/language_server.sh" },
 })
 LSP.setup("efm", {
   filetypes = {
@@ -170,8 +169,6 @@ LSP.setup("zk", {
 LSP.setup("zls", {})
 LSP.setup("gopls", {})
 
-local default_tailwind_config = lsputil.extract_config("tailwindcss")
-
 LSP.setup(
   "tailwindcss",
   vim.tbl_extend("force", {
@@ -185,7 +182,7 @@ LSP.setup(
       },
     },
     filetypes = { "elixir", "eelixir", "html", "liquid" },
-  }, default_tailwind_config)
+  }, LSP.default_config("tailwindcss"))
 )
 
 -- vim.opt.listchars = {
