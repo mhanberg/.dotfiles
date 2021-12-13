@@ -108,4 +108,4 @@ alias luamake=/Users/mitchell/.cache/nvim/nlua/sumneko_lua/lua-language-server/3
 
 eval "$(starship init zsh)"
 
-# eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh)"
