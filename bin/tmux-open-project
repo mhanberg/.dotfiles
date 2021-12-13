@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-projects=$(fd --base-directory "$HOME/Development" --max-depth 1 .)
+projects=$(fd --strip-cwd-prefix --base-directory "$HOME/Development" --max-depth 1 .)
 
 projects="$projects
 .dotfiles
