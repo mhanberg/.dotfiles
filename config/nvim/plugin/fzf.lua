@@ -2,6 +2,7 @@ local _ = require("underscore")
 
 vim.env.FZF_DEFAULT_OPTS = "--reverse"
 vim.g.fzf_preview_window = {}
+vim.g.fzf_commands_expect = "enter"
 vim.g.fzf_layout = {
   window = {
     width = 119,

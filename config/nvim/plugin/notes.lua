@@ -107,9 +107,14 @@ _G.motch.notes = notes
 local dir = require("lspconfig").util.root_pattern(".zk")(vim.fn.getcwd())
 if type(dir) == "string" then
   vim.cmd([[command! ZkDaily :term zk daily]])
-  nnoremap("<C-p>", [[:lua motch.notes.find()<cr>]])
-  nnoremap("<space>zt", [[:lua motch.notes.find_by_tag()<cr>]])
-  nnoremap("<space>zb", [[:lua motch.notes.find({linkTo = {vim.fn.expand("%")}})<cr>]])
-  nnoremap("<space>zl", [[:lua motch.notes.find({linkedBy = {vim.fn.expand("%")}})<cr>]])
+  vim.cmd([[command! Notes :lua motch.notes.find()]])
+  vim.cmd([[command! Tags :lua motch.notes.find_by_tag()]])
+  vim.cmd([[command! Backlinks :lua motch.notes.find({linkTo = {vim.fn.expand("%")}})]])
+  vim.cmd([[command! Links :lua motch.notes.find({linkedBy = {vim.fn.expand("%")}})]])
+
+  nnoremap("<C-p>", [[:Notes<cr>]])
+  nnoremap("<space>zt", [[:Tags<cr>]])
+  nnoremap("<space>zl", [[:Links<cr>]])
+  nnoremap("<space>zb", [[:Backlinks<cr>]])
   nnoremap("<space>zd", ":ZkDaily<cr>")
 end
