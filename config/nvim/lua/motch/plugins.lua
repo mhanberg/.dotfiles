@@ -12,6 +12,7 @@ startup({
   function(use, use_rocks)
     use({ "wbthomason/packer.nvim", opt = true })
 
+    use("~/Development/zk.nvim")
     use("elixir-editors/vim-elixir")
     use("APZelos/blamer.nvim")
     use("AndrewRadev/splitjoin.vim")
@@ -47,8 +48,6 @@ startup({
     use("tpope/vim-dispatch")
     use("tpope/vim-eunuch")
     use("tpope/vim-fugitive")
-    use("tpope/vim-liquid")
-    use("tpope/vim-markdown")
     use("tpope/vim-projectionist")
     use("tpope/vim-repeat")
     use("tpope/vim-rsi")

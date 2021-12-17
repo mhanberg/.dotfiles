@@ -81,4 +81,8 @@ alias nvim-plugins="cd ~/.local/share/nvim/site/pack/packer/start"
 
 alias icloud="cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
 
+# zk
+
+alias notes="zk edit --match=README --tag=startup"
+
 source $HOME/.zsh/aliases.local

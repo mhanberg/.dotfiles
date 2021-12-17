@@ -151,7 +151,10 @@ LSP.setup("solargraph", {})
 LSP.setup("omnisharp", {})
 LSP.setup("tsserver", {})
 LSP.setup("vimls", {})
-LSP.setup("zk", {
+
+local zk = require("zk")
+
+zk.setup({
   filetypes = { "markdown", "liquid" },
   on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
@@ -160,9 +163,15 @@ LSP.setup("zk", {
     local opts = { noremap = true, silent = true }
 
     LSP.on_attach(client, bufnr)
+    buf_set_keymap("n", "<C-p>", [[:Notes<cr>]], opts)
+    buf_set_keymap("n", "<space>zt", [[:Tags<cr>]], opts)
+    buf_set_keymap("n", "<space>zl", [[:Links<cr>]], opts)
+    buf_set_keymap("n", "<space>zb", [[:Backlinks<cr>]], opts)
+    buf_set_keymap("n", "<space>zd", ":ZkDaily<cr>", opts)
     buf_set_keymap("v", "<leader>zn", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
-    buf_set_keymap("n", "<leader>zn", ":ZkNew {title = vim.fn.input('Title: ')}<CR>", opts)
-    buf_set_keymap("n", "<leader>zl", ":ZkNew {dir = 'log'}<CR>", opts)
+
+    buf_set_keymap("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts)
+    buf_set_keymap("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts)
   end,
 })
 

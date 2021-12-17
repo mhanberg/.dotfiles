@@ -433,7 +433,7 @@ mouse:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # at once.
-#key_bindings:
+key_bindings:
   # (Windows, Linux, and BSD only)
   #- { key: V,        mods: Control|Shift, action: Paste            }
   #- { key: C,        mods: Control|Shift, action: Copy             }
@@ -461,6 +461,11 @@ mouse:
   #- { key: Q,      mods: Command,         action: Quit             }
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
+
+  - { key: J,        mods: Alt,     chars: "\x1bj" }
+  - { key: K,        mods: Alt,     chars: "\x1bk" }
+  - { key: H,        mods: Alt,     chars: "\x1bh" }
+  - { key: L,        mods: Alt,     chars: "\x1bl" }
 
   #- { key: Paste,                    action: Paste                            }
   #- { key: Copy,                     action: Copy                             }

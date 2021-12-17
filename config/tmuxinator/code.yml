@@ -4,5 +4,5 @@ name: <%= @args[0].gsub("\.", "") %>
 root: <%= `project-dir #{@args[0]}` %>
 
 windows:
-  - editor: v
+  - editor: eval ${TMUXINATOR_STARTUP_COMMAND:-v}
   - shell: 
