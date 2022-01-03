@@ -1,7 +1,5 @@
 local lspconfig = require("lspconfig")
 
-local lsp_installer = require("nvim-lsp-installer")
-
 M = {}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

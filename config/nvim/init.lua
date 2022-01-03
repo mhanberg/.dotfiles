@@ -147,7 +147,7 @@ LSP.setup("efm", {
   },
 })
 LSP.setup("rust_analyzer", {})
-LSP.setup("solargraph", {})
+-- LSP.setup("solargraph", {})
 LSP.setup("omnisharp", {})
 LSP.setup("tsserver", {})
 LSP.setup("vimls", {})
@@ -170,8 +170,10 @@ zk.setup({
     buf_set_keymap("n", "<space>zd", ":ZkDaily<cr>", opts)
     buf_set_keymap("v", "<leader>zn", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
 
-    buf_set_keymap("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts)
-    buf_set_keymap("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts)
+    if vim.fn.expand("%:h") == "dnd" then
+      buf_set_keymap("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts)
+      buf_set_keymap("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts)
+    end
   end,
 })
 
@@ -193,16 +195,6 @@ LSP.setup(
     filetypes = { "elixir", "eelixir", "html", "liquid" },
   }, LSP.default_config("tailwindcss"))
 )
-
--- vim.opt.listchars = {
---   eol = "↴",
--- }
-
--- require("indent_blankline").setup({
---   show_end_of_line = true,
---   buftype_exclude = { "terminal" },
--- })
---
 
 augroup("random", function(autocmd)
   autocmd([[BufWritePost plugins.lua PackerCompile]])

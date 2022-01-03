@@ -34,7 +34,6 @@ startup({
     use("williamboman/nvim-lsp-installer")
     use("kristijanhusak/vim-dadbod-completion")
     use("kristijanhusak/vim-dadbod-ui")
-    use("mattn/emmet-vim")
     use("neovim/nvim-lspconfig")
     use("norcalli/nvim.lua")
     use("nvim-lua/plenary.nvim")

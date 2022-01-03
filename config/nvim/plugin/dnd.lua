@@ -11,7 +11,7 @@ dnd.previous_session = function()
   end
 
   local previous_session_err, previous_session = zk.list({
-    select = { "title", "absPath", "filenameStem" },
+    select = { "title", "path", "filenameStem" },
     excludeHrefs = { current_session.absPath },
     createdBefore = current_session.created,
     tags = { "dnd", "session" },
@@ -41,7 +41,7 @@ dnd.next_session = function()
   end
 
   local params = {
-    select = { "title", "absPath", "filenameStem" },
+    select = { "title", "path", "filenameStem" },
     excludeHrefs = { current_session.absPath },
     createdAfter = current_session.created,
     tags = { "dnd", "session" },
@@ -73,7 +73,7 @@ dnd.move_to = function(direction)
   end
 
   if note ~= nil then
-    vim.cmd("e " .. note.absPath)
+    vim.cmd("e " .. note.path)
   end
 end
 
