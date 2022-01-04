@@ -5,6 +5,7 @@ format = """
 [│](bold white)$all"""
 
 # add_newline = false
+command_timeout = 1000
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]

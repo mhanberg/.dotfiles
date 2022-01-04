@@ -14,6 +14,7 @@ startup({
 
     use("~/Development/zk.nvim")
     use("elixir-editors/vim-elixir")
+    use("ruanyl/vim-gh-line")
     use("APZelos/blamer.nvim")
     use("AndrewRadev/splitjoin.vim")
     use("alvan/vim-closetag")
