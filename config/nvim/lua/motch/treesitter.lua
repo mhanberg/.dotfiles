@@ -1,6 +1,6 @@
 require("nvim-treesitter.configs").setup({
   ensure_installed = "all",
-  ignore_install = {"elixir", "haskell"},
+  ignore_install = {"haskell", "phpdoc"},
   highlight = { enable = true },
   indent = { enable = true },
   playground = {

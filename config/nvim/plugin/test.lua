@@ -20,4 +20,4 @@ vim.g["test#neovim#start_normal"] = 1
 
 vim.g["test#javascript#jest#executable"] = "bin/test"
 
-vim.g["test#strategy"] = "neovim"
+vim.g["test#strategy"] = "dispatch"
