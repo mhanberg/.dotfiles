@@ -20,3 +20,11 @@ To only install the dotfiles, run the `rcup` script.
 ```shell
 $ ~/.dotfiles/rcup
 ```
+
+## Bootstrap
+
+The curl flags are copied from the Homebrew install method. I'm not entirely sure what they do tbh.
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mhanberg/.dotfiles/main/bootstrap.bash)"
+```
