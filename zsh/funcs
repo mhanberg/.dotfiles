@@ -157,3 +157,22 @@ dev() {
 _dev() { _arguments "1: :($(ls $HOME/Development))" }
 
 compdef _dev dev
+
+mixx() {
+  mix $(mix help --names | fzf --delimiter=' ' --preview 'mix help {}' --reverse)
+}
+
+t() {
+  one-thing "🟡In Progress🟡"
+
+  mix test $@
+
+  case $? in
+    0)
+      one-thing "🟢Success🟢"
+      ;;
+    *)
+      one-thing  "🔴Fail🔴"
+      ;;
+  esac
+}
