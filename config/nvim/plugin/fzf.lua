@@ -49,6 +49,29 @@ _G.motch.projects = function()
   })
 end
 
+_G.motch.mix = function(arg)
+  if #arg > 0 then
+    -- :Mix deps.get
+    vim.cmd([[!mix ]] .. arg)
+  else
+    -- :Mix
+    FZF({
+      source = [[mix help --names]],
+      sink = function(selection)
+        vim.cmd([[!mix ]] .. selection)
+      end,
+      window = { width = 0.9, height = 1, yoffset = 0, highlight = "Normal" },
+      options = {
+        "--preview-window",
+        "top",
+        "--preview",
+        "mix help {}",
+      },
+    })
+  end
+end
+
+vim.cmd([[command! -nargs=* Mix lua motch.mix(<q-args>)]])
 _G.motch.swp = function()
   FZF({
     source = [[ls -lrt -d -1 ~/.tmp/swp/*]],
