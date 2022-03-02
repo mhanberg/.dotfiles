@@ -72,6 +72,21 @@ _G.motch.mix = function(arg)
 end
 
 vim.cmd([[command! -nargs=* Mix lua motch.mix(<q-args>)]])
+
+_G.motch.gdiff = function()
+  FZF({
+    source = [[git status --porcelain | awk '{ print $2 }']],
+    window = { width = 0.9, height = 1, yoffset = 0, highlight = "Normal" },
+    options = {
+      "--prompt",
+      "Git Status>",
+      "--preview",
+      "git diff --color {}",
+      "--ansi",
+    },
+  })
+end
+
 _G.motch.swp = function()
   FZF({
     source = [[ls -lrt -d -1 ~/.tmp/swp/*]],

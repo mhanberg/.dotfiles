@@ -183,7 +183,10 @@ nnoremap("<leader>c", ":botright copen 20<cr>")
 nnoremap("<leader>gd", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git diff'<cr>")
 nnoremap("<leader>gs", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git status'<cr>")
 
+nnoremap("<leader>d", ":lua motch.gdiff()<cr>")
 nnoremap("<leader><leader>m", ":Mix<cr>")
+
+
 vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 
 vim.g.dispatch_handlers = { "job" }
