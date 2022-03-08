@@ -1,11 +1,10 @@
 local _ = require("underscore")
 
 vim.env.FZF_DEFAULT_OPTS = "--reverse"
-vim.g.fzf_preview_window = {}
 vim.g.fzf_commands_expect = "enter"
 vim.g.fzf_layout = {
   window = {
-    width = 119,
+    width = 0.9,
     height = 0.6,
     yoffset = 0,
     highlight = "Normal",
@@ -14,6 +13,10 @@ vim.g.fzf_layout = {
 vim.g.fzf_buffers_jump = 1
 
 local fzf_grep = vim.fn["fzf#vim#grep"]
+
+_G.motch.files = function()
+  vim.fn["fzf#vim#files"](".", { window = { width = 119, height = 0.6, yoffset = 0, highlight = "Normal" } })
+end
 
 local live_grep = function(query, fullscreen, dir)
   local command_format =

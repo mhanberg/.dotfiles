@@ -2,6 +2,36 @@ _G.motch = {}
 
 require("motch.plugins")
 
+vim.notify = require("notify")
+
+-- export namespace MessageType {
+-- 	/**
+-- 	 * An error message.
+-- 	 */
+-- 	export const Error = 1;
+-- 	/**
+-- 	 * A warning message.
+-- 	 */
+-- 	export const Warning = 2;
+-- 	/**
+-- 	 * An information message.
+-- 	 */
+-- 	export const Info = 3;
+-- 	/**
+-- 	 * A log message.
+-- 	 */
+-- 	export const Log = 4;
+-- }
+
+-- export type MessageType = 1 | 2 | 3 | 4;
+--
+local n = function(_, result, ...)
+  vim.notify(result.message, vim.lsp.log_levels[result.type])
+end
+
+-- vim.lsp.handlers["window/showMessage"] = n
+-- vim.lsp.handlers["window/logMessage"] = n
+
 _ = require("underscore")
 
 local augroup = require("motch.utils").augroup
@@ -172,7 +202,7 @@ nnoremap("cn", ":cnext<cr>")
 nnoremap("<leader><space>", ":set hls!<cr>")
 nnoremap("<leader>ev", ":vsplit ~/.vimrc<cr>")
 nnoremap("<leader>sv", [[:luafile $MYVIMRC<cr>]])
-nnoremap("<c-p>", ":Files<cr>")
+nnoremap("<c-p>", ":lua motch.files()<cr>")
 nnoremap("<space>vp", ":Files ~/.local/share/nvim/site/pack/packer/start<cr>")
 nnoremap("<space>df", ":lua motch.projects()<cr>")
 nnoremap("gl", ":BLines<cr>")
@@ -223,12 +253,12 @@ local LSP = require("motch.lsp")
 LSP.setup("elixirls", {
   settings = {
     elixirLS = {
-      dialyzerEnabled = false,
+      dialyzerEnabled = true,
       fetchDeps = false,
       enableTestLenses = true,
     },
   },
-  cmd = { vim.fn.stdpath("data") .. "/lsp_servers/elixir/elixir-ls/language_server.sh" },
+  cmd = { vim.fn.stdpath("data") .. "/lsp_servers/elixir/elixir-ls/rel/language_server.sh" },
 })
 LSP.setup("efm", {
   filetypes = {
@@ -264,7 +294,7 @@ zk.setup({
     buf_set_keymap("n", "<space>zt", [[:Tags<cr>]], opts)
     buf_set_keymap("n", "<space>zl", [[:Links<cr>]], opts)
     buf_set_keymap("n", "<space>zb", [[:Backlinks<cr>]], opts)
-    buf_set_keymap("n", "<space>zd", ":ZkDaily<cr>", opts)
+    buf_set_keymap("n", "<space>zd", [[:lua require("zk").new({group = "daily", dir = "journal/daily"})<cr>]], opts)
     buf_set_keymap("v", "<leader>zn", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
 
     if vim.fn.expand("%:h") == "dnd" then
@@ -293,6 +323,8 @@ LSP.setup(
   }, LSP.default_config("tailwindcss"))
 )
 
+-- vim.cmd([[autocmd CursorHold,CursorHoldI * lua require('motch.code_action').code_action_listener()]])
+
 augroup("random", function(autocmd)
   autocmd([[BufWritePost plugins.lua PackerCompile]])
   -- autocmd [[User FloatermOpen execute "normal G" | wincmd p]]
@@ -301,6 +333,7 @@ augroup("random", function(autocmd)
   autocmd([[FileType netrw :lua RemoveNetrwMap()]])
   autocmd([[FileType fzf :tnoremap <buffer> <esc> <C-c>]])
   autocmd([[BufRead,BufNewFile *.zsh-theme set filetype=zsh]])
+  autocmd([[BufRead,BufNewFile *.livemd set filetype=markdown]])
   autocmd([[BufRead,BufNewFile aliases.local set filetype=zsh]])
   autocmd([[BufRead,BufNewFile *.lexs set filetype=elixir]])
   autocmd([[BufRead,BufNewFile *.exs set filetype=elixir]])

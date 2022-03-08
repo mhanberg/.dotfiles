@@ -144,17 +144,17 @@ tp() {
 
 dev() {
   if [ -z "$1" ]; then
-    cd ~/Development
+    cd ~/src
   else
-    if [ -d ~/Development/"$1" ]; then
+    if [ -d "$HOME/src/$1" ]; then
       mux start --suppress-tmux-version-warning=0 code "$1"
     else
-      echo "~/Development/$1 does not exist"
+      echo "$HOME/src/$1 does not exist"
     fi
   fi
 }
 
-_dev() { _arguments "1: :($(ls $HOME/Development))" }
+_dev() { _arguments "1: :($(ls $HOME/src))" }
 
 compdef _dev dev
 

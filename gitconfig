@@ -16,7 +16,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = nvim
-	pager = "delta --plus-color=\"#333B2F\" --minus-color=\"#382F32\" --theme='Forest Night (Italic)'"
+	pager = "delta"
 [include]
   path = ~/.gitconfig.local
 [alias]

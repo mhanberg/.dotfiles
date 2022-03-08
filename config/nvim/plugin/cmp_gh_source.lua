@@ -40,7 +40,7 @@ source.complete = function(self, _, callback)
             gh_item.body = string.gsub(gh_item.body or "", "\r", "")
 
             table.insert(items, {
-              label = string.format("#%s", gh_item.number),
+              label = string.format("#%s %s", gh_item.number, gh_item.title),
               documentation = {
                 kind = "markdown",
                 value = string.format("# %s\n\n%s", gh_item.title, gh_item.body),

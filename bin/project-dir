@@ -6,14 +6,14 @@ case "$1" in
     ;;
 
   notes)
-    echo "$ICLOUD/notes/zk"
+    echo "$ICLOUD/notes/personal"
     ;;
 
   work-notes)
-    echo "$ICLOUD/stord/notes"
+    echo "$ICLOUD/notes/work"
     ;;
-  *)
 
-    echo "$HOME/Development/$1"
+  *)
+    echo "$HOME/src/$1"
     ;;
 esac

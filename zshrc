@@ -27,10 +27,6 @@ export ZPLUG_PROTOCOL="SSH"
 export ZPLUG_HOME="$brew_prefix"/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-if [ -f "$brew_prefix"/opt/asdf/asdf.sh ]; then
-  . "$brew_prefix"/opt/asdf/asdf.sh
-fi
-
 if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc ]; then
   source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 fi
@@ -105,6 +101,10 @@ source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias luamake=/Users/mitchell/.cache/nvim/nlua/sumneko_lua/lua-language-server/3rd/luamake/luamake
+
+if [ -f "$brew_prefix"/opt/asdf/asdf.sh ]; then
+  . "$brew_prefix"/opt/asdf/asdf.sh
+fi
 
 eval "$(starship init zsh)"
 

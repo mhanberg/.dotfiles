@@ -20,9 +20,10 @@ M.on_attach = function(_, bufnr)
   map("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
   -- map("n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", map_opts)
   map("n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
-  map("n", "gr", "<cmd>lua require'telescope.builtin'.lsp_references{}<cr>", map_opts)
-  map("n", "g0", "<cmd>lua require'telescope.builtin'.lsp_document_symbols{}<cr>", map_opts)
-  map("n", "gW", "<cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<cr>", map_opts)
+  map("n", "gr", ":References<cr>", map_opts)
+  map("n", "g0", ":DocumentSymbols<cr>", map_opts)
+  map("n", "gW", ":WorkspaceSymbols<cr>", map_opts)
+  map("n", "<leader>d", ":Diagnostics<cr>", map_opts)
 
   vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
   vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
@@ -89,7 +90,7 @@ M.setup = function(name, opts)
 end
 
 if
-  vim.fn.executable(vim.fn.expand("~/.cache/nvim/nlua/sumneko_lua/lua-language-server/bin/OSX/lua-language-server")) > 0
+  vim.fn.executable(vim.fn.expand("~/.cache/nvim/nlua/sumneko_lua/lua-language-server/bin/lua-language-server")) > 0
 then
   require("nlua.lsp.nvim").setup(require("lspconfig"), {
     on_attach = M.on_attach,
@@ -101,7 +102,7 @@ end
 vim.lsp.set_log_level(0)
 
 M.default_config = function(name)
-  return require("lspconfig.server_configurations."..name).default_config
+  return require("lspconfig.server_configurations." .. name).default_config
 end
 
 return M

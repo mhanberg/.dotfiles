@@ -12,7 +12,7 @@ startup({
   function(use, use_rocks)
     use({ "wbthomason/packer.nvim", opt = true })
 
-    use("~/Development/zk.nvim")
+    use("~/src/zk.nvim")
     use("elixir-editors/vim-elixir")
     use("ruanyl/vim-gh-line")
     use("APZelos/blamer.nvim")
@@ -62,6 +62,7 @@ startup({
         vim.fn["fzf#install"]()
       end,
     })
+    use({ "gfanto/fzf-lsp.nvim" })
     use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "mg979/vim-visual-multi", branch = "master" })

@@ -2,11 +2,6 @@
 
 projects=$(fd --strip-cwd-prefix --base-directory "$HOME/src" --max-depth 1 .)
 
-projects="$projects
-.dotfiles
-work-notes
-notes"
-
 echo "$projects" \
   | fzf --reverse --prompt='> ' \
   | xargs tmuxinator start code
