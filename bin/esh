@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+[ "$1" ] || exit 1
+
+iex --sname console --cookie monster --remsh "$1"

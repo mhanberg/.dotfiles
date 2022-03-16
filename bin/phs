@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+[ "$1" ] || exit 1
+
+elixir --sname "$1" --cookie monster -S mix phx.server
