@@ -51,7 +51,6 @@ startup({
     use("tpope/vim-projectionist")
     use("tpope/vim-repeat")
     use("tpope/vim-rsi")
-    use("tpope/vim-sensible")
     use("tpope/vim-surround")
     use("tpope/vim-vinegar")
     use("vim-test/vim-test")
@@ -78,6 +77,9 @@ startup({
     use({ "rrethy/vim-hexokinase", run = "make hexokinase" })
 
     use("lukas-reineke/cmp-rg")
+
+    use({ "kristijanhusak/vim-carbon-now-sh" })
+    use({ "junegunn/vim-easy-align" })
 
     use_rocks({ "underscore" })
     use_rocks({ "ansicolors" })

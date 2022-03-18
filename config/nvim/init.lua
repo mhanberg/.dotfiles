@@ -58,6 +58,19 @@ FZF = vim.fn["FzfWrapHelper"]
 vim.env.WALLABY_DRIVER = "chrome"
 
 NVIM = require("nvim")
+p = NVIM.print
+opt.laststatus = 3
+
+opt.fillchars = {
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┫",
+  vertright = "┣",
+  verthoriz = "╋",
+}
+
 opt.colorcolumn = "99999"
 opt.guifont = "JetBrains Mono"
 opt.foldmethod = "syntax"
@@ -215,7 +228,6 @@ nnoremap("<leader>gs", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git sta
 
 nnoremap("<leader>d", ":lua motch.gdiff()<cr>")
 nnoremap("<leader><leader>m", ":Mix<cr>")
-
 
 vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 
