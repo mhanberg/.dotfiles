@@ -81,6 +81,8 @@ startup({
     use({ "kristijanhusak/vim-carbon-now-sh" })
     use({ "junegunn/vim-easy-align" })
 
+    use({ "simrat39/symbols-outline.nvim" })
+
     use_rocks({ "underscore" })
     use_rocks({ "ansicolors" })
   end,

@@ -65,6 +65,12 @@ alias mts="WALLABY_DRIVER=selenium mix test"
 ## elixir
 alias mt="mix test"
 
+function mix-test-watch() {
+  fswatch -o . | mix test --stale --listen-on-stdin
+}
+
+alias mtw="mix-test-watch"
+
 # tt
 standup() {
   echo '[todo]\n[work]\n[review]\n[meeting]\n[other]' | \

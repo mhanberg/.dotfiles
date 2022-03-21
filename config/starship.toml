@@ -39,6 +39,9 @@ symbol = " "
 read_only = " "
 style = "bold blue"
 
+[directory.substitutions]
+"com~apple~CloudDocs" = "/iCloud"
+
 [docker_context]
 symbol = " "
 

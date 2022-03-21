@@ -1,9 +1,7 @@
-local nnoremap = require("motch.utils").nnoremap
-
-nnoremap("<leader>n", ":TestNearest<cr>")
-nnoremap("<leader>f", ":TestFile<cr>")
-nnoremap("<leader>s", ":TestSuite<cr>")
-nnoremap("<leader>l", ":TestLast<cr>")
+vim.keymap.set("n","<leader>n", ":TestNearest<cr>")
+vim.keymap.set("n","<leader>f", ":TestFile<cr>")
+vim.keymap.set("n","<leader>s", ":TestSuite<cr>")
+vim.keymap.set("n","<leader>l", ":TestLast<cr>")
 
 vim.cmd([[
 function! MotchStrategy(cmd) abort
