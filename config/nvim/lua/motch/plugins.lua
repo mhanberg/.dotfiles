@@ -83,6 +83,10 @@ startup({
 
     use({ "simrat39/symbols-outline.nvim" })
 
+
+    use({ "~/src/elixir.nvim" })
+    use({ "mfussenegger/nvim-dap" })
+
     use_rocks({ "underscore" })
     use_rocks({ "ansicolors" })
   end,

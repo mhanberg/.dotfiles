@@ -2,4 +2,8 @@
 
 [ "$1" ] || exit 1
 
-elixir --sname "$1" --cookie monster -S mix phx.server
+name="$1"
+
+shift
+
+elixir --sname "$name" --cookie monster -S mix phx.server "$@"
