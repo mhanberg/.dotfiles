@@ -232,6 +232,16 @@ vim.g.markdown_syntax_conceal = 0
 
 vim.g.Hexokinase_optInPatterns = { "full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla" }
 
+local old_handler = vim.lsp.handlers["window/logMessage"]
+
+vim.lsp.handlers["window/logMessage"] = function(err, result, ...)
+  if result.type == 3 or result.type == 4 then
+    print(result.message)
+  end
+
+  old_handler(err, result, ...)
+end
+
 local LSP = require("motch.lsp")
 
 local elixirls = require("elixir")
