@@ -16,8 +16,10 @@ local vim_notify_notfier = function(exit)
 end
 local terminal_notifier_notfier = function(cmd, exit)
   if exit == 0 then
+    print("Success!")
     system(string.format([[terminal-notifier -title "Neovim" -subtitle "%s" -message "Success!"]], cmd))
   else
+    print("Failure!")
     system(string.format([[terminal-notifier -title "Neovim" -subtitle "%s" -message "Fail!"]], cmd))
   end
 end
@@ -46,6 +48,8 @@ local function test(cmd)
       end
     end,
   })
+
+  print(cmd)
 
   vim.cmd([[normal! G]])
   vim.cmd([[wincmd p]])
