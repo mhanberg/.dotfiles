@@ -13,7 +13,6 @@ startup({
     use({ "wbthomason/packer.nvim", opt = true })
 
     use("~/src/zk.nvim")
-    use("elixir-editors/vim-elixir")
     use("ruanyl/vim-gh-line")
     use("APZelos/blamer.nvim")
     use("AndrewRadev/splitjoin.vim")

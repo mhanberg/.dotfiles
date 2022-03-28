@@ -9,6 +9,15 @@ p = function(thing)
   return thing
 end
 
+if pcall(require, "plenary") then
+  RELOAD = require("plenary.reload").reload_module
+
+  R = function(name)
+    RELOAD(name)
+    return require(name)
+  end
+end
+
 vim.notify = require("notify")
 
 -- vim.lsp.handlers["window/logMessage"] = n
@@ -386,3 +395,7 @@ autocmd({ "BufRead", "BufNewFile" }, { group = markdown, pattern = "*.md", comma
 autocmd({ "BufRead", "BufNewFile" }, { group = markdown, pattern = "*.md", command = "setlocal linebreak" })
 
 vim.cmd([[let g:test#javascript#jest#file_pattern = '\v(.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']])
+
+if vim.fn.filereadable(".init.local.lua") == 1 then
+  vim.cmd([[source .init.local.lua]])
+end

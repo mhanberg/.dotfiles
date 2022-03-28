@@ -5,3 +5,6 @@
 .elixir_ls
 .envrc
 .projections.json
+.init.local.lua
+
+.elixir.nvim
