@@ -39,7 +39,7 @@ end
 vim.cmd([[command! -nargs=* -bang LocalProjectSearch lua motch.local_project_search(<q-args>, <bang>0)]])
 
 _G.motch.global_project_search = function(query, fullscreen)
-  live_grep(query, fullscreen, "~/Development")
+  live_grep(query, fullscreen, "~/src")
 end
 
 _G.motch.projects = function()
@@ -53,15 +53,16 @@ _G.motch.projects = function()
 end
 
 _G.motch.mix = function(arg)
+  local winnr = vim.fn.winnr()
   if #arg > 0 then
     -- :Mix deps.get
-    vim.cmd([[!mix ]] .. arg)
+    require("motch.term").open([[mix ]] .. arg)
   else
     -- :Mix
     FZF({
       source = [[mix help --names]],
       sink = function(selection)
-        vim.cmd([[!mix ]] .. selection)
+        require("motch.term").open([[mix ]] .. selection, winnr)
       end,
       window = { width = 0.9, height = 1, yoffset = 0, highlight = "Normal" },
       options = {
