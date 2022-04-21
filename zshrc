@@ -102,8 +102,8 @@ source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 
 alias luamake=/Users/mitchell/.cache/nvim/nlua/sumneko_lua/lua-language-server/3rd/luamake/luamake
 
-if [ -f "$brew_prefix"/opt/asdf/asdf.sh ]; then
-  . "$brew_prefix"/opt/asdf/asdf.sh
+if [ -f "$brew_prefix"/opt/asdf/libexec/asdf.sh ]; then
+  . "$brew_prefix"/opt/asdf/libexec/asdf.sh
 fi
 
 eval "$(starship init zsh)"

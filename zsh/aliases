@@ -39,6 +39,7 @@ alias lsf='ls | fzf-tmux -p -- --reverse'
 alias mxi='mix'
 alias localnvim="/Users/mitchell/localnvim/bin/nvim"
 alias shfmt="shfmt -i 2"
+alias ls="exa"
 
 alias dadbod="nvim -c ':DBUI'"
 
