@@ -20,7 +20,8 @@ M.on_attach = function(_, bufnr)
   vim.keymap.set("n", "gr", ":References<cr>", map_opts)
   vim.keymap.set("n", "g0", ":DocumentSymbols<cr>", map_opts)
   vim.keymap.set("n", "gW", ":WorkspaceSymbols<cr>", map_opts)
-  vim.keymap.set("n", "<leader>d", ":Diagnostics<cr>", map_opts)
+  vim.keymap.set("n", "<leader>dd", ":Diagnostics<cr>", map_opts)
+  vim.keymap.set("n", "<leader>da", ":DiagnosticsAll<cr>", map_opts)
 
   vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
   vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
@@ -52,7 +53,7 @@ cmp.setup({
     { name = "spell", keyword_length = 5 },
     -- { name = "rg", keyword_length = 3 },
     -- { name = "buffer", keyword_length = 5 },
-    { name = "emoji" },
+    -- { name = "emoji" },
     { name = "path" },
     { name = "gh_issues" },
   },
@@ -64,7 +65,7 @@ cmp.setup({
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
-        emoji = "[Emoji]",
+        -- emoji = "[Emoji]",
         spell = "[Spell]",
         path = "[Path]",
         -- rg = "[Rg]",

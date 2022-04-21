@@ -257,9 +257,10 @@ local elixirls = require("elixir")
 
 elixirls.setup({
   -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
-  cmd = {"/Users/mitchell/src/elixir-ls/rel/language_server.sh"},
+  repo = "mhanberg/elixir-ls",
+  branch = "mh/all-workspace-symbols",
   settings = elixirls.settings({
-    mixEnv = "test",
+    dialyzerEnabled = false,
   }),
   log_level = vim.lsp.protocol.MessageType.Log,
   message_level = vim.lsp.protocol.MessageType.Log,
@@ -291,7 +292,7 @@ LSP.setup("rust_analyzer", {})
 -- LSP.setup("solargraph", {})
 LSP.setup("omnisharp", {})
 LSP.setup("tsserver", {})
-LSP.setup("vimls", {})
+-- LSP.setup("vimls", {})
 LSP.setup("bashls", {})
 
 local zk = require("zk")

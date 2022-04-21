@@ -13,6 +13,7 @@ startup({
     use({ "wbthomason/packer.nvim", opt = true })
 
     use("~/src/zk.nvim")
+    -- use("elixir-editors/vim-elixir")
     use("ruanyl/vim-gh-line")
     use("APZelos/blamer.nvim")
     use("AndrewRadev/splitjoin.vim")
@@ -64,7 +65,7 @@ startup({
     use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "mg979/vim-visual-multi", branch = "master" })
-    use({ "mhanberg/thicc_forest", requires = { "rktjmp/lush.nvim" } })
+    use({ "~/src/thicc_forest", requires = { "rktjmp/lush.nvim" } })
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
     use({
       "nvim-treesitter/nvim-treesitter",
@@ -73,7 +74,6 @@ startup({
       end,
     })
     use({ "nvim-treesitter/playground" })
-    use({ "rrethy/vim-hexokinase", run = "make hexokinase" })
 
     use("lukas-reineke/cmp-rg")
 
