@@ -1,12 +1,5 @@
 #!/usr/bin/env zsh
 
-g() {
-  if [[ $# > 0 ]]; then
-    git $@
-  else
-    git status
-  fi
-}
 compdef g=git
 
 ga() { git add "$@"; }

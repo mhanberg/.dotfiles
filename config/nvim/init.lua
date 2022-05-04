@@ -233,13 +233,13 @@ opt.grepformat = "%f:%l:%c:%m"
 
 vim.g.jsx_ext_required = 0
 
-vim.keymap.set("n", "<leader>gy", ":Goyo<cr>")
+vim.keymap.set("n", "<leader>gy", ":TZAtaraxis<cr>")
 vim.g.goyo_width = 120
 vim.g.goyo_height = 100
 
 vim.g.markdown_syntax_conceal = 0
 
-vim.g.Hexokinase_optInPatterns = { "full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla" }
+-- vim.g.Hexokinase_optInPatterns = { "full_hex", "triple_hex", "rgb", "rgba", "hsl", "hsla" }
 
 local old_handler = vim.lsp.handlers["window/logMessage"]
 

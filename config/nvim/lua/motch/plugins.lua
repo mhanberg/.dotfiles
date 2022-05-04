@@ -31,7 +31,7 @@ startup({
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/vim-vsnip")
     use("junegunn/fzf.vim")
-    use("junegunn/goyo.vim")
+    -- use("junegunn/goyo.vim")
     use("williamboman/nvim-lsp-installer")
     use("kristijanhusak/vim-dadbod-completion")
     use("kristijanhusak/vim-dadbod-ui")
@@ -82,9 +82,10 @@ startup({
 
     use({ "simrat39/symbols-outline.nvim" })
 
-
     use({ "~/src/elixir.nvim" })
     use({ "mfussenegger/nvim-dap" })
+
+    use("Pocco81/TrueZen.nvim")
 
     use_rocks({ "underscore" })
     use_rocks({ "ansicolors" })
