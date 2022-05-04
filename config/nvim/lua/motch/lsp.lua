@@ -87,17 +87,12 @@ M.setup = function(name, opts)
   end
 end
 
-if
-  vim.fn.executable(
-    vim.fn.expand("~/.cache/nvim/nlua/sumneko_lua/lua-language-server/bin/lua-language-server")
-  ) > 0
-then
-  require("nlua.lsp.nvim").setup(require("lspconfig"), {
-    on_attach = M.on_attach,
-    globals = { "vim", "hs" },
-    library = { [vim.fn.expand("~/.hammerspoon/Spoons/EmmyLua.spoon/annotations")] = true },
-  })
-end
+require("nlua.lsp.nvim").setup(require("lspconfig"), {
+  cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/main.lua") },
+  on_attach = M.on_attach,
+  globals = { "vim", "hs" },
+  library = { [vim.fn.expand("~/.hammerspoon/Spoons/EmmyLua.spoon/annotations")] = true },
+})
 
 vim.lsp.set_log_level(2)
 
