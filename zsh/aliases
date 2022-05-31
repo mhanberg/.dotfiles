@@ -64,7 +64,18 @@ alias mtc="WALLABY_DRIVER=chrome mix test"
 alias mts="WALLABY_DRIVER=selenium mix test"
 
 ## elixir
-alias mt="mix test"
+
+function mt() {
+  if [ -z $1 ]; then
+    mix test \
+      && terminal-notifier -title "mix test" -subtitle "Test Suite" -message "Success!" \
+      || terminal-notifier -title "mix test" -subtitle "Test Suite" -message "Failure!"
+  else
+    mix test "$1" \
+      && terminal-notifier -title "mix test" -subtitle "$1" -message "Success!" \
+      || terminal-notifier -title "mix test" -subtitle "$1" -message "Failure!"
+  fi
+}
 
 function mix-test-watch() {
   fswatch -o . | mix test --stale --listen-on-stdin

@@ -7,4 +7,6 @@
 .projections.json
 .init.local.lua
 
+motch-tmp
+
 .elixir.nvim

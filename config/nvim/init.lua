@@ -46,6 +46,7 @@ FZF = vim.fn["FzfWrapHelper"]
 vim.env.WALLABY_DRIVER = "chrome"
 
 opt.laststatus = 3
+opt.winbar = "%f %m"
 
 opt.fillchars = {
   horiz = "━",
@@ -57,7 +58,7 @@ opt.fillchars = {
   verthoriz = "╋",
 }
 
-opt.colorcolumn = "99999"
+opt.colorcolumn = "999"
 opt.guifont = "JetBrains Mono"
 opt.foldmethod = "syntax"
 opt.foldlevelstart = 99
