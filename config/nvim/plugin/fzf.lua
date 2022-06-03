@@ -44,7 +44,7 @@ end
 
 _G.motch.projects = function()
   FZF({
-    source = [[fd --type d --hidden --glob ".git" /Users/mitchellhanberg/Development --exec echo {} | rev | cut -c 6- - | rev]],
+    source = [[fd --type d --hidden --glob ".git" /Users/mitchellhanberg/src --exec echo {} | rev | cut -c 6- - | rev]],
     sink = function(selection)
       vim.api.nvim_set_current_dir(selection)
       vim.cmd([[Files]])

@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-projects=$(fd --strip-cwd-prefix --base-directory "$HOME/src" --max-depth 1 .)
+projects=$(fd --strip-cwd-prefix --path-separator="" --base-directory "$HOME/src" --max-depth 1 .)
 
 projects="$projects
 .dotfiles
 work-notes
+elixir-from-scratch
 notes"
 
 echo "$projects" \

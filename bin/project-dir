@@ -9,6 +9,10 @@ case "$1" in
     echo "$ICLOUD/notes/personal"
     ;;
 
+  elixir-from-scratch)
+    echo "$ICLOUD/notes/elixir-from-scratch"
+    ;;
+
   work-notes)
     echo "$ICLOUD/notes/work"
     ;;
