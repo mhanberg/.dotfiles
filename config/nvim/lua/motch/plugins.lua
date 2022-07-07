@@ -73,6 +73,8 @@ startup({
         vim.cmd([[TSUpdate]])
       end,
     })
+    use({ "nvim-treesitter/nvim-treesitter-textobjects" })
+    use({ "nvim-treesitter/nvim-treesitter-context" })
     use({ "nvim-treesitter/playground" })
 
     use("lukas-reineke/cmp-rg")
