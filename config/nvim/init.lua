@@ -280,6 +280,7 @@ elixirls.setup({
   end,
 })
 
+LSP.setup("dartls", {})
 LSP.setup("efm", {
   filetypes = {
     "elixir",
