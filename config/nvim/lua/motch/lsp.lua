@@ -19,7 +19,7 @@ M.on_attach = function(_, bufnr)
   vim.keymap.set("n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
   vim.keymap.set("n", "gr", ":References<cr>", map_opts)
   vim.keymap.set("n", "g0", ":DocumentSymbols<cr>", map_opts)
-  vim.keymap.set("n", "gW", ":WorkspaceSymbols<cr>", map_opts)
+  vim.keymap.set("n", "g7", ":WorkspaceSymbols<cr>", map_opts)
   vim.keymap.set("n", "<leader>dd", ":Diagnostics<cr>", map_opts)
   vim.keymap.set("n", "<leader>da", ":DiagnosticsAll<cr>", map_opts)
 
