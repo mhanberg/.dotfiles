@@ -28,10 +28,9 @@ export ZPLUG_HOME="$brew_prefix"/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 function maybe_touch() {
-
-if [ ! -f "$1" ]; then
-  touch "$1"
-fi
+  if [ ! -f "$1" ]; then
+    touch "$1"
+  fi
 }
 
 if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc ]; then
