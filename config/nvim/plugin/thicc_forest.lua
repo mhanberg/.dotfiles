@@ -1,1 +1,1 @@
-vim.cmd [[color thicc_forest]]
+vim.cmd([[color thicc_forest]])

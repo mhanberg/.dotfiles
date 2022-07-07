@@ -57,11 +57,10 @@ startup({
     use({ "NTBBloodbath/rest.nvim", requires = { "nvim-lua/plenary.nvim" } })
     use({
       "junegunn/fzf",
-      run = function()
-        vim.fn["fzf#install"]()
-      end,
+      run = function() vim.fn["fzf#install"]() end,
     })
-    use({ "gfanto/fzf-lsp.nvim" })
+    -- use({ "gfanto/fzf-lsp.nvim" })
+    use({ "/Users/mitchell/src/fzf-lsp.nvim" })
     use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "mg979/vim-visual-multi", branch = "master" })
@@ -69,9 +68,7 @@ startup({
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
     use({
       "nvim-treesitter/nvim-treesitter",
-      run = function()
-        vim.cmd([[TSUpdate]])
-      end,
+      run = function() vim.cmd([[TSUpdate]]) end,
     })
     use({ "nvim-treesitter/nvim-treesitter-textobjects" })
     use({ "nvim-treesitter/nvim-treesitter-context" })
@@ -95,9 +92,7 @@ startup({
   config = {
     max_jobs = 30,
     display = {
-      open_fn = function()
-        return require("packer.util").float({ border = "single" })
-      end,
+      open_fn = function() return require("packer.util").float({ border = "single" }) end,
     },
   },
 })

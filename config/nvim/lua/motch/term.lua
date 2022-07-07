@@ -17,9 +17,7 @@ function M.open(cmd, winnr, notifier)
 
   vim.fn.termopen(cmd, {
     on_exit = function(_jobid, exit_code, _event)
-      if notifier then
-        notifier(cmd, exit_code)
-      end
+      if notifier then notifier(cmd, exit_code) end
 
       if exit_code == 0 then
         vim.api.nvim_buf_delete(term_buf_id, { force = true })

@@ -27,9 +27,7 @@ _ = require("underscore")
 local opt = vim.opt
 
 function RemoveNetrwMap()
-  if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
-    vim.cmd([[unmap <buffer> <C-l>]])
-  end
+  if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then vim.cmd([[unmap <buffer> <C-l>]]) end
 end
 
 vim.api.nvim_exec(
@@ -246,9 +244,7 @@ vim.g.markdown_syntax_conceal = 0
 local old_handler = vim.lsp.handlers["window/logMessage"]
 
 vim.lsp.handlers["window/logMessage"] = function(err, result, ...)
-  if result.type == 3 or result.type == 4 then
-    print(result.message)
-  end
+  if result.type == 3 or result.type == 4 then print(result.message) end
 
   old_handler(err, result, ...)
 end
@@ -371,17 +367,13 @@ autocmd("VimResized", { group = random, pattern = "*", command = "wincmd =" })
 autocmd("GUIEnter", {
   group = random,
   pattern = "*",
-  callback = function()
-    vim.opt.visualbell = "t_vb="
-  end,
+  callback = function() vim.opt.visualbell = "t_vb=" end,
 })
 autocmd("FileType", { group = random, pattern = "netrw", callback = RemoveNetrwMap })
 autocmd("FileType", {
   group = random,
   pattern = "fzf",
-  callback = function()
-    vim.keymap.set("t", "<esc>", "<C-c>", { buffer = 0 })
-  end,
+  callback = function() vim.keymap.set("t", "<esc>", "<C-c>", { buffer = 0 }) end,
 })
 autocmd(
   { "BufRead", "BufNewFile" },
@@ -402,6 +394,4 @@ autocmd({ "BufRead", "BufNewFile" }, { group = markdown, pattern = "*.md", comma
 
 vim.cmd([[let g:test#javascript#jest#file_pattern = '\v(.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']])
 
-if vim.fn.filereadable(".init.local.lua") == 1 then
-  vim.cmd([[source .init.local.lua]])
-end
+if vim.fn.filereadable(".init.local.lua") == 1 then vim.cmd([[source .init.local.lua]]) end

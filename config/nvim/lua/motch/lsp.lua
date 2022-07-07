@@ -122,8 +122,7 @@ vim.lsp.handlers["window/showMessage"] = function(_, result, ...)
   end
 end
 
-M.default_config = function(name)
-  return require("lspconfig.server_configurations." .. name).default_config
-end
+M.default_config =
+  function(name) return require("lspconfig.server_configurations." .. name).default_config end
 
 return M

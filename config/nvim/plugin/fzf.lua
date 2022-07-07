@@ -12,6 +12,17 @@ vim.g.fzf_layout = {
 }
 vim.g.fzf_buffers_jump = 1
 
+vim.g.fzf_lsp_width = 70
+vim.g.fzf_lsp_layout = {
+  window = {
+    width = 0.95,
+    height = 0.95,
+    yoffset = 0,
+    highlight = "Normal",
+  },
+}
+vim.g.fzf_lsp_preview_window = { "right:50%" }
+
 local fzf_grep = vim.fn["fzf#vim#grep"]
 
 _G.motch.files = function()
@@ -32,15 +43,11 @@ local live_grep = function(query, fullscreen, dir)
   fzf_grep(initial_command, 1, vim.fn["fzf#vim#with_preview"](spec, "right"), fullscreen)
 end
 
-_G.motch.local_project_search = function(query, fullscreen)
-  live_grep(query, fullscreen)
-end
+_G.motch.local_project_search = function(query, fullscreen) live_grep(query, fullscreen) end
 
 vim.cmd([[command! -nargs=* -bang LocalProjectSearch lua motch.local_project_search(<q-args>, <bang>0)]])
 
-_G.motch.global_project_search = function(query, fullscreen)
-  live_grep(query, fullscreen, "~/src")
-end
+_G.motch.global_project_search = function(query, fullscreen) live_grep(query, fullscreen, "~/src") end
 
 _G.motch.projects = function()
   FZF({
@@ -61,9 +68,7 @@ _G.motch.mix = function(arg)
     -- :Mix
     FZF({
       source = [[mix help --names]],
-      sink = function(selection)
-        require("motch.term").open([[mix ]] .. selection, winnr)
-      end,
+      sink = function(selection) require("motch.term").open([[mix ]] .. selection, winnr) end,
       window = { width = 0.9, height = 1, yoffset = 0, highlight = "Normal" },
       options = {
         "--preview-window",
@@ -98,9 +103,7 @@ _G.motch.swp = function()
       local action = selection[1]
       local file = selection[2]
 
-      if action == "ctrl-d" then
-        vim.fn.system([[rm ]] .. file)
-      end
+      if action == "ctrl-d" then vim.fn.system([[rm ]] .. file) end
     end,
     options = { "--expect", "ctrl-d" },
   })
