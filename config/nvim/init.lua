@@ -45,6 +45,7 @@ FZF = vim.fn["FzfWrapHelper"]
 
 vim.env.WALLABY_DRIVER = "chrome"
 
+opt.scrolloff = 4
 opt.laststatus = 3
 opt.winbar = "%f %m"
 
