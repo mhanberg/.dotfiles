@@ -384,6 +384,22 @@ autocmd(
   { group = random, pattern = "aliases.local", command = "set filetype=zsh" }
 )
 autocmd({ "BufRead", "BufNewFile" }, { group = random, pattern = "*.lexs", command = "set filetype=elixir" })
+autocmd({ "FileType" }, {
+  group = random,
+  pattern = {"markdown"},
+  callback = function()
+    file = vim.fs.find({ ".git" }, { upward = true })[1]
+
+    if file then
+      vim.notify("starting spell lsp")
+      vim.lsp.start({
+        name = "spels",
+        cmd = { "elixir", "--no-halt", "/Users/mitchell/src/gen_lsp/examples/spell.exs" },
+        root_dir = vim.fs.dirname(file),
+      })
+    end
+  end,
+})
 
 local clojure = augroup("clojure", { clear = true })
 autocmd("BufWritePost", { group = clojure, pattern = "*.clj", command = "silent Require" })
