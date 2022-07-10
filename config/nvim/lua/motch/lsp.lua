@@ -72,7 +72,7 @@ cmp.setup({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
-        nvim_lua = "[Lua]",
+        nvim_lua = "[Vim]",
         -- emoji = "[Emoji]",
         spell = "[Spell]",
         path = "[Path]",
