@@ -59,8 +59,8 @@ startup({
       "junegunn/fzf",
       run = function() vim.fn["fzf#install"]() end,
     })
-    -- use({ "gfanto/fzf-lsp.nvim" })
-    use({ "/Users/mitchell/src/fzf-lsp.nvim" })
+    use({ "gfanto/fzf-lsp.nvim" })
+    -- use({ "/Users/mitchell/src/fzf-lsp.nvim" })
     use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "mg979/vim-visual-multi", branch = "master" })
