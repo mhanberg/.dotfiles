@@ -45,7 +45,7 @@ vim.env.WALLABY_DRIVER = "chrome"
 
 opt.scrolloff = 4
 opt.laststatus = 3
-opt.winbar = "%f %m"
+opt.winbar = [[%f %m %{%v:lua.require("nvim-navic").get_location()%}]]
 
 opt.fillchars = {
   horiz = "━",

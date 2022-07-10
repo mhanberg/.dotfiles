@@ -86,6 +86,11 @@ startup({
 
     use("Pocco81/TrueZen.nvim")
 
+    use({
+      "SmiteshP/nvim-navic",
+      requires = "neovim/nvim-lspconfig",
+    })
+
     use_rocks({ "underscore" })
     use_rocks({ "ansicolors" })
   end,

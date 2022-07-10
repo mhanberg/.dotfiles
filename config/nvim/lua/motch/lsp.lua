@@ -7,7 +7,13 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local has_run = {}
 
-M.on_attach = function(_, bufnr)
+local navic = require("nvim-navic")
+
+navic.setup({
+  depth_limit = 5,
+})
+
+M.on_attach = function(client, bufnr)
   local map_opts = { buffer = bufnr, silent = true }
 
   vim.keymap.set("n", "df", "<cmd>lua vim.lsp.buf.format()<cr>", map_opts)
@@ -27,6 +33,8 @@ M.on_attach = function(_, bufnr)
   vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
 
   require("cmp_nvim_lsp").update_capabilities(capabilities)
+
+  if client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
 end
 
 local cmp = require("cmp")
