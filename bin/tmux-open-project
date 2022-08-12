@@ -9,5 +9,5 @@ elixir-from-scratch
 notes"
 
 echo "$projects" \
-  | fzf --reverse --prompt='> ' \
+  | fzf --reverse "$(fzf-default-opts)" --border=rounded --prompt='> ' \
   | xargs tmuxinator start code

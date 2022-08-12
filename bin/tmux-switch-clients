@@ -2,5 +2,5 @@
 
 tmux list-sessions -F "#S" \
   | grep -v "^$(tmux display-message -p '#S')\$" \
-  | fzf --reverse --prompt='Go to> ' \
+  | fzf --reverse "$(fzf-default-opts)" --border=rounded --prompt='Go to> ' \
   | xargs tmux switch-client -t

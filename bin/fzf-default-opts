@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "--color=fg:#d8caac,bg:#273433,hl:#a7c080,fg+:#d8caac,bg+:#394C4A,hl+:#87c095,info:#87c095,prompt:#e39b7b,pointer:#83b6af,marker:#d9bb80,spinner:#d9bb80,header:#868d80,border:black"
