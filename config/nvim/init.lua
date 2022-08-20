@@ -204,8 +204,6 @@ vim.keymap.set("n", "<leader>a", ":LocalProjectSearch<cr>")
 vim.keymap.set("n", "<space>a", ":GlobalProjectSearch<cr>")
 vim.keymap.set("n", "<leader>gr", ":grep<cr>")
 vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>")
-vim.keymap.set("n", "<leader>gd", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git diff'<cr>")
-vim.keymap.set("n", "<leader>gs", ":silent !tmux popup -K -w '90\\%' -h '90\\%' -R 'git status'<cr>")
 
 vim.keymap.set("n", "<leader>d", ":lua motch.gdiff()<cr>")
 vim.keymap.set("n", "<leader><leader>m", ":Mix<cr>")
@@ -213,9 +211,6 @@ vim.keymap.set("n", "<leader><leader>m", ":Mix<cr>")
 vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 
 vim.g.dispatch_handlers = { "job" }
-
--- ctags
-vim.keymap.set("n", "<leader>ct", ":!ctags -R .<cr>")
 
 opt.completeopt = { "menu", "menuone", "noselect" }
 
