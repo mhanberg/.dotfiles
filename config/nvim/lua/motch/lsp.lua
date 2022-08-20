@@ -9,9 +9,9 @@ local has_run = {}
 
 local navic = require("nvim-navic")
 
-navic.setup({
+navic.setup {
   depth_limit = 5,
-})
+}
 
 M.on_attach = function(client, bufnr)
   local map_opts = { buffer = bufnr, silent = true }
@@ -34,7 +34,9 @@ M.on_attach = function(client, bufnr)
 
   require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-  if client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 end
 
 local cmp = require("cmp")
@@ -135,7 +137,8 @@ vim.lsp.handlers["window/showMessage"] = function(_, result, ...)
   end
 end
 
-M.default_config =
-  function(name) return require("lspconfig.server_configurations." .. name).default_config end
+M.default_config = function(name)
+  return require("lspconfig.server_configurations." .. name).default_config
+end
 
 return M

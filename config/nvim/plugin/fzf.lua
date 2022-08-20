@@ -22,6 +22,7 @@ vim.g.fzf_lsp_layout = {
   },
 }
 vim.g.fzf_lsp_preview_window = { "right:50%" }
+vim.g.fzf_lsp_pretty = true
 
 local fzf_grep = vim.fn["fzf#vim#grep"]
 
@@ -80,7 +81,7 @@ _G.motch.mix = function(arg)
   end
 end
 
-vim.cmd([[command! -nargs=* Mix lua motch.mix(<q-args>)]])
+-- vim.cmd([[command! -nargs=* Mix lua motch.mix(<q-args>)]])
 
 _G.motch.gdiff = function()
   FZF({

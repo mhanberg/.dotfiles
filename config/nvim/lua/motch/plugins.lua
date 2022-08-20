@@ -8,9 +8,9 @@ vim.cmd([[packadd packer.nvim]])
 
 local startup = require("packer").startup
 
-startup({
+startup {
   function(use, use_rocks)
-    use({ "wbthomason/packer.nvim", opt = true })
+    use { "wbthomason/packer.nvim", opt = true }
 
     use("~/src/zk.nvim")
     -- use("elixir-editors/vim-elixir")
@@ -28,6 +28,14 @@ startup({
     use("hrsh7th/cmp-nvim-lua")
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-vsnip")
+
+    use {
+      "norcalli/nvim-colorizer.lua",
+      config = function()
+        require("colorizer").setup()
+      end,
+    }
+
     use("hrsh7th/cmp-cmdline")
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/vim-vsnip")
@@ -55,52 +63,58 @@ startup({
     use("tpope/vim-surround")
     use("tpope/vim-vinegar")
     use("vim-test/vim-test")
-    use({ "NTBBloodbath/rest.nvim", requires = { "nvim-lua/plenary.nvim" } })
-    use({
+    use { "NTBBloodbath/rest.nvim", requires = { "nvim-lua/plenary.nvim" } }
+    use {
       "junegunn/fzf",
-      run = function() vim.fn["fzf#install"]() end,
-    })
-    use({ "gfanto/fzf-lsp.nvim" })
+      run = function()
+        vim.fn["fzf#install"]()
+      end,
+    }
+    use { "gfanto/fzf-lsp.nvim" }
     -- use({ "/Users/mitchell/src/fzf-lsp.nvim" })
-    use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
-    use({ "lukas-reineke/indent-blankline.nvim" })
-    use({ "mg979/vim-visual-multi", branch = "master" })
-    use({ "~/src/thicc_forest", requires = { "rktjmp/lush.nvim" } })
-    use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
-    use({
+    use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
+    use { "lukas-reineke/indent-blankline.nvim" }
+    use { "mg979/vim-visual-multi", branch = "master" }
+    use { "~/src/thicc_forest", requires = { "rktjmp/lush.nvim" } }
+    use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
+    use {
       "nvim-treesitter/nvim-treesitter",
-      run = function() vim.cmd([[TSUpdate]]) end,
-    })
-    use({ "nvim-treesitter/nvim-treesitter-textobjects" })
-    use({ "nvim-treesitter/nvim-treesitter-context" })
-    use({ "nvim-treesitter/playground" })
+      run = function()
+        vim.cmd([[TSUpdate]])
+      end,
+    }
+    use { "nvim-treesitter/nvim-treesitter-textobjects" }
+    use { "nvim-treesitter/nvim-treesitter-context" }
+    use { "nvim-treesitter/playground" }
 
     use("lukas-reineke/cmp-rg")
 
-    use({ "kristijanhusak/vim-carbon-now-sh" })
-    use({ "junegunn/vim-easy-align" })
+    use { "kristijanhusak/vim-carbon-now-sh" }
+    use { "junegunn/vim-easy-align" }
 
-    use({ "simrat39/symbols-outline.nvim" })
+    use { "simrat39/symbols-outline.nvim" }
 
-    use({ "~/src/elixir.nvim" })
-    use({ "mfussenegger/nvim-dap" })
+    use { "~/src/elixir.nvim" }
+    use { "mfussenegger/nvim-dap" }
 
     use("Pocco81/TrueZen.nvim")
 
-    use({
+    use {
       "SmiteshP/nvim-navic",
       requires = "neovim/nvim-lspconfig",
-    })
+    }
 
-    use_rocks({ "underscore" })
-    use_rocks({ "ansicolors" })
+    use_rocks { "underscore" }
+    use_rocks { "ansicolors" }
   end,
   config = {
     max_jobs = 30,
     display = {
-      open_fn = function() return require("packer.util").float({ border = "single" }) end,
+      open_fn = function()
+        return require("packer.util").float { border = "single" }
+      end,
     },
   },
-})
+}
 
 require("packer.luarocks").setup_paths()
