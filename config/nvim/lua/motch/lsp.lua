@@ -39,20 +39,20 @@ end
 
 local cmp = require("cmp")
 
-cmp.setup({
+cmp.setup {
   snippet = {
     expand = function(args)
       -- For `vsnip` user.
       vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-  mapping = cmp.mapping.preset.insert({
+  mapping = cmp.mapping.preset.insert {
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
-    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-  }),
+    ["<C-y>"] = cmp.mapping.confirm { select = true },
+  },
   sources = {
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
@@ -66,7 +66,7 @@ cmp.setup({
     { name = "gh_issues" },
   },
   formatting = {
-    format = require("lspkind").cmp_format({
+    format = require("lspkind").cmp_format {
       with_text = true,
       menu = {
         buffer = "[Buffer]",
@@ -76,10 +76,15 @@ cmp.setup({
         -- emoji = "[Emoji]",
         spell = "[Spell]",
         path = "[Path]",
-        -- rg = "[Rg]",
+        cmdline = "[Cmd]",
       },
-    }),
+    },
   },
+}
+
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline", keyword_length = 2 } }),
 })
 
 M.setup = function(name, opts)
