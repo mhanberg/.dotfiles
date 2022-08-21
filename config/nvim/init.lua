@@ -2,6 +2,8 @@ _G.motch = {}
 
 require("motch.plugins")
 
+vim.filetype.add({ filename = { Brewfile = "ruby" } })
+
 NVIM = require("nvim")
 p = function(thing)
   NVIM.print(thing)
