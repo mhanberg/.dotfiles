@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+gh pr list | fzf --reverse --preview="echo {} | awk '{ print \$1 }' | xargs gh pr view" | awk '{ print $1 }' | xargs gh pr view -w
