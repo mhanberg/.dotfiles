@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-gh pr list | fzf --reverse --preview="echo {} | awk '{ print \$1 }' | xargs gh pr view" | awk '{ print $1 }' | xargs gh pr view -w
+gh pr list \
+  | fzf --reverse --preview="echo {} | awk '{ print \$1 }' | GH_FORCE_TTY=true CLICOLOR_FORCE=1 xargs gh pr view" \
+  | awk '{ print $1 }' \
+  | xargs gh pr view -w

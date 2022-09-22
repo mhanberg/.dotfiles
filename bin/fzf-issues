@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-gh issue list --limit 999 | fzf --reverse --preview="echo {} | awk '{ print \$1 }' | xargs gh issue view" | awk '{ print $1 }' | xargs gh issue view -w
+gh issue list --limit 999 \
+  | fzf --reverse --preview="echo {} | awk '{ print \$1 }' | GH_FORCE_TTY=true CLICOLOR_FORCE=1 xargs gh issue view" \
+  | awk '{ print $1 }' \
+  | xargs gh issue view -w
