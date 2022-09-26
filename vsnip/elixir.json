@@ -1,0 +1,45 @@
+{
+  "Mix Task": {
+    "prefix": ["mtask"],
+    "body":[
+      "defmodule Mix.Tasks.$1 do",
+      "  use Mix.Task",
+      "",
+      "  @shortdoc \"A placeholder shortdoc for mix $2\"",
+      "  @moduledoc @shortdoc",
+      "",
+      "  @doc false",
+      "  def run(argv) do",
+      "    $3",
+      "  end",
+      "end"
+    ],
+    "description": "Create a new mix task"
+  },
+  "GenServer": {
+    "prefix": ["gserver"],
+    "body":[
+      "defmodule $1 do",
+      "  use GenServer",
+      "",
+      "  def start_link(arg) do",
+      "    GenServer.start_link(__MODULE__, arg, [])",
+      "  end",
+      "",
+      "  def init(arg) do",
+      "    {:ok, arg}",
+      "  end",
+      "end"
+    ],
+    "description": "Create a new mix task"
+  },
+  "Feature Test": {
+    "prefix": ["feature"],
+    "body": [
+      "feature \"$1\", %{session: session} do",
+      "  $2",
+      "end"
+    ],
+    "description": "Wallaby `feature` macro"
+  }
+}
