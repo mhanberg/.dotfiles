@@ -1,1 +1,0 @@
-require("rest-nvim").setup()
