@@ -1,8 +1,8 @@
 _G.motch = {}
 
-require("motch.plugins")
+require("motch.deps")
 
-vim.filetype.add({ filename = { Brewfile = "ruby" } })
+vim.filetype.add { filename = { Brewfile = "ruby" } }
 
 NVIM = require("nvim")
 p = function(thing)
@@ -27,7 +27,9 @@ _ = require("underscore")
 local opt = vim.opt
 
 function RemoveNetrwMap()
-  if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then vim.cmd([[unmap <buffer> <C-l>]]) end
+  if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
+    vim.cmd([[unmap <buffer> <C-l>]])
+  end
 end
 
 vim.api.nvim_exec(
@@ -68,10 +70,9 @@ opt.expandtab = true
 opt.number = true
 opt.termguicolors = true
 opt.backupdir = vim.fn.expand("~/.tmp/backup")
-opt.directory = vim.fn.expand("~/.tmp/swp/"..vim.fn.expand("%:p"))
+opt.directory = vim.fn.expand("~/.tmp/swp/" .. vim.fn.expand("%:p"))
 opt.splitbelow = true
 opt.splitright = true
-opt.lazyredraw = true
 opt.showmode = false
 opt.incsearch = true
 opt.ignorecase = true
@@ -195,20 +196,26 @@ vim.cmd([[command! Wq wq]])
 
 vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("n", "cn", ":cnext<cr>")
-vim.keymap.set("n", "<leader><space>", ":set hls!<cr>")
-vim.keymap.set("n", "<leader>ev", ":vsplit ~/.vimrc<cr>")
+vim.keymap.set("n", "<leader><space>", function()
+  vim.cmd.set("hls!")
+end)
 vim.keymap.set("n", "<leader>sv", [[:luafile $MYVIMRC<cr>]])
-vim.keymap.set("n", "<c-p>", ":Files<cr>")
+vim.keymap.set("n", "<c-p>", function()
+  vim.cmd.Files()
+end)
 vim.keymap.set("n", "<space>vp", ":Files ~/.local/share/nvim/site/pack/packer/start<cr>")
 vim.keymap.set("n", "<space>df", ":Files ~/src/<cr>")
-vim.keymap.set("n", "gl", ":BLines<cr>")
-vim.keymap.set("n", "<leader>a", ":LocalProjectSearch<cr>")
+vim.keymap.set("n", "gl", function()
+  vim.cmd.BLines()
+end)
+vim.keymap.set("n", "<leader>a", function()
+  vim.cmd.LocalProjectSearch()
+end)
 vim.keymap.set("n", "<space>a", ":GlobalProjectSearch<cr>")
 vim.keymap.set("n", "<leader>gr", ":grep<cr>")
 vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>")
 
 vim.keymap.set("n", "<leader>d", ":lua motch.gdiff()<cr>")
-vim.keymap.set("n", "<leader><leader>m", ":Mix<cr>")
 
 vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 
@@ -238,13 +245,14 @@ local LSP = require("motch.lsp")
 
 local elixirls = require("elixir")
 
-elixirls.setup({
+elixirls.setup {
   -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
   repo = "mhanberg/elixir-ls",
   branch = "mh/all-workspace-symbols",
-  settings = elixirls.settings({
+  settings = elixirls.settings {
     dialyzerEnabled = false,
-  }),
+    enableTestLenses = false,
+  },
   log_level = vim.lsp.protocol.MessageType.Log,
   message_level = vim.lsp.protocol.MessageType.Log,
   on_attach = function(client, bufnr)
@@ -259,6 +267,31 @@ elixirls.setup({
     vim.keymap.set("n", "<space>db", require("dap").toggle_breakpoint, { buffer = true, silent = true })
     vim.keymap.set("n", "<space>dc", require("dap").continue, { buffer = true, silent = true })
   end,
+}
+
+LSP.setup("sumneko_lua", {
+  settings = {
+
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { "vim" },
+        unusedLocalExclude = { "_*" },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
 })
 
 LSP.setup("dartls", {})
@@ -283,7 +316,7 @@ LSP.setup("bashls", {})
 
 local zk = require("zk")
 
-zk.setup({
+zk.setup {
   filetypes = { "markdown", "liquid" },
   on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, silent = true }
@@ -306,7 +339,7 @@ zk.setup({
       vim.keymap.set("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts)
     end
   end,
-})
+}
 
 LSP.setup("zls", {})
 LSP.setup("gopls", {})
@@ -331,7 +364,7 @@ LSP.setup(
         },
       },
     },
-    filetypes = { "elixir", "eelixir", "html", "liquid" },
+    filetypes = { "elixir", "eelixir", "html", "liquid", "heex" },
   })
 )
 
@@ -345,20 +378,24 @@ local random = augroup("random", { clear = true })
 
 autocmd(
   "BufWritePost",
-  { group = random, pattern = "config/nvim/lua/motch/plugins.lua", command = "PackerCompile" }
+  { group = random, pattern = "config/nvim/lua/motch/deps.lua", command = "PackerCompile" }
 )
 -- autocmd "User", FloatermOpen execute "normal G" | wincmd p]]
 autocmd("VimResized", { group = random, pattern = "*", command = "wincmd =" })
 autocmd("GUIEnter", {
   group = random,
   pattern = "*",
-  callback = function() vim.opt.visualbell = "t_vb=" end,
+  callback = function()
+    vim.opt.visualbell = "t_vb="
+  end,
 })
 autocmd("FileType", { group = random, pattern = "netrw", callback = RemoveNetrwMap })
 autocmd("FileType", {
   group = random,
   pattern = "fzf",
-  callback = function() vim.keymap.set("t", "<esc>", "<C-c>", { buffer = 0 }) end,
+  callback = function()
+    vim.keymap.set("t", "<esc>", "<C-c>", { buffer = 0 })
+  end,
 })
 autocmd(
   { "BufRead", "BufNewFile" },
@@ -369,22 +406,6 @@ autocmd(
   { group = random, pattern = "aliases.local", command = "set filetype=zsh" }
 )
 autocmd({ "BufRead", "BufNewFile" }, { group = random, pattern = "*.lexs", command = "set filetype=elixir" })
-autocmd({ "FileType" }, {
-  group = random,
-  pattern = {"markdown"},
-  callback = function()
-    file = vim.fs.find({ ".git" }, { upward = true })[1]
-
-    if file then
-      vim.notify("starting spell lsp")
-      vim.lsp.start({
-        name = "spels",
-        cmd = { "elixir", "--no-halt", "/Users/mitchell/src/gen_lsp/examples/spell.exs" },
-        root_dir = vim.fs.dirname(file),
-      })
-    end
-  end,
-})
 
 local clojure = augroup("clojure", { clear = true })
 autocmd("BufWritePost", { group = clojure, pattern = "*.clj", command = "silent Require" })
@@ -395,4 +416,6 @@ autocmd({ "BufRead", "BufNewFile" }, { group = markdown, pattern = "*.md", comma
 
 vim.cmd([[let g:test#javascript#jest#file_pattern = '\v(.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']])
 
-if vim.fn.filereadable(".init.local.lua") == 1 then vim.cmd([[source .init.local.lua]]) end
+if vim.fn.filereadable(".init.local.lua") == 1 then
+  vim.cmd([[source .init.local.lua]])
+end

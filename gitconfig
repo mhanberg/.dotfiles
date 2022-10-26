@@ -1,38 +1,45 @@
 [filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
 [user]
-	name = Mitchell Hanberg
-	email = mitch@mitchellhanberg.com
+  name = Mitchell Hanberg
+  email = mitch@mitchellhanberg.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR
 [filter "hawser"]
-	clean = git hawser clean %f
-	smudge = git hawser smudge %f
-	required = true
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
 [push]
-	default = simple
+  default = simple
 [color]
-	branch = auto
+  branch = auto
 [core]
-	excludesfile = ~/.gitignore_global
-	editor = nvim
-	pager = "delta"
+  excludesfile = ~/.gitignore_global
+  editor = nvim
+  pager = "delta"
 [include]
   path = ~/.gitconfig.local
 [alias]
-	next = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
-	prev = checkout HEAD^
+  next = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
+  prev = checkout HEAD^
   empty = !git checkout . && git clean -fd
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [mergetool]
-	keepBackup = false
+  keepBackup = false
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [pull]
-	ff = only
+  ff = only
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[commit]
+  gpgsign = true

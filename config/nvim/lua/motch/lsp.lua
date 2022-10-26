@@ -16,13 +16,12 @@ navic.setup {
 M.on_attach = function(client, bufnr)
   local map_opts = { buffer = bufnr, silent = true }
 
-  vim.keymap.set("n", "df", "<cmd>lua vim.lsp.buf.format()<cr>", map_opts)
-  vim.keymap.set("n", "gd", "<cmd>lua vim.diagnostic.open_float()<cr>", map_opts)
-  vim.keymap.set("n", "dt", "<cmd>lua vim.lsp.buf.definition()<cr>", map_opts)
-  vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
-  vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
-  -- vim.keymap.set("n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", map_opts)
-  vim.keymap.set("n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
+  vim.keymap.set("n", "df", vim.lsp.buf.format, map_opts)
+  vim.keymap.set("n", "gd", vim.diagnostic.open_float, map_opts)
+  vim.keymap.set("n", "dt", vim.lsp.buf.definition, map_opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.implementation, map_opts)
+  vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, map_opts)
   vim.keymap.set("n", "gr", ":References<cr>", map_opts)
   vim.keymap.set("n", "g0", ":DocumentSymbols<cr>", map_opts)
   vim.keymap.set("n", "g7", ":WorkspaceSymbols<cr>", map_opts)
@@ -32,7 +31,7 @@ M.on_attach = function(client, bufnr)
   vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
   vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
 
-  require("cmp_nvim_lsp").update_capabilities(capabilities)
+  require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
@@ -101,13 +100,6 @@ M.setup = function(name, opts)
     }, opts))
   end
 end
-
-require("nlua.lsp.nvim").setup(require("lspconfig"), {
-  cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/main.lua") },
-  on_attach = M.on_attach,
-  globals = { "vim", "hs" },
-  library = { [vim.fn.expand("~/.hammerspoon/Spoons/EmmyLua.spoon/annotations")] = true },
-})
 
 vim.lsp.set_log_level(2)
 

@@ -6,3 +6,4 @@ root: <%= `project-dir #{@args[0]}` %>
 windows:
   - editor: eval ${TMUXINATOR_STARTUP_COMMAND:-v}
   - shell: 
+  <%= "- docker:" if args[0] == "freeroll" %>

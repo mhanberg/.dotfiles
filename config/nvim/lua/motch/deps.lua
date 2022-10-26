@@ -29,6 +29,16 @@ startup {
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-vsnip")
 
+    -- Packer
+    use {
+      "folke/noice.nvim",
+      requires = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+      },
+    }
+
     use {
       "norcalli/nvim-colorizer.lua",
       config = function()
@@ -97,7 +107,7 @@ startup {
     use { "~/src/elixir.nvim" }
     use { "mfussenegger/nvim-dap" }
 
-    use("Pocco81/TrueZen.nvim")
+    use("Pocco81/true-zen.nvim")
 
     use {
       "SmiteshP/nvim-navic",

@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup {
   ensure_installed = "all",
   ignore_install = { "haskell", "phpdoc" },
   highlight = { enable = true },
@@ -21,7 +21,16 @@ require("nvim-treesitter.configs").setup({
       show_help = "?",
     },
   },
-})
+  select = {
+    enable = true,
+    keymaps = {
+      ["ab"] = "@block.outer",
+      ["ib"] = "@block.inner",
+      ["if"] = "@function.inner",
+      ["af"] = "@function.outer",
+    },
+  },
+}
 
 vim.cmd([[set foldmethod=expr]])
 vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])

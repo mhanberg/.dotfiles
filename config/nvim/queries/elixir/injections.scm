@@ -1,3 +1,4 @@
+; extends
 ; HTML string blocks
 ((comment) @_comment
   .
@@ -35,3 +36,9 @@
   .
   (string (quoted_content) @javascript)
   (#eq? @_comment "# javascript"))
+
+(call
+  target: ((identifier) @_identifier (#any-of? @_identifier "execute"))
+  (arguments
+    (string
+      (quoted_content) @sql))) 
