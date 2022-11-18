@@ -33,5 +33,77 @@ require("noice").setup {
       },
       opts = { skip = true },
     },
+    {
+      view = "mini",
+      filter = {
+        find = "search hit BOTTOM, continuing at TOP",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "E486",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "change; before #",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "line less; before #",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "lines yanked",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "more lines",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "more line; before #",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "fewer lines; before #",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "fewer lines",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "changes; before #",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "Already at newest change",
+      },
+    },
+    {
+      view = "mini",
+      filter = {
+        find = "mix test ",
+      },
+    },
   },
 }

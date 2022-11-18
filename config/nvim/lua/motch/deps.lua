@@ -25,7 +25,6 @@ startup {
     use("hrsh7th/cmp-buffer")
     use("hrsh7th/cmp-emoji")
     use("hrsh7th/cmp-nvim-lsp")
-    use("hrsh7th/cmp-nvim-lua")
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-vsnip")
 
@@ -61,7 +60,6 @@ startup {
     use("onsails/lspkind-nvim")
     use("rcarriga/nvim-notify")
     use("stsewd/fzf-checkout.vim")
-    use("tjdevries/nlua.nvim")
     use("tpope/vim-commentary")
     use("tpope/vim-dadbod")
     use("tpope/vim-dispatch")
@@ -85,6 +83,7 @@ startup {
     use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
     use { "lukas-reineke/indent-blankline.nvim" }
     use { "mg979/vim-visual-multi", branch = "master" }
+    use { "sainnhe/everforest"}
     use { "~/src/thicc_forest", requires = { "rktjmp/lush.nvim" } }
     use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
     use {
@@ -104,7 +103,7 @@ startup {
 
     use { "simrat39/symbols-outline.nvim" }
 
-    use { "~/src/elixir.nvim" }
+    use { "mhanberg/elixir.nvim" }
     use { "mfussenegger/nvim-dap" }
 
     use("Pocco81/true-zen.nvim")
@@ -119,11 +118,6 @@ startup {
   end,
   config = {
     max_jobs = 30,
-    display = {
-      open_fn = function()
-        return require("packer.util").float { border = "single" }
-      end,
-    },
   },
 }
 

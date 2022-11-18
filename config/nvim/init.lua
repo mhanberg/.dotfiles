@@ -44,6 +44,7 @@ endfunction
 FZF = vim.fn["FzfWrapHelper"]
 
 vim.env.WALLABY_DRIVER = "chrome"
+vim.env.BAT_STYLE = "header,grid,numbers"
 
 opt.scrolloff = 4
 opt.laststatus = 3
@@ -68,7 +69,6 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.number = true
-opt.termguicolors = true
 opt.backupdir = vim.fn.expand("~/.tmp/backup")
 opt.directory = vim.fn.expand("~/.tmp/swp/" .. vim.fn.expand("%:p"))
 opt.splitbelow = true
@@ -271,7 +271,6 @@ elixirls.setup {
 
 LSP.setup("sumneko_lua", {
   settings = {
-
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)

@@ -23,6 +23,7 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "gD", vim.lsp.buf.implementation, map_opts)
   vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, map_opts)
   vim.keymap.set("n", "gr", ":References<cr>", map_opts)
+  vim.keymap.set("n", "gi", ":Implementations<cr>", map_opts)
   vim.keymap.set("n", "g0", ":DocumentSymbols<cr>", map_opts)
   vim.keymap.set("n", "g7", ":WorkspaceSymbols<cr>", map_opts)
   vim.keymap.set("n", "<leader>dd", ":Diagnostics<cr>", map_opts)
@@ -55,7 +56,6 @@ cmp.setup {
     ["<C-y>"] = cmp.mapping.confirm { select = true },
   },
   sources = {
-    { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "vsnip" },
     { name = "vim-dadbod-completion" },
@@ -73,7 +73,6 @@ cmp.setup {
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
-        nvim_lua = "[Vim]",
         -- emoji = "[Emoji]",
         spell = "[Spell]",
         path = "[Path]",
@@ -123,7 +122,7 @@ local levels = {
   [0] = "TRACE",
 }
 
-vim.lsp.handlers["window/showMessage"] = function(_, result, ...)
+vim.lsp.handlers["window/showMessage"] = function(_, result)
   if require("vim.lsp.log").should_log(convert_lsp_log_level_to_neovim_log_level(result.type)) then
     vim.notify(result.message, levels[result.type])
   end
