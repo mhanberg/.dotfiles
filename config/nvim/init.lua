@@ -20,8 +20,6 @@ if pcall(require, "plenary") then
   end
 end
 
-vim.notify = require("notify")
-
 _ = require("underscore")
 
 local opt = vim.opt
@@ -45,6 +43,8 @@ FZF = vim.fn["FzfWrapHelper"]
 
 vim.env.WALLABY_DRIVER = "chrome"
 vim.env.BAT_STYLE = "header,grid,numbers"
+
+opt.timeoutlen = 500
 
 opt.scrolloff = 4
 opt.laststatus = 3
@@ -194,28 +194,24 @@ vim.cmd([[command! E e]])
 vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
 
-vim.keymap.set("n", "Y", "y$")
-vim.keymap.set("n", "cn", ":cnext<cr>")
+vim.keymap.set("n", "cn", ":cnext<cr>", { desc = "Go to next quickfix item" })
 vim.keymap.set("n", "<leader><space>", function()
   vim.cmd.set("hls!")
-end)
+end, { desc = "Toggle search highlight" })
 vim.keymap.set("n", "<leader>sv", [[:luafile $MYVIMRC<cr>]])
-vim.keymap.set("n", "<c-p>", function()
-  vim.cmd.Files()
-end)
-vim.keymap.set("n", "<space>vp", ":Files ~/.local/share/nvim/site/pack/packer/start<cr>")
-vim.keymap.set("n", "<space>df", ":Files ~/src/<cr>")
-vim.keymap.set("n", "gl", function()
-  vim.cmd.BLines()
-end)
-vim.keymap.set("n", "<leader>a", function()
-  vim.cmd.LocalProjectSearch()
-end)
-vim.keymap.set("n", "<space>a", ":GlobalProjectSearch<cr>")
+vim.keymap.set("n", "<c-p>", vim.cmd.Files, { desc = "Find files" })
+vim.keymap.set(
+  "n",
+  "<space>vp",
+  ":Files ~/.local/share/nvim/site/pack/packer/start<cr>",
+  { desc = "Find files of vim plugins" }
+)
+vim.keymap.set("n", "<space>df", ":Files ~/src/<cr>", { desc = "Find files in all projects" })
+vim.keymap.set("n", "gl", vim.cmd.BLines, { desc = "FZF Buffer Lines" })
+vim.keymap.set("n", "<leader>a", vim.cmd.LocalProjectSearch, { desc = "Search in project" })
+vim.keymap.set("n", "<space>a", ":GlobalProjectSearch<cr>", { desc = "Search in all projects" })
 vim.keymap.set("n", "<leader>gr", ":grep<cr>")
 vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>")
-
-vim.keymap.set("n", "<leader>d", ":lua motch.gdiff()<cr>")
 
 vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 
@@ -318,20 +314,29 @@ local zk = require("zk")
 zk.setup {
   filetypes = { "markdown", "liquid" },
   on_attach = function(client, bufnr)
-    local opts = { buffer = bufnr, silent = true }
+    local opts = function(tbl)
+      return vim.tbl_extend("keep", { buffer = bufnr, silent = true }, tbl)
+    end
 
     LSP.on_attach(client, bufnr)
-    vim.keymap.set("n", "<C-p>", [[:Notes<cr>]], opts)
-    vim.keymap.set("n", "<space>zt", [[:Tags<cr>]], opts)
-    vim.keymap.set("n", "<space>zl", [[:Links<cr>]], opts)
-    vim.keymap.set("n", "<space>zb", [[:Backlinks<cr>]], opts)
+    vim.keymap.set("n", "<space>zf", vim.cmd.Notes, opts { desc = "Find notes" })
+    vim.keymap.set("n", "<space>zt", vim.cmd.Tags, opts { desc = "Find tags" })
+    vim.keymap.set("n", "<space>zl", vim.cmd.Links, opts { desc = "Find links in note" })
+    vim.keymap.set("n", "<space>zb", vim.cmd.Backlinks, opts { desc = "Find backlinks in note" })
     vim.keymap.set(
       "n",
       "<space>zd",
       [[:lua require("zk").new({group = "daily", dir = "journal/daily"})<cr>]],
-      opts
+      opts { desc = "New Journal Entry" }
     )
-    vim.keymap.set("v", "<leader>zn", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
+    vim.keymap.set("v", "<space>zn", function()
+      vim.lsp.buf.code_action {
+        apply = true,
+        filter = function(ca)
+          return ca.title == [[New note in top directory]]
+        end,
+      }
+    end, opts { desc = "Create and link note from selection" })
 
     if vim.fn.expand("%:h") == "dnd" then
       vim.keymap.set("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts)

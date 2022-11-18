@@ -1,16 +1,9 @@
 local system = vim.fn.system
-vim.keymap.set("n", "<leader>n", function()
-  vim.cmd.TestNearest()
-end)
-vim.keymap.set("n", "<leader>f", function()
-  vim.cmd.TestFile()
-end)
-vim.keymap.set("n", "<leader>s", function()
-  vim.cmd.TestSuite()
-end)
-vim.keymap.set("n", "<leader>l", function()
-  vim.cmd.TestLast()
-end)
+
+vim.keymap.set("n", "<leader>n", vim.cmd.TestNearest, { desc = "Run nearest test" })
+vim.keymap.set("n", "<leader>f", vim.cmd.TestFile, { desc = "Run test file" })
+vim.keymap.set("n", "<leader>s", vim.cmd.TestSuite, { desc = "Run test suite" })
+vim.keymap.set("n", "<leader>l", vim.cmd.TestLast, { desc = "Run last test" })
 
 local vim_notify_notfier = function(cmd, exit)
   if exit == 0 then

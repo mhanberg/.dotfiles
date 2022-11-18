@@ -13,7 +13,6 @@ startup {
     use { "wbthomason/packer.nvim", opt = true }
 
     use("~/src/zk.nvim")
-    -- use("elixir-editors/vim-elixir")
     use("ruanyl/vim-gh-line")
     use("APZelos/blamer.nvim")
     use("AndrewRadev/splitjoin.vim")
@@ -28,14 +27,34 @@ startup {
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-vsnip")
 
+    -- Lua
+    use {
+      "narutoxy/silicon.lua",
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("silicon").setup {}
+      end,
+    }
+
     -- Packer
     use {
       "folke/noice.nvim",
       requires = {
         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
       },
+    }
+
+    -- Lua
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("which-key").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end,
     }
 
     use {
@@ -58,7 +77,6 @@ startup {
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/telescope.nvim")
     use("onsails/lspkind-nvim")
-    use("rcarriga/nvim-notify")
     use("stsewd/fzf-checkout.vim")
     use("tpope/vim-commentary")
     use("tpope/vim-dadbod")
@@ -83,7 +101,7 @@ startup {
     use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
     use { "lukas-reineke/indent-blankline.nvim" }
     use { "mg979/vim-visual-multi", branch = "master" }
-    use { "sainnhe/everforest"}
+    use { "sainnhe/everforest" }
     use { "~/src/thicc_forest", requires = { "rktjmp/lush.nvim" } }
     use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
     use {
@@ -116,9 +134,7 @@ startup {
     use_rocks { "underscore" }
     use_rocks { "ansicolors" }
   end,
-  config = {
-    max_jobs = 30,
-  },
+  config = { max_jobs = 30 },
 }
 
 require("packer.luarocks").setup_paths()
