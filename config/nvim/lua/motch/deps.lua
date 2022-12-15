@@ -45,25 +45,6 @@ startup {
       },
     }
 
-    -- Lua
-    use {
-      "folke/which-key.nvim",
-      config = function()
-        require("which-key").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
-      end,
-    }
-
-    use {
-      "norcalli/nvim-colorizer.lua",
-      config = function()
-        require("colorizer").setup()
-      end,
-    }
-
     use("hrsh7th/cmp-cmdline")
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/vim-vsnip")

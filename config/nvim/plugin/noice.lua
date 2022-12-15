@@ -44,5 +44,9 @@ require("noice").setup {
       },
       opts = { skip = true },
     },
+    {
+      filter = { find = "Scanning" },
+      opts = { skip = true },
+    },
   },
 }

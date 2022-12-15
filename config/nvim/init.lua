@@ -380,6 +380,7 @@ local autocmd = vim.api.nvim_create_autocmd
 
 local random = augroup("random", { clear = true })
 
+autocmd("FileType", { pattern = "fzf", group = "random", command = "setlocal winhighlight+=Normal:Normal" })
 autocmd(
   "BufWritePost",
   { group = random, pattern = "config/nvim/lua/motch/deps.lua", command = "PackerCompile" }
