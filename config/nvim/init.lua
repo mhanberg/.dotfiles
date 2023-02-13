@@ -5,7 +5,7 @@ require("motch.deps")
 vim.filetype.add { filename = { Brewfile = "ruby" } }
 
 NVIM = require("nvim")
-p = function(thing)
+P = function(thing)
   NVIM.print(thing)
 
   return thing
@@ -35,7 +35,7 @@ vim.api.nvim_exec(
 function! FzfWrapHelper(opts)
   call fzf#run(fzf#wrap(a:opts))
 endfunction
-]],
+]] ,
   false
 )
 
@@ -243,8 +243,8 @@ local elixirls = require("elixir")
 
 elixirls.setup {
   -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
-  repo = "mhanberg/elixir-ls",
-  branch = "mh/all-workspace-symbols",
+  repo = "elixir-lsp/elixir-ls",
+  branch = "master",
   settings = elixirls.settings {
     dialyzerEnabled = false,
     enableTestLenses = false,
@@ -254,7 +254,6 @@ elixirls.setup {
   on_attach = function(client, bufnr)
     LSP.on_attach(client, bufnr)
 
-    vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, { buffer = true, noremap = true })
     vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
     vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
     vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
@@ -371,6 +370,13 @@ LSP.setup(
     filetypes = { "elixir", "eelixir", "html", "liquid", "heex" },
   })
 )
+LSP.setup("gopls", {
+  settings = {
+    gopls = {
+      codelenses = { test = true, }
+    }
+  }
+})
 
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua require('motch.code_action').code_action_listener()]])
 --

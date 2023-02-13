@@ -28,6 +28,7 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "g7", ":WorkspaceSymbols<cr>", map_opts)
   vim.keymap.set("n", "<leader>dd", ":Diagnostics<cr>", map_opts)
   vim.keymap.set("n", "<leader>da", ":DiagnosticsAll<cr>", map_opts)
+  vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
 
   vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
   vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
@@ -95,10 +96,21 @@ M.setup = function(name, opts)
       log_level = vim.lsp.protocol.MessageType.Log,
       message_level = vim.lsp.protocol.MessageType.Log,
       capabilities = capabilities,
-      on_attach = M.on_attach,
+      on_attach = function(client, bufnr)
+        if client.server_capabilities.codelensProvider then
+          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            buffer = bufnr,
+            callback = vim.lsp.codelens.refresh,
+          })
+          vim.lsp.codelens.refresh()
+        end
+        M.on_attach(client, bufnr)
+      end,
     }, opts))
   end
 end
+
+M.capabilities = capabilities
 
 vim.lsp.set_log_level(2)
 

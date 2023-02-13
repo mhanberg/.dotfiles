@@ -31,9 +31,6 @@ startup {
     use {
       "narutoxy/silicon.lua",
       requires = { "nvim-lua/plenary.nvim" },
-      config = function()
-        require("silicon").setup {}
-      end,
     }
 
     -- Packer
@@ -103,6 +100,13 @@ startup {
     use { "simrat39/symbols-outline.nvim" }
 
     use { "mhanberg/elixir.nvim" }
+
+    use {
+      "simrat39/rust-tools.nvim",
+      requires = {
+        "neovim/nvim-lspconfig",
+      },
+    }
     use { "mfussenegger/nvim-dap" }
 
     use("Pocco81/true-zen.nvim")
