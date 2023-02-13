@@ -12,7 +12,7 @@ failures=0
 
 for ((n = 0; n < $1; n++)); do
   # run all arguments except for the count as new command
-  "${@:2}"
+  eval "$2"
 
   if [[ $? == 0 ]]; then
     # no need to say success, that should be more common
