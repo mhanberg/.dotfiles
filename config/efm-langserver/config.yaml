@@ -25,10 +25,6 @@ tools:
   prettier: &prettier
     format-command: './node_modules/.bin/prettier'
 
-  luafmt: &luafmt
-    format-command: 'luafmt --indent-count 2 --stdin'
-    format-stdin: true
-
   stylua: &stylua
     format-command: 'stylua -'
     format-stdin: true

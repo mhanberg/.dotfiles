@@ -47,17 +47,21 @@ source.complete = function(self, _, callback)
           })
         end
 
-        callback({ items = items, isIncomplete = false })
+        callback { items = items, isIncomplete = false }
         self.cache[bufnr] = items
       end,
     }):start()
   else
-    callback({ items = self.cache[bufnr], isIncomplete = false })
+    callback { items = self.cache[bufnr], isIncomplete = false }
   end
 end
 
-source.get_trigger_characters = function() return { "#" } end
+source.get_trigger_characters = function()
+  return { "#" }
+end
 
-source.is_available = function() return vim.bo.filetype == "gitcommit" end
+source.is_available = function()
+  return vim.bo.filetype == "gitcommit"
+end
 
 require("cmp").register_source("gh_issues", source.new())

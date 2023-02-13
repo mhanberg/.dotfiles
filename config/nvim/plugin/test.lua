@@ -23,6 +23,7 @@ local terminal_notifier_notfier = function(cmd, exit)
 end
 
 -- vim.g["test#javascript#jest#executable"] = "bin/test"
+vim.g.motch_term_auto_close = true
 
 vim.g["test#custom_strategies"] = {
   motch = function(cmd)

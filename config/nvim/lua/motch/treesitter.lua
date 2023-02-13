@@ -21,13 +21,15 @@ require("nvim-treesitter.configs").setup {
       show_help = "?",
     },
   },
-  select = {
-    enable = true,
-    keymaps = {
-      ["ab"] = "@block.outer",
-      ["ib"] = "@block.inner",
-      ["if"] = "@function.inner",
-      ["af"] = "@function.outer",
+  textobjects = {
+    select = {
+      enable = true,
+      keymaps = {
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
+        ["if"] = "@function.inner",
+        ["af"] = "@function.outer",
+      },
     },
   },
 }

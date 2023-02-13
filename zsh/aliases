@@ -49,6 +49,7 @@ alias docker-image-remove='docker image rm $(docker image ls -q) --force'
 
 # gh aliases
 
+
 alias ghc='gh repo clone'
 alias ghv='gh repo view -w'
 open-pr() {
@@ -58,6 +59,8 @@ open-pr() {
 
   [[ -z $pr ]] && gh pr view -w "$pr"
 }
+
+alias redo-labels='gh pr edit --remove-label elixir --remove-label freeroll && gh pr edit --add-label elixir --add-label freeroll'
 
 # wallaby
 alias mtc="WALLABY_DRIVER=chrome mix test"

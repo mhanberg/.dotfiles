@@ -27,6 +27,8 @@ startup {
     use("hrsh7th/cmp-path")
     use("hrsh7th/cmp-vsnip")
 
+    use { "edluffy/hologram.nvim" }
+
     -- Lua
     use {
       "narutoxy/silicon.lua",
@@ -80,8 +82,8 @@ startup {
     use { "lukas-reineke/indent-blankline.nvim" }
     use { "mg979/vim-visual-multi", branch = "master" }
     use { "sainnhe/everforest" }
-    use { "~/src/thicc_forest", requires = { "rktjmp/lush.nvim" } }
-    use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
+    use { "nvim-tree/nvim-web-devicons" }
+    use { "nvim-lualine/lualine.nvim" }
     use {
       "nvim-treesitter/nvim-treesitter",
       run = function()
@@ -115,6 +117,8 @@ startup {
       "SmiteshP/nvim-navic",
       requires = "neovim/nvim-lspconfig",
     }
+
+    use { "prichrd/netrw.nvim" }
 
     use_rocks { "underscore" }
     use_rocks { "ansicolors" }

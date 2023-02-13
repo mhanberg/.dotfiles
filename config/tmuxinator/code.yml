@@ -6,4 +6,4 @@ root: <%= `project-dir #{@args[0]}` %>
 windows:
   - editor: eval ${TMUXINATOR_STARTUP_COMMAND:-v}
   - shell: 
-  <%= "- docker:" if args[0] == "freeroll" %>
+  <%= "- docker: docker-compose up -d && lazydocker" if args[0] == "freeroll" %>

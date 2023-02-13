@@ -10,8 +10,18 @@ local has_run = {}
 local navic = require("nvim-navic")
 
 navic.setup {
-  depth_limit = 5,
+  highlight = true,
+  safe_output = true,
 }
+
+M.navic = function()
+  local loc = navic.get_location()
+  if loc and #loc > 0 then
+    return "> " .. navic.get_location()
+  else
+    return ""
+  end
+end
 
 M.on_attach = function(client, bufnr)
   local map_opts = { buffer = bufnr, silent = true }
@@ -112,8 +122,6 @@ end
 
 M.capabilities = capabilities
 
-vim.lsp.set_log_level(2)
-
 local convert_lsp_log_level_to_neovim_log_level = function(lsp_log_level)
   if lsp_log_level == 1 then
     return 4
@@ -143,5 +151,7 @@ end
 M.default_config = function(name)
   return require("lspconfig.server_configurations." .. name).default_config
 end
+
+vim.lsp.set_log_level(0)
 
 return M

@@ -10,14 +10,14 @@ dnd.previous_session = function()
     return
   end
 
-  local previous_session_err, previous_session = zk.list({
+  local previous_session_err, previous_session = zk.list {
     select = { "title", "path", "filenameStem" },
     excludeHrefs = { current_session.absPath },
     createdBefore = current_session.created,
     tags = { "dnd", "session" },
     limit = 1,
     sort = { "created" },
-  })
+  }
 
   if previous_session_err then
     vim.api.nvim_err_write(
@@ -74,11 +74,14 @@ dnd.move_to = function(direction)
     note = dnd.previous_session()
   end
 
-  if note ~= nil then vim.cmd("e " .. note.path) end
+  if note ~= nil then
+    vim.cmd("e " .. note.path)
+  end
 end
 
-dnd.insert_link =
-  function(note) vim.cmd('exe "normal \\<esc>i[' .. note.title .. "](" .. note.filenameStem .. [[)"]]) end
+dnd.insert_link = function(note)
+  vim.cmd('exe "normal \\<esc>i[' .. note.title .. "](" .. note.filenameStem .. [[)"]])
+end
 
 vim.cmd([[command! InsertPreviousSessionLink lua motch.dnd.insert_link(motch.dnd.previous_session())]])
 

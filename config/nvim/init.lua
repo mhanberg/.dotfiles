@@ -44,11 +44,14 @@ FZF = vim.fn["FzfWrapHelper"]
 vim.env.WALLABY_DRIVER = "chrome"
 vim.env.BAT_STYLE = "header,grid,numbers"
 
+opt.shortmess:append("C")
+opt.shortmess:append("c")
+
 opt.timeoutlen = 500
 
 opt.scrolloff = 4
 opt.laststatus = 3
-opt.winbar = [[%f %m %{v:lua.require("nvim-navic").get_location()}]]
+opt.winbar = [[%m %t %{%v:lua.require'motch.lsp'.navic()%}]]
 
 opt.fillchars = {
   horiz = "━",
@@ -64,7 +67,6 @@ opt.colorcolumn = "999"
 opt.guifont = "JetBrains Mono"
 opt.foldmethod = "syntax"
 opt.foldlevelstart = 99
-opt.smartindent = true
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
@@ -93,99 +95,7 @@ opt.title = true
 vim.g.forest_night_enable_italic = 1
 vim.g.forest_night_diagnostic_text_highlight = 1
 
--- vim.cmd([[color thicc_forest]])
-
-vim.g.projectionist_heuristics = vim.json.decode([[
-{
-  "mix.exs": {
-    "lib/**/views/*_view.ex": {
-      "type": "view",
-      "alternate": "test/{dirname}/views/{basename}_view_test.exs",
-      "template": [
-        "defmodule {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}View do",
-        "  use {dirname|camelcase|capitalize}, :view",
-        "end"
-      ]
-    },
-    "test/**/views/*_view_test.exs": {
-      "alternate": "lib/{dirname}/views/{basename}_view.ex",
-      "type": "test",
-      "template": [
-        "defmodule {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}ViewTest do",
-        "  use ExUnit.Case, async: true",
-        "",
-        "  alias {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}View",
-        "end"
-      ]
-    },
-    "lib/**/controllers/*_controller.ex": {
-      "type": "controller",
-      "alternate": "test/{dirname}/controllers/{basename}_controller_test.exs",
-      "template": [
-        "defmodule {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}Controller do",
-        "  use {dirname|camelcase|capitalize}, :controller",
-        "end"
-      ]
-    },
-    "test/**/controllers/*_controller_test.exs": {
-      "alternate": "lib/{dirname}/controllers/{basename}_controller.ex",
-      "type": "test",
-      "template": [
-        "defmodule {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}ControllerTest do",
-        "  use {dirname|camelcase|capitalize}.ConnCase, async: true",
-        "end"
-      ]
-    },
-    "lib/**/channels/*_channel.ex": {
-      "type": "channel",
-      "alternate": "test/{dirname}/channels/{basename}_channel_test.exs",
-      "template": [
-        "defmodule {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}Channel do",
-        "  use {dirname|camelcase|capitalize}, :channel",
-        "end"
-      ]
-    },
-    "test/**/channels/*_channel_test.exs": {
-      "alternate": "lib/{dirname}/channels/{basename}_channel.ex",
-      "type": "test",
-      "template": [
-        "defmodule {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}ChannelTest do",
-        "  use {dirname|camelcase|capitalize}.ChannelCase, async: true",
-        "",
-        "  alias {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}Channel",
-        "end"
-      ]
-    },
-    "test/**/features/*_test.exs": {
-      "type": "feature",
-      "template": [
-        "defmodule {dirname|camelcase|capitalize}.{basename|camelcase|capitalize}Test do",
-        "  use {dirname|camelcase|capitalize}.FeatureCase, async: true",
-        "end"
-      ]
-    },
-    "lib/*.ex": {
-      "alternate": "test/{}_test.exs",
-      "type": "source",
-      "template": [
-        "defmodule {camelcase|capitalize|dot} do",
-        "end"
-      ]
-    },
-    "test/*_test.exs": {
-      "alternate": "lib/{}.ex",
-      "type": "test",
-      "template": [
-        "defmodule {camelcase|capitalize|dot}Test do",
-        "  use ExUnit.Case, async: true",
-        "",
-        "  alias {camelcase|capitalize|dot}",
-        "end"
-      ]
-    }
-  }
-}
-]])
+require("netrw").setup()
 
 vim.cmd([[command! Q q]])
 vim.cmd([[command! Qall qall]])
@@ -198,8 +108,10 @@ vim.keymap.set("n", "cn", ":cnext<cr>", { desc = "Go to next quickfix item" })
 vim.keymap.set("n", "<leader><space>", function()
   vim.cmd.set("hls!")
 end, { desc = "Toggle search highlight" })
-vim.keymap.set("n", "<leader>sv", [[:luafile $MYVIMRC<cr>]])
 vim.keymap.set("n", "<c-p>", vim.cmd.Files, { desc = "Find files" })
+vim.keymap.set("n", "<space>p", function()
+  vim.cmd([[GitFiles?]])
+end, { desc = "Find in changes files" })
 vim.keymap.set(
   "n",
   "<space>vp",
@@ -264,9 +176,12 @@ elixirls.setup {
   end,
 }
 
-LSP.setup("sumneko_lua", {
+LSP.setup("lua_ls", {
   settings = {
     Lua = {
+      format = {
+        enable = false,
+      },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = "LuaJIT",
@@ -378,11 +293,30 @@ LSP.setup("gopls", {
   }
 })
 
--- vim.cmd([[autocmd CursorHold,CursorHoldI * lua require('motch.code_action').code_action_listener()]])
---
-
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+
+-- local credo = vim.api.nvim_create_augroup("credo", { clear = true })
+
+-- vim.api.nvim_create_autocmd({ "FileType" }, {
+--   group = credo,
+--   pattern = { "elixir" },
+--   callback = function()
+--     vim.lsp.start {
+--       name = "CredoLS",
+--       cmd = { "mix", "credo.lsp" },
+--       settings = {},
+--       capabilities = LSP.capabilities,
+--       root_dir = vim.fs.dirname(vim.fs.find({ "mix.exs", ".git" }, { upward = true })[1]),
+--       on_attach = LSP.on_attach,
+--     }
+--   end,
+-- })
+--
+
+-- require('hologram').setup {
+--   auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+-- }
 
 local random = augroup("random", { clear = true })
 
