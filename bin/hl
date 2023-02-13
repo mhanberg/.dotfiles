@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+highlight -l -O rtf --syntax elixir --font-size 42 --font 'JetBrains Mono' --style Seashell | pbcopy
