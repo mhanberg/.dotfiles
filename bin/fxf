@@ -3,9 +3,9 @@
 Mix.install([:ratatouille])
 
 # fxf
-# 
+#
 # Usage:
-# 
+#
 # $ fxf # recursively lists all files in the current directory
 #
 # $ git ls-files | fxf -- # lists whatever is piped into stdin (note the arg '--')
@@ -122,6 +122,9 @@ defmodule Fxf.State do
     cond do
       selected_row in y_offset..(height + y_offset) ->
         model
+
+      y_offset > 0 and selected_row < height ->
+        %{model | y_offset: y_offset - 1}
 
       selected_row < height ->
         %{model | y_offset: 0}
