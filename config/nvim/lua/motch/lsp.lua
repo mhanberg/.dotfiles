@@ -50,58 +50,11 @@ M.on_attach = function(client, bufnr)
   end
 end
 
-local cmp = require("cmp")
-
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      -- For `vsnip` user.
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert {
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
-    ["<C-y>"] = cmp.mapping.confirm { select = true },
-  },
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "vsnip" },
-    { name = "vim-dadbod-completion" },
-    { name = "spell", keyword_length = 5 },
-    -- { name = "rg", keyword_length = 3 },
-    -- { name = "buffer", keyword_length = 5 },
-    -- { name = "emoji" },
-    { name = "path" },
-    { name = "gh_issues" },
-  },
-  formatting = {
-    format = require("lspkind").cmp_format {
-      with_text = true,
-      menu = {
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
-        -- emoji = "[Emoji]",
-        spell = "[Spell]",
-        path = "[Path]",
-        cmdline = "[Cmd]",
-      },
-    },
-  },
-}
-
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline", keyword_length = 2 } }),
-})
-
 M.setup = function(name, opts)
   if not has_run[name] then
     has_run[name] = true
 
+    local lspconfig = require("lspconfig")
     lspconfig[name].setup(vim.tbl_extend("force", {
       log_level = vim.lsp.protocol.MessageType.Log,
       message_level = vim.lsp.protocol.MessageType.Log,

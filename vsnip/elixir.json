@@ -1,4 +1,12 @@
 {
+  "HEEx Template": {
+    "prefix": ["heex"],
+    "body": [
+      "~H\"\"\"",
+      "$1",
+      "\"\"\""
+    ]
+  },
   "Mix Task": {
     "prefix": ["mtask"],
     "body":[

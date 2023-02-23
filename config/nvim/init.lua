@@ -1,6 +1,7 @@
 _G.motch = {}
 
-require("motch.deps")
+require("motch.lazy")
+vim.cmd.colorscheme("everforest")
 
 vim.filetype.add { filename = { Brewfile = "ruby" } }
 
@@ -20,8 +21,6 @@ if pcall(require, "plenary") then
   end
 end
 
-_ = require("underscore")
-
 local opt = vim.opt
 
 function RemoveNetrwMap()
@@ -29,17 +28,6 @@ function RemoveNetrwMap()
     vim.cmd([[unmap <buffer> <C-l>]])
   end
 end
-
-vim.api.nvim_exec(
-  [[
-function! FzfWrapHelper(opts)
-  call fzf#run(fzf#wrap(a:opts))
-endfunction
-]] ,
-  false
-)
-
-FZF = vim.fn["FzfWrapHelper"]
 
 vim.env.WALLABY_DRIVER = "chrome"
 vim.env.BAT_STYLE = "header,grid,numbers"
@@ -53,7 +41,7 @@ opt.scrolloff = 4
 opt.laststatus = 3
 opt.winbar = [[%m %t %{%v:lua.require'motch.lsp'.navic()%}]]
 
-opt.fillchars = {
+opt.fillchars:append {
   horiz = "━",
   horizup = "┻",
   horizdown = "┳",
@@ -65,8 +53,6 @@ opt.fillchars = {
 
 opt.colorcolumn = "999"
 opt.guifont = "JetBrains Mono"
-opt.foldmethod = "syntax"
-opt.foldlevelstart = 99
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
@@ -92,11 +78,6 @@ opt.autoread = true
 
 opt.title = true
 
-vim.g.forest_night_enable_italic = 1
-vim.g.forest_night_diagnostic_text_highlight = 1
-
-require("netrw").setup()
-
 vim.cmd([[command! Q q]])
 vim.cmd([[command! Qall qall]])
 vim.cmd([[command! QA qall]])
@@ -108,20 +89,6 @@ vim.keymap.set("n", "cn", ":cnext<cr>", { desc = "Go to next quickfix item" })
 vim.keymap.set("n", "<leader><space>", function()
   vim.cmd.set("hls!")
 end, { desc = "Toggle search highlight" })
-vim.keymap.set("n", "<c-p>", vim.cmd.Files, { desc = "Find files" })
-vim.keymap.set("n", "<space>p", function()
-  vim.cmd([[GitFiles?]])
-end, { desc = "Find in changes files" })
-vim.keymap.set(
-  "n",
-  "<space>vp",
-  ":Files ~/.local/share/nvim/site/pack/packer/start<cr>",
-  { desc = "Find files of vim plugins" }
-)
-vim.keymap.set("n", "<space>df", ":Files ~/src/<cr>", { desc = "Find files in all projects" })
-vim.keymap.set("n", "gl", vim.cmd.BLines, { desc = "FZF Buffer Lines" })
-vim.keymap.set("n", "<leader>a", vim.cmd.LocalProjectSearch, { desc = "Search in project" })
-vim.keymap.set("n", "<space>a", ":GlobalProjectSearch<cr>", { desc = "Search in all projects" })
 vim.keymap.set("n", "<leader>gr", ":grep<cr>")
 vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>")
 
@@ -136,45 +103,17 @@ vim.g.blamer_relative_time = 1
 
 vim.g.zig_fmt_autosave = 0
 
-require("motch.treesitter")
-
 opt.grepprg = "ag --vimgrep -Q $*"
 opt.grepformat = "%f:%l:%c:%m"
 
 vim.g.jsx_ext_required = 0
 
-vim.keymap.set("n", "<leader>gy", ":TZAtaraxis<cr>")
 vim.g.goyo_width = 120
 vim.g.goyo_height = 100
 
 vim.g.markdown_syntax_conceal = 0
 
 local LSP = require("motch.lsp")
-
-local elixirls = require("elixir")
-
-elixirls.setup {
-  -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
-  repo = "elixir-lsp/elixir-ls",
-  branch = "master",
-  settings = elixirls.settings {
-    dialyzerEnabled = false,
-    enableTestLenses = false,
-  },
-  log_level = vim.lsp.protocol.MessageType.Log,
-  message_level = vim.lsp.protocol.MessageType.Log,
-  on_attach = function(client, bufnr)
-    LSP.on_attach(client, bufnr)
-
-    vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-    vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-    vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-
-    -- dap
-    vim.keymap.set("n", "<space>db", require("dap").toggle_breakpoint, { buffer = true, silent = true })
-    vim.keymap.set("n", "<space>dc", require("dap").continue, { buffer = true, silent = true })
-  end,
-}
 
 LSP.setup("lua_ls", {
   settings = {
@@ -223,42 +162,6 @@ LSP.setup("tsserver", {})
 -- LSP.setup("vimls", {})
 LSP.setup("bashls", {})
 
-local zk = require("zk")
-
-zk.setup {
-  filetypes = { "markdown", "liquid" },
-  on_attach = function(client, bufnr)
-    local opts = function(tbl)
-      return vim.tbl_extend("keep", { buffer = bufnr, silent = true }, tbl)
-    end
-
-    LSP.on_attach(client, bufnr)
-    vim.keymap.set("n", "<space>zf", vim.cmd.Notes, opts { desc = "Find notes" })
-    vim.keymap.set("n", "<space>zt", vim.cmd.Tags, opts { desc = "Find tags" })
-    vim.keymap.set("n", "<space>zl", vim.cmd.Links, opts { desc = "Find links in note" })
-    vim.keymap.set("n", "<space>zb", vim.cmd.Backlinks, opts { desc = "Find backlinks in note" })
-    vim.keymap.set(
-      "n",
-      "<space>zd",
-      [[:lua require("zk").new({group = "daily", dir = "journal/daily"})<cr>]],
-      opts { desc = "New Journal Entry" }
-    )
-    vim.keymap.set("v", "<space>zn", function()
-      vim.lsp.buf.code_action {
-        apply = true,
-        filter = function(ca)
-          return ca.title == [[New note in top directory]]
-        end,
-      }
-    end, opts { desc = "Create and link note from selection" })
-
-    if vim.fn.expand("%:h") == "dnd" then
-      vim.keymap.set("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts)
-      vim.keymap.set("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts)
-    end
-  end,
-}
-
 LSP.setup("zls", {})
 LSP.setup("gopls", {})
 
@@ -288,9 +191,9 @@ LSP.setup(
 LSP.setup("gopls", {
   settings = {
     gopls = {
-      codelenses = { test = true, }
-    }
-  }
+      codelenses = { test = true },
+    },
+  },
 })
 
 local augroup = vim.api.nvim_create_augroup
@@ -321,10 +224,6 @@ local autocmd = vim.api.nvim_create_autocmd
 local random = augroup("random", { clear = true })
 
 autocmd("FileType", { pattern = "fzf", group = "random", command = "setlocal winhighlight+=Normal:Normal" })
-autocmd(
-  "BufWritePost",
-  { group = random, pattern = "config/nvim/lua/motch/deps.lua", command = "PackerCompile" }
-)
 -- autocmd "User", FloatermOpen execute "normal G" | wincmd p]]
 autocmd("VimResized", { group = random, pattern = "*", command = "wincmd =" })
 autocmd("GUIEnter", {
