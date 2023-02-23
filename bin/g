@@ -8,6 +8,30 @@ case $1 in
       git checkout "$2"
     fi
     ;;
+
+  sync)
+    gt repo sync --restack && gt ss
+    ;;
+
+  up | down | top | bottom)
+    gt branch "$1"
+    ;;
+
+  stack)
+    shift
+
+    case $1 in
+      new)
+        shift
+        gt branch create "$@"
+        ;;
+      *)
+        echo "stack $1: unknown command"
+        ;;
+    esac
+
+    ;;
+
   *)
     if [[ $# -gt 0 ]]; then
       git "$@"
