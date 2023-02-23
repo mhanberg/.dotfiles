@@ -5,6 +5,8 @@
 # (_)/___//____//_/ /_//_/    \___/
 #
 
+export HOMEBREW_NO_GOOGLE_ANALYTICS=1
+
 if [ $(arch) = "arm64" ]; then
   brew_prefix='/opt/homebrew'
 
