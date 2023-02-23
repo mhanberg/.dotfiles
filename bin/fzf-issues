@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-gh issue list --limit 999 \
-  | fzf --reverse --preview="echo {} | awk '{ print \$1 }' | GH_FORCE_TTY=true CLICOLOR_FORCE=1 xargs gh issue view" \
-  | awk '{ print $1 }' \
-  | xargs gh issue view -w
+gh issue list --limit 10000 \
+  | fzf \
+    --delimiter "\t" \
+    --reverse \
+    --preview="GH_FORCE_TTY=true CLICOLOR_FORCE=1 gh issue view {1}" \
+    --bind="enter:become(gh issue view -w {1}),ctrl-t:reload(gh issue list --state=all --limit=10000)"

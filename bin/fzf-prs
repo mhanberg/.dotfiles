@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 gh pr list \
-  | fzf --reverse --preview="echo {} | awk '{ print \$1 }' | GH_FORCE_TTY=true CLICOLOR_FORCE=1 xargs gh pr view" \
-  | awk '{ print $1 }' \
-  | xargs gh pr view -w
+  | fzf \
+    --delimiter "\t" \
+    --reverse \
+    --preview="GH_FORCE_TTY=true CLICOLOR_FORCE=1 gh pr view --comments {1}" \
+    --bind="enter:become(gh pr view -w {1}),ctrl-e:become(gh pr checkout {1}),ctrl-t:reload(gh pr list --state=all --limit=10000)"
