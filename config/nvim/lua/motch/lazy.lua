@@ -501,43 +501,51 @@ endfunction
       }
     end,
     config = function()
-      vim.cmd([[highlight! link @symbol Blue]])
-      vim.cmd([[highlight! link @constant PurpleItalic]])
+      vim.api.nvim_create_autocmd("User LazyColorscheme", {
+        group = vim.api.nvim_create_augroup("lazy_colorscheme", { clear = true }),
+        once = true,
+        callback = function()
+          vim.cmd([[highlight! link @symbol Blue]])
+          vim.cmd([[highlight! link @constant PurpleItalic]])
 
-      local palette = vim.fn["everforest#get_palette"]("medium", vim.g.everforest_colors_override)
-      local hl = function(...)
-        vim.api.nvim_set_hl(0, ...)
-      end
+          local palette = vim.fn["everforest#get_palette"]("medium", vim.g.everforest_colors_override)
+          local hl = function(...)
+            vim.api.nvim_set_hl(0, ...)
+          end
 
-      hl("NavicIconsFile", { default = true, fg = palette.fg[1], bg = nil })
-      hl("NavicIconsModule", { default = true, fg = palette.yellow[1], bg = nil })
-      hl("NavicIconsNamespace", { default = true, fg = palette.fg[1], bg = nil })
-      hl("NavicIconsPackage", { default = true, fg = palette.fg[1], bg = nil })
-      hl("NavicIconsClass", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsMethod", { default = true, fg = palette.blue[1], bg = nil })
-      hl("NavicIconsProperty", { default = true, fg = palette.green[1], bg = nil })
-      hl("NavicIconsField", { default = true, fg = palette.green[1], bg = nil })
-      hl("NavicIconsConstructor", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsEnum", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsInterface", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsFunction", { default = true, fg = palette.blue[1], bg = nil })
-      hl("NavicIconsVariable", { default = true, fg = palette.purple[1], bg = nil })
-      hl("NavicIconsConstant", { default = true, fg = palette.purple[1], bg = nil })
-      hl("NavicIconsString", { default = true, fg = palette.green[1], bg = nil })
-      hl("NavicIconsNumber", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsBoolean", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsArray", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsObject", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsKey", { default = true, fg = palette.purple[1], bg = nil })
-      hl("NavicIconsKeyword", { default = true, fg = palette.purple[1], bg = nil })
-      hl("NavicIconsNull", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsEnumMember", { default = true, fg = palette.green[1], bg = nil })
-      hl("NavicIconsStruct", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsEvent", { default = true, fg = palette.orange[1], bg = nil })
-      hl("NavicIconsOperator", { default = true, fg = palette.fg[1], bg = nil })
-      hl("NavicIconsTypeParameter", { default = true, fg = palette.green[1], bg = nil })
-      hl("NavicText", { default = true, fg = palette.fg[1], bg = nil })
-      hl("NavicSeparator", { default = true, fg = palette.fg[1], bg = nil })
+          hl("NavicIconsFile", { default = true, fg = palette.fg[1], bg = nil })
+          hl("NavicIconsModule", { default = true, fg = palette.yellow[1], bg = nil })
+          hl("NavicIconsNamespace", { default = true, fg = palette.fg[1], bg = nil })
+          hl("NavicIconsPackage", { default = true, fg = palette.fg[1], bg = nil })
+          hl("NavicIconsClass", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsMethod", { default = true, fg = palette.blue[1], bg = nil })
+          hl("NavicIconsProperty", { default = true, fg = palette.green[1], bg = nil })
+          hl("NavicIconsField", { default = true, fg = palette.green[1], bg = nil })
+          hl("NavicIconsConstructor", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsEnum", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsInterface", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsFunction", { default = true, fg = palette.blue[1], bg = nil })
+          hl("NavicIconsVariable", { default = true, fg = palette.purple[1], bg = nil })
+          hl("NavicIconsConstant", { default = true, fg = palette.purple[1], bg = nil })
+          hl("NavicIconsString", { default = true, fg = palette.green[1], bg = nil })
+          hl("NavicIconsNumber", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsBoolean", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsArray", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsObject", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsKey", { default = true, fg = palette.purple[1], bg = nil })
+          hl("NavicIconsKeyword", { default = true, fg = palette.purple[1], bg = nil })
+          hl("NavicIconsNull", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsEnumMember", { default = true, fg = palette.green[1], bg = nil })
+          hl("NavicIconsStruct", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsEvent", { default = true, fg = palette.orange[1], bg = nil })
+          hl("NavicIconsOperator", { default = true, fg = palette.fg[1], bg = nil })
+          hl("NavicIconsTypeParameter", { default = true, fg = palette.green[1], bg = nil })
+          hl("NavicText", { default = true, fg = palette.fg[1], bg = nil })
+          hl("NavicSeparator", { default = true, fg = palette.fg[1], bg = nil })
+        end,
+
+        vim.api.nvim_exec_autocmds("User LazyColorscheme", {}),
+      })
     end,
     priority = 1000,
     lazy = true,
@@ -551,7 +559,6 @@ endfunction
       extensions = { "fzf" },
       sections = {
         lualine_c = { { "filename", path = 1 } },
-        -- lualine_x = { { navic.get_location, cond = navic.is_available }, "filetype" },
       },
     },
   },
@@ -625,7 +632,6 @@ endfunction
         message_level = vim.lsp.protocol.MessageType.Log,
         on_attach = function(client, bufnr)
           LSP.on_attach(client, bufnr)
-          print("calling mitch elixirnvim on attach")
 
           vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
           vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
