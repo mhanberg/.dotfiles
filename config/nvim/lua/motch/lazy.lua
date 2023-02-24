@@ -85,7 +85,6 @@ require("lazy").setup({
     dev = true,
   },
   { "ruanyl/vim-gh-line", event = { "BufReadPost", "BufNewFile" } },
-  { "AndrewRadev/splitjoin.vim", event = { "BufReadPost", "BufNewFile" } },
   { "alvan/vim-closetag", ft = { "html", "liquid", "javascriptreact", "typescriptreact" } },
   { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
   { "christoomey/vim-tmux-runner", event = { "BufReadPost", "BufNewFile" } },

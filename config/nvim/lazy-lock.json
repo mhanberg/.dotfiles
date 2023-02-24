@@ -33,7 +33,6 @@
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "rust-tools.nvim": { "branch": "master", "commit": "71d2cf67b5ed120a0e31b2c8adb210dd2834242f" },
   "silicon.lua": { "branch": "main", "commit": "8db5682c9c13d6de584551c4b2b9982709f05610" },
-  "splitjoin.vim": { "branch": "main", "commit": "cdc1eb05496c2ecdeea7c7bf7ab0b6ab5b421f24" },
   "statuscol.nvim": { "branch": "main", "commit": "49a3bdab3e9cf23982724c1e888a6296fca4c8b9" },
   "telescope.nvim": { "branch": "master", "commit": "a486ac3e8fb2198f3636da1927ed57a28836fbd8" },
   "vim-closetag": { "branch": "master", "commit": "d0a562f8bdb107a50595aefe53b1a690460c3822" },
