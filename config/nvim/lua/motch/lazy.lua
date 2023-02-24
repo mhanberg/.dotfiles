@@ -12,13 +12,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-
   {
     "luukvbaal/statuscol.nvim",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       setopt = true,
+      separator = false,
       foldfunc = "builtin",
+      order = "NSFs",
     },
     init = function()
       vim.opt.foldcolumn = "1"
@@ -32,6 +33,9 @@ require("lazy").setup({
         foldclose = "",
       }
     end,
+    dependencies = {
+      "lewis6991/gitsigns.nvim",
+    },
   },
   {
     "mhanberg/zk.nvim",
@@ -454,6 +458,9 @@ endfunction
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    config = function(_, opts)
+      require("gitsigns").setup(opts)
+    end,
     dependencies = { "nvim-lua/plenary.nvim" },
   },
   {
