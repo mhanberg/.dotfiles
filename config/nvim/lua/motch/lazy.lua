@@ -92,6 +92,9 @@ require("lazy").setup({
     "hrsh7th/nvim-cmp",
     lazy = true,
     event = "InsertEnter",
+    init = function()
+      vim.opt.completeopt = { "menu", "menuone", "noselect" }
+    end,
     config = function()
       local cmp = require("cmp")
 
@@ -363,7 +366,7 @@ endfunction
       { "<space>p", "<cmd>GitFiles?<cr>", desc = "Find of changes files" },
       {
         "<space>vp",
-        "<cmd>Files ~/.local/share/nvim/site/pack/packer/start<cr>",
+        "<cmd>Files ~/.local/share/nvim/lazy<cr>",
         desc = "Find files of vim plugins",
       },
       { "<space>df", "<cmd>Files ~/src/<cr>", desc = "Find files in all projects" },
