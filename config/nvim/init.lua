@@ -132,6 +132,8 @@ LSP.setup("bashls", {})
 
 LSP.setup("zls", {})
 LSP.setup("gopls", {})
+LSP.setup("jsonls", {})
+LSP.setup("cssls", {})
 
 local default_tw_config = LSP.default_config("tailwindcss")
 LSP.setup(
