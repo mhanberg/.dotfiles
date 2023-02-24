@@ -158,7 +158,7 @@ require("lazy").setup({
       { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } },
     },
   },
-  "farmergreg/vim-lastplace",
+  { "farmergreg/vim-lastplace", event = "VeryLazy" },
 
   { "edluffy/hologram.nvim", ft = "markdown" },
 
@@ -399,20 +399,18 @@ endfunction
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = { "SmiteshP/nvim-navic" },
   },
-  "norcalli/nvim.lua",
-  { "nvim-lua/plenary.nvim", lazy = true },
+  { "norcalli/nvim.lua", event = "VeryLazy" },
   { "nvim-lua/telescope.nvim", lazy = true },
   { "tpope/vim-commentary", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-dispatch", event = "VeryLazy" },
   { "tpope/vim-eunuch", event = "VeryLazy" },
   { "tpope/vim-fugitive", event = "VeryLazy" },
-  "tpope/vim-projectionist",
-  "tpope/vim-repeat",
+  { "tpope/vim-projectionist", event = { "BufReadPost", "BufNewFile" } },
+  { "tpope/vim-repeat", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-rsi", event = "VeryLazy" },
   { "tpope/vim-surround", event = { "BufReadPost", "BufNewFile" } },
-  "tpope/vim-vinegar",
+  { "tpope/vim-vinegar" },
   {
     "vim-test/vim-test",
     event = { "BufReadPost", "BufNewFile" },
@@ -553,7 +551,6 @@ endfunction
     priority = 1000,
     lazy = true,
   },
-  { "nvim-tree/nvim-web-devicons" },
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -660,7 +657,9 @@ endfunction
     event = { "BufReadPost", "BufNewFile" },
   },
 
-  { "prichrd/netrw.nvim" },
+  { "prichrd/netrw.nvim", ft = "netrw", dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  } },
 }, {
   concurrency = 30,
   dev = { path = "~/src" },
