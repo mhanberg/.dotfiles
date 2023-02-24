@@ -85,16 +85,6 @@ require("lazy").setup({
     dev = true,
   },
   { "ruanyl/vim-gh-line", event = { "BufReadPost", "BufNewFile" } },
-  {
-    "APZelos/blamer.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    init = function()
-      vim.g.blamer_show_in_visual_modes = 0
-      vim.g.blamer_template = "<author>, <committer-time> • <summary>"
-      vim.g.blamer_enabled = 1
-      vim.g.blamer_relative_time = 1
-    end,
-  },
   { "AndrewRadev/splitjoin.vim", event = { "BufReadPost", "BufNewFile" } },
   { "alvan/vim-closetag", ft = { "html", "liquid", "javascriptreact", "typescriptreact" } },
   { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
@@ -458,6 +448,10 @@ endfunction
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      current_line_blame = true,
+      current_line_blame_formatter = "   <author>, <committer_time:%R> • <summary>",
+    },
     config = function(_, opts)
       require("gitsigns").setup(opts)
     end,

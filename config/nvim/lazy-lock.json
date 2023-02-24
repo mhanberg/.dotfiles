@@ -1,5 +1,4 @@
 {
-  "blamer.nvim": { "branch": "master", "commit": "f4eb22a9013642c411725fdda945ae45f8d93181" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-cmdline": { "branch": "main", "commit": "8fcc934a52af96120fe26358985c10c035984b53" },
   "cmp-emoji": { "branch": "main", "commit": "19075c36d5820253d32e2478b6aaf3734aeaafa0" },
