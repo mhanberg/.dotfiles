@@ -85,7 +85,6 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export PATH="$brew_prefix/opt/python@3.9/libexec/bin:$PATH"
 export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
-export PATH="$(yarn global bin):$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export PATH="$HOME/zls/zig-out/bin:$PATH"
@@ -99,8 +98,6 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-alias luamake=/Users/mitchell/.cache/nvim/nlua/sumneko_lua/lua-language-server/3rd/luamake/luamake
 
 if [ -f "$brew_prefix"/opt/asdf/libexec/asdf.sh ]; then
   . "$brew_prefix"/opt/asdf/libexec/asdf.sh
