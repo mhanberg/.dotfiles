@@ -1,39 +1,17 @@
 _G.motch = {}
 
-require("motch.lazy")
-vim.cmd.colorscheme("everforest")
-
 vim.filetype.add { filename = { Brewfile = "ruby" } }
 
-NVIM = require("nvim")
-P = function(thing)
-  NVIM.print(thing)
-
-  return thing
-end
-
-if pcall(require, "plenary") then
-  RELOAD = require("plenary.reload").reload_module
-
-  R = function(name)
-    RELOAD(name)
-    return require(name)
-  end
-end
+require("motch.lazy")
+vim.cmd.colorscheme("everforest")
+require("motch.autocmds")
 
 local opt = vim.opt
-
-function RemoveNetrwMap()
-  if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
-    vim.cmd([[unmap <buffer> <C-l>]])
-  end
-end
 
 vim.env.WALLABY_DRIVER = "chrome"
 vim.env.BAT_STYLE = "header,grid,numbers"
 
-opt.shortmess:append("C")
-opt.shortmess:append("c")
+vim.cmd [[set shortmess+="C,c"]]
 
 opt.timeoutlen = 500
 
@@ -96,20 +74,10 @@ vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 
 vim.g.dispatch_handlers = { "job" }
 
-opt.completeopt = { "menu", "menuone", "noselect" }
-
-vim.g.blamer_enabled = 1
-vim.g.blamer_relative_time = 1
-
 vim.g.zig_fmt_autosave = 0
 
 opt.grepprg = "ag --vimgrep -Q $*"
 opt.grepformat = "%f:%l:%c:%m"
-
-vim.g.jsx_ext_required = 0
-
-vim.g.goyo_width = 120
-vim.g.goyo_height = 100
 
 vim.g.markdown_syntax_conceal = 0
 
@@ -196,9 +164,6 @@ LSP.setup("gopls", {
   },
 })
 
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-
 -- local credo = vim.api.nvim_create_augroup("credo", { clear = true })
 
 -- vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -220,45 +185,6 @@ local autocmd = vim.api.nvim_create_autocmd
 -- require('hologram').setup {
 --   auto_display = true -- WIP automatic markdown image display, may be prone to breaking
 -- }
-
-local random = augroup("random", { clear = true })
-
-autocmd("FileType", { pattern = "fzf", group = "random", command = "setlocal winhighlight+=Normal:Normal" })
--- autocmd "User", FloatermOpen execute "normal G" | wincmd p]]
-autocmd("VimResized", { group = random, pattern = "*", command = "wincmd =" })
-autocmd("GUIEnter", {
-  group = random,
-  pattern = "*",
-  callback = function()
-    vim.opt.visualbell = "t_vb="
-  end,
-})
-autocmd("FileType", { group = random, pattern = "netrw", callback = RemoveNetrwMap })
-autocmd("FileType", {
-  group = random,
-  pattern = "fzf",
-  callback = function()
-    vim.keymap.set("t", "<esc>", "<C-c>", { buffer = 0 })
-  end,
-})
-autocmd(
-  { "BufRead", "BufNewFile" },
-  { group = random, pattern = "*.livemd", command = "set filetype=markdown" }
-)
-autocmd(
-  { "BufRead", "BufNewFile" },
-  { group = random, pattern = "aliases.local", command = "set filetype=zsh" }
-)
-autocmd({ "BufRead", "BufNewFile" }, { group = random, pattern = "*.lexs", command = "set filetype=elixir" })
-
-local clojure = augroup("clojure", { clear = true })
-autocmd("BufWritePost", { group = clojure, pattern = "*.clj", command = "silent Require" })
-
-local markdown = augroup("markdown", { clear = true })
-autocmd({ "BufRead", "BufNewFile" }, { group = markdown, pattern = "*.md", command = "setlocal spell" })
-autocmd({ "BufRead", "BufNewFile" }, { group = markdown, pattern = "*.md", command = "setlocal linebreak" })
-
-vim.cmd([[let g:test#javascript#jest#file_pattern = '\v(.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$']])
 
 if vim.fn.filereadable(".init.local.lua") == 1 then
   vim.cmd([[source .init.local.lua]])
