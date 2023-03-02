@@ -111,18 +111,6 @@ LSP.setup("lua_ls", {
 })
 
 LSP.setup("dartls", {})
-LSP.setup("efm", {
-  filetypes = {
-    "elixir",
-    "javascript",
-    "typescript",
-    "lua",
-    "bash",
-    "zsh",
-    "sh",
-    "sql",
-  },
-})
 LSP.setup("rust_analyzer", {})
 -- LSP.setup("solargraph", {})
 LSP.setup("omnisharp", {})

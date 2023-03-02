@@ -462,6 +462,34 @@ endfunction
     end,
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {},
+    config = function()
+      local null_ls = require("null-ls")
+
+      null_ls.setup {
+        sources = {
+          -- null_ls.builtins.completion.spell,
+          null_ls.builtins.diagnostics.actionlint,
+          null_ls.builtins.diagnostics.trail_space,
+          null_ls.builtins.diagnostics.credo,
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.formatting.eslint,
+          null_ls.builtins.formatting.pg_format,
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.trim_whitespace,
+          null_ls.builtins.formatting.trim_newlines,
+        },
+      }
+    end,
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
