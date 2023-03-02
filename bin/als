@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+ALS_PATH=${ALS_PATH:-"$HOME/src/als/als-server/jvm/target/scala-2.12/als-server-assembly-5.4.0-SNAPSHOT.jar"}
+
+java -jar "$ALS_PATH" "$@"

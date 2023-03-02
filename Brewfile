@@ -48,7 +48,7 @@ brew "exa"
 brew "fd"
 brew "figlet"
 brew "fswatch"
-brew "fzf", args: ["HEAD"]
+brew "fzf"
 brew "geckodriver"
 brew "genext2fs"
 brew "gh"
