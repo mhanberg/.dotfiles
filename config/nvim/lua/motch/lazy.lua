@@ -478,6 +478,7 @@ endfunction
           null_ls.builtins.diagnostics.credo,
           null_ls.builtins.diagnostics.eslint,
           null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.diagnostics.zsh,
           null_ls.builtins.formatting.eslint,
           null_ls.builtins.formatting.pg_format,
           null_ls.builtins.formatting.stylua,
@@ -485,7 +486,85 @@ endfunction
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.trim_whitespace,
           null_ls.builtins.formatting.trim_newlines,
+          {
+            name = "redocly",
+            method = require("null-ls.methods").internal.DIAGNOSTICS,
+            filetypes = { "raml" },
+            generator = null_ls.generator {
+              command = "redocly",
+              args = { "lint", "$FILENAME", "--format", "codeclimate" },
+              format = "json",
+              to_stdin = false,
+              ignore_stderr = true,
+              to_temp_file = true,
+              on_output = function(params)
+                local h = require("null-ls.helpers")
+                local severities = {
+                  blocker = h.diagnostics.severities.error,
+                  critical = h.diagnostics.severities.error,
+                  major = h.diagnostics.severities.error,
+                  minor = h.diagnostics.severities.warning,
+                  info = h.diagnostics.severities.information,
+                }
+                params.messages = {}
+                for _, message in ipairs(params.output) do
+                  local col = nil
+                  local row = message.location.lines.begin
+                  if type(row) == "table" then
+                    row = row.line
+                    col = row.column
+                  end
+                  table.insert(params.messages, {
+                    row = row,
+                    col = col,
+                    message = message.description,
+                    severity = severities[message.severity],
+                    filename = params.bufname,
+                  })
+                end
+                return params.messages
+              end,
+            },
+          },
+
+          {
+            name = "asyncapi",
+            method = require("null-ls.methods").internal.DIAGNOSTICS,
+            filetypes = { "yaml" },
+            generator = null_ls.generator {
+              command = "asyncapi",
+              args = { "validate", "$FILENAME", "--diagnostics-format", "json" },
+              format = "json_raw",
+              to_stdin = false,
+              ignore_stderr = true,
+              to_temp_file = true,
+              on_output = function(params)
+                local h = require("null-ls.helpers")
+                local severities = {
+                  h.diagnostics.severities.error,
+                  h.diagnostics.severities.warning,
+                  h.diagnostics.severities.info,
+                }
+                params.messages = {}
+                local output = vim.split(params.output, "\n", { trimempty = true })
+                local json = vim.fn.join { unpack(output, 2) }
+                for _, message in ipairs(vim.json.decode(json)) do
+                  table.insert(params.messages, {
+                    row = message.range.start.line + 1,
+                    col = message.range.start.character + 1,
+                    end_row = message.range["end"].line + 1,
+                    end_col = message.range["end"].character + 1,
+                    message = message.message,
+                    severity = severities[message.severity],
+                    filename = params.bufname,
+                  })
+                end
+                return params.messages
+              end,
+            },
+          },
         },
+        on_attach = require("motch.lsp").on_attach,
       }
     end,
     dependencies = { "nvim-lua/plenary.nvim" },
