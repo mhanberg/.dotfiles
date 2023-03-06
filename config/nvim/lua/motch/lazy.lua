@@ -15,22 +15,28 @@ require("lazy").setup({
   {
     "luukvbaal/statuscol.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      setopt = true,
-      separator = false,
-      foldfunc = "builtin",
-      order = "NSFs",
-    },
     init = function()
       vim.opt.foldcolumn = "1"
       vim.opt.foldlevelstart = 99
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
       vim.opt.foldmethod = "expr"
       vim.opt.mousemodel = "extend"
       vim.opt.fillchars:append {
         foldopen = "",
         foldsep = " ",
         foldclose = "",
+      }
+    end,
+    config = function()
+      local builtin = require("statuscol.builtin")
+      require("statuscol").setup {
+        setopt = true,
+        foldfunc = "builtin",
+        segments = {
+          { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+          { text = { "%s" }, click = "v:lua.ScSa" },
+          { text = { builtin.foldfunc, " " }, condition = { true, builtin.not_empty }, click = "v:lua.ScFa" },
+        },
       }
     end,
     dependencies = {
@@ -70,8 +76,8 @@ require("lazy").setup({
 
         if vim.fn.expand("%:h") == "dnd" then
           require("motch.dnd")
-          vim.keymap.set("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts)
-          vim.keymap.set("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts)
+          vim.keymap.set("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts {})
+          vim.keymap.set("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts {})
         end
       end,
     },
@@ -176,7 +182,7 @@ require("lazy").setup({
       -- bgImage = "/Users/mitchell/Downloads/sincerely-media-K5OLjMlPe4U-unsplash.jpg",
       -- bgImage = "/Users/mitchell/Downloads/sincerely-media-yHWvPxLadRE-unsplash.jpg",
       shadowBlurRadius = 0,
-      theme = "/Users/mitchell/.config/bat/themes/Everforest Dark.tmTheme",
+      theme = "Everforest Dark",
     },
     keys = {
       {
@@ -703,8 +709,18 @@ endfunction
           keymaps = {
             ["ab"] = "@block.outer",
             ["ib"] = "@block.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
             ["if"] = "@function.inner",
             ["af"] = "@function.outer",
+          },
+        },
+        lsp_interop = {
+          enable = true,
+          floating_preview_opts = { border = "none" },
+          peek_definition_code = {
+            ["<leader>df"] = "@function.outer",
+            ["<leader>dF"] = "@class.outer",
           },
         },
       },
