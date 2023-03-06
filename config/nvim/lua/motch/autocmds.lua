@@ -16,6 +16,45 @@ autocmd("GUIEnter", {
 
 autocmd("FileType", {
   group = random,
+  pattern = "yaml",
+  callback = function()
+    -- vim.bo.commentstring = "# %s"
+    vim.lsp.start {
+      name = "YAML Language Server",
+      cmd = { "yaml-language-server", "--stdio" },
+      root_dir = vim.fs.dirname(vim.fs.find(".git", { upward = true })[1]),
+      settings = {
+        redhat = { telemetry = { enabled = false } },
+      },
+      capabilities = require("motch.lsp").capabilities,
+      on_attach = require("motch.lsp").on_attach,
+    }
+  end,
+})
+autocmd("FileType", {
+  group = random,
+  pattern = "raml",
+  callback = function()
+    local jobid = vim.fn.jobstart("als --port 9000 --listen")
+
+    if jobid > 0 then
+      vim.wait(1000, function() end)
+      vim.lsp.start {
+        name = "ALS",
+        cmd = vim.lsp.rpc.connect("127.0.0.1", 9000),
+        root_dir = vim.fs.dirname(vim.fs.find(".git", { upward = true })[1]),
+        settings = {},
+        capabilities = require("motch.lsp").capabilities,
+        on_attach = require("motch.lsp").on_attach,
+      }
+    else
+      vim.notify("Couldn't start ALS", vim.log.levels.WARN)
+    end
+  end,
+})
+
+autocmd("FileType", {
+  group = random,
   pattern = "netrw",
   callback = function()
     if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
