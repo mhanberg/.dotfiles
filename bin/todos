@@ -1,0 +1,70 @@
+#!/usr/bin/env elixir
+
+Mix.install([:ratatouille])
+
+defmodule Todos do
+  @behaviour Ratatouille.App
+
+  import Ratatouille.View
+  import Ratatouille.Constants, only: [color: 1, key: 1]
+
+  @style_selected [
+    color: color(:black),
+    background: color(:white)
+  ]
+
+  @space key(:space)
+
+  def init(_) do
+    %{todo: %{items: %{"buy eggs" => false , "mow the lawn" => true, "get a haircut" => false}, cursor_y: 0}}
+  end
+
+  def update(model, msg) do
+    case msg do
+      {:event, %{key: @space}} ->
+        {todo, _done} = Enum.at(model.todo.items, model.todo.cursor_y)
+
+        update_in(model.todo.items[todo], & !&1)
+
+      {:event, %{ch: ?j}} ->
+        update_in(model.todo.cursor_y, &cursor_down(&1, model.todo.items))
+
+      {:event, %{ch: ?k}} ->
+        update_in(model.todo.cursor_y, &cursor_up/1)
+
+      _ ->
+        model
+    end
+  end
+
+  defp cursor_down(cursor, rows) do
+    min(cursor + 1, Enum.count(rows) - 1)
+  end
+
+  defp cursor_up(cursor) do
+    max(cursor - 1, 0)
+  end
+
+  def render(model) do
+    view do
+      panel title: "TODO", height: :fill do
+        for {{t, done}, idx} <- Enum.with_index(model.todo.items) do
+          row do
+            column size: 12 do
+              label if(idx == model.todo.cursor_y, do: @style_selected, else: []) do
+                text content: "- ["
+                done(done)
+                text content: "] #{t}"
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  defp done(true), do: text(content: "x")
+  defp done(false), do: text(content: " ")
+end
+
+Ratatouille.run(Todos)
