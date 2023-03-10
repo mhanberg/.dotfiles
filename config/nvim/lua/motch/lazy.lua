@@ -182,7 +182,7 @@ require("lazy").setup({
       -- bgImage = "/Users/mitchell/Downloads/sincerely-media-K5OLjMlPe4U-unsplash.jpg",
       -- bgImage = "/Users/mitchell/Downloads/sincerely-media-yHWvPxLadRE-unsplash.jpg",
       shadowBlurRadius = 0,
-      theme = "Everforest Dark",
+      theme = "/Users/mitchell/.config/silicon/themes/Everforest Dark.tmTheme",
     },
     keys = {
       {
