@@ -680,13 +680,13 @@ endfunction
         group = vim.api.nvim_create_augroup("lazy_colorscheme", { clear = true }),
         once = true,
         callback = function()
-          vim.cmd([[highlight! link @symbol Blue]])
-          vim.cmd([[highlight! link @constant PurpleItalic]])
-
           local palette = vim.fn["everforest#get_palette"]("medium", vim.g.everforest_colors_override)
           local hl = function(...)
             vim.api.nvim_set_hl(0, ...)
           end
+
+          hl("@symbol", { link = "Blue" })
+          hl("@constant", { link = "PurpleItalic" })
 
           hl("NavicIconsFile", { default = true, fg = palette.fg[1], bg = nil })
           hl("NavicIconsModule", { default = true, fg = palette.yellow[1], bg = nil })
@@ -717,6 +717,15 @@ endfunction
           hl("NavicIconsTypeParameter", { default = true, fg = palette.green[1], bg = nil })
           hl("NavicText", { default = true, fg = palette.fg[1], bg = nil })
           hl("NavicSeparator", { default = true, fg = palette.fg[1], bg = nil })
+
+          hl("@lsp.type.enum", { link = "@type" })
+          hl("@lsp.type.keyword", { link = "@keyword" })
+          hl("@lsp.type.interface", { link = "Identifier" })
+          hl("@lsp.type.namespace", { link = "@namespace" })
+          hl("@lsp.type.parameter", { link = "@parameter" })
+          hl("@lsp.type.property", { link = "@property" })
+          hl("@lsp.typemod.function.defaultLibrary", { link = "Special" })
+          hl("@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
         end,
 
         vim.api.nvim_exec_autocmds("User LazyColorscheme", {}),
