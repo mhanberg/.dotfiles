@@ -11,7 +11,7 @@ local opt = vim.opt
 vim.env.WALLABY_DRIVER = "chrome"
 vim.env.BAT_STYLE = "header,grid,numbers"
 
-vim.cmd [[set shortmess+="C,c"]]
+vim.cmd([[set shortmess+="C,c"]])
 
 opt.timeoutlen = 500
 
@@ -66,7 +66,8 @@ vim.cmd([[command! Wq wq]])
 vim.api.nvim_create_user_command("LspLogDelete", function()
   vim.fn.system([[rm "$HOME/.local/state/nvim/lsp.log"]])
 end, { desc = "Deletes the LSP log file. Useful for when it gets too big" })
-vim.keymap.set("n", "cn", ":cnext<cr>", { desc = "Go to next quickfix item" })
+vim.keymap.set("n", "[q", vim.cmd.cprev, {desc = "Go to the previous item in the quickfix list."})
+vim.keymap.set("n", "]q", vim.cmd.cnext, {desc = "Go to the next item in the quickfix list."})
 vim.keymap.set("n", "<leader><space>", function()
   vim.cmd.set("hls!")
 end, { desc = "Toggle search highlight" })

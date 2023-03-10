@@ -28,6 +28,9 @@ M.on_attach = function(client, bufnr)
 
   vim.keymap.set("n", "df", vim.lsp.buf.format, map_opts)
   vim.keymap.set("n", "gd", vim.diagnostic.open_float, map_opts)
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts)
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts)
+
   vim.keymap.set("n", "dt", vim.lsp.buf.definition, map_opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
   vim.keymap.set("n", "gD", vim.lsp.buf.implementation, map_opts)

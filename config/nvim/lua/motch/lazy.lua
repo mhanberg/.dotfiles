@@ -807,6 +807,13 @@ endfunction
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup()
+    end,
+  },
+
+  {
     "mhanberg/elixir.nvim",
     ft = { "elixir", "eex", "heex", "surface" },
     config = function()
