@@ -367,6 +367,17 @@ endfunction
         }
       end
     end,
+    cmd = {
+      "Files",
+      "BLines",
+      "BCommits",
+      "References",
+      "Implementations",
+      "DocumentSymbols",
+      "WorkspaceSymbols",
+      "Diagnostics",
+      "DiagnosticsAll",
+    },
     keys = {
       { "<c-p>", vim.cmd.Files, desc = "Find files" },
       { "<space>p", "<cmd>GitFiles?<cr>", desc = "Find of changes files" },
