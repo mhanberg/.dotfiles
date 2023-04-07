@@ -9,6 +9,7 @@ rcup \
   -x mitch-preonic.json \
   -x install \
   -x rcup \
+  -x .gitignore \
   -x tmux-terminfo.txt \
   -x tmux-256color.terminfo \
   -x xterm-256color.terminfo \

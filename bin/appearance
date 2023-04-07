@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+case "$("$HOME/.bin/darkmode")" in
+true)
+	echo "dark"
+	;;
+
+false)
+	echo "light"
+	;;
+esac

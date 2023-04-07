@@ -1,0 +1,3 @@
+#!/usr/bin/env osascript
+
+tell application "System Events" to tell appearance preferences to get dark mode

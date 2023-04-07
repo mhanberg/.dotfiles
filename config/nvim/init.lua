@@ -2,6 +2,41 @@ _G.motch = {}
 
 vim.filetype.add { filename = { Brewfile = "ruby" } }
 
+_G.motch.set_dark_theme = function()
+  vim.g.everforest_colors_override = {
+    -- bg8 = { "#000000", 235 },
+    bg0 = { "#273433", "235" },
+    bg1 = { "#394C4A", "236" },
+    bg2 = { "#425755", "237" },
+    bg3 = { "#4B6361", "238" },
+    bg4 = { "#56716F", "239" },
+  }
+  vim.opt.background = "dark"
+  vim.cmd.colorscheme("everforest")
+end
+_G.motch.set_light_theme = function()
+  vim.g.everforest_colors_override = {
+    bg8 = { "#000000", 235 },
+  }
+  vim.opt.background = "light"
+
+  vim.cmd.colorscheme("everforest")
+end
+
+_G.motch.toggle_theme = function()
+  if vim.opt.background:get() == "dark" then
+    motch.set_light_theme()
+  else
+    motch.set_dark_theme()
+  end
+end
+
+vim.api.nvim_create_user_command(
+  "ToggleColorscheme",
+  motch.toggle_theme,
+  { desc = "Toggle the theme from dark mode to light mode" }
+)
+
 require("motch.lazy")
 vim.cmd.colorscheme("everforest")
 require("motch.autocmds")

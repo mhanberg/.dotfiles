@@ -30,7 +30,7 @@ gui:
         unstagedChangesColor:
             - red
         defaultFgColor:
-            - black
+            - white
     commitLength:
         show: true
     skipNoStagedFilesWarning: false

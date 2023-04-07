@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
 
-echo "--color=fg:#d8caac,bg:#273433,hl:#a7c080,fg+:#d8caac,bg+:#394C4A,hl+:#87c095,info:#87c095,prompt:#e39b7b,pointer:#83b6af,marker:#d9bb80,spinner:#d9bb80,header:#868d80,border:black"
+case "$(cat "$HOME/.local/share/mitch/appearance.txt")" in
+dark)
+	echo "--color=fg:#d8caac,bg:#273433,hl:#a7c080,fg+:#d8caac,bg+:#394C4A,hl+:#87c095,info:#87c095,prompt:#e39b7b,pointer:#83b6af,marker:#d9bb80,spinner:#d9bb80,header:#868d80,border:black"
+	;;
+light)
+	echo "--color=fg:#5c6a72,bg:#fdf6e3,hl:#8da101,fg+:#5c6a72,bg+:#efebd4,hl+:#35a77c,info:#35a77c,prompt:#f57d26,pointer:#3a94c5,marker:#dfa000,spinner:#dfa000,header:#a6b0a0,border:#829181"
+	;;
+
+esac
