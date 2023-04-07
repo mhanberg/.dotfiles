@@ -377,6 +377,7 @@ endfunction
       "WorkspaceSymbols",
       "Diagnostics",
       "DiagnosticsAll",
+      "Helptags",
     },
     keys = {
       { "<c-p>", vim.cmd.Files, desc = "Find files" },
@@ -642,7 +643,6 @@ endfunction
     name = "indent_blankline",
     init = function()
       vim.opt.list = true
-      vim.opt.listchars:append("eol:↴")
     end,
     opts = {
       space_char_blankline = " ",
@@ -668,6 +668,7 @@ endfunction
       vim.g.everforest_diagnostic_virtual_text = "colored"
       vim.g.everforest_enable_italic = true
       vim.g.everforest_colors_override = {
+        -- bg8 = { "#000000", 235 },
         bg0 = { "#273433", "235" },
         bg1 = { "#394C4A", "236" },
         bg2 = { "#425755", "237" },
@@ -742,6 +743,7 @@ endfunction
       extensions = { "fzf" },
       sections = {
         lualine_c = { { "filename", path = 1 } },
+        lualine_x = { "selectioncount", "searchcount", "encoding", "fileformat", "filetype" },
       },
     },
   },
@@ -808,6 +810,8 @@ endfunction
 
   {
     "nvim-treesitter/nvim-treesitter-context",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("treesitter-context").setup()
     end,
@@ -815,9 +819,9 @@ endfunction
 
   {
     "mhanberg/elixir.nvim",
+    -- dir = "~/src/elixir.nvim",
     ft = { "elixir", "eex", "heex", "surface" },
     config = function()
-      local LSP = require("motch.lsp")
       local elixirls = require("elixir")
 
       elixirls.setup {
@@ -830,9 +834,7 @@ endfunction
         },
         log_level = vim.lsp.protocol.MessageType.Log,
         message_level = vim.lsp.protocol.MessageType.Log,
-        on_attach = function(client, bufnr)
-          LSP.on_attach(client, bufnr)
-
+        on_attach = function()
           vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
           vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
           vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
@@ -855,6 +857,14 @@ endfunction
   {
     "SmiteshP/nvim-navic",
     event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      local navic = require("nvim-navic")
+
+      navic.setup {
+        highlight = true,
+        safe_output = true,
+      }
+    end,
   },
 
   { "prichrd/netrw.nvim", ft = "netrw", dependencies = {

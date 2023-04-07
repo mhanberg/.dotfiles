@@ -41,4 +41,4 @@
   target: ((identifier) @_identifier (#any-of? @_identifier "execute"))
   (arguments
     (string
-      (quoted_content) @sql))) 
+      (quoted_content) @sql)))

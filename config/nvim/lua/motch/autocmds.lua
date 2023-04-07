@@ -14,6 +14,48 @@ autocmd("GUIEnter", {
   end,
 })
 
+autocmd("LspAttach", {
+  group = augroup("lsp", { clear = true }),
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local map_opts = { buffer = bufnr, silent = true }
+
+    vim.keymap.set("n", "df", vim.lsp.buf.format, map_opts)
+    vim.keymap.set("n", "gd", vim.diagnostic.open_float, map_opts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts)
+
+    vim.keymap.set("n", "dt", vim.lsp.buf.definition, map_opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.implementation, map_opts)
+    vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, map_opts)
+    vim.keymap.set("n", "gr", ":References<cr>", map_opts)
+    vim.keymap.set("n", "gi", ":Implementations<cr>", map_opts)
+    vim.keymap.set("n", "g0", ":DocumentSymbols<cr>", map_opts)
+    vim.keymap.set("n", "g7", ":WorkspaceSymbols<cr>", map_opts)
+    vim.keymap.set("n", "<leader>dd", ":Diagnostics<cr>", map_opts)
+    vim.keymap.set("n", "<leader>da", ":DiagnosticsAll<cr>", map_opts)
+    vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
+
+    vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
+    vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
+    -- if client.server_capabilities.codelensProvider then
+    --   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+    --     buffer = bufnr,
+    --     callback = vim.lsp.codelens.refresh,
+    --   })
+    --   vim.lsp.codelens.refresh()
+    -- end
+
+    require("cmp_nvim_lsp").default_capabilities(require("motch.lsp").capabilities)
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+    end
+  end,
+})
+
 autocmd("FileType", {
   group = random,
   pattern = "yaml",
