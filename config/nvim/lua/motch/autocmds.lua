@@ -67,6 +67,10 @@ autocmd("FileType", {
       root_dir = vim.fs.dirname(vim.fs.find(".git", { upward = true })[1]),
       settings = {
         redhat = { telemetry = { enabled = false } },
+        yaml = {
+          keyOrdering = false,
+          schemaStore = { enable = true },
+        },
       },
       capabilities = require("motch.lsp").capabilities,
       on_attach = require("motch.lsp").on_attach,
@@ -101,6 +105,10 @@ autocmd("FileType", {
   callback = function()
     if vim.fn.hasmapto("<Plug>NetrwRefresh") > 0 then
       vim.cmd([[unmap <buffer> <C-l>]])
+    end
+
+    if vim.fn.hasmapto("<Plug>NetrwHideEdit") > 0 then
+      vim.cmd([[unmap <buffer> <C-h>]])
     end
   end,
 })
