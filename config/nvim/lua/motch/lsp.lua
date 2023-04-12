@@ -2,19 +2,18 @@ M = {}
 
 local has_run = {}
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 M.navic = function()
 	local navic = require("nvim-navic")
 	local loc = navic.get_location()
 	if loc and #loc > 0 then
-		return "> " .. navic.get_location()
+		return "%#NavicSeparator#> " .. navic.get_location()
 	else
 		return ""
 	end
 end
 
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 M.setup = function(name, opts)
 	if not has_run[name] then
 		has_run[name] = true
@@ -23,12 +22,10 @@ M.setup = function(name, opts)
 		lspconfig[name].setup(vim.tbl_extend("force", {
 			log_level = vim.lsp.protocol.MessageType.Log,
 			message_level = vim.lsp.protocol.MessageType.Log,
-			capabilities = capabilities,
+			capabilities = M.capabilities,
 		}, opts))
 	end
 end
-
-M.capabilities = capabilities
 
 local convert_lsp_log_level_to_neovim_log_level = function(lsp_log_level)
 	if lsp_log_level == 1 then

@@ -63,8 +63,7 @@ require("lazy").setup({
     ft = "markdown",
     opts = {
       filetypes = { "markdown", "liquid" },
-      on_attach = function(client, bufnr)
-        local LSP = require("motch.lsp")
+      on_attach = function(_client, bufnr)
         local opts = function(tbl)
           return vim.tbl_extend("keep", { buffer = bufnr, silent = true }, tbl)
         end
@@ -124,6 +123,10 @@ require("lazy").setup({
             -- For `vsnip` user.
             vim.fn["vsnip#anonymous"](args.body)
           end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -673,6 +676,8 @@ endfunction
   { "mg979/vim-visual-multi", branch = "master", event = { "BufReadPost", "BufNewFile" } },
   {
     "sainnhe/everforest",
+    lazy = true,
+    priority = 1000,
     init = function()
       vim.opt.termguicolors = true
 
@@ -687,64 +692,6 @@ endfunction
         bg4 = { "#56716F", "239" },
       }
     end,
-    config = function()
-      vim.api.nvim_create_autocmd("User LazyColorscheme", {
-        group = vim.api.nvim_create_augroup("lazy_colorscheme", { clear = true }),
-        once = true,
-        callback = function()
-          local palette = vim.fn["everforest#get_palette"]("medium", vim.g.everforest_colors_override)
-          local hl = function(...)
-            vim.api.nvim_set_hl(0, ...)
-          end
-
-          hl("@symbol", { link = "Blue" })
-          hl("@constant", { link = "PurpleItalic" })
-
-          hl("NavicIconsFile", { default = true, fg = palette.fg[1], bg = nil })
-          hl("NavicIconsModule", { default = true, fg = palette.yellow[1], bg = nil })
-          hl("NavicIconsNamespace", { default = true, fg = palette.fg[1], bg = nil })
-          hl("NavicIconsPackage", { default = true, fg = palette.fg[1], bg = nil })
-          hl("NavicIconsClass", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsMethod", { default = true, fg = palette.blue[1], bg = nil })
-          hl("NavicIconsProperty", { default = true, fg = palette.green[1], bg = nil })
-          hl("NavicIconsField", { default = true, fg = palette.green[1], bg = nil })
-          hl("NavicIconsConstructor", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsEnum", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsInterface", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsFunction", { default = true, fg = palette.blue[1], bg = nil })
-          hl("NavicIconsVariable", { default = true, fg = palette.purple[1], bg = nil })
-          hl("NavicIconsConstant", { default = true, fg = palette.purple[1], bg = nil })
-          hl("NavicIconsString", { default = true, fg = palette.green[1], bg = nil })
-          hl("NavicIconsNumber", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsBoolean", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsArray", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsObject", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsKey", { default = true, fg = palette.purple[1], bg = nil })
-          hl("NavicIconsKeyword", { default = true, fg = palette.purple[1], bg = nil })
-          hl("NavicIconsNull", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsEnumMember", { default = true, fg = palette.green[1], bg = nil })
-          hl("NavicIconsStruct", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsEvent", { default = true, fg = palette.orange[1], bg = nil })
-          hl("NavicIconsOperator", { default = true, fg = palette.fg[1], bg = nil })
-          hl("NavicIconsTypeParameter", { default = true, fg = palette.green[1], bg = nil })
-          hl("NavicText", { default = true, fg = palette.fg[1], bg = nil })
-          hl("NavicSeparator", { default = true, fg = palette.fg[1], bg = nil })
-
-          hl("@lsp.type.enum", { link = "@type" })
-          hl("@lsp.type.keyword", { link = "@keyword" })
-          hl("@lsp.type.interface", { link = "Identifier" })
-          hl("@lsp.type.namespace", { link = "@namespace" })
-          hl("@lsp.type.parameter", { link = "@parameter" })
-          hl("@lsp.type.property", { link = "@property" })
-          hl("@lsp.typemod.function.defaultLibrary", { link = "Special" })
-          hl("@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
-        end,
-
-        vim.api.nvim_exec_autocmds("User LazyColorscheme", {}),
-      })
-    end,
-    priority = 1000,
-    lazy = true,
   },
   {
     "nvim-lualine/lualine.nvim",

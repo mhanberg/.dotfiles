@@ -47,10 +47,25 @@ autocmd("LspAttach", {
       vim.lsp.codelens.refresh()
     end
 
-    require("cmp_nvim_lsp").default_capabilities(require("motch.lsp").capabilities)
 
     if client.server_capabilities.documentSymbolProvider then
       require("nvim-navic").attach(client, bufnr)
+    end
+  end,
+})
+
+autocmd("ColorScheme", {
+  group = random,
+  pattern = "everforest",
+  once = true,
+  callback = function()
+    local highlights = {
+      ["@symbol.elixir"] = { link = "Blue" },
+      ["@constant.elixir"] = { link = "PurpleItalic" },
+    }
+
+    for key, value in pairs(highlights) do
+      vim.api.nvim_set_hl(0, key, value)
     end
   end,
 })
@@ -72,7 +87,6 @@ autocmd("FileType", {
         },
       },
       capabilities = require("motch.lsp").capabilities,
-      on_attach = require("motch.lsp").on_attach,
     }
   end,
 })
