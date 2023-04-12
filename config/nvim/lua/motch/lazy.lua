@@ -816,29 +816,39 @@ endfunction
       require("treesitter-context").setup()
     end,
   },
+  {
+    "nvim-lua/plenary.nvim",
+    cmd = {
+      "PlenaryBustedDirectory",
+      "PlenaryBustedFile",
+    },
+  },
 
   {
-    "mhanberg/elixir.nvim",
-    -- dir = "~/src/elixir.nvim",
+    "elixir-tools/elixir-tools.nvim",
+    -- dir = "~/src/elixir-tools.nvim",
     ft = { "elixir", "eex", "heex", "surface" },
     config = function()
-      local elixirls = require("elixir")
+      local elixir = require("elixir")
 
-      elixirls.setup {
-        -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
-        repo = "elixir-lsp/elixir-ls",
-        branch = "master",
-        settings = elixirls.settings {
-          dialyzerEnabled = false,
-          enableTestLenses = false,
+      elixir.setup {
+        credo = {},
+        elixirls = {
+          -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
+          repo = "elixir-lsp/elixir-ls",
+          branch = "master",
+          settings = elixir.elixirls.settings {
+            dialyzerEnabled = false,
+            enableTestLenses = false,
+          },
+          log_level = vim.lsp.protocol.MessageType.Log,
+          message_level = vim.lsp.protocol.MessageType.Log,
+          on_attach = function()
+            vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+            vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+            vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+          end,
         },
-        log_level = vim.lsp.protocol.MessageType.Log,
-        message_level = vim.lsp.protocol.MessageType.Log,
-        on_attach = function()
-          vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-          vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-          vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-        end,
       }
     end,
     dependencies = {
@@ -867,9 +877,15 @@ endfunction
     end,
   },
 
-  { "prichrd/netrw.nvim", ft = "netrw", dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  } },
+  {
+    "prichrd/netrw.nvim",
+    ft = "netrw",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
+
+  { "junegunn/vim-easy-align" },
 }, {
   concurrency = 30,
   dev = { path = "~/src" },
