@@ -13,6 +13,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
+    "mhanberg/output-panel.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("output_panel").setup()
+    end,
+  },
+  {
     "luukvbaal/statuscol.nvim",
     event = { "BufReadPost", "BufNewFile" },
     init = function()
