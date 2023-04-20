@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-(
-cd ~/src/credo_ls || exit 1
-
-
-mix run --no-halt
-)
