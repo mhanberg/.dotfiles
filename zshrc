@@ -25,9 +25,6 @@ export EDITOR="nvim"
 export CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-export ZPLUG_PROTOCOL="SSH"
-export ZPLUG_HOME="$brew_prefix"/opt/zplug
-source $ZPLUG_HOME/init.zsh
 
 function maybe_touch() {
   if [ ! -f "$1" ]; then
@@ -44,23 +41,39 @@ unset -v GEM_HOME
 maybe_touch "$HOME/.zsh/aliases.local"
 maybe_touch "$HOME/.zsh/zshrc.local"
 
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "lib/history", from:oh-my-zsh
-zplug "lib/key-bindings", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/fzf", from:oh-my-zsh
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+zinit ice wait lucid
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
-zplug load
+
+zinit ice wait lucid
+zinit light "zsh-users/zsh-autosuggestions"
+
+zinit ice wait lucid
+zinit light "zsh-users/zsh-completions"
+
+zinit ice wait lucid
+zinit light "zsh-users/zsh-syntax-highlighting"
+
+zinit ice wait lucid
+zinit snippet OMZL::key-bindings.zsh
+
+zinit ice wait lucid
+zinit snippet OMZL::history.zsh
+
+zinit ice wait lucid
+zinit snippet OMZP::colored-man-pages
+
+zinit ice wait lucid
+zinit snippet OMZP::fzf
 
 autoload -U compinit && compinit
 
@@ -145,4 +158,3 @@ _redocly_yargs_completions()
 }
 compdef _redocly_yargs_completions redocly
 ###-end-redocly-completions-###
-
