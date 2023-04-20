@@ -184,7 +184,7 @@ require("lazy").setup({
 
   -- Lua
   {
-    "0oAstro/silicon.lua",
+    "mhanberg/silicon.lua",
     opts = {
       font = "Hack",
       lineNumber = false,
