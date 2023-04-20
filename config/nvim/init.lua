@@ -195,20 +195,3 @@ LSP.setup("gopls", {
     },
   },
 })
-
--- local credo = vim.api.nvim_create_augroup("credo", { clear = true })
-
--- vim.api.nvim_create_autocmd({ "FileType" }, {
---   group = credo,
---   pattern = { "elixir" },
---   callback = function()
---     vim.lsp.start {
---       name = "CredoLS",
---       cmd = { "mix", "credo.lsp" },
---       settings = {},
---       capabilities = LSP.capabilities,
---       root_dir = vim.fs.dirname(vim.fs.find({ "mix.exs", ".git" }, { upward = true })[1]),
---       on_attach = LSP.on_attach,
---     }
---   end,
--- })

@@ -4,7 +4,6 @@ local autocmd = vim.api.nvim_create_autocmd
 local random = augroup("random", { clear = true })
 
 autocmd("FileType", { pattern = "fzf", group = "random", command = "setlocal winhighlight+=Normal:Normal" })
--- autocmd "User", FloatermOpen execute "normal G" | wincmd p]]
 autocmd("VimResized", { group = random, pattern = "*", command = "wincmd =" })
 autocmd("GUIEnter", {
   group = random,
@@ -40,13 +39,13 @@ autocmd("LspAttach", {
 
     vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
     vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
-    -- if client.server_capabilities.codelensProvider then
-    --   vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-    --     buffer = bufnr,
-    --     callback = vim.lsp.codelens.refresh,
-    --   })
-    --   vim.lsp.codelens.refresh()
-    -- end
+    if client.server_capabilities.codelensProvider then
+      vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        buffer = bufnr,
+        callback = vim.lsp.codelens.refresh,
+      })
+      vim.lsp.codelens.refresh()
+    end
 
     require("cmp_nvim_lsp").default_capabilities(require("motch.lsp").capabilities)
 
