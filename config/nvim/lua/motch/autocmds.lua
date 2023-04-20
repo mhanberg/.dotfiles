@@ -47,7 +47,6 @@ autocmd("LspAttach", {
       vim.lsp.codelens.refresh()
     end
 
-
     if client.server_capabilities.documentSymbolProvider then
       require("nvim-navic").attach(client, bufnr)
     end
@@ -57,7 +56,6 @@ autocmd("LspAttach", {
 autocmd("ColorScheme", {
   group = random,
   pattern = "everforest",
-  once = true,
   callback = function()
     local highlights = {
       ["@symbol.elixir"] = { link = "Blue" },
@@ -67,6 +65,22 @@ autocmd("ColorScheme", {
     for key, value in pairs(highlights) do
       vim.api.nvim_set_hl(0, key, value)
     end
+  end,
+})
+
+autocmd("FileType", {
+  group = random,
+  pattern = "raml",
+  callback = function()
+    vim.bo.commentstring = "# %s"
+    vim.lsp.start {
+      name = "ALS",
+      cmd = { "als", "--systemStream" },
+      root_dir = vim.fs.dirname(vim.fs.find(".git", { upward = true })[1]),
+      settings = {},
+      capabilities = require("motch.lsp").capabilities,
+      on_attach = require("motch.lsp").on_attach,
+    }
   end,
 })
 
@@ -90,6 +104,7 @@ autocmd("FileType", {
     }
   end,
 })
+
 autocmd("FileType", {
   group = random,
   pattern = "raml",
