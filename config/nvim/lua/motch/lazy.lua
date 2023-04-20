@@ -554,10 +554,7 @@ endfunction
 
       null_ls.setup {
         sources = {
-          -- null_ls.builtins.completion.spell,
           null_ls.builtins.diagnostics.actionlint,
-          null_ls.builtins.diagnostics.trail_space,
-          null_ls.builtins.diagnostics.credo,
           null_ls.builtins.diagnostics.eslint,
           null_ls.builtins.diagnostics.shellcheck,
           null_ls.builtins.diagnostics.zsh,
