@@ -136,6 +136,9 @@ LSP.setup("lua_ls", {
         -- Get the language server to recognize the `vim` global
         globals = { "vim" },
         unusedLocalExclude = { "_*" },
+        disable = {
+          "duplicate-set-field"
+        }
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
