@@ -69,7 +69,6 @@ require("lazy").setup({
           return vim.tbl_extend("keep", { buffer = bufnr, silent = true }, tbl)
         end
 
-        LSP.on_attach(client, bufnr)
         vim.keymap.set("n", "<space>zf", vim.cmd.Notes, opts { desc = "Find notes" })
         vim.keymap.set("n", "<space>zt", vim.cmd.Tags, opts { desc = "Find tags" })
         vim.keymap.set("n", "<space>zl", vim.cmd.Links, opts { desc = "Find links in note" })
