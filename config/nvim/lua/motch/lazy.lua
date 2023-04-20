@@ -18,6 +18,14 @@ require("lazy").setup({
     config = function()
       require("output_panel").setup()
     end,
+    keys = {
+      {
+        "<leader>o",
+        vim.cmd.OutputPanel,
+        mode = "n",
+        desc = "Toggle the output panel",
+      },
+    },
   },
   {
     "luukvbaal/statuscol.nvim",
