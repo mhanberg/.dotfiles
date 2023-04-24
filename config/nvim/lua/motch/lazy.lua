@@ -436,7 +436,7 @@ endfunction
     event = { "BufReadPost", "BufNewFile" },
   },
   { "norcalli/nvim.lua", event = "VeryLazy" },
-  { "nvim-lua/telescope.nvim", lazy = true },
+  { "nvim-lua/telescope.nvim", cmd = { "Telescope" } },
   { "tpope/vim-commentary", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-dispatch", event = "VeryLazy" },
   { "tpope/vim-eunuch", event = "VeryLazy" },
@@ -824,6 +824,7 @@ endfunction
 
   {
     "SmiteshP/nvim-navic",
+    -- dir = "~/src/nvim-navic",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       local navic = require("nvim-navic")
@@ -831,6 +832,7 @@ endfunction
       navic.setup {
         highlight = true,
         safe_output = true,
+        click = true,
       }
     end,
   },
