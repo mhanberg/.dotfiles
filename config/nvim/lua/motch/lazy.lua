@@ -178,7 +178,13 @@ require("lazy").setup({
       "hrsh7th/vim-vsnip",
 
       "onsails/lspkind-nvim",
-      { "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" } },
+      {
+        "petertriho/cmp-git",
+        config = function()
+          require("cmp_git").setup()
+        end,
+        dependencies = { "nvim-lua/plenary.nvim" },
+      },
     },
   },
   { "farmergreg/vim-lastplace", event = "VeryLazy" },
