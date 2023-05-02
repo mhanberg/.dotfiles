@@ -50,6 +50,8 @@ vim.cmd([[set shortmess+="C,c"]])
 
 opt.timeoutlen = 500
 
+opt.smoothscroll = true
+
 opt.scrolloff = 4
 opt.laststatus = 3
 opt.winbar = [[%m %t %{%v:lua.require'motch.lsp'.navic()%}]]
