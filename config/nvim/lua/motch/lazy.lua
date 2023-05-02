@@ -60,7 +60,7 @@ require("lazy").setup({
   },
   {
     "mhanberg/zk.nvim",
-    ft = "markdown",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       filetypes = { "markdown", "liquid" },
       on_attach = function(_client, bufnr)
@@ -791,7 +791,7 @@ endfunction
   {
     "elixir-tools/elixir-tools.nvim",
     -- dir = "~/src/elixir-tools.nvim",
-    ft = { "elixir", "eex", "heex", "surface" },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
 
