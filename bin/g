@@ -26,6 +26,10 @@ stack)
 		gt branch create "$@"
 		;;
 
+  submit)
+    gt stack submit
+    ;;
+
 	test)
 		for branch in $(gt ls -s -r | awk '{ print $2 }'); do
 			git checkout "$branch" && mix test
