@@ -13,7 +13,7 @@ gdb() {
 gcm() {
   git checkout $(gdb $1)
 }
-gl() { _gh; }
+gl() { _gl; }
 gpull() { git pull "$@"; }
 gpush() { git push "$@"; }
 alias gpu="git push -u origin"

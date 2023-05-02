@@ -75,6 +75,10 @@ zinit snippet OMZP::colored-man-pages
 zinit ice wait lucid
 zinit snippet OMZP::fzf
 
+zinit ice wait lucid
+zinit ice as'completion'
+zinit snippet OMZP::gh
+
 autoload -U compinit && compinit
 
 # echo "sourcing zsh files"

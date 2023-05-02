@@ -44,3 +44,5 @@
 	allowedSignersFile = /Users/mitchell/.ssh/allowed_signers
 [commit]
   gpgsign = true
+[rebase]
+	updateRefs = true
