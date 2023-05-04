@@ -3,7 +3,6 @@ local autocmd = vim.api.nvim_create_autocmd
 
 local random = augroup("random", { clear = true })
 
-autocmd("FileType", { pattern = "fzf", group = "random", command = "setlocal winhighlight+=Normal:Normal" })
 autocmd("VimResized", { group = random, pattern = "*", command = "wincmd =" })
 autocmd("GUIEnter", {
   group = random,
@@ -144,6 +143,7 @@ autocmd("FileType", {
   group = random,
   pattern = "fzf",
   callback = function()
+    vim.cmd.setlocal("winhighlight+=Normal:Normal")
     vim.keymap.set("t", "<esc>", "<C-c>", { buffer = 0 })
   end,
 })
