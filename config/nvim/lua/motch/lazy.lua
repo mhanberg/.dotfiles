@@ -814,8 +814,8 @@ endfunction
   },
 
   {
-    "elixir-tools/elixir-tools.nvim",
-    -- dir = "~/src/elixir-tools.nvim",
+    -- "elixir-tools/elixir-tools.nvim",
+    dir = "~/src/elixir-tools.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
