@@ -700,7 +700,8 @@ endfunction
     end,
   },
   {
-    "nvim-lualine/lualine.nvim",
+    "yujinyuz/lualine.nvim",
+    branch = "nerdfonts-fix",
     event = "VeryLazy",
     opts = {
       options = { globalstatus = true, theme = "everforest" },
@@ -829,9 +830,11 @@ endfunction
   },
 
   {
-    "SmiteshP/nvim-navic",
+    "XenoPhex/nvim-navic",
+    -- "SmiteshP/nvim-navic",
     -- dir = "~/src/nvim-navic",
     event = { "BufReadPost", "BufNewFile" },
+    branch = "fix-icons",
     config = function()
       local navic = require("nvim-navic")
 
