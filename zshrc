@@ -54,25 +54,16 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 
-zinit ice wait lucid
-zinit light "zsh-users/zsh-autosuggestions"
-
-zinit ice wait lucid
-zinit light "zsh-users/zsh-completions"
-
-zinit ice wait lucid
-zinit light "zsh-users/zsh-syntax-highlighting"
-
-zinit ice wait lucid
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
 zinit snippet OMZL::key-bindings.zsh
-
-zinit ice wait lucid
 zinit snippet OMZL::history.zsh
-
-zinit ice wait lucid
 zinit snippet OMZP::colored-man-pages
-
-zinit ice wait lucid
 zinit snippet OMZP::fzf
 
 zinit ice wait lucid
