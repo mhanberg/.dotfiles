@@ -424,6 +424,20 @@ endfunction
       vim.fn["fzf#install"]()
     end,
   },
+
+  {
+    "stevearc/dressing.nvim",
+    config = function()
+      require("dressing").setup {
+        select = {
+          backend = {
+            -- "telescope",
+            "fzf",
+          },
+        },
+      }
+    end,
+  },
   {
     "tpope/vim-dadbod",
     cmd = { "DB", "DBUI" },
