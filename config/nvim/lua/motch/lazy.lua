@@ -777,6 +777,16 @@ endfunction
       },
     },
     config = function(_, opts)
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.iex = {
+        install_info = {
+          url = "/Users/mitchell/src/tree-sitter-iex", -- local path or git repo
+          files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+          branch = "main",
+          generate_requires_npm = false,
+          requires_generate_from_grammar = false,
+        },
+      }
       require("nvim-treesitter.configs").setup(opts)
     end,
 
