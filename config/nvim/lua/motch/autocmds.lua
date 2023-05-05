@@ -19,6 +19,12 @@ autocmd("LspAttach", {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     local map_opts = { buffer = bufnr, silent = true }
 
+    local fzf = function(func)
+      return function()
+        require("fzf-lua")[func] { winopts = { height = 0.9, width = 0.9 } }
+      end
+    end
+
     vim.keymap.set("n", "df", vim.lsp.buf.format, map_opts)
     vim.keymap.set("n", "gd", vim.diagnostic.open_float, map_opts)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts)
@@ -28,12 +34,12 @@ autocmd("LspAttach", {
     vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
     vim.keymap.set("n", "gD", vim.lsp.buf.implementation, map_opts)
     vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, map_opts)
-    vim.keymap.set("n", "gr", ":References<cr>", map_opts)
-    vim.keymap.set("n", "gi", ":Implementations<cr>", map_opts)
-    vim.keymap.set("n", "g0", ":DocumentSymbols<cr>", map_opts)
-    vim.keymap.set("n", "g7", ":WorkspaceSymbols<cr>", map_opts)
-    vim.keymap.set("n", "<leader>dd", ":Diagnostics<cr>", map_opts)
-    vim.keymap.set("n", "<leader>da", ":DiagnosticsAll<cr>", map_opts)
+    vim.keymap.set("n", "gr", fzf("lsp_references"), map_opts)
+    vim.keymap.set("n", "gi", fzf("lsp_implementations"), map_opts)
+    vim.keymap.set("n", "g0", fzf("lsp_document_symbols"), map_opts)
+    vim.keymap.set("n", "g7", fzf("lsp_workspace_symbols"), map_opts)
+    vim.keymap.set("n", "<leader>dd", fzf("lsp_document_diagnostics"), map_opts)
+    vim.keymap.set("n", "<leader>da", fzf("lsp_workspace_diagnostics"), map_opts)
     vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
 
     vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])

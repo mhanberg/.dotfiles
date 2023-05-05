@@ -11,6 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local fzf = function(func)
+  return function(...)
+    return require("fzf-lua")[func](...)
+  end
+end
+
 require("lazy").setup({
   {
     "mhanberg/output-panel.nvim",
@@ -294,135 +300,78 @@ require("lazy").setup({
     },
   },
   {
-    "junegunn/fzf",
-    init = function()
-      vim.env.FZF_DEFAULT_OPTS = "--reverse"
-      vim.g.fzf_commands_expect = "enter"
-      vim.g.fzf_layout = {
-        window = {
-          width = 0.9,
-          height = 0.6,
-          yoffset = 0,
-          highlight = "Normal",
-        },
-      }
-      vim.g.fzf_buffers_jump = 1
-
-      vim.g.fzf_lsp_width = 70
-      vim.g.fzf_lsp_layout = {
-        window = {
-          width = 0.95,
-          height = 0.95,
-          yoffset = 0,
-          highlight = "Normal",
-        },
-      }
-      vim.g.fzf_lsp_preview_window = { "right:50%" }
-      vim.g.fzf_lsp_pretty = true
-    end,
-    config = function()
-      vim.api.nvim_exec(
-        [[
-function! FzfWrapHelper(opts)
-  call fzf#run(fzf#wrap(a:opts))
-endfunction
-]],
-        false
-      )
-
-      local FZF = vim.fn["FzfWrapHelper"]
-      local fzf_grep = vim.fn["fzf#vim#grep"]
-
-      _G.motch.files = function()
-        vim.fn["fzf#vim#files"](
-          ".",
-          { window = { width = 119, height = 0.6, yoffset = 1, highlight = "Normal" } }
-        )
-      end
-
-      local live_grep = function(query, fullscreen, dir)
-        local command_format =
-          "rg --glob '!yarn.lock' --glob '!package-lock.json' --glob '!.git' --hidden --column --line-number --no-heading --color=always --smart-case %s || true"
-        local initial_command = vim.fn.printf(command_format, vim.fn.shellescape(query))
-        local reload_command = vim.fn.printf(command_format, "{q}")
-        local spec = {
-          options = { "--disabled", "--query", query, "--bind", "change:reload:" .. reload_command },
-          window = { width = 0.9, height = 0.6, yoffset = 0, highlight = "Normal" },
-          dir = dir,
-        }
-
-        fzf_grep(initial_command, 1, vim.fn["fzf#vim#with_preview"](spec, "right"), fullscreen)
-      end
-
-      _G.motch.local_project_search = function(query, fullscreen)
-        live_grep(query, fullscreen)
-      end
-
-      vim.cmd(
-        [[command! -nargs=* -bang LocalProjectSearch lua motch.local_project_search(<q-args>, <bang>0)]]
-      )
-
-      _G.motch.global_project_search = function(query, fullscreen)
-        live_grep(query, fullscreen, "~/src")
-      end
-
-      _G.motch.projects = function()
-        FZF {
-          source = [[fd --type d --hidden --glob ".git" /Users/mitchellhanberg/src --exec echo {} | rev | cut -c 6- - | rev]],
-          sink = function(selection)
-            vim.api.nvim_set_current_dir(selection)
-            vim.cmd([[Files]])
-          end,
-        }
-      end
-
-      _G.motch.todos = function()
-        FZF {
-          source = [[rg --vimgrep '^\s+# TODO:']],
-          options = {
-            "--delimiter",
-            ":",
-          },
-          sink = function(selection)
-            vim.api.nvim_set_current_dir(selection)
-            vim.cmd([[Files]])
-          end,
-        }
-      end
-    end,
-    cmd = {
-      "Files",
-      "BLines",
-      "BCommits",
-      "References",
-      "Implementations",
-      "DocumentSymbols",
-      "WorkspaceSymbols",
-      "Diagnostics",
-      "DiagnosticsAll",
-      "Helptags",
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
     },
+    config = function()
+      local actions = require("fzf-lua.actions")
+      require("fzf-lua").setup {
+        winopts = {
+          height = 0.6, -- window height
+          width = 0.9,
+          row = 0, -- window row position (0=top, 1=bottom)
+        },
+        actions = {
+          files = {
+            ["default"] = actions.file_edit_or_qf,
+            ["ctrl-x"] = actions.file_split,
+            ["ctrl-v"] = actions.file_vsplit,
+            ["ctrl-t"] = actions.file_tabedit,
+            ["alt-q"] = actions.file_sel_to_qf,
+            ["alt-l"] = actions.file_sel_to_ll,
+          },
+        },
+        lsp = {
+          symbols = {
+            symbol_icons = {
+              File = "󰈙",
+              Module = "",
+              Namespace = "󰦮",
+              Package = "",
+              Class = "󰆧",
+              Method = "󰊕",
+              Property = "",
+              Field = "",
+              Constructor = "",
+              Enum = "",
+              Interface = "",
+              Function = "󰊕",
+              Variable = "󰀫",
+              Constant = "󰏿",
+              String = "",
+              Number = "󰎠",
+              Boolean = "󰨙",
+              Array = "󱡠",
+              Object = "",
+              Key = "󰌋",
+              Null = "󰟢",
+              EnumMember = "",
+              Struct = "󰆼",
+              Event = "",
+              Operator = "󰆕",
+              TypeParameter = "󰗴",
+            },
+          },
+        },
+      }
+    end,
     keys = {
-      { "<c-p>", vim.cmd.Files, desc = "Find files" },
-      { "<space>p", "<cmd>GitFiles?<cr>", desc = "Find of changes files" },
+      { "<c-p>", fzf("files"), desc = "Find files" },
+      { "<space>p", fzf("git_status"), desc = "Find of changes files" },
       {
         "<space>vp",
-        "<cmd>Files ~/.local/share/nvim/lazy<cr>",
+        function()
+          fzf("files") { cwd = "~/.local/share/nvim/lazy<cr>" }
+        end,
         desc = "Find files of vim plugins",
       },
-      { "<space>df", "<cmd>Files ~/src/<cr>", desc = "Find files in all projects" },
-      { "gl", vim.cmd.BLines, desc = "FZF Buffer Lines" },
-      { "<leader>a", vim.cmd.LocalProjectSearch, desc = "Search in project" },
-      { "<space>a", ":GlobalProjectSearch<cr>", desc = "Search in all projects" },
+      -- { "<space>df", "<cmd>Files ~/src/<cr>", desc = "Find files in all projects" },
+      { "gl", fzf("blines"), desc = "FZF Buffer Lines" },
+      { "<leader>a", fzf("live_grep"), desc = "Search in project" },
+      -- { "<space>a", ":GlobalProjectSearch<cr>", desc = "Search in all projects" },
     },
-
-    dependencies = {
-      "junegunn/fzf.vim",
-      "gfanto/fzf-lsp.nvim",
-    },
-    build = function()
-      vim.fn["fzf#install"]()
-    end,
   },
 
   {
@@ -714,8 +663,7 @@ endfunction
     end,
   },
   {
-    "yujinyuz/lualine.nvim",
-    branch = "nerdfonts-fix",
+    "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = {
       options = { globalstatus = true, theme = "everforest" },
