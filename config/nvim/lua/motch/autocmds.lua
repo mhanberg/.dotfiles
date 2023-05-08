@@ -38,6 +38,7 @@ autocmd("LspAttach", {
     vim.keymap.set("n", "gi", fzf("lsp_implementations"), map_opts)
     vim.keymap.set("n", "g0", fzf("lsp_document_symbols"), map_opts)
     vim.keymap.set("n", "g7", fzf("lsp_workspace_symbols"), map_opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, map_opts)
     vim.keymap.set("n", "<leader>dd", fzf("lsp_document_diagnostics"), map_opts)
     vim.keymap.set("n", "<leader>da", fzf("lsp_workspace_diagnostics"), map_opts)
     vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
