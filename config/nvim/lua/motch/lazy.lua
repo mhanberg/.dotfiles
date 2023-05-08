@@ -363,7 +363,7 @@ require("lazy").setup({
       {
         "<space>vp",
         function()
-          fzf("files") { cwd = "~/.local/share/nvim/lazy<cr>" }
+          fzf("files") { cwd = vim.fn.expand("~/.local/share/nvim/lazy") }
         end,
         desc = "Find files of vim plugins",
       },
@@ -405,7 +405,7 @@ require("lazy").setup({
     event = { "BufReadPost", "BufNewFile" },
   },
   { "norcalli/nvim.lua", event = "VeryLazy" },
-  { "nvim-lua/telescope.nvim", cmd = { "Telescope" } },
+  { "nvim-telescope/telescope.nvim", cmd = { "Telescope" } },
   { "tpope/vim-commentary", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-dispatch", event = "VeryLazy" },
   { "tpope/vim-eunuch", event = "VeryLazy" },
@@ -819,11 +819,15 @@ require("lazy").setup({
   },
 
   {
-    "prichrd/netrw.nvim",
-    ft = "netrw",
+    "pwntester/octo.nvim",
     dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
       "nvim-tree/nvim-web-devicons",
     },
+    config = function()
+      require("octo").setup()
+    end,
   },
 
   { "junegunn/vim-easy-align" },

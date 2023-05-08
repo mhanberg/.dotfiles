@@ -5,6 +5,21 @@
 # (_)/___//____//_/ /_//_/    \___/
 #
 
+function ensure_dep() {
+	local dep
+	dep="$1"
+
+	if ! command -v "$dep" >/dev/null; then
+		if command -v brew >/dev/null; then
+			echo "⚠️ Installing \`$dep\` with homebrew"
+			brew install "$dep"
+		else
+			echo "🚨 $dep is missing"
+			exit 1
+		fi
+	fi
+}
+
 export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 
 if [ $(arch) = "arm64" ]; then
@@ -107,9 +122,8 @@ source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [ -f "$brew_prefix"/opt/asdf/libexec/asdf.sh ]; then
-  . "$brew_prefix"/opt/asdf/libexec/asdf.sh
-fi
+ensure_dep "rtx"
+eval "$(rtx activate zsh)"
 
 #compdef gt
 ###-begin-gt-completions-###
@@ -131,25 +145,8 @@ _gt_yargs_completions()
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
 
+ensure_dep "starship"
 eval "$(starship init zsh)"
 
+ensure_dep "direnv"
 eval "$(direnv hook zsh)"
-#compdef redocly
-###-begin-redocly-completions-###
-#
-# yargs command completion script
-#
-# Installation: ../../.asdf/installs/nodejs/16.9.1/.npm/bin/redocly completion >> ~/.zshrc
-#    or ../../.asdf/installs/nodejs/16.9.1/.npm/bin/redocly completion >> ~/.zsh_profile on OSX.
-#
-_redocly_yargs_completions()
-{
-  local reply
-  local si=$IFS
-  IFS=$'
-' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" ../../.asdf/installs/nodejs/16.9.1/.npm/bin/redocly --get-yargs-completions "${words[@]}"))
-  IFS=$si
-  _describe 'values' reply
-}
-compdef _redocly_yargs_completions redocly
-###-end-redocly-completions-###

@@ -22,7 +22,7 @@ gui:
         selectedLineBgColor:
             - blue
         selectedRangeBgColor:
-            - default
+            - black
         cherryPickedCommitBgColor:
             - cyan
         cherryPickedCommitFgColor:
