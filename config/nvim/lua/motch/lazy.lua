@@ -458,6 +458,7 @@ require("lazy").setup({
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
+      _inline2 = true,
       current_line_blame = true,
       current_line_blame_formatter = "   <author>, <committer_time:%R> • <summary>",
       on_attach = function(bufnr)
