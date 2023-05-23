@@ -301,6 +301,7 @@ require("lazy").setup({
   },
   {
     "ibhagwan/fzf-lua",
+    cmd = { "FzfLua" },
     -- optional for icon support
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -803,11 +804,9 @@ require("lazy").setup({
   },
 
   {
-    "XenoPhex/nvim-navic",
-    -- "SmiteshP/nvim-navic",
+    "SmiteshP/nvim-navic",
     -- dir = "~/src/nvim-navic",
     event = { "BufReadPost", "BufNewFile" },
-    branch = "fix-icons",
     config = function()
       local navic = require("nvim-navic")
 
@@ -821,6 +820,7 @@ require("lazy").setup({
 
   {
     "pwntester/octo.nvim",
+    cmd = { "Octo" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
@@ -831,7 +831,7 @@ require("lazy").setup({
     end,
   },
 
-  { "junegunn/vim-easy-align" },
+  { "junegunn/vim-easy-align", event = "VeryLazy" },
 }, {
   concurrency = 30,
   dev = { path = "~/src" },
