@@ -2,6 +2,8 @@ _G.motch = {}
 
 vim.filetype.add { filename = { Brewfile = "ruby" } }
 
+local theme = "kanagawa"
+
 _G.motch.set_dark_theme = function()
   vim.g.everforest_colors_override = {
     -- bg8 = { "#000000", 235 },
@@ -12,7 +14,7 @@ _G.motch.set_dark_theme = function()
     bg4 = { "#56716F", "239" },
   }
   vim.opt.background = "dark"
-  vim.cmd.colorscheme("everforest")
+  vim.cmd.colorscheme(theme)
 end
 _G.motch.set_light_theme = function()
   vim.g.everforest_colors_override = {
@@ -20,7 +22,7 @@ _G.motch.set_light_theme = function()
   }
   vim.opt.background = "light"
 
-  vim.cmd.colorscheme("everforest")
+  vim.cmd.colorscheme(theme)
 end
 
 _G.motch.toggle_theme = function()
@@ -38,7 +40,7 @@ vim.api.nvim_create_user_command(
 )
 
 require("motch.lazy")
-vim.cmd.colorscheme("everforest")
+vim.cmd.colorscheme("kanagawa")
 require("motch.autocmds")
 
 local opt = vim.opt

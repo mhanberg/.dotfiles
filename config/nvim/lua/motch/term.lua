@@ -29,7 +29,7 @@ function M.open(cmd, winnr, notifier)
     end,
   })
 
-  print(cmd)
+  vim.notify(cmd, vim.log.levels.INFO)
 
   vim.cmd([[normal! G]])
   vim.cmd(winnr .. [[wincmd w]])

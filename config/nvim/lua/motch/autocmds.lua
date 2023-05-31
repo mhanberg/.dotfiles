@@ -19,9 +19,10 @@ autocmd("LspAttach", {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     local map_opts = { buffer = bufnr, silent = true }
 
-    local fzf = function(func)
+    local fzf = function(func, override)
+      local opts = override or { winopts = { height = 0.9, width = 0.9 } }
       return function()
-        require("fzf-lua")[func] { winopts = { height = 0.9, width = 0.9 } }
+        require("fzf-lua")[func](opts)
       end
     end
 
@@ -38,7 +39,7 @@ autocmd("LspAttach", {
     vim.keymap.set("n", "gi", fzf("lsp_implementations"), map_opts)
     vim.keymap.set("n", "g0", fzf("lsp_document_symbols"), map_opts)
     vim.keymap.set("n", "g7", fzf("lsp_workspace_symbols"), map_opts)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, map_opts)
+    vim.keymap.set("n", "<leader>ca", fzf("lsp_code_actions", {}), map_opts)
     vim.keymap.set("n", "<leader>dd", fzf("lsp_document_diagnostics"), map_opts)
     vim.keymap.set("n", "<leader>da", fzf("lsp_workspace_diagnostics"), map_opts)
     vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
