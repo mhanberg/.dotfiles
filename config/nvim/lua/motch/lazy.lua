@@ -853,6 +853,8 @@ require("lazy").setup({
     },
   },
 
+  { "folke/neodev.nvim", opts = {} },
+
   {
     -- "elixir-tools/elixir-tools.nvim",
     dir = "~/src/elixir-tools.nvim",
@@ -917,7 +919,9 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("octo").setup()
+      require("octo").setup {
+        picker = "fzf-lua",
+      }
     end,
   },
 
