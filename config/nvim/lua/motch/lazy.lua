@@ -410,7 +410,6 @@ require("lazy").setup({
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
   },
-  { "norcalli/nvim.lua", event = "VeryLazy" },
   { "nvim-telescope/telescope.nvim", cmd = { "Telescope" } },
   { "tpope/vim-commentary", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-dispatch", event = "VeryLazy" },
