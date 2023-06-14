@@ -36,3 +36,9 @@
   .
   (string (quoted_content) @javascript)
   (#eq? @_comment "# javascript"))
+
+((sigil
+   (sigil_name) @_name (#eq? @_name "g")
+   (quoted_content) @injection.content
+   (sigil_modifiers) @injection.language))
+

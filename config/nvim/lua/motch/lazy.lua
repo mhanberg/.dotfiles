@@ -416,7 +416,7 @@ require("lazy").setup({
   { "tpope/vim-dispatch", event = "VeryLazy" },
   { "tpope/vim-eunuch", event = "VeryLazy" },
   { "tpope/vim-fugitive", event = "VeryLazy" },
-  { "tpope/vim-projectionist", event = { "BufReadPost", "BufNewFile" } },
+  { "tpope/vim-projectionist" },
   { "tpope/vim-repeat", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-rsi", event = "VeryLazy" },
   { "tpope/vim-surround", event = { "BufReadPost", "BufNewFile" } },
@@ -659,6 +659,10 @@ require("lazy").setup({
   {
     "rebelot/kanagawa.nvim",
     opts = {
+      background = {
+        dark = vim.fn.readfile(vim.fn.expand("~/.local/share/mitch/kanagawa.txt"))[1],
+        light = "lotus",
+      },
       overrides = function(colors)
         local theme = colors.theme
         return {
@@ -931,7 +935,7 @@ require("lazy").setup({
   dev = { path = "~/src" },
   install = {
     missing = true,
-    colorscheme = { "everforest" },
+    colorscheme = { "kanagawa" },
   },
   performance = {
     rtp = {

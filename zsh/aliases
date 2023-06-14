@@ -41,6 +41,9 @@ alias localnvim="/Users/mitchell/localnvim/bin/nvim"
 alias shfmt="shfmt -i 2"
 alias ls="exa"
 
+alias wave="colorscheme wave kanagawa-wave kanagawa_wave"
+alias dragon="colorscheme dragon kanagawa-dragon kanagawa_dragon"
+
 alias dadbod="nvim -c ':DBUI'"
 
 # docker

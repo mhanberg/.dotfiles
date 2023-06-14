@@ -3,9 +3,9 @@ ruby 3.2.0
 nodejs lts
 clojure 1.10.1
 neovim nightly
-rebar 3.14.2
 rust stable
 erlang 25.3
 racket 8.0
 zig ref:master
 elixir 1.14.3-otp-25
+python 3.9.16

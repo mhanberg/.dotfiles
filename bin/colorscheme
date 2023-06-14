@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e
+
+function main() {
+  local name="$1"
+  local nvim="$2"
+  local kitty="$3"
+
+  echo "$name" > "$HOME/.local/share/mitch/kanagawa.txt"
+
+  kitty +kitten themes "$kitty"
+
+  instances=$(nvr --serverlist)
+
+  for inst in $instances; do
+    nvr --servername "$inst" --remote-send ":colorscheme $nvim<cr>" --nostart
+  done
+
+  echo "Set theme to $nvim and $kitty"
+}
+
+main "$@"
