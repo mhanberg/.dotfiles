@@ -31,15 +31,11 @@ stack)
     ;;
 
 	test)
-		for branch in $(gt ls -s -r | awk '{ print $2 }'); do
-			git checkout "$branch" && mix test
-		done
+    gt stack test "mix test"
 		;;
 
 	lint)
-		for branch in $(gt ls -s -r | awk '{ print $2 }'); do
-			git checkout "$branch" && mix lint && mix dialyzer
-		done
+    gt stack test "mix lint && mix dialyzer"
 		;;
 
 	redo-labels)
