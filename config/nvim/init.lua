@@ -74,8 +74,8 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.number = true
-opt.backupdir = vim.fn.expand("~/.tmp/backup")
-opt.directory = vim.fn.expand("~/.tmp/swp/" .. vim.fn.expand("%:p"))
+opt.backupdir = { vim.fn.expand("~/.tmp/backup") }
+opt.directory = { vim.fn.expand("~/.tmp/swp/" .. vim.fn.expand("%:p")) }
 opt.splitbelow = true
 opt.splitright = true
 opt.showmode = false
@@ -83,7 +83,7 @@ opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.undofile = true
-opt.undodir = vim.fn.expand("~/.tmp")
+opt.undodir = { vim.fn.expand("~/.tmp") }
 opt.mouse = "a"
 opt.errorbells = false
 opt.visualbell = true
@@ -103,7 +103,7 @@ vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
 
 vim.api.nvim_create_user_command("LspLogDelete", function()
-  vim.fn.system([[rm "$HOME/.local/state/nvim/lsp.log"]])
+  vim.system({ "rm", vim.fn.expand("$HOME/.local/state/nvim/lsp.log") }):wait()
 end, { desc = "Deletes the LSP log file. Useful for when it gets too big" })
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Go to the previous item in the quickfix list." })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Go to the next item in the quickfix list." })
