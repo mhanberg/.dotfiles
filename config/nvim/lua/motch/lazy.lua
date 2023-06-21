@@ -1,13 +1,15 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  }
+  vim
+    .system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable", -- latest stable release
+      lazypath,
+    })
+    :wait()
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -199,7 +201,7 @@ require("lazy").setup({
 
   -- Lua
   {
-    "mhanberg/silicon.lua",
+    "0oAstro/silicon.lua",
     opts = {
       font = "Hack",
       lineNumber = false,
@@ -236,6 +238,7 @@ require("lazy").setup({
 
   {
     "folke/noice.nvim",
+    version = "*",
     event = "VeryLazy",
     opts = {
       cmdline = {
@@ -387,7 +390,7 @@ require("lazy").setup({
         select = {
           backend = {
             -- "telescope",
-            "fzf",
+            "fzf-lua",
           },
         },
       }
@@ -727,7 +730,7 @@ require("lazy").setup({
 
   {
     "echasnovski/mini.nvim",
-    version = false,
+    version = "*",
     config = function()
       local hipatterns = require("mini.hipatterns")
       hipatterns.setup {
@@ -859,8 +862,9 @@ require("lazy").setup({
   { "folke/neodev.nvim", opts = {} },
 
   {
-    -- "elixir-tools/elixir-tools.nvim",
-    dir = "~/src/elixir-tools.nvim",
+    "elixir-tools/elixir-tools.nvim",
+    version = "*",
+    -- dir = "~/src/elixir-tools.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
@@ -869,8 +873,8 @@ require("lazy").setup({
         credo = {},
         elixirls = {
           -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
-          repo = "elixir-lsp/elixir-ls",
-          branch = "master",
+          -- repo = "elixir-lsp/elixir-ls",
+          -- branch = "master",
           settings = elixir.elixirls.settings {
             dialyzerEnabled = false,
             enableTestLenses = false,
