@@ -870,7 +870,8 @@ require("lazy").setup({
       local elixir = require("elixir")
 
       elixir.setup {
-        credo = {},
+        credo = {enable = false},
+        nextls = {enable = true},
         elixirls = {
           -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
           -- repo = "elixir-lsp/elixir-ls",
@@ -881,6 +882,9 @@ require("lazy").setup({
           },
           log_level = vim.lsp.protocol.MessageType.Log,
           message_level = vim.lsp.protocol.MessageType.Log,
+          handlers = {
+            ["textDocument/publishDiagnostics"] = function() end,
+          },
           on_attach = function()
             vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
             vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })

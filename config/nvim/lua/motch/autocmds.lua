@@ -26,7 +26,13 @@ autocmd("LspAttach", {
       end
     end
 
-    vim.keymap.set("n", "df", vim.lsp.buf.format, map_opts)
+    vim.keymap.set("n", "df", function()
+      vim.lsp.buf.format {
+        filter = function(fmt_client)
+          return fmt_client.name ~= "ElixirLS"
+        end,
+      }
+    end, map_opts)
     vim.keymap.set("n", "gd", vim.diagnostic.open_float, map_opts)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts)
