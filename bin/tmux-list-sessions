@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+tmux list-sessions -F "#S" | grep -v "^$(tmux display-message -p '#S')\$"

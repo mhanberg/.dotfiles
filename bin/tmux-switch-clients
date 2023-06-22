@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-tmux list-sessions -F "#S" \
-  | grep -v "^$(tmux display-message -p '#S')\$" \
-  | fzf --reverse --border=rounded --prompt='Go to> ' \
-  | xargs tmux switch-client -t
+function main() {
+	tmux-list-sessions |
+		fzf \
+			--reverse \
+			--border=rounded \
+			--prompt='Go to> ' \
+			--header="[CTRL-X] Kill Session" \
+			--bind='ctrl-x:execute(tmux kill-session -t {})+reload(tmux-list-sessions)' |
+		xargs tmux switch-client -t
+}
+
+main
