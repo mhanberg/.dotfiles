@@ -195,7 +195,7 @@ require("lazy").setup({
       },
     },
   },
-  { "farmergreg/vim-lastplace", event = "VeryLazy" },
+  { "farmergreg/vim-lastplace", event = { "BufReadPre", "BufNewFile" } },
 
   { "edluffy/hologram.nvim", ft = "markdown" },
 
@@ -384,6 +384,7 @@ require("lazy").setup({
   },
 
   {
+    event = "VeryLazy",
     "stevearc/dressing.nvim",
     config = function()
       require("dressing").setup {
@@ -416,9 +417,9 @@ require("lazy").setup({
   { "nvim-telescope/telescope.nvim", cmd = { "Telescope" } },
   { "tpope/vim-commentary", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-dispatch", event = "VeryLazy" },
-  { "tpope/vim-eunuch", event = "VeryLazy" },
+  { "tpope/vim-eunuch", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-fugitive", event = "VeryLazy" },
-  { "tpope/vim-projectionist" },
+  { "tpope/vim-projectionist", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-repeat", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-rsi", event = "VeryLazy" },
   { "tpope/vim-surround", event = { "BufReadPost", "BufNewFile" } },
@@ -730,6 +731,7 @@ require("lazy").setup({
 
   {
     "echasnovski/mini.nvim",
+    event = { "BufReadPost", "BufNewFile" },
     version = "*",
     config = function()
       local hipatterns = require("mini.hipatterns")
@@ -859,7 +861,11 @@ require("lazy").setup({
     },
   },
 
-  { "folke/neodev.nvim", opts = {} },
+  {
+    event = { "BufReadPre", "BufNewFile" },
+    "folke/neodev.nvim",
+    opts = {},
+  },
 
   {
     "elixir-tools/elixir-tools.nvim",
@@ -945,7 +951,7 @@ require("lazy").setup({
     end,
   },
 
-  { "junegunn/vim-easy-align", event = "VeryLazy" },
+  { "junegunn/vim-easy-align", event = { "BufReadPost", "BufNewFile" } },
 }, {
   concurrency = 30,
   dev = { path = "~/src" },
