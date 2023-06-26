@@ -3,10 +3,14 @@ M = {}
 local has_run = {}
 
 M.navic = function()
-  local navic = require("nvim-navic")
-  local loc = navic.get_location()
-  if loc and #loc > 0 then
-    return "%#NavicSeparator#> " .. navic.get_location()
+  if package.loaded["nvim-navic"] then
+    local navic = require("nvim-navic")
+    local loc = navic.get_location()
+    if loc and #loc > 0 then
+      return "%#NavicSeparator#> " .. navic.get_location()
+    else
+      return ""
+    end
   else
     return ""
   end
