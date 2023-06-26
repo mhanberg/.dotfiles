@@ -126,8 +126,11 @@ vim.g.markdown_syntax_conceal = 0
 
 local LSP = require("motch.lsp")
 
-LSP.setup("lua_ls", { settings = { Lua = { format = { enable = false } } } })
-LSP.setup("dartls", {})
+LSP.setup(
+  "lua_ls",
+  { settings = { Lua = { hint = { enable = true, arrayIndex = "Disable" }, format = { enable = false } } } }
+)
+-- LSP.setup("dartls", {})
 LSP.setup("rust_analyzer", {})
 -- LSP.setup("solargraph", {})
 LSP.setup("omnisharp", {})
