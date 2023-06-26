@@ -864,15 +864,24 @@ require("lazy").setup({
   {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
-    -- dir = "~/src/elixir-tools.nvim",
+    -- dev = true,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
+      local nextls_opts
+      if vim.env.NEXTLS_LOCAL == "1" then
+        nextls_opts = { enable = true, port = 9000 }
+      else
+        nextls_opts = { enable = true }
+      end
 
       elixir.setup {
-        credo = {enable = false},
-        nextls = {enable = true},
+        -- credo = { port = 9000 },
+        -- credo = { version = "0.1.0-rc.3" },
+        credo = { enable = false },
+        nextls = nextls_opts,
         elixirls = {
+          enable = false,
           -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
           -- repo = "elixir-lsp/elixir-ls",
           -- branch = "master",
