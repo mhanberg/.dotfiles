@@ -4,7 +4,7 @@ local move_around = function(window, pane, direction_wez, direction_nvim)
   -- if pane:get_title():sub(-4) == "NVIM" then
   -- 	window:perform_action(wezterm.action({ SendString = "^" .. direction_nvim }), pane)
   -- else
-  window:perform_action(wezterm.action({ ActivatePaneDirection = direction_wez }), pane)
+  window:perform_action(wezterm.action { ActivatePaneDirection = direction_wez }, pane)
   -- end
 end
 
@@ -36,18 +36,26 @@ return {
   skip_close_confirmation_for_processes_named = { "" },
   leader = { key = "s", mods = "CTRL", timeout_milliseconds = 1000 },
   keys = {
-    { key = "c", mods = "LEADER", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
-    { key = "j", mods = "LEADER", action = wezterm.action({ SpawnTab = { DomainName = "dotfiles" } }) },
+    { key = "c", mods = "LEADER", action = wezterm.action { SpawnTab = "CurrentPaneDomain" } },
+    { key = "j", mods = "LEADER", action = wezterm.action { SpawnTab = { DomainName = "dotfiles" } } },
     { key = "l", mods = "LEADER", action = "ShowLauncher" },
-    { key = "n", mods = "LEADER", action = wezterm.action({ ActivateTabRelative = 1 }) },
-    { key = "p", mods = "LEADER", action = wezterm.action({ ActivateTabRelative = -1 }) },
-    { key = "\\", mods = "LEADER", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
-    { key = "-", mods = "LEADER", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-    { key = "x", mods = "LEADER", action = wezterm.action({ CloseCurrentPane = { confirm = true } }) },
-    { key = "h", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-left" }) },
-    { key = "l", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-right" }) },
-    { key = "k", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-up" }) },
-    { key = "j", mods = "CTRL", action = wezterm.action({ EmitEvent = "move-down" }) },
+    { key = "n", mods = "LEADER", action = wezterm.action { ActivateTabRelative = 1 } },
+    { key = "p", mods = "LEADER", action = wezterm.action { ActivateTabRelative = -1 } },
+    {
+      key = "\\",
+      mods = "LEADER",
+      action = wezterm.action { SplitHorizontal = { domain = "CurrentPaneDomain" } },
+    },
+    {
+      key = "-",
+      mods = "LEADER",
+      action = wezterm.action { SplitVertical = { domain = "CurrentPaneDomain" } },
+    },
+    { key = "x", mods = "LEADER", action = wezterm.action { CloseCurrentPane = { confirm = true } } },
+    { key = "h", mods = "CTRL", action = wezterm.action { EmitEvent = "move-left" } },
+    { key = "l", mods = "CTRL", action = wezterm.action { EmitEvent = "move-right" } },
+    { key = "k", mods = "CTRL", action = wezterm.action { EmitEvent = "move-up" } },
+    { key = "j", mods = "CTRL", action = wezterm.action { EmitEvent = "move-down" } },
     { key = "l", mods = "CMD", action = "ShowDebugOverlay" },
   },
   colors = {
@@ -152,9 +160,6 @@ return {
         -- The same options that were listed under the `active_tab` section above
         -- can also be used for `new_tab_hover`.
       },
-
     },
-
   },
-
 }
