@@ -78,7 +78,11 @@ end)
 return {
   font = wezterm.font("JetBrainsMono Nerd Font Mono"),
   font_size = 14.0,
-  color_scheme = "Kanagawa (Gogh)",
+  color_scheme = "kanagawa_dragon",
+  inactive_pane_hsb = {
+    saturation = 1.0,
+    brightness = 1.0,
+  },
   skip_close_confirmation_for_processes_named = { "" },
   tab_bar_at_bottom = true,
   switch_to_last_active_tab_when_closing_tab = true,
