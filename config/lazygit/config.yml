@@ -39,7 +39,7 @@ gui:
   showRandomTip: false
   showCommandLog: true
   showBottomLine: true
-  showIcons: true
+  nerdFontsVersion: "3"
   commandLogSize: 8
   splitDiff: auto
   skipRewordInEditorWarning: false

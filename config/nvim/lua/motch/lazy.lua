@@ -113,7 +113,42 @@ require("lazy").setup({
   },
   { "ruanyl/vim-gh-line", event = { "BufReadPost", "BufNewFile" } },
   { "alvan/vim-closetag", ft = { "html", "liquid", "javascriptreact", "typescriptreact" } },
-  { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
+  {
+    "numToStr/Navigator.nvim",
+    keys = {
+      {
+        "<C-w>h",
+        "<C-\\><C-n><cmd>NavigatorLeft<cr>",
+        desc = "NavigatorLeft",
+        silent = true,
+        mode = { "v", "n", "i", "t" },
+      },
+      {
+        "<C-w>l",
+        "<C-\\><C-n><cmd>NavigatorRight<cr>",
+        desc = "NavigatorRight",
+        silent = true,
+        mode = { "v", "n", "i", "t" },
+      },
+      {
+        "<C-w>k",
+        "<C-\\><C-n><cmd>NavigatorUp<cr>",
+        desc = "NavigatorUp",
+        silent = true,
+        mode = { "v", "n", "i", "t" },
+      },
+      {
+        "<C-w>j",
+        "<C-\\><C-n><cmd>NavigatorDown<cr>",
+        desc = "NavigatorDown",
+        silent = true,
+        mode = { "v", "n", "i", "t" },
+      },
+    },
+    config = function()
+      require("Navigator").setup()
+    end,
+  },
   { "christoomey/vim-tmux-runner", event = { "BufReadPost", "BufNewFile" } },
   {
     "hrsh7th/nvim-cmp",
@@ -770,7 +805,25 @@ require("lazy").setup({
       extensions = { "fzf" },
       sections = {
         lualine_c = { { "filename", path = 1 } },
-        lualine_x = { "selectioncount", "searchcount", "encoding", "fileformat", "filetype" },
+        lualine_x = {
+          {
+            "macro-recording",
+            fmt = function()
+              local recording_register = vim.fn.reg_recording()
+              if recording_register == "" then
+                return ""
+              else
+                return "recording @" .. recording_register
+              end
+            end,
+            color = { fg = "orange" },
+          },
+          "selectioncount",
+          "searchcount",
+          "encoding",
+          "fileformat",
+          "filetype",
+        },
       },
     },
   },
