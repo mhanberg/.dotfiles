@@ -3,6 +3,18 @@ local home = "/Users/mitchell"
 local icloud = string.format("%s/Library/Mobile Documents/com~apple~CloudDocs", home)
 local src = string.format("%s/src", home)
 
+local table_filter = function(tbl, filterer)
+  local new_table = {}
+
+  for _, el in ipairs(tbl) do
+    if filterer(el) then
+      table.insert(new_table, el)
+    end
+  end
+
+  return new_table
+end
+
 local function isViProcess(pane)
   -- get_foreground_process_name On Linux, macOS and Windows,
   -- the process can be queried to determine this path. Other operating systems
@@ -70,7 +82,15 @@ wezterm.on("fzf-workspaces-switch", function(window)
   window:mux_window():spawn_tab {
     args = { "/Users/mitchell/.bin/wezterm-switch-workspace" },
     set_environment_variables = {
-      FZF_DEFAULT_COMMAND = string.format("echo '%s'", table.concat(wezterm.mux.get_workspace_names(), "\n")),
+      FZF_DEFAULT_COMMAND = string.format(
+        "echo '%s'",
+        table.concat(
+          table_filter(wezterm.mux.get_workspace_names(), function(n)
+            return n ~= window:active_workspace()
+          end),
+          "\n"
+        )
+      ),
     },
   }
 end)
@@ -79,6 +99,7 @@ return {
   font = wezterm.font("JetBrainsMono Nerd Font Mono"),
   font_size = 14.0,
   color_scheme = "kanagawa_dragon",
+  front_end = "WebGpu",
   inactive_pane_hsb = {
     saturation = 1.0,
     brightness = 1.0,
