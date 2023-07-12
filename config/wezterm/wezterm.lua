@@ -96,6 +96,9 @@ wezterm.on("fzf-workspaces-switch", function(window)
 end)
 
 return {
+  term = "wezterm",
+  unix_domains = { { name = "unix" } },
+  default_gui_startup_args = { "connect", "unix" },
   font = wezterm.font("JetBrainsMono Nerd Font Mono"),
   font_size = 14.0,
   color_scheme = "kanagawa_dragon",

@@ -16,4 +16,4 @@ trap '__wezterm_set_user_var WORKSPACE_CHANGED ""' EXIT
 
 __wezterm_set_user_var "WORKSPACE_CHANGED" "$(/opt/homebrew/bin/fzf --reverse --border=rounded --prompt='> ')"
 
-sleep 1
+sleep 0.25

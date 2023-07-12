@@ -1,5 +1,3 @@
 source ~/.envrc
 
-PATH_add "$(asdf where rust)"/bin
-
 PATH_add "$(yarn global bin)"
