@@ -113,42 +113,8 @@ require("lazy").setup({
   },
   { "ruanyl/vim-gh-line", event = { "BufReadPost", "BufNewFile" } },
   { "alvan/vim-closetag", ft = { "html", "liquid", "javascriptreact", "typescriptreact" } },
-  {
-    "numToStr/Navigator.nvim",
-    keys = {
-      {
-        "<C-w>h",
-        "<C-\\><C-n><cmd>NavigatorLeft<cr>",
-        desc = "NavigatorLeft",
-        silent = true,
-        mode = { "v", "n", "i", "t" },
-      },
-      {
-        "<C-w>l",
-        "<C-\\><C-n><cmd>NavigatorRight<cr>",
-        desc = "NavigatorRight",
-        silent = true,
-        mode = { "v", "n", "i", "t" },
-      },
-      {
-        "<C-w>k",
-        "<C-\\><C-n><cmd>NavigatorUp<cr>",
-        desc = "NavigatorUp",
-        silent = true,
-        mode = { "v", "n", "i", "t" },
-      },
-      {
-        "<C-w>j",
-        "<C-\\><C-n><cmd>NavigatorDown<cr>",
-        desc = "NavigatorDown",
-        silent = true,
-        mode = { "v", "n", "i", "t" },
-      },
-    },
-    config = function()
-      require("Navigator").setup()
-    end,
-  },
+  { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
+
   { "christoomey/vim-tmux-runner", event = { "BufReadPost", "BufNewFile" } },
   {
     "hrsh7th/nvim-cmp",
