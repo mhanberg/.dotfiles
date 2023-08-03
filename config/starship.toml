@@ -43,6 +43,7 @@ style = "bold blue"
 "com~apple~CloudDocs" = "/iCloud"
 
 [docker_context]
+disabled = true
 symbol = " "
 
 [elixir]
