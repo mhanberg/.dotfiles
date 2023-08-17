@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+gh api graphql --paginate -f query='
+{
+  viewer {
+    hasSponsorsListing
+    sponsors(first: 100, orderBy: {field: LOGIN, direction: ASC}) {
+      edges {
+        node {
+          ... on User {
+            login
+          }
+          ... on Organization {
+            login
+          }
+        }
+      }
+    }
+  }
+}' | jq -r '.data.viewer.sponsors.edges | .[] | "- [" + .node.login + "](https://github.com/" + .node.login + ")"'
