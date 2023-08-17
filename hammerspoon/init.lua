@@ -6,7 +6,7 @@ require("hs.ipc")
 -- hs.loadSpoon("EmmyLua")
 
 hs.hotkey.bind({ "cmd", "alt", "control" }, "\\", function()
-  hs.application.open("Alacritty")
+  hs.window.find("editor"):setSize(hs.geometry.size(1708, 1056))
 end)
 
 hs.hotkey.bind({ "cmd", "alt" }, "M", function()
