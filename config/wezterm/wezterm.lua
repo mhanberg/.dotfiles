@@ -69,6 +69,10 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
       },
       pane
     )
+  elseif name == "WORKSPACE_CHANGED" then
+    wezterm.log_warn("couldn't change workspace for some reason", value)
+  else
+    wezterm.log_info("unhandled var change", name, value)
   end
 end)
 
@@ -121,7 +125,8 @@ return {
         SpawnCommandInNewTab = {
           args = { "lazygit" },
           set_environment_variables = {
-            PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
+            PATH = "/Users/mitchell/.local/share/rtx/installs/neovim/nightly/bin:/Users/mitchell/.local/share/rtx/installs/nodejs/18.16.0/bin:/opt/homebrew/bin:"
+              .. os.getenv("PATH"),
             XDG_CONFIG_HOME = string.format("%s/%s", home, ".config"),
           },
         },
@@ -133,6 +138,18 @@ return {
       action = wezterm.action {
         SpawnCommandInNewTab = {
           args = { "fzf-prs" },
+          set_environment_variables = {
+            PATH = string.format("%s/%s", home, ".bin:") .. "/opt/homebrew/bin:" .. os.getenv("PATH"),
+          },
+        },
+      },
+    },
+    {
+      key = "i",
+      mods = "LEADER|CTRL",
+      action = wezterm.action {
+        SpawnCommandInNewTab = {
+          args = { "fzf-issues" },
           set_environment_variables = {
             PATH = string.format("%s/%s", home, ".bin:") .. "/opt/homebrew/bin:" .. os.getenv("PATH"),
           },
