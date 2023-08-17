@@ -114,6 +114,7 @@ export PATH="$HOME/zls/zig-out/bin:$PATH"
 
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
+export KERL_BUILD_DOCS=yes
 
 # echo "sourcing z.sh"
 . "$brew_prefix"/etc/profile.d/z.sh
