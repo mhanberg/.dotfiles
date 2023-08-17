@@ -3,11 +3,8 @@
 .vim-test
 ./tags
 .elixir_ls
-.elixir-tools
 .envrc
 .projections.json
 .init.local.lua
 
 motch-tmp
-
-.elixir-tools
