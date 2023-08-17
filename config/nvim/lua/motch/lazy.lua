@@ -21,8 +21,39 @@ end
 
 require("lazy").setup({
   {
+    dir = "~/src/control-panel.nvim",
+    config = function()
+      -- local cp = require("control_panel")
+      -- cp.register {
+      --   id = "output-panel",
+      --   title = "Output Panel",
+      -- }
+
+      -- local handler = vim.lsp.handlers["window/logMessage"]
+
+      -- vim.lsp.handlers["window/logMessage"] = function(err, result, context)
+      --   handler(err, result, context)
+      --   if not err then
+      --     local client_id = context.client_id
+      --     local client = vim.lsp.get_client_by_id(client_id)
+
+      --     if not cp.panel("output-panel"):has_tab(client.name) then
+      --       cp.panel("output-panel")
+      --         :tab { name = client.name, key = tostring(#cp.panel("output-panel"):tabs() + 1) }
+      --     end
+
+      --     cp.panel("output-panel"):append {
+      --       tab = client.name,
+      --       text = "[" .. vim.lsp.protocol.MessageType[result.type] .. "] " .. result.message,
+      --     }
+      --   end
+      -- end
+    end,
+  },
+  {
     "mhanberg/output-panel.nvim",
     event = "VeryLazy",
+    -- dev = true,
     config = function()
       require("output_panel").setup()
     end,
@@ -504,19 +535,7 @@ require("lazy").setup({
         -- Actions
         map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
         map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-        -- map("n", "<leader>hS", gs.stage_buffer)
-        -- map("n", "<leader>hu", gs.undo_stage_hunk)
-        -- map("n", "<leader>hR", gs.reset_buffer)
         map("n", "<leader>hp", gs.preview_hunk)
-        -- map("n", "<leader>hb", function()
-        --   gs.blame_line { full = true }
-        -- end)
-        -- map("n", "<leader>tb", gs.toggle_current_line_blame)
-        -- map("n", "<leader>hd", gs.diffthis)
-        -- map("n", "<leader>hD", function()
-        --   gs.diffthis("~")
-        -- end)
-        -- map("n", "<leader>td", gs.toggle_deleted)
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
@@ -529,109 +548,6 @@ require("lazy").setup({
   },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {},
-    config = function()
-      local null_ls = require("null-ls")
-
-      null_ls.setup {
-        sources = {
-          null_ls.builtins.diagnostics.actionlint,
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.diagnostics.shellcheck,
-          null_ls.builtins.diagnostics.zsh,
-          null_ls.builtins.formatting.eslint,
-          null_ls.builtins.formatting.pg_format,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.trim_whitespace,
-          null_ls.builtins.formatting.trim_newlines,
-          {
-            name = "redocly",
-            method = require("null-ls.methods").internal.DIAGNOSTICS,
-            filetypes = { "raml" },
-            generator = null_ls.generator {
-              command = "redocly",
-              args = { "lint", "$FILENAME", "--format", "codeclimate" },
-              format = "json",
-              to_stdin = false,
-              ignore_stderr = true,
-              to_temp_file = true,
-              on_output = function(params)
-                local h = require("null-ls.helpers")
-                local severities = {
-                  blocker = h.diagnostics.severities.error,
-                  critical = h.diagnostics.severities.error,
-                  major = h.diagnostics.severities.error,
-                  minor = h.diagnostics.severities.warning,
-                  info = h.diagnostics.severities.information,
-                }
-                params.messages = {}
-                for _, message in ipairs(params.output) do
-                  local col = nil
-                  local row = message.location.lines.begin
-                  if type(row) == "table" then
-                    row = row.line
-                    col = row.column
-                  end
-                  table.insert(params.messages, {
-                    row = row,
-                    col = col,
-                    message = message.description,
-                    severity = severities[message.severity],
-                    filename = params.bufname,
-                  })
-                end
-                return params.messages
-              end,
-            },
-          },
-
-          {
-            name = "asyncapi",
-            method = require("null-ls.methods").internal.DIAGNOSTICS,
-            filetypes = { "yaml" },
-            generator = null_ls.generator {
-              command = "asyncapi",
-              args = { "validate", "$FILENAME", "--diagnostics-format", "json" },
-              format = "json_raw",
-              to_stdin = false,
-              ignore_stderr = true,
-              to_temp_file = true,
-              on_output = function(params)
-                local h = require("null-ls.helpers")
-                local severities = {
-                  h.diagnostics.severities.error,
-                  h.diagnostics.severities.warning,
-                  h.diagnostics.severities.info,
-                }
-                params.messages = {}
-                local output = vim.split(params.output, "\n", { trimempty = true })
-                local json = vim.fn.join { unpack(output, 2) }
-                for _, message in ipairs(vim.json.decode(json)) do
-                  table.insert(params.messages, {
-                    row = message.range.start.line + 1,
-                    col = message.range.start.character + 1,
-                    end_row = message.range["end"].line + 1,
-                    end_col = message.range["end"].character + 1,
-                    message = message.message,
-                    severity = severities[message.severity],
-                    filename = params.bufname,
-                  })
-                end
-                return params.messages
-              end,
-            },
-          },
-        },
-        on_attach = require("motch.lsp").on_attach,
-      }
-    end,
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
     name = "indent_blankline",
@@ -641,8 +557,6 @@ require("lazy").setup({
     opts = {
       viewport_buffer = 100,
       space_char_blankline = " ",
-      show_current_context = true,
-      show_current_context_start = true,
       use_treesitter = true,
       char = "▎",
       context_char = "▎",
@@ -880,16 +794,50 @@ require("lazy").setup({
     },
   },
 
+  { "folke/neodev.nvim", opts = {} },
+
   {
-    event = { "BufReadPre", "BufNewFile" },
-    "folke/neodev.nvim",
-    opts = {},
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      require("symbols-outline").setup {
+        symbols = {
+          File = { icon = "󰈔", hl = "@text.uri" },
+          Module = { icon = "󰆧", hl = "@namespace" },
+          Namespace = { icon = "󰅪", hl = "@namespace" },
+          Package = { icon = "󰏗", hl = "@namespace" },
+          Class = { icon = "𝓒", hl = "@type" },
+          Method = { icon = "ƒ", hl = "@method" },
+          Property = { icon = "", hl = "@method" },
+          Field = { icon = "󰆨", hl = "@field" },
+          Constructor = { icon = "", hl = "@constructor" },
+          Enum = { icon = "ℰ", hl = "@type" },
+          Interface = { icon = "󰜰", hl = "@type" },
+          Function = { icon = "", hl = "@function" },
+          Variable = { icon = "", hl = "@constant" },
+          Constant = { icon = "", hl = "@constant" },
+          String = { icon = "𝓐", hl = "@string" },
+          Number = { icon = "#", hl = "@number" },
+          Boolean = { icon = "⊨", hl = "@boolean" },
+          Array = { icon = "󰅪", hl = "@constant" },
+          Object = { icon = "⦿", hl = "@type" },
+          Key = { icon = "🔐", hl = "@type" },
+          Null = { icon = "NULL", hl = "@type" },
+          EnumMember = { icon = "", hl = "@field" },
+          Struct = { icon = "𝓢", hl = "@type" },
+          Event = { icon = "🗲", hl = "@type" },
+          Operator = { icon = "+", hl = "@operator" },
+          TypeParameter = { icon = "𝙏", hl = "@parameter" },
+          Component = { icon = "󰅴", hl = "@function" },
+          Fragment = { icon = "󰅴", hl = "@constant" },
+        },
+      }
+    end,
   },
 
   {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
-    -- dev = true,
+    dev = false,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
