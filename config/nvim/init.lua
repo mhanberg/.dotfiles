@@ -52,7 +52,9 @@ vim.cmd([[set shortmess+="C,c"]])
 
 opt.timeoutlen = 500
 
-opt.smoothscroll = true
+if vim.fn.has("smoothscroll") then
+  opt.smoothscroll = true
+end
 
 opt.scrolloff = 4
 opt.laststatus = 3
@@ -141,7 +143,15 @@ LSP.setup("bashls", {})
 LSP.setup("zls", {})
 LSP.setup("gopls", {})
 LSP.setup("jsonls", {})
-LSP.setup("cssls", {})
+LSP.setup("cssls", {
+  settings = {
+    css = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+  },
+})
 
 local default_tw_config = LSP.default_config("tailwindcss")
 LSP.setup(
@@ -163,7 +173,7 @@ LSP.setup(
         },
       },
     },
-    filetypes = { "elixir", "eelixir", "html", "liquid", "heex" },
+    filetypes = { "elixir", "eelixir", "html", "liquid", "heex", "css" },
   })
 )
 LSP.setup("gopls", {
