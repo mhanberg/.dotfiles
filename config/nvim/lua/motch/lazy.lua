@@ -455,7 +455,6 @@ require("lazy").setup({
   { "tpope/vim-repeat", event = { "BufReadPost", "BufNewFile" } },
   { "tpope/vim-rsi", event = "VeryLazy" },
   { "tpope/vim-surround", event = { "BufReadPost", "BufNewFile" } },
-  { "tpope/vim-vinegar" },
   {
     "vim-test/vim-test",
     event = { "BufReadPost", "BufNewFile" },
@@ -919,6 +918,42 @@ require("lazy").setup({
   },
 
   { "junegunn/vim-easy-align", event = { "BufReadPost", "BufNewFile" } },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    opts = {
+      event_handlers = {
+        {
+          event = "file_opened",
+          handler = function()
+            vim.cmd.Neotree("close")
+          end,
+          id = "close-on-enter",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("neo-tree").setup(opts)
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    cmd = {
+      "Neotree",
+    },
+    keys = {
+      {
+        "-",
+        function()
+          vim.cmd.Neotree("reveal", "toggle=true")
+        end,
+        mode = "n",
+        desc = "Toggle Neotree",
+      },
+    },
+  },
 }, {
   concurrency = 30,
   dev = { path = "~/src" },
@@ -933,7 +968,7 @@ require("lazy").setup({
         "gzip",
         -- "matchit",
         -- "matchparen",
-        -- "netrwPlugin",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",

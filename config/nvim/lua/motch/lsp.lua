@@ -3,10 +3,10 @@ M = {}
 local has_run = {}
 
 local signs = {
-  Error = '✘', -- x000f015a
-  Warn = '󰀪', -- x000f002a
-  Info = '󰋽', -- x000f02fd
-  Hint = '󰌶', -- x000f0336
+  Error = "✘", -- x000f015a
+  Warn = "󰀪", -- x000f002a
+  Info = "󰋽", -- x000f02fd
+  Hint = "󰌶", -- x000f0336
 }
 
 for type, icon in pairs(signs) do
@@ -63,16 +63,17 @@ local levels = {
   [0] = "TRACE",
 }
 
-vim.lsp.handlers["window/showMessage"] = function(_, result)
-  if require("vim.lsp.log").should_log(convert_lsp_log_level_to_neovim_log_level(result.type)) then
-    vim.notify(result.message, levels[result.type])
-  end
-end
+-- vim.lsp.handlers["window/showMessage"] = function(_, result)
+--   -- if require("vim.lsp.log").should_log(convert_lsp_log_level_to_neovim_log_level(result.type)) then
+--   vim.print(result.message)
+--     vim.notify(result.message, levels[result.type])
+--   -- end
+-- end
 
 M.default_config = function(name)
   return require("lspconfig.server_configurations." .. name).default_config
 end
 
--- vim.lsp.set_log_level(0)
+vim.lsp.set_log_level(0)
 
 return M

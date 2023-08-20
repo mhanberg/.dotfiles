@@ -52,9 +52,7 @@ vim.cmd([[set shortmess+="C,c"]])
 
 opt.timeoutlen = 500
 
-if vim.fn.has("smoothscroll") then
-  opt.smoothscroll = true
-end
+-- opt.smoothscroll = true
 
 opt.scrolloff = 4
 opt.laststatus = 3
