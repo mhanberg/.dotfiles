@@ -341,6 +341,7 @@ require("lazy").setup({
   },
   {
     "ibhagwan/fzf-lua",
+    ft = "starter",
     cmd = { "FzfLua" },
     -- optional for icon support
     dependencies = {
@@ -645,7 +646,7 @@ require("lazy").setup({
 
   {
     "echasnovski/mini.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "VimEnter", "BufReadPost", "BufNewFile" },
     version = "*",
     config = function()
       local hipatterns = require("mini.hipatterns")
@@ -655,6 +656,29 @@ require("lazy").setup({
           hex_color = hipatterns.gen_highlighter.hex_color(),
         },
       }
+
+      local fzflua = function()
+        return function()
+          return {
+            { action = "FzfLua files", name = "Find File", section = "FZF" },
+          }
+        end
+      end
+
+      local header = {
+        [[@@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@  @@@  @@@  @@@  @@@  @@@  @@@@@@@@@@ ]],
+        [[@@@@@@@@@@@  @@@@@@@@  @@@@@@@  @@@@@@@@  @@@  @@@  @@@  @@@  @@@  @@@@@@@@@@@]],
+        [[@@! @@! @@!  @@!  @@@    @@!    !@@       @@!  @@@  @@!  @@@  @@!  @@! @@! @@!]],
+        [[!@! !@! !@!  !@!  @!@    !@!    !@!       !@!  @!@  !@!  @!@  !@!  !@! !@! !@!]],
+        [[@!! !!@ @!@  @!@  !@!    @!!    !@!       @!@!@!@!  @!@  !@!  !!@  @!! !!@ @!@]],
+        [[!@!   ! !@!  !@!  !!!    !!!    !!!       !!!@!!!!  !@!  !!!  !!!  !@!   ! !@!]],
+        [[!!:     !!:  !!:  !!!    !!:    :!!       !!:  !!!  :!:  !!:  !!:  !!:     !!:]],
+        [[:!:     :!:  :!:  !:!    :!:    :!:       :!:  !:!   ::!!:!   :!:  :!:     :!:]],
+        [[:::     ::   ::::: ::     ::     ::: :::  ::   :::    ::::     ::  :::     :: ]],
+        [[ :      :     : :  :      :      :: :: :   :   : :     :      :     :      :  ]],
+      }
+
+      require("mini.starter").setup { header = table.concat(header, "\n"), items = { fzflua } }
     end,
   },
   {
@@ -848,10 +872,8 @@ require("lazy").setup({
       end
 
       elixir.setup {
-        -- credo = { port = 9000 },
-        -- credo = { version = "0.1.0-rc.3" },
-        credo = { enable = false },
         nextls = nextls_opts,
+        credo = { enable = false },
         elixirls = {
           enable = false,
           -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
