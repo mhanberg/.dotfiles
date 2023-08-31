@@ -128,8 +128,8 @@ require("lazy").setup({
 
         if vim.fn.expand("%:h") == "dnd" then
           require("motch.dnd")
-          vim.keymap.set("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts {})
-          vim.keymap.set("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts {})
+          vim.keymap.set("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts {desc = "Previous D&D note"})
+          vim.keymap.set("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts {desc = "Next D&D note"})
         end
       end,
     },
@@ -520,7 +520,7 @@ require("lazy").setup({
             gs.next_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
+        end, { expr = true, desc = "Next hunk" })
 
         map("n", "[c", function()
           if vim.wo.diff then
@@ -530,15 +530,15 @@ require("lazy").setup({
             gs.prev_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
+        end, { expr = true, desc = "Prev. hunk" })
 
         -- Actions
-        map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-        map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-        map("n", "<leader>hp", gs.preview_hunk)
+        map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", {desc = "Stage hunk under cursor"})
+        map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", {desc = "Reset hunk under cursor"})
+        map("n", "<leader>hp", gs.preview_hunk, {desc = "Preview hunk under cursor"})
 
         -- Text object
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", {desc = "Select hunk under cursor"})
       end,
     },
     config = function(_, opts)
@@ -969,7 +969,7 @@ require("lazy").setup({
       {
         "-",
         function()
-          vim.cmd.Neotree("reveal", "toggle=true")
+          vim.cmd.Neotree("reveal", "toggle=true", "position=current")
         end,
         mode = "n",
         desc = "Toggle Neotree",

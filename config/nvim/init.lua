@@ -110,8 +110,8 @@ vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Go to the next item in the qu
 vim.keymap.set("n", "<leader><space>", function()
   vim.cmd.set("hls!")
 end, { desc = "Toggle search highlight" })
-vim.keymap.set("n", "<leader>gr", ":grep<cr>")
-vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>")
+vim.keymap.set("n", "<leader>gr", ":grep<cr>", {desc = ":grep"})
+vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>", {desc = "Open quickfix"})
 
 vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 
