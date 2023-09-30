@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -e
+
+function main() {
+  local formula
+  local version
+  local sha
+
+  formula="$1"
+  version="$2"
+  local url="https://github.com/elixir-tools/next-ls/archive/refs/tags/$version.tar.gz"
+
+  sha="$(curl --silent -L "$url" | shasum -a 256 | cut -f 1 -d ' ' -)"
+  (
+  cd "$(brew --repository elixir-tools/homebrew-tap)"
+
+  git checkout main && git pull
+  )
+
+  HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)" brew bump-formula-pr "$formula" --url="$url" --sha256="$sha" --no-fork
+}
+
+main "$@"
