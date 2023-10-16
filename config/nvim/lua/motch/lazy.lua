@@ -128,8 +128,18 @@ require("lazy").setup({
 
         if vim.fn.expand("%:h") == "dnd" then
           require("motch.dnd")
-          vim.keymap.set("n", "<A-j>", [[:lua motch.dnd.move_to("previous")<cr>]], opts {desc = "Previous D&D note"})
-          vim.keymap.set("n", "<A-k>", [[:lua motch.dnd.move_to("next")<cr>]], opts {desc = "Next D&D note"})
+          vim.keymap.set(
+            "n",
+            "<A-j>",
+            [[:lua motch.dnd.move_to("previous")<cr>]],
+            opts { desc = "Previous D&D note" }
+          )
+          vim.keymap.set(
+            "n",
+            "<A-k>",
+            [[:lua motch.dnd.move_to("next")<cr>]],
+            opts { desc = "Next D&D note" }
+          )
         end
       end,
     },
@@ -147,6 +157,23 @@ require("lazy").setup({
   { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
 
   { "christoomey/vim-tmux-runner", event = { "BufReadPost", "BufNewFile" } },
+  {
+    "stevearc/conform.nvim",
+    opts = {},
+    config = function()
+      require("conform").setup {
+        formatters_by_ft = {
+          lua = { "stylua" },
+          sh = { "shfmt" },
+          bash = { "shfmt" },
+          zsh = { "shfmt" },
+          nix = { "nixpkgs_fmt" },
+          -- Conform will run multiple formatters sequentially
+          swift = { "swift_format" },
+        },
+      }
+    end,
+  },
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
@@ -237,15 +264,16 @@ require("lazy").setup({
     opts = {
       font = "Hack",
       lineNumber = false,
-      padHoriz = 120, -- Horizontal padding
-      padVert = 140, -- vertical padding
-      bgColor = "#56716F",
+      padHoriz = 60, -- Horizontal padding
+      padVert = 40, -- vertical padding
+      -- bgColor = "#56716F",
+      -- bgImage = vim.fs.joinpath(vim.env.ICLOUD, "/code-snippet-background.png"),
       -- bgImage = "/Users/mitchell/Downloads/robert-anasch-u6AQYn1tMSE-unsplash.jpg",
       -- bgImage = "/Users/mitchell/Downloads/engin-akyurt-HEMIBJ8QQuA-unsplash.jpg",
       -- bgImage = "/Users/mitchell/Downloads/sincerely-media-K5OLjMlPe4U-unsplash.jpg",
       -- bgImage = "/Users/mitchell/Downloads/sincerely-media-yHWvPxLadRE-unsplash.jpg",
       shadowBlurRadius = 0,
-      theme = "/Users/mitchell/.config/silicon/themes/Everforest Dark.tmTheme",
+      -- theme = "/Users/mitchell/.config/silicon/themes/Everforest Dark.tmTheme",
     },
     keys = {
       {
@@ -301,6 +329,7 @@ require("lazy").setup({
           ["cmp.entry.get_documentation"] = true,
         },
         message = {
+          enabled = false,
           view = "mini",
         },
       },
@@ -533,12 +562,12 @@ require("lazy").setup({
         end, { expr = true, desc = "Prev. hunk" })
 
         -- Actions
-        map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", {desc = "Stage hunk under cursor"})
-        map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", {desc = "Reset hunk under cursor"})
-        map("n", "<leader>hp", gs.preview_hunk, {desc = "Preview hunk under cursor"})
+        map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Stage hunk under cursor" })
+        map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "Reset hunk under cursor" })
+        map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk under cursor" })
 
         -- Text object
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", {desc = "Select hunk under cursor"})
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select hunk under cursor" })
       end,
     },
     config = function(_, opts)
@@ -549,29 +578,37 @@ require("lazy").setup({
 
   {
     "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
     event = { "BufReadPost", "BufNewFile" },
     name = "indent_blankline",
     init = function()
       vim.opt.list = true
     end,
     opts = {
-      viewport_buffer = 100,
-      space_char_blankline = " ",
-      use_treesitter = true,
-      char = "▎",
-      context_char = "▎",
-      filetype_exclude = {
-        "markdown",
-        "terminal",
-        "json",
-        "lspinfo",
-        "packer",
-        "checkhealth",
-        "help",
-        "lazy",
-        "",
+      scope = {
+        enabled = false,
+      },
+      exclude = {
+        filetypes = {
+          "markdown",
+          "help",
+          "man",
+          "gitcommit",
+          "terminal",
+          "json",
+          "lspinfo",
+          "packer",
+          "checkhealth",
+          "help",
+          "lazy",
+          "",
+        },
       },
     },
+
+    config = function(_, opts)
+      require("ibl").setup(opts)
+    end,
   },
   { "mg979/vim-visual-multi", branch = "master", event = { "BufReadPost", "BufNewFile" } },
   {
@@ -678,7 +715,30 @@ require("lazy").setup({
         [[ :      :     : :  :      :      :: :: :   :   : :     :      :     :      :  ]],
       }
 
-      require("mini.starter").setup { header = table.concat(header, "\n"), items = { fzflua } }
+      local header2 = vim.split(
+        [[
+@@@@@@@@  @@@       @@@  @@@  @@@  @@@  @@@@@@@              @@@@@@@   @@@@@@    @@@@@@   @@@        @@@@@@
+@@@@@@@@  @@@       @@@  @@@  @@@  @@@  @@@@@@@@             @@@@@@@  @@@@@@@@  @@@@@@@@  @@@       @@@@@@@
+@@!       @@!       @@!  @@!  !@@  @@!  @@!  @@@               @@!    @@!  @@@  @@!  @@@  @@!       !@@
+!@!       !@!       !@!  !@!  @!!  !@!  !@!  @!@               !@!    !@!  @!@  !@!  @!@  !@!       !@!
+@!!!:!    @!!       !!@   !@@!@!   !!@  @!@!!@!   @!@!@!@!@    @!!    @!@  !@!  @!@  !@!  @!!       !!@@!!
+!!!!!:    !!!       !!!    @!!!    !!!  !!@!@!    !!!@!@!!!    !!!    !@!  !!!  !@!  !!!  !!!        !!@!!!
+!!:       !!:       !!:   !: :!!   !!:  !!: :!!                !!:    !!:  !!!  !!:  !!!  !!:            !:!
+:!:        :!:      :!:  :!:  !:!  :!:  :!:  !:!               :!:    :!:  !:!  :!:  !:!   :!:          !:!
+ :: ::::   :: ::::   ::   ::  :::   ::  ::   :::                ::    ::::: ::  ::::: ::   :: ::::  :::: ::
+: :: ::   : :: : :  :     :   ::   :     :   : :                :      : :  :    : :  :   : :: : :  :: : :
+      ]],
+        "\n"
+      )
+
+      local starter = require("mini.starter")
+      starter.setup {
+        header = table.concat(header2, "\n"),
+        items = { fzflua },
+        content_hooks = {
+          starter.gen_hook.aligning("center", "center"),
+        },
+      }
     end,
   },
   {
@@ -804,6 +864,7 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter-context",
     lazy = true,
+    enabled = false,
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("treesitter-context").setup()
@@ -866,7 +927,10 @@ require("lazy").setup({
       local elixir = require("elixir")
       local nextls_opts
       if vim.env.NEXTLS_LOCAL == "1" then
-        nextls_opts = { enable = true, port = 9000 }
+        nextls_opts = {
+          enable = true,
+          port = 9000,
+        }
       else
         nextls_opts = { enable = true }
       end

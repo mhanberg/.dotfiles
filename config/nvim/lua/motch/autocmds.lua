@@ -18,7 +18,7 @@ autocmd("LspAttach", {
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     local map_opts = function(override)
-      vim.tbl_extend("force",{ buffer = bufnr, silent = true }, override or {})
+      vim.tbl_extend("force", { buffer = bufnr, silent = true }, override or {})
     end
 
     local fzf = function(func, override)
@@ -29,27 +29,46 @@ autocmd("LspAttach", {
     end
 
     vim.keymap.set("n", "df", function()
-      vim.lsp.buf.format {
-        filter = function(fmt_client)
-          return fmt_client.name ~= "ElixirLS"
-        end,
-      }
-    end, map_opts({desc = "Format file"}))
-    vim.keymap.set("n", "gd", vim.diagnostic.open_float, map_opts({desc = "Open diagnostic window"}))
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts({desc = "Prev. diagnostic"}))
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts({desc = "Next diagnostic"}))
+      -- local range = nil
+      -- if args.count ~= -1 then
+      -- local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+      -- range = {
+      -- start = { args.line1, 0 },
+      -- ["end"] = { args.line2, end_line:len() },
+      -- }
+      -- end
+      require("conform").format { async = true, lsp_fallback = true }
+      -- vim.lsp.buf.format {
+      --   filter = function(fmt_client)
+      --     return fmt_client.name ~= "ElixirLS"
+      --   end,
+      -- }
+    end, map_opts { desc = "Format file" })
+    vim.keymap.set("n", "gd", vim.diagnostic.open_float, map_opts { desc = "Open diagnostic window" })
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, map_opts { desc = "Prev. diagnostic" })
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, map_opts { desc = "Next diagnostic" })
 
-    vim.keymap.set("n", "dt", vim.lsp.buf.definition, map_opts({desc = "Go to definition"}))
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts({desc = "Show hover documentation"}))
-    vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, map_opts({desc = "Go to type definition"}))
-    vim.keymap.set("n", "gr", fzf("lsp_references"), map_opts({desc = "Find references"}))
-    vim.keymap.set("n", "gi", fzf("lsp_implementations"), map_opts({desc = "Find implementations"}))
-    vim.keymap.set("n", "g0", fzf("lsp_document_symbols"), map_opts({desc = "Document Symbols"}))
-    vim.keymap.set("n", "g7", fzf("lsp_workspace_symbols"), map_opts({desc = "Workspace Symbols"}))
-    vim.keymap.set("n", "<leader>ca", fzf("lsp_code_actions", {}), map_opts({desc = "Code Actions"}))
-    vim.keymap.set("n", "<leader>dd", fzf("lsp_document_diagnostics"), map_opts({desc = "Buffer diagnostics"}))
-    vim.keymap.set("n", "<leader>da", fzf("lsp_workspace_diagnostics"), map_opts({desc = "Workspace diagnostics"}))
-    vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts({desc = "Run codelens"}))
+    vim.keymap.set("n", "dt", vim.lsp.buf.definition, map_opts { desc = "Go to definition" })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts { desc = "Show hover documentation" })
+    vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, map_opts { desc = "Go to type definition" })
+    vim.keymap.set("n", "gr", fzf("lsp_references"), map_opts { desc = "Find references" })
+    vim.keymap.set("n", "gi", fzf("lsp_implementations"), map_opts { desc = "Find implementations" })
+    vim.keymap.set("n", "g0", fzf("lsp_document_symbols"), map_opts { desc = "Document Symbols" })
+    vim.keymap.set("n", "g7", fzf("lsp_workspace_symbols"), map_opts { desc = "Workspace Symbols" })
+    vim.keymap.set("n", "<leader>ca", fzf("lsp_code_actions", {}), map_opts { desc = "Code Actions" })
+    vim.keymap.set(
+      "n",
+      "<leader>dd",
+      fzf("lsp_document_diagnostics"),
+      map_opts { desc = "Buffer diagnostics" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>da",
+      fzf("lsp_workspace_diagnostics"),
+      map_opts { desc = "Workspace diagnostics" }
+    )
+    vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts { desc = "Run codelens" })
 
     vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
     vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])

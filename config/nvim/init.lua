@@ -137,8 +137,16 @@ LSP.setup("omnisharp", {})
 LSP.setup("tsserver", {})
 -- LSP.setup("vimls", {})
 LSP.setup("bashls", {})
+LSP.setup("sourcekit", {})
 
 LSP.setup("zls", {})
+LSP.setup("nil_ls", {
+  ["nil"] = {
+    formatting = {
+      command = { "/run/current-system/sw/bin/nixpkgs-fmt" },
+    },
+  },
+})
 LSP.setup("gopls", {})
 LSP.setup("jsonls", {})
 LSP.setup("cssls", {

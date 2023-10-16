@@ -28,6 +28,12 @@ M.navic = function()
   end
 end
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = "rounded",
+  }
+)
+
 M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 M.setup = function(name, opts)
@@ -63,12 +69,12 @@ local levels = {
   [0] = "TRACE",
 }
 
--- vim.lsp.handlers["window/showMessage"] = function(_, result)
---   -- if require("vim.lsp.log").should_log(convert_lsp_log_level_to_neovim_log_level(result.type)) then
---   vim.print(result.message)
---     vim.notify(result.message, levels[result.type])
---   -- end
--- end
+vim.lsp.handlers["window/showMessage"] = function(_, result)
+  -- if require("vim.lsp.log").should_log(convert_lsp_log_level_to_neovim_log_level(result.type)) then
+  -- vim.print(result.message)
+  vim.notify(result.message, vim.log.levels[levels[result.type]])
+  -- end
+end
 
 M.default_config = function(name)
   return require("lspconfig.server_configurations." .. name).default_config

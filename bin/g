@@ -2,59 +2,59 @@
 
 case $1 in
 co)
-	if [ ! "$2" ]; then
-		git branches-sorted | fzf --tac --ansi | sed 's/^\* //' | awk '{ print $1 }' | xargs git checkout
-	else
-		git checkout "$2"
-	fi
-	;;
+  if [ ! "$2" ]; then
+    git branches-sorted | fzf --tac --ansi | sed 's/^\* //' | awk '{ print $1 }' | xargs git checkout
+  else
+    git checkout "$2"
+  fi
+  ;;
 
 sync)
-	gt repo sync --restack && gt ss
-	;;
+  gt repo sync --restack && gt ss
+  ;;
 
 up | down | top | bottom)
-	gt branch "$1"
-	;;
+  gt branch "$1"
+  ;;
 
 stack)
-	shift
+  shift
 
-	case $1 in
-	new)
-		shift
-		gt branch create "$@"
-		;;
+  case $1 in
+  new)
+    shift
+    gt branch create "$@"
+    ;;
 
   submit)
     gt stack submit
     ;;
 
-	test)
+  test)
     gt stack test "mix test"
-		;;
+    ;;
 
-	lint)
+  lint)
     gt stack test "mix lint && mix dialyzer"
-		;;
+    ;;
 
-	redo-labels)
-		for branch in $(gt ls -s -r | awk '{ print $2 }'); do
-			git checkout "$branch" && gh pr edit --remove-label elixir --remove-label freeroll && gh pr edit --add-label elixir --add-label freeroll
-		done
-		;;
-	*)
-		echo "stack $1: unknown command"
-		;;
-	esac
+  redo-labels)
+    for branch in $(gt ls -s -r | awk '{ print $2 }'); do
+      git checkout "$branch" && gh pr edit --remove-label elixir --remove-label freeroll && gh pr edit --add-label elixir --add-label freeroll
+    done
+    ;;
+  *)
+    echo "stack $1: unknown command"
+    ;;
+  esac
 
-	;;
+  ;;
 
 *)
-	if [[ $# -gt 0 ]]; then
-		git "$@"
-	else
-		git status
-	fi
-	;;
+  if [[ $# -gt 0 ]]; then
+    git "$@"
+  else
+    git status
+  fi
+  ;;
 esac
