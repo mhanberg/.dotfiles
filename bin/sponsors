@@ -17,4 +17,23 @@ gh api graphql --paginate -f query='
       }
     }
   }
-}' | jq -r '.data.viewer.sponsors.edges | .[] | "- [" + .node.login + "](https://github.com/" + .node.login + ")"'
+}' | elixir -e '
+Mix.install([:jason])
+
+input = IO.read(:eof) |> Jason.decode!(keys: :atoms)
+
+rows = 
+  input.data.viewer.sponsors.edges
+  |> Enum.chunk_every(3)
+  |> Enum.map_join("\n", fn row ->
+    "| " <> Enum.map_join(row, " | ", fn cell ->
+      "[#{cell.node.login}](https://github.com/#{cell.node.login})"
+    end) <> " | "
+  end)
+
+IO.puts("""
+| Sponsors | | |
+| --- | --- | ---|
+#{rows}
+""")
+'
