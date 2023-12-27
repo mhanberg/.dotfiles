@@ -100,6 +100,9 @@ require("lazy").setup({
   {
     "mhanberg/zk.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    config = function (_, opts)
+      require("zk").setup(opts)
+    end,
     opts = {
       filetypes = { "markdown", "liquid" },
       on_attach = function(_client, bufnr)
