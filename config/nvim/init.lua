@@ -1,6 +1,8 @@
 _G.motch = {}
 
-vim.filetype.add { filename = { Brewfile = "ruby" } }
+vim.filetype.add { filename = { Brewfile = "ruby", ["GRAPHITE_PR_DESCRIPTION.md"] = "octo" } }
+
+
 
 local theme = "kanagawa"
 
@@ -130,7 +132,6 @@ LSP.setup(
   "lua_ls",
   { settings = { Lua = { hint = { enable = true, arrayIndex = "Disable" }, format = { enable = false } } } }
 )
--- LSP.setup("dartls", {})
 LSP.setup("rust_analyzer", {})
 LSP.setup("clangd", {})
 -- LSP.setup("solargraph", {})
@@ -164,15 +165,36 @@ local default_tw_config = LSP.default_config("tailwindcss")
 LSP.setup(
   "tailwindcss",
   vim.tbl_deep_extend("force", default_tw_config, {
+    -- cmd = vim.lsp.rpc.connect("127.0.0.1", 9000),
+
     init_options = {
       userLanguages = {
         elixir = "phoenix-heex",
         eruby = "erb",
         heex = "phoenix-heex",
+        surface = "phoenix-heex",
       },
     },
     settings = {
       tailwindCSS = {
+        validate = true,
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidScreen = "error",
+          invalidVariant = "error",
+          invalidConfigPath = "error",
+          invalidTailwindDirective = "error",
+          recommendedVariantOrder = "warning",
+        },
+        classAttributes = {
+          "class",
+          "className",
+          "class:list",
+          "classList",
+          "ngClass",
+        },
+
         experimental = {
           classRegex = {
             [[class: "([^"]*)]],
@@ -180,7 +202,7 @@ LSP.setup(
         },
       },
     },
-    filetypes = { "elixir", "eelixir", "html", "liquid", "heex", "css" },
+    filetypes = { "elixir", "eelixir", "html", "liquid", "heex", "surface", "css" },
   })
 )
 LSP.setup("gopls", {

@@ -21,6 +21,7 @@ function ensure_dep() {
 }
 
 export HOMEBREW_NO_GOOGLE_ANALYTICS=1
+export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 
 if [ $(arch) = "arm64" ]; then
   brew_prefix='/opt/homebrew'
@@ -123,8 +124,8 @@ source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-ensure_dep "rtx"
-eval "$(rtx activate zsh)"
+ensure_dep "mise"
+eval "$(mise activate zsh)"
 
 #compdef gt
 ###-begin-gt-completions-###

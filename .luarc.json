@@ -4,5 +4,6 @@
         "/Users/mitchell/.local/share/rtx/installs/neovim/nightly/share/nvim/runtime/lua",
         "/Users/mitchell/.dotfiles/config/nvim/lua",
         "${3rd}/luv/library"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }

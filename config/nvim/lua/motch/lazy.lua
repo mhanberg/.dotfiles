@@ -73,6 +73,7 @@ require("lazy").setup({
       vim.opt.foldcolumn = "1"
       vim.opt.foldlevelstart = 99
       vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+      vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
       vim.opt.foldmethod = "expr"
       vim.opt.mousemodel = "extend"
       vim.opt.fillchars:append {
@@ -273,7 +274,7 @@ require("lazy").setup({
       -- bgImage = "/Users/mitchell/Downloads/robert-anasch-u6AQYn1tMSE-unsplash.jpg",
       -- bgImage = "/Users/mitchell/Downloads/engin-akyurt-HEMIBJ8QQuA-unsplash.jpg",
       -- bgImage = "/Users/mitchell/Downloads/sincerely-media-K5OLjMlPe4U-unsplash.jpg",
-      -- bgImage = "/Users/mitchell/Downloads/sincerely-media-yHWvPxLadRE-unsplash.jpg",
+      bgImage = "/Users/mitchell/Downloads/luke-chesser-pJadQetzTkI-unsplash.jpg",
       shadowBlurRadius = 0,
       -- theme = "/Users/mitchell/.config/silicon/themes/Everforest Dark.tmTheme",
     },
@@ -646,40 +647,63 @@ require("lazy").setup({
           NoiceCmdlineIconSearch = { bg = theme.ui.bg_m3, fg = theme.diag.warning },
 
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-
-          NavicIconsFile = { link = "Directory" },
-          NavicIconsModule = { link = "TSInclude" },
-          NavicIconsNamespace = { link = "TSInclude" },
-          NavicIconsPackage = { link = "TSInclude" },
-          NavicIconsClass = { link = "Structure" },
-          NavicIconsMethod = { link = "Function" },
-          NavicIconsProperty = { link = "TSProperty" },
-          NavicIconsField = { link = "TSField" },
-          NavicIconsConstructor = { link = "@constructor" },
-          NavicIconsEnum = { link = "Identifier" },
-          NavicIconsInterface = { link = "Type" },
-          NavicIconsFunction = { link = "Function" },
-          NavicIconsVariable = { link = "@variable" },
-          NavicIconsConstant = { link = "Constant" },
-          NavicIconsString = { link = "String" },
-          NavicIconsNumber = { link = "Number" },
-          NavicIconsBoolean = { link = "Boolean" },
-          NavicIconsArray = { link = "Type" },
-          NavicIconsObject = { link = "Type" },
-          NavicIconsKey = { link = "Keyword" },
-          NavicIconsNull = { link = "Type" },
-          NavicIconsEnumMember = { link = "TSField" },
-          NavicIconsStruct = { link = "Structure" },
-          NavicIconsEvent = { link = "Structure" },
-          NavicIconsOperator = { link = "Operator" },
-          NavicIconsTypeParameter = { link = "Identifier" },
-          NavicText = { fg = theme.ui.fg },
-          NavicSeparator = { fg = theme.ui.fg },
         }
       end,
     },
     config = function(_, opts)
       require("kanagawa").setup(opts)
+    end,
+  },
+
+  {
+    "echasnovski/mini.clue",
+    version = false,
+    config = function()
+      local miniclue = require("mini.clue")
+      miniclue.setup {
+        triggers = {
+          -- Leader triggers
+          { mode = "n", keys = "<Leader>" },
+          { mode = "n", keys = "<space>" },
+          { mode = "x", keys = "<Leader>" },
+
+          -- Built-in completion
+          { mode = "i", keys = "<C-x>" },
+
+          -- `g` key
+          { mode = "n", keys = "g" },
+          { mode = "x", keys = "g" },
+
+          -- Marks
+          { mode = "n", keys = "'" },
+          { mode = "n", keys = "`" },
+          { mode = "x", keys = "'" },
+          { mode = "x", keys = "`" },
+
+          -- Registers
+          { mode = "n", keys = '"' },
+          { mode = "x", keys = '"' },
+          { mode = "i", keys = "<C-r>" },
+          { mode = "c", keys = "<C-r>" },
+
+          -- Window commands
+          { mode = "n", keys = "<C-w>" },
+
+          -- `z` key
+          { mode = "n", keys = "z" },
+          { mode = "x", keys = "z" },
+        },
+
+        clues = {
+          -- Enhance this by adding descriptions for <Leader> mapping groups
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+        },
+      }
     end,
   },
 
@@ -695,6 +719,28 @@ require("lazy").setup({
           hex_color = hipatterns.gen_highlighter.hex_color(),
         },
       }
+
+      -- require("mini.base16").setup {
+      --   palette = {
+      --     base00 = "#000000",
+      --     base01 = "#6928FF",
+      --     base02 = "#FFFFFF",
+      --     base03 = "#8691a7",
+      --     base04 = "#150044",
+      --     base05 = "#e2e98f",
+      --     base06 = "#eff69c",
+      --     base07 = "#fcffaa",
+      --     base08 = "#ffcfa0",
+      --     base09 = "#cc7e46",
+      --     base0A = "#46a436",
+      --     base0B = "#9ff895",
+      --     base0C = "#ca6ecf",
+      --     base0D = "#42f7ff",
+      --     base0E = "#ffc4ff",
+      --     base0F = "#00a5c5",
+      --   },
+      --   use_cterm = true,
+      -- }
 
       local fzflua = function()
         return function()
@@ -736,7 +782,7 @@ require("lazy").setup({
 
       local starter = require("mini.starter")
       starter.setup {
-        header = table.concat(header2, "\n"),
+        header = table.concat(header, "\n"),
         items = { fzflua },
         content_hooks = {
           starter.gen_hook.aligning("center", "center"),
@@ -871,7 +917,7 @@ require("lazy").setup({
 
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "nvim-treesitter/nvim-treesitter-context",
+      -- "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/playground",
     },
   },
@@ -932,6 +978,27 @@ require("lazy").setup({
       }
     end,
   },
+  {
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim", -- optional for vim.ui.select
+    },
+    config = function()
+      require("flutter-tools").setup {} -- use defaults
+    end,
+  },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    config = function()
+      require("ts_context_commentstring").setup {
+        languages = {
+          surface = [[<!--\ %s\ -->]],
+        },
+      }
+    end,
+  },
 
   {
     "mhanberg/workspace-folder.nvim",
@@ -952,41 +1019,36 @@ require("lazy").setup({
           enable = true,
           init_options = { experimental = { completions = { enable = true } } },
           port = 9000,
+          init_options = {
+            experimental = {
+              completions = {
+                enable = true,
+              },
+            },
+          },
         }
       else
         nextls_opts = {
           enable = true,
-          init_options = { experimental = { completions = { enable = true } } },
+          init_options = {
+            experimental = {
+              completions = {
+                enable = true,
+              },
+            },
+          },
         }
       end
 
       elixir.setup {
         nextls = nextls_opts,
         credo = { enable = false },
-        elixirls = {
-          enable = false,
-          -- cmd = { vim.fn.expand("~/.local/share/nvim/lsp_servers/elixir/elixir-ls/rel/language_server.sh") },
-          -- repo = "elixir-lsp/elixir-ls",
-          -- branch = "master",
-          settings = elixir.elixirls.settings {
-            dialyzerEnabled = false,
-            enableTestLenses = false,
-          },
-          log_level = vim.lsp.protocol.MessageType.Log,
-          message_level = vim.lsp.protocol.MessageType.Log,
-          handlers = {
-            ["textDocument/publishDiagnostics"] = function() end,
-          },
-          on_attach = function()
-            vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-          end,
-        },
+        elixirls = { enable = false },
       }
     end,
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "mhanberg/workspace-folders.nvim",
     },
   },
 
@@ -1033,6 +1095,11 @@ require("lazy").setup({
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     opts = {
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+        },
+      },
       event_handlers = {
         {
           event = "file_opened",
