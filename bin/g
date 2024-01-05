@@ -9,14 +9,6 @@ co)
   fi
   ;;
 
-sync)
-  gt repo sync --restack && gt ss
-  ;;
-
-up | down | top | bottom)
-  gt branch "$1"
-  ;;
-
 stack)
   shift
 
@@ -24,10 +16,6 @@ stack)
   new)
     shift
     gt branch create "$@"
-    ;;
-
-  submit)
-    gt stack submit
     ;;
 
   test)
