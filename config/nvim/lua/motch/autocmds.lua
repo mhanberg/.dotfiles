@@ -105,6 +105,13 @@ autocmd("ColorScheme", {
   end,
 })
 
+autocmd({ "BufReadPre", "BufNewFile" }, {
+  group = random,
+  pattern = "GRAPHITE_PR_DESCRIPTION.md",
+  callback = function()
+    vim.treesitter.language.register("markdown", "octo")
+  end,
+})
 autocmd("FileType", {
   group = random,
   pattern = "raml",
