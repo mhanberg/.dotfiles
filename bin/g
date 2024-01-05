@@ -3,7 +3,7 @@
 case $1 in
 co)
   if [ ! "$2" ]; then
-    git branches-sorted | fzf --tac --ansi | sed 's/^\* //' | awk '{ print $1 }' | xargs git checkout
+    git branches-sorted | fzf --tac --ansi | sed 's/^\* //' | awk '{ print $1 }' | xargs -r git checkout
   else
     git checkout "$2"
   fi

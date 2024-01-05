@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+alias tsr='tailscale serve reset'
+
 alias wtf='wtfutil'
 alias tmux='direnv exec / tmux'
 alias mux="tmuxinator"

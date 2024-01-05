@@ -10,4 +10,4 @@ notes"
 
 echo "$projects" \
   | fzf --reverse --border=rounded --prompt='> ' \
-  | xargs tmuxinator start code
+  | xargs -r tmuxinator start code

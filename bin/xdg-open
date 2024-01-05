@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function main() {
+	local ip
+	local uri
+
+	uri="$1"
+	if [[ ! -z "$SSH_CONNECTION" ]]; then
+		ip="$(echo "$SSH_CONNECTION" | awk '{ print $1 }')"
+
+		ssh "mitchell@$ip" open "$uri"
+	else
+		xdg-open "$uri"
+	fi
+}
+
+main "$@"

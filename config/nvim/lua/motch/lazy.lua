@@ -105,7 +105,7 @@ require("lazy").setup({
     end,
     opts = {
       filetypes = { "markdown", "liquid" },
-      on_attach = function(_client, bufnr)
+      on_attach = function(_, bufnr)
         local opts = function(tbl)
           return vim.tbl_extend("keep", { buffer = bufnr, silent = true }, tbl)
         end
@@ -153,7 +153,6 @@ require("lazy").setup({
 
       "neovim/nvim-lspconfig",
     },
-    dev = true,
   },
   { "ruanyl/vim-gh-line", event = { "BufReadPost", "BufNewFile" } },
   { "alvan/vim-closetag", ft = { "html", "liquid", "javascriptreact", "typescriptreact" } },
@@ -211,7 +210,7 @@ require("lazy").setup({
           { name = "vim-dadbod-completion" },
           { name = "spell", keyword_length = 5 },
           -- { name = "rg", keyword_length = 3 },
-          -- { name = "buffer", keyword_length = 5 },
+          { name = "buffer", keyword_length = 3 },
           -- { name = "emoji" },
           { name = "path" },
           { name = "git" },
@@ -700,7 +699,8 @@ require("lazy").setup({
       local fzflua = function()
         return function()
           return {
-            { action = "FzfLua files", name = "Find File", section = "FZF" },
+            { action = "FzfLua files", name = "Find File", section = "Files" },
+            { action = "Neotree", name = "Neotree", section = "Files" },
           }
         end
       end
@@ -844,16 +844,28 @@ require("lazy").setup({
       },
     },
     config = function(_, opts)
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.iex = {
-        install_info = {
-          url = "/Users/mitchell/src/tree-sitter-iex", -- local path or git repo
-          files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
-          branch = "main",
-          generate_requires_npm = false,
-          requires_generate_from_grammar = false,
-        },
-      }
+      -- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      -- parser_config.iex = {
+      --   install_info = {
+      --     url = "/Users/mitchell/src/tree-sitter-iex", -- local path or git repo
+      --     files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+      --     branch = "main",
+      --     generate_requires_npm = false,
+      --     requires_generate_from_grammar = false,
+      --   },
+      -- }
+      --
+      -- vim.treesitter.language.register("liquid", "liquid")
+      -- parser_config.liquid_html = parser_config.html
+      -- parser_config.liquid = {
+      --   install_info = {
+      --     url = "https://github.com/adamazing/tree-sitter-liquid.git", -- local path or git repo
+      --     files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+      --     branch = "main",
+      --     generate_requires_npm = false,
+      --     requires_generate_from_grammar = true,
+      --   },
+      -- }
       require("nvim-treesitter.configs").setup(opts)
     end,
 
@@ -922,9 +934,15 @@ require("lazy").setup({
   },
 
   {
+    "mhanberg/workspace-folder.nvim",
+    dir = "~/src/workspace-folders.nvim",
+    lazy = false,
+  },
+
+  {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
-    dev = false,
+    dev = true,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
@@ -932,10 +950,14 @@ require("lazy").setup({
       if vim.env.NEXTLS_LOCAL == "1" then
         nextls_opts = {
           enable = true,
+          init_options = { experimental = { completions = { enable = true } } },
           port = 9000,
         }
       else
-        nextls_opts = { enable = true }
+        nextls_opts = {
+          enable = true,
+          init_options = { experimental = { completions = { enable = true } } },
+        }
       end
 
       elixir.setup {

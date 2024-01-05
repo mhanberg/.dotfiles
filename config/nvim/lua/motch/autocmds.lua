@@ -84,8 +84,8 @@ autocmd("LspAttach", {
       require("nvim-navic").attach(client, bufnr)
     end
 
-    if client and client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint(bufnr, true)
+    if vim.lsp.inlay_hint and client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(bufnr, true)
     end
   end,
 })
