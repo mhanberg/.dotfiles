@@ -13,4 +13,7 @@ rcup \
   -x tmux-terminfo.txt \
   -x tmux-256color.terminfo \
   -x xterm-256color.terminfo \
+  -x flake.nix \
+  -x home.nix \
+  -x flake.lock \
   -v
