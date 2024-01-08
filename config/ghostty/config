@@ -23,7 +23,7 @@ palette=14=#7aa89f
 palette=15=#c5c9c5
 
 font-family="JetBrainsMono Nerd Font Mono"
-font-size=11
+font-size=14
 font-thicken=false
 
 cursor-style-blink=false
