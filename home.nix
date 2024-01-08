@@ -19,46 +19,47 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    gh
-    git
-    zsh
-    rtx
-    starship
-    fzf
-    vim
-    direnv
-    tmux
-    tmuxinator
-    fd
-    xclip
-    eza
-    lazygit
-    graphite-cli
-    sqlite-interactive
-    ripgrep
-    neovim-remote
-    shfmt
-    yarn
-    chromedriver
-    selenium-server-standalone
-    unixtools.ifconfig
-    inotify-tools
-    btop
-    delta
-    cachix
-    bat
-    lua-language-server
-    fastfetch
-    stylua
-    cmake
-    rust-analyzer
-    lazydocker
-    silicon
     backblaze-b2
+    bat
+    btop
+    cachix
+    chromedriver
     clang
     clang-tools
-    tree-sitter
+    cmake
+    delta
+    direnv
+    eza
+    fastfetch
+    fd
+    fzf
+    gh
+    git
+    graphite-cli
     hyperfine
+    inotify-tools
+    lazydocker
+    lazygit
+    lua-language-server
+    neovim-remote
+    ripgrep
+    rtx
+    rust-analyzer
+    selenium-server-standalone
+    shfmt
+    silicon
+    sqlite-interactive
+    starship
+    stylua
+    tmux
+    tmuxinator
+    tokei
+    tree-sitter
+    unixtools.ifconfig
+    vim
+    xclip
+    yarn
+    zsh
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
