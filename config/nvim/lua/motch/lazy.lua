@@ -1009,7 +1009,7 @@ require("lazy").setup({
   {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
-    dev = true,
+    -- dev = true,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
@@ -1017,7 +1017,6 @@ require("lazy").setup({
       if vim.env.NEXTLS_LOCAL == "1" then
         nextls_opts = {
           enable = true,
-          init_options = { experimental = { completions = { enable = true } } },
           port = 9000,
           init_options = {
             experimental = {
