@@ -75,13 +75,14 @@ setopt ignoreeof
 export PATH="/opt/homebrew/bin/qt@5.5/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+# export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 # export PATH="$brew_prefix/opt/python@3.9/libexec/bin:$PATH"
-export PATH="$HOME/Library/Python/3.8/bin:$PATH"
-export PATH="$HOME/Library/Python/2.7/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-export PATH="$HOME/zls/zig-out/bin:$PATH"
+# export PATH="$HOME/Library/Python/3.8/bin:$PATH"
+# export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+# export PATH="$HOME/go/bin:$PATH"
+# export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+# export PATH="$HOME/zls/zig-out/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Enable shell history in iex
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -113,6 +114,8 @@ _gt_yargs_completions()
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
 
+export LC_ALL="C.UTF-8"
+ensure_dep "starship"
 eval "$(starship init zsh)"
 
 eval "$(direnv hook zsh)"
