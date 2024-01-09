@@ -5,52 +5,27 @@
 # (_)/___//____//_/ /_//_/    \___/
 #
 
-function ensure_dep() {
-	local dep
-	dep="$1"
-
-	if ! command -v "$dep" >/dev/null; then
-		if command -v brew >/dev/null; then
-			echo "⚠️ Installing \`$dep\` with homebrew"
-			brew install "$dep"
-		else
-			echo "🚨 $dep is missing"
-			exit 1
-		fi
-	fi
-}
 
 export HOMEBREW_NO_GOOGLE_ANALYTICS=1
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 
-if [ $(arch) = "arm64" ]; then
+if uname -a | grep -i "darwin" > /dev/null; then
+  export CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
+  export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
   brew_prefix='/opt/homebrew'
 
   eval $(/opt/homebrew/bin/brew shellenv)
-else
-  brew_prefix='/usr/local'
-fi
-
-if ! command -v starship >/dev/null; then
-  echo "==> starship.rs not installed. Installing now..."
-  brew install starship
 fi
 
 export TMPDIR="$(mktemp -d)"
 export EDITOR="nvim"
-export CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
-export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
 function maybe_touch() {
   if [ ! -f "$1" ]; then
     touch "$1"
   fi
 }
-
-if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc ]; then
-  source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-fi
 
 unset -v GEM_HOME
 
@@ -97,12 +72,7 @@ disable r
 setopt nohistignoredups
 setopt ignoreeof
 
-if [ -f /usr/libeexec/java_home ]; then
-  export JAVA_HOME="$(/usr/libexec/java_home)"
-fi
-
 export PATH="/opt/homebrew/bin/qt@5.5/bin:$PATH"
-export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
@@ -117,14 +87,10 @@ export PATH="$HOME/zls/zig-out/bin:$PATH"
 export ERL_AFLAGS="-kernel shell_history enabled"
 export KERL_BUILD_DOCS=yes
 
-# echo "sourcing z.sh"
-. "$brew_prefix"/etc/profile.d/z.sh
-
-source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
+# source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-ensure_dep "mise"
 eval "$(mise activate zsh)"
 
 #compdef gt
@@ -147,8 +113,6 @@ _gt_yargs_completions()
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
 
-ensure_dep "starship"
 eval "$(starship init zsh)"
 
-ensure_dep "direnv"
 eval "$(direnv hook zsh)"

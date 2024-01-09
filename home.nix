@@ -5,7 +5,7 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mitchell";
-  home.homeDirectory = "/home/mitchell";
+  home.homeDirectory = pkgs.lib.mkForce(if pkgs.stdenv.isLinux then "/home/mitchell" else "/Users/mitchell");
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -19,7 +19,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    backblaze-b2
+    actionlint
+    nodePackages.bash-language-server
     bat
     btop
     cachix
@@ -32,35 +33,37 @@
     eza
     fastfetch
     fd
+    figlet
     fzf
     gh
     git
     graphite-cli
     hyperfine
-    inotify-tools
+    jq
     lazydocker
     lazygit
     lua-language-server
+    neovim-nightly
     neovim-remote
+    nodejs
     ripgrep
     rtx
     rust-analyzer
     selenium-server-standalone
+    shellcheck
     shfmt
     silicon
     sqlite-interactive
+    sqlite
     starship
     stylua
     tmux
     tmuxinator
-    tokei
     tree-sitter
-    unixtools.ifconfig
     vim
-    xclip
     yarn
     zsh
-  ];
+  ] ++ (if pkgs.stdenv.isLinux then [ backblaze-b2 xclip unixtools.ifconfig inotify-tools ] else []);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

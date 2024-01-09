@@ -7,9 +7,10 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, neovim-nightly-overlay }:
   let
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
@@ -38,7 +39,6 @@
       homebrew.enable = true;
       homebrew.onActivation.cleanup = "uninstall";
       homebrew.brews = [
-        "actionlint"
         "agg"
         "alerter"
         "aom"
@@ -46,7 +46,6 @@
         "apr-util"
         "argon2"
         "asciinema"
-        "asdf"
         "aspell"
         "asyncapi"
         "autoconf"
@@ -57,8 +56,6 @@
         "base64"
         "bash"
         "bash-completion"
-        "bash-language-server"
-        "bat"
         "bdw-gc"
         "berkeley-db"
         "berkeley-db@5"
@@ -80,7 +77,6 @@
         "docutils"
         "dtc"
         "dust"
-        "efm-langserver"
         "elixir"
         "emacs"
         "emscripten"
@@ -132,9 +128,6 @@
         "highlight"
         "highway"
         "hiredis"
-        "htop"
-        "hub"
-        "hyperfine"
         "icu4c"
         "imath"
         "imgcat"
@@ -145,13 +138,10 @@
         "jpeg"
         "jpeg-turbo"
         "jpeg-xl"
-        "jq"
         "kafka"
         "kcat"
         "krb5"
         "kubernetes-cli"
-        "lazydocker"
-        "lazygit"
         "libassuan"
         "libavif"
         "libevent"
@@ -220,8 +210,6 @@
         "msgpack"
         "ncurses"
         "neofetch"
-        "neovim"
-        "neovim-remote"
         "netcat"
         "netpbm"
         "nettle"
@@ -252,8 +240,6 @@
         "pinentry"
         "pixman"
         "pkg-config"
-        "podman"
-        "podman-compose"
         "popt"
         "postgresql"
         "postgresql@14"
@@ -267,7 +253,6 @@
         "pyyaml"
         "qemu"
         "rabbitmq"
-        "rcm"
         "readline"
         "ripgrep"
         "rsync"
@@ -282,20 +267,12 @@
         "sl"
         "snappy"
         "speedtest"
-        "sqlite"
-        "starship"
-        "stylua"
         "telnet"
         "terminal-notifier"
         "the_silver_searcher"
         "tidy-html5"
         "tmate"
-        "tmux"
-        "tmuxinator"
-        "tmuxp"
-        "tokei"
         "tree"
-        "tree-sitter"
         "uchardet"
         "unbound"
         "unibilium"
@@ -315,14 +292,11 @@
         "xxhash"
         "xz"
         "yajl"
-        "yarn"
         "youtube-dl"
         "yuicompressor"
-        "z"
         "zk"
         "zookeeper"
         "zsh"
-        "zsh-completions"
         "zstd"
       ];
       homebrew.casks = [
@@ -332,11 +306,9 @@
         "alacritty"
         "alfred"
         "aws-vpn-client"
-        "balenaetcher"
         "bartender"
         "chromedriver"
         "dash"
-        "db-browser-for-sqlite"
         "deckset"
         "discord"
         "divvy"
@@ -345,41 +317,31 @@
         "element"
         "elgato-control-center"
         "elgato-stream-deck"
-        "equinox"
         "farrago"
         "figma"
         "firefox"
         "firefox-developer-edition"
-        "folx"
         "font-inter"
         "font-jetbrains-mono"
         "font-jetbrains-mono-nerd-font"
         "font-work-sans"
         "gitpigeon"
         "hammerspoon"
-        "insomnia"
         "iterm2"
         "itsycal"
         "karabiner-elements"
         "kindle"
         "kitty"
-        "licecap"
         "loopback"
-        "muzzle"
-        "ngrok"
         "nordvpn"
         "notion"
         "obs"
         "pocket-casts"
-        "podman-desktop"
         "postgres-unofficial"
         "postico"
-        "postman"
         "screenflow"
         "slack"
-        "slack-cli"
         "soundsource"
-        "steermouse"
         "sublime-merge"
         "tailscale"
         "tuple"
@@ -404,12 +366,15 @@
     darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
-        # home-manager.darwinModules.home-manager
-        # {
-        #   home-manager.useGlobalPkgs = true;
-        #   home-manager.useUserPackages = true;
-        #   home-manager.users.mitchell = import ../home.nix;
-        # }
+        home-manager.darwinModules.home-manager
+        {
+          nixpkgs.overlays = [neovim-nightly-overlay.overlay];
+        }
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.mitchell = import ../home.nix;
+        }
       ];
     };
 
