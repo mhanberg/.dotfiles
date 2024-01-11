@@ -119,7 +119,7 @@ compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
 if "$(uname)" == "Linux" then
   export LC_ALL="C.UTF-8"
-if
+fi
 eval "$(starship init zsh)"
 
 eval "$(direnv hook zsh)"
