@@ -117,7 +117,7 @@ _gt_yargs_completions()
 }
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
-if "$(uname)" == "Linux" then
+if [[ "$(uname)" == "Linux" ]]; then
   export LC_ALL="C.UTF-8"
 fi
 eval "$(starship init zsh)"
