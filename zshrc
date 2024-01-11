@@ -92,7 +92,11 @@ export KERL_BUILD_DOCS=yes
 # echo "sourcing fzf.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(mise activate zsh)"
+if command -v mise >/dev/null; then
+  eval "$(mise activate zsh)"
+else
+  eval "$(rtx activate zsh)"
+fi
 
 #compdef gt
 ###-begin-gt-completions-###
@@ -113,9 +117,9 @@ _gt_yargs_completions()
 }
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
-
-export LC_ALL="C.UTF-8"
-ensure_dep "starship"
+if "$(uname)" == "Linux" then
+  export LC_ALL="C.UTF-8"
+if
 eval "$(starship init zsh)"
 
 eval "$(direnv hook zsh)"
