@@ -204,7 +204,6 @@
         "markdown"
         "mdcat"
         "minikube"
-        "mise"
         "mpdecimal"
         "mpfr"
         "msgpack"

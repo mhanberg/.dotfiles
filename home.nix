@@ -22,11 +22,8 @@
     actionlint
     nodePackages.bash-language-server
     bat
-    btop
     cachix
     chromedriver
-    clang
-    clang-tools
     cmake
     delta
     direnv
@@ -47,7 +44,7 @@
     neovim-remote
     nodejs
     ripgrep
-    rtx
+    mise
     rust-analyzer
     selenium-server-standalone
     shellcheck
@@ -63,7 +60,7 @@
     vim
     yarn
     zsh
-  ] ++ (if pkgs.stdenv.isLinux then [ backblaze-b2 xclip unixtools.ifconfig inotify-tools ] else []);
+  ] ++ (if pkgs.stdenv.isLinux then [ clang clang-tools backblaze-b2 xclip unixtools.ifconfig inotify-tools ] else []);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
