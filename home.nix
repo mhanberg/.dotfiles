@@ -59,6 +59,7 @@
     tree-sitter
     vim
     yarn
+    zk
     zsh
   ] ++ (if pkgs.stdenv.isLinux then [ clang clang-tools backblaze-b2 xclip unixtools.ifconfig inotify-tools ] else []);
 
@@ -152,7 +153,7 @@
     zinit ice as'completion'
     zinit snippet OMZP::gh
 
-    autoload -U compinit && compinit
+    # autoload -U compinit && compinit
 
     # echo "sourcing zsh files"
     for file (~/.zsh/*); do
