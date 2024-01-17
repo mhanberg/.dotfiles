@@ -10,9 +10,14 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, neovim-nightly-overlay }:
-  let
-    configuration = { pkgs, ... }: {
+  outputs = {
+    self,
+    nix-darwin,
+    nixpkgs,
+    home-manager,
+    neovim-nightly-overlay,
+  }: let
+    configuration = {pkgs, ...}: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = [];
@@ -23,7 +28,7 @@
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
-      nix.trustedUsers = [ "mitchell" ];
+      nix.settings.trusted-users = ["mitchell"];
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       # programs.zsh.enable = true;  # default shell on catalina
@@ -359,8 +364,7 @@
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
     };
-  in
-  {
+  in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#simple
     darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {

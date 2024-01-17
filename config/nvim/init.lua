@@ -2,8 +2,6 @@ _G.motch = {}
 
 vim.filetype.add { filename = { Brewfile = "ruby", ["GRAPHITE_PR_DESCRIPTION.md"] = "octo" } }
 
-
-
 local theme = "kanagawa"
 
 _G.motch.set_dark_theme = function()
@@ -143,9 +141,11 @@ LSP.setup("bashls", {})
 
 LSP.setup("zls", {})
 LSP.setup("nil_ls", {
-  ["nil"] = {
-    formatting = {
-      command = { "/run/current-system/sw/bin/nixpkgs-fmt" },
+  settings = {
+    ["nil"] = {
+      formatting = {
+        command = { "alejandra" },
+      },
     },
   },
 })
