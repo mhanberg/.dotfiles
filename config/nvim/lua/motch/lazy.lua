@@ -168,6 +168,7 @@ require("lazy").setup({
         formatters_by_ft = {
           lua = { "stylua" },
           sh = { "shfmt" },
+          javascript = { "prettier", "eslint" },
           bash = { "shfmt" },
           zsh = { "shfmt" },
           nix = { "nixpkgs_fmt" },
