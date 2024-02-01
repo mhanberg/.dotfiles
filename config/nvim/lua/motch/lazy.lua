@@ -101,7 +101,7 @@ require("lazy").setup({
   {
     "mhanberg/zk.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    config = function (_, opts)
+    config = function(_, opts)
       require("zk").setup(opts)
     end,
     opts = {
@@ -648,6 +648,25 @@ require("lazy").setup({
           NoiceCmdlineIconSearch = { bg = theme.ui.bg_m3, fg = theme.diag.warning },
 
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+          ["@string.regexp"] = { link = "@string.regex" },
+          ["@variable.parameter"] = { link = "@parameter" },
+          ["@exception"] = { link = "@exception" },
+          ["@string.special.symbol"] = { link = "@symbol" },
+          ["@markup.strong"] = { link = "@text.strong" },
+          ["@markup.italic"] = { link = "@text.emphasis" },
+          ["@markup.heading"] = { link = "@text.title" },
+          ["@markup.raw"] = { link = "@text.literal" },
+          ["@markup.quote"] = { link = "@text.quote" },
+          ["@markup.math"] = { link = "@text.math" },
+          ["@markup.environment"] = { link = "@text.environment" },
+          ["@markup.environment.name"] = { link = "@text.environment.name" },
+          ["@markup.link.url"] = { link = "Special" },
+          ["@markup.link.label"] = { link = "Identifier" },
+          ["@comment.note"] = { link = "@text.note" },
+          ["@comment.warning"] = { link = "@text.warning" },
+          ["@comment.danger"] = { link = "@text.danger" },
+          ["@diff.plus"] = { link = "@text.diff.add" },
+          ["@diff.minus"] = { link = "@text.diff.delete" },
         }
       end,
     },
@@ -1024,6 +1043,7 @@ require("lazy").setup({
               completions = {
                 enable = true,
               },
+              parser = { enable = true },
             },
           },
         }
