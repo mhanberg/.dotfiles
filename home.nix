@@ -25,6 +25,7 @@
       actionlint
       alejandra
       bat
+      btop
       cachix
       chromedriver
       cmake
@@ -61,6 +62,7 @@
       stylua
       tmux
       tmuxinator
+      tokei
       tree-sitter
       vim
       yarn
@@ -69,7 +71,7 @@
     ]
     ++ (
       if pkgs.stdenv.isLinux
-      then [clang clang-tools backblaze-b2 xclip unixtools.ifconfig inotify-tools]
+      then [gcc libstdcxx5 backblaze-b2 xclip unixtools.ifconfig inotify-tools]
       else []
     );
 
@@ -226,6 +228,23 @@
 
       eval "$(direnv hook zsh)"
     '';
+  };
+
+  programs.bat.enable = true;
+  programs.bat.themes = {
+    kanagawa = {
+      src = pkgs.fetchFromGitHub {
+        owner = "obergodmar";
+        repo = "kanagawa-tmTheme"; # Bat uses sublime syntax for its themes
+        rev = "edb1e41256421a7b26348c80146bcff2c3e37f34";
+        sha256 = "5Gj0Jz6UUm55v5d7V7E89ujUDSn0aGsZrOMS5FXduAE=";
+      };
+      file = "Kanagawa.tmTheme";
+    };
+  };
+
+  programs.bat.config = {
+    theme = "kanagawa";
   };
 
   # Home Manager can also manage your environment variables through
