@@ -196,11 +196,7 @@
       # echo "sourcing fzf.zsh"
       [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-      if command -v mise >/dev/null; then
-        eval "$(mise activate zsh)"
-      else
-        eval "$(rtx activate zsh)"
-      fi
+      eval "$(mise activate zsh)"
 
       #compdef gt
       ###-begin-gt-completions-###
