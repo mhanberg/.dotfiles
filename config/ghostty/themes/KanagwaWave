@@ -1,0 +1,40 @@
+
+## name: kanagawa_wave
+## license: MIT
+## author: Tommaso Laurenzi
+## upstream: https://github.com/rebelot/kanagawa.nvim/
+
+
+background = #1F1F28
+foreground = #DCD7BA
+selection-background = #2D4F67
+selection-foreground = #C8C093
+cursor-color =#C8C093
+
+# Tabs
+#tab_bar_background #15161E
+
+# normal
+palette = 0=#727169
+palette = 1=#C34043
+palette = 2=#76946A
+palette = 3=#C0A36E
+palette = 4=#7E9CD8
+palette = 5=#957FB8
+palette = 6=#6A9589
+palette = 7=#C8C093
+
+# bright
+palette = 8=#727169
+palette = 9=#E82424
+palette = 10=#98BB6C
+palette = 11=#E6C384
+palette = 12=#7FB4CA
+palette = 13=#938AA9
+palette = 14=#7AA89F
+palette = 15=#DCD7BA
+
+
+# extended colors
+palette = 16=#FFA066
+palette = 17=#FF5D62

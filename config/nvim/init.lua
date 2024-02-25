@@ -2,43 +2,6 @@ _G.motch = {}
 
 vim.filetype.add { filename = { Brewfile = "ruby", ["GRAPHITE_PR_DESCRIPTION.md"] = "octo" } }
 
-local theme = "kanagawa"
-
-_G.motch.set_dark_theme = function()
-  vim.g.everforest_colors_override = {
-    -- bg8 = { "#000000", 235 },
-    bg0 = { "#273433", "235" },
-    bg1 = { "#394C4A", "236" },
-    bg2 = { "#425755", "237" },
-    bg3 = { "#4B6361", "238" },
-    bg4 = { "#56716F", "239" },
-  }
-  vim.opt.background = "dark"
-  vim.cmd.colorscheme(theme)
-end
-_G.motch.set_light_theme = function()
-  vim.g.everforest_colors_override = {
-    bg8 = { "#000000", 235 },
-  }
-  vim.opt.background = "light"
-
-  vim.cmd.colorscheme(theme)
-end
-
-_G.motch.toggle_theme = function()
-  if vim.opt.background:get() == "dark" then
-    motch.set_light_theme()
-  else
-    motch.set_dark_theme()
-  end
-end
-
-vim.api.nvim_create_user_command(
-  "ToggleColorscheme",
-  motch.toggle_theme,
-  { desc = "Toggle the theme from dark mode to light mode" }
-)
-
 require("motch.lazy")
 vim.cmd.colorscheme("kanagawa")
 require("motch.autocmds")
@@ -51,8 +14,6 @@ vim.env.BAT_STYLE = "header,grid,numbers"
 vim.cmd([[set shortmess+="C,c"]])
 
 opt.timeoutlen = 500
-
--- opt.smoothscroll = true
 
 opt.scrolloff = 4
 opt.laststatus = 3
@@ -111,7 +72,7 @@ vim.keymap.set("n", "<leader><space>", function()
   vim.cmd.set("hls!")
 end, { desc = "Toggle search highlight" })
 vim.keymap.set("n", "<leader>gr", ":grep<cr>", { desc = ":grep" })
-vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>", { desc = "Open quickfix" })
+-- vim.keymap.set("n", "<leader>c", ":botright copen 20<cr>", { desc = "Open quickfix" })
 
 vim.cmd([[tnoremap <esc> <C-\><C-n>]])
 

@@ -1,0 +1,41 @@
+
+## name: kanagawa_lotus
+## license: MIT
+## author: Tommaso Laurenzi
+## upstream: https://github.com/rebelot/kanagawa.nvim/
+
+
+background = #f2ecbc
+foreground = #545464
+selection-background = #c9cbd1
+selection-foreground = #43436c
+cursor-color =#43436c
+cursor-text = #f2ecbc
+
+# Tabs
+
+# normal
+palette = 0=#1F1F28
+palette = 1=#c84053
+palette = 2=#6f894e
+palette = 3=#77713f
+palette = 4=#4d699b
+palette = 5=#b35b79
+palette = 6=#597b75
+palette = 7=#545464
+
+# bright
+palette = 8=#8a8980
+palette = 9=#d7474b
+palette = 10=#6e915f
+palette = 11=#836f4a
+palette = 12=#6693bf
+palette = 13=#624c83
+palette = 14=#5e857a
+palette = 15=#43436c
+
+
+# extended colors
+palette = 16=#cc6d00
+palette = 17=#e82424
+

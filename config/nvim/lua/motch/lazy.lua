@@ -73,10 +73,11 @@ require("lazy").setup({
       vim.opt.foldcolumn = "1"
       vim.opt.foldlevelstart = 99
       vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+      vim.opt.foldtext = ""
       vim.opt.foldmethod = "expr"
       vim.opt.mousemodel = "extend"
       vim.opt.fillchars:append {
+        fold = " ",
         foldopen = "",
         foldsep = " ",
         foldclose = "",
@@ -648,25 +649,6 @@ require("lazy").setup({
           NoiceCmdlineIconSearch = { bg = theme.ui.bg_m3, fg = theme.diag.warning },
 
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-          ["@string.regexp"] = { link = "@string.regex" },
-          ["@variable.parameter"] = { link = "@parameter" },
-          ["@exception"] = { link = "@exception" },
-          ["@string.special.symbol"] = { link = "@symbol" },
-          ["@markup.strong"] = { link = "@text.strong" },
-          ["@markup.italic"] = { link = "@text.emphasis" },
-          ["@markup.heading"] = { link = "@text.title" },
-          ["@markup.raw"] = { link = "@text.literal" },
-          ["@markup.quote"] = { link = "@text.quote" },
-          ["@markup.math"] = { link = "@text.math" },
-          ["@markup.environment"] = { link = "@text.environment" },
-          ["@markup.environment.name"] = { link = "@text.environment.name" },
-          ["@markup.link.url"] = { link = "Special" },
-          ["@markup.link.label"] = { link = "Identifier" },
-          ["@comment.note"] = { link = "@text.note" },
-          ["@comment.warning"] = { link = "@text.warning" },
-          ["@comment.danger"] = { link = "@text.danger" },
-          ["@diff.plus"] = { link = "@text.diff.add" },
-          ["@diff.minus"] = { link = "@text.diff.delete" },
         }
       end,
     },
@@ -807,25 +789,6 @@ require("lazy").setup({
         content_hooks = {
           starter.gen_hook.aligning("center", "center"),
         },
-      }
-    end,
-  },
-  {
-    "sainnhe/everforest",
-    lazy = true,
-    priority = 1000,
-    init = function()
-      vim.opt.termguicolors = true
-
-      vim.g.everforest_diagnostic_virtual_text = "colored"
-      vim.g.everforest_enable_italic = true
-      vim.g.everforest_colors_override = {
-        -- bg8 = { "#000000", 235 },
-        bg0 = { "#273433", "235" },
-        bg1 = { "#394C4A", "236" },
-        bg2 = { "#425755", "237" },
-        bg3 = { "#4B6361", "238" },
-        bg4 = { "#56716F", "239" },
       }
     end,
   },
@@ -1038,18 +1001,19 @@ require("lazy").setup({
         nextls_opts = {
           enable = true,
           port = 9000,
+          spitfire = true,
           init_options = {
             experimental = {
               completions = {
                 enable = true,
               },
-              parser = { enable = true },
             },
           },
         }
       else
         nextls_opts = {
           enable = true,
+          spitfire = true,
           init_options = {
             experimental = {
               completions = {

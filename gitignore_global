@@ -6,5 +6,6 @@
 .envrc
 .projections.json
 .init.local.lua
+.direnv
 
 motch-tmp

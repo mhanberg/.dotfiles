@@ -22,6 +22,9 @@
   # environment.
   home.packages = with pkgs;
     [
+      autoconf
+      automake
+      autogen
       actionlint
       alejandra
       bat
@@ -31,11 +34,15 @@
       cmake
       delta
       direnv
+      beam_minimal.packages.erlang_26.elixir_1_16
+      beam_minimal.packages.erlang_26.erlang
       eza
       fastfetch
       fd
       figlet
+      fswatch
       fzf
+      gawk
       gh
       git
       graphite-cli
@@ -50,6 +57,7 @@
       nil
       nodePackages.bash-language-server
       nodejs
+      openssl
       ripgrep
       rust-analyzer
       selenium-server-standalone
@@ -71,7 +79,7 @@
     ]
     ++ (
       if pkgs.stdenv.isLinux
-      then [gcc libstdcxx5 backblaze-b2 xclip unixtools.ifconfig inotify-tools]
+      then [gcc coreutils libstdcxx5 backblaze-b2 xclip unixtools.ifconfig inotify-tools ncurses5]
       else []
     );
 
@@ -89,7 +97,7 @@
     ".gitignore_global".source = ./gitignore_global;
     ".hammerspoon/Spoons/EmmyLua.spoon/init.lua".source = ./hammerspoon/Spoons/EmmyLua.spoon/init.lua;
     ".hammerspoon/init.lua".source = ./hammerspoon/init.lua;
-    ".tmate.conf".source = ./tmate.conf;
+    ".tmux.conf".source = ./tmux.conf;
     ".vsnip/elixir.json".source = ./vsnip/elixir.json;
     ".xterm-256color.terminfo".source = ./xterm-256color.terminfo;
     ".zsh".source = ./zsh;
@@ -196,7 +204,9 @@
       # echo "sourcing fzf.zsh"
       [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-      eval "$(mise activate zsh)"
+      # if [[ $_IS_NIX_SHELL -ne 1 ]]; then
+      #   eval "$(mise activate zsh)"
+      # fi
 
       #compdef gt
       ###-begin-gt-completions-###
@@ -241,6 +251,16 @@
 
   programs.bat.config = {
     theme = "kanagawa";
+  };
+
+  programs.mise = {
+    enable = true;
+    globalConfig = {
+      tools = {
+        nodejs = "lts";
+        rust = "stable";
+      };
+    };
   };
 
   # Home Manager can also manage your environment variables through
