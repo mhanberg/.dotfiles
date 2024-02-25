@@ -12,3 +12,5 @@ font-size=14
 font-thicken=false
 
 cursor-style-blink=false
+
+macos-titlebar-tabs=true

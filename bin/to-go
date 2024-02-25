@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+function msg() {
+  local num="$1"
+
+  if [ "$num" -lt 0 ]; then
+    echo "$((-1 * num)) stars ahead!"
+  else
+    echo "$num stars to go!"
+  fi
+}
+
+function main() {
+  local n
+  local e
+  local l
+
+  n="$(gh api /repos/elixir-tools/next-ls | jq .watchers)"
+  e="$(gh api /repos/elixir-lsp/elixir-ls | jq .watchers)"
+  l="$(gh api /repos/lexical-lsp/lexical | jq .watchers)"
+
+  echo "
+  Stars to go 🌟
+
+  Elixir LS: $(msg $((e - n)))
+    Lexical: $(msg $((l - n)))
+
+    Next LS: $n"
+}
+
+main
