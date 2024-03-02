@@ -288,6 +288,7 @@
         "websocat"
         "weechat"
         "wget"
+        "wimlib"
         "wxwidgets"
         "xorgproto"
         "xxhash"
