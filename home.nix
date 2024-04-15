@@ -64,6 +64,7 @@
       shellcheck
       shfmt
       silicon
+      silver-searcher
       sqlite
       sqlite-interactive
       starship
@@ -79,7 +80,7 @@
     ]
     ++ (
       if pkgs.stdenv.isLinux
-      then [gcc coreutils libstdcxx5 backblaze-b2 xclip unixtools.ifconfig inotify-tools ncurses5]
+      then [gcc coreutils libstdcxx5 xclip unixtools.ifconfig inotify-tools ncurses5]
       else []
     );
 

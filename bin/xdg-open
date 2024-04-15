@@ -5,7 +5,7 @@ function main() {
 	local uri
 
 	uri="$1"
-	if [[ ! -z "$SSH_CONNECTION" ]]; then
+	if [[ -n "$SSH_CONNECTION" ]]; then
 		ip="$(echo "$SSH_CONNECTION" | awk '{ print $1 }')"
 
 		ssh "mitchell@$ip" open "$uri"

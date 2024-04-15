@@ -97,19 +97,6 @@ function mix-test-watch() {
 
 alias mtw="mix-test-watch"
 
-# tt
-standup() {
-  echo '[todo]\n[work]\n[review]\n[meeting]\n[other]' | \
-    fzf-tmux -p 90% -- --preview-window=down:80% --reverse --disabled --preview='echo "$(tt review)" | rg --fixed-strings {}';
-}
-ttr() { tt "[review] $1"; }
-ttw() { tt "[work] $1"; }
-ttm() { tt "[meeting] $1"; }
-tto() { tt "[other] $1"; }
-ttt() { tt "[todo] $1"; }
-
-alias nvim-plugins="cd ~/.local/share/nvim/site/pack/packer/start"
-
 alias icloud="cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
 
 # zk

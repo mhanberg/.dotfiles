@@ -232,7 +232,6 @@
         "openssl@3"
         "p11-kit"
         "pango"
-        "parity"
         "pcre"
         "pcre2"
         "perl"

@@ -1,0 +1,9 @@
+[[language]]
+name = "elixir"
+scope = "source.elixir"
+language-servers = ["nextls"]
+
+[language-server.nextls]
+command = "/home/mitchell/.cache/elixir-tools/nextls/bin/nextls"
+args = ["--stdio=true"]
+
