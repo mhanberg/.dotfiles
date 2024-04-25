@@ -213,7 +213,7 @@ require("lazy").setup({
           { name = "vim-dadbod-completion" },
           { name = "spell", keyword_length = 5 },
           -- { name = "rg", keyword_length = 3 },
-          { name = "buffer", keyword_length = 3 },
+          -- { name = "buffer", keyword_length = 3 },
           -- { name = "emoji" },
           { name = "path" },
           { name = "git" },
