@@ -72,7 +72,25 @@ autocmd("LspAttach", {
 
     vim.cmd([[imap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
     vim.cmd([[smap <expr> <C-l> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']])
-    if client and client.server_capabilities.codelensProvider then
+
+    if client and client.name == "Next LS" then
+      vim.keymap.set(
+        "n",
+        "<space>tp",
+        ":Elixir nextls to-pipe<cr>",
+        { desc = "Convert nested syntax to pipe syntax" }
+      )
+
+      vim.keymap.set(
+        "n",
+        "<space>fp",
+        ":Elixir nextls from-pipe<cr>",
+        { desc = "Convert pipe syntax to nested syntax" }
+      )
+    end
+    if
+      client and (client.server_capabilities.codeLensProvider or client.server_capabilities.codelensProvider)
+    then
       vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
         buffer = bufnr,
         callback = vim.lsp.codelens.refresh,
