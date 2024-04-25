@@ -205,10 +205,6 @@
       # echo "sourcing fzf.zsh"
       [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-      # if [[ $_IS_NIX_SHELL -ne 1 ]]; then
-      #   eval "$(mise activate zsh)"
-      # fi
-
       #compdef gt
       ###-begin-gt-completions-###
       #
@@ -255,13 +251,7 @@
   };
 
   programs.mise = {
-    enable = true;
-    globalConfig = {
-      tools = {
-        nodejs = "lts";
-        rust = "stable";
-      };
-    };
+    enable = false;
   };
 
   # Home Manager can also manage your environment variables through
