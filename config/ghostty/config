@@ -13,4 +13,4 @@ font-thicken=false
 
 cursor-style-blink=false
 
-macos-titlebar-tabs=true
+macos-titlebar-tabs=false
