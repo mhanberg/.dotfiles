@@ -1,7 +1,7 @@
 # Inserts a blank line between shell prompts
 
 format = """
-[┌─](bold white) $time
+[┌](bold white) $time
 [│](bold white)$all"""
 
 # add_newline = false
@@ -10,7 +10,7 @@ command_timeout = 1000
 # Replace the "❯" symbol in the prompt with "➜"
 [character]
 format = """
-[└─ ](bold white)$symbol """
+[└ ](bold white)$symbol """
 success_symbol = "[](bold yellow)"
 error_symbol = "[](bold red)"
 
