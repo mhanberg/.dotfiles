@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 if [ "$(uname)" = "Linux" ]; then
-  alias pbpaste="ssh mitchell@100.75.29.88 pbpaste"
-  alias pbcopy="ssh mitchell@100.75.29.88 pbcopy"
+  alias pbpaste="ssh mitchell@$(echo $SSH_CONNECTION | awk '{ print $1}') pbpaste"
+  alias pbcopy="ssh mitchell@$(echo $SSH_CONNECTION | awk '{ print $1}') pbcopy"
 fi
 
 alias tsr='tailscale serve reset'
