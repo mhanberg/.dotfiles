@@ -2,7 +2,7 @@ return {
   {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
-    dev = true,
+    -- dev = true,
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")
