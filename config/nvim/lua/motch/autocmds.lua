@@ -17,9 +17,20 @@ autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
+    assert(client, "LSP is yet to be found")
     local map_opts = function(override)
       vim.tbl_extend("force", { buffer = bufnr, silent = true }, override or {})
     end
+
+    autocmd("BufWritePre", {
+      group = random,
+      buffer = bufnr,
+      callback = function()
+        require("conform").format { async = false, lsp_fallback = true, id = client.id }
+        -- vim.lsp.buf.format()
+        -- vim.lsp.buf.format { id = client.id }
+      end,
+    })
 
     local fzf = function(func, override)
       local opts = override or { winopts = { height = 0.9, width = 0.9 } }
@@ -37,7 +48,9 @@ autocmd("LspAttach", {
       -- ["end"] = { args.line2, end_line:len() },
       -- }
       -- end
-      require("conform").format { async = true, lsp_fallback = true }
+      require("conform").format { async = false, lsp_fallback = true, id = client.id }
+      -- vim.lsp.buf.format { async = false }
+      -- require("conform").format { async = false, lsp_fallback = true }
       -- vim.lsp.buf.format {
       --   filter = function(fmt_client)
       --     return fmt_client.name ~= "ElixirLS"
@@ -103,7 +116,7 @@ autocmd("LspAttach", {
     end
 
     if vim.lsp.inlay_hint and client and client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(bufnr, true)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
   end,
 })

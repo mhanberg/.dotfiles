@@ -3,7 +3,7 @@ _G.motch = {}
 vim.filetype.add { filename = { Brewfile = "ruby", ["GRAPHITE_PR_DESCRIPTION.md"] = "octo" } }
 
 require("motch.lazy")
-vim.cmd.colorscheme("kanagawa")
+vim.cmd.colorscheme("kanagawa-dragon")
 require("motch.autocmds")
 
 local opt = vim.opt
@@ -64,7 +64,7 @@ vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
 
 vim.api.nvim_create_user_command("LspLogDelete", function()
-  vim.system({ "rm", vim.fn.expand("$HOME/.local/state/nvim/lsp.log") }):wait()
+  vim.fn.delete(vim.lsp.get_log_path())
 end, { desc = "Deletes the LSP log file. Useful for when it gets too big" })
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Go to the previous item in the quickfix list." })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Go to the next item in the quickfix list." })
@@ -87,10 +87,26 @@ vim.g.markdown_syntax_conceal = 0
 
 local LSP = require("motch.lsp")
 
-LSP.setup(
-  "lua_ls",
-  { settings = { Lua = { hint = { enable = true, arrayIndex = "Disable" }, format = { enable = false } } } }
-)
+LSP.setup("lua_ls", {
+  settings = {
+    Lua = {
+      hint = {
+        enable = true,
+        arrayIndex = "Disable",
+      },
+      format = {
+        enable = false,
+      },
+      workspace = {
+        library = {
+          "nvim-test/lua",
+          "${3rd}/busted/library",
+          "${3rd}/luassert/library",
+        },
+      },
+    },
+  },
+})
 LSP.setup("rust_analyzer", {})
 LSP.setup("clangd", {})
 -- LSP.setup("solargraph", {})

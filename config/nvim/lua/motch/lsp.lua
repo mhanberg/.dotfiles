@@ -78,6 +78,6 @@ M.default_config = function(name)
   return require("lspconfig.server_configurations." .. name).default_config
 end
 
-vim.lsp.set_log_level(0)
+vim.lsp.set_log_level(2)
 
 return M
