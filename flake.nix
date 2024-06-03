@@ -4,35 +4,39 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = {
+    self,
+    nix-darwin,
     nixpkgs,
     home-manager,
-    #neovim-nightly-overlay,
-  }: let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    homeConfigurations."mitchell" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-
-      # Specify your home configuration modules here, for example,
-      # the path to your home.nix.
+  }: {
+    darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      specialArgs = {inherit self;};
       modules = [
-        # {
-        #   nixpkgs.overlays = [neovim-nightly-overlay.overlay];
-        # }
-        ./home.nix
+        ./nix/darwin.nix
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.mitchell = import ./nix/home.nix;
+        }
       ];
+    };
 
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
+    homeConfigurations."mitchell" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      modules = [
+        ./nix/home.nix
+      ];
     };
   };
 }

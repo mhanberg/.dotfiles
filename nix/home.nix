@@ -45,14 +45,13 @@
       gawk
       gh
       git
-      graphite-cli
       hyperfine
       jq
       lazydocker
       lazygit
       lua-language-server
       mise
-      neovim-nightly
+      neovim
       neovim-remote
       nil
       nodePackages.bash-language-server
