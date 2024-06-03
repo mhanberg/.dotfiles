@@ -8,14 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = {
     nixpkgs,
     home-manager,
-    neovim-nightly-overlay,
-    ...
+    #neovim-nightly-overlay,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -26,9 +25,9 @@
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
       modules = [
-        {
-          nixpkgs.overlays = [neovim-nightly-overlay.overlay];
-        }
+        # {
+        #   nixpkgs.overlays = [neovim-nightly-overlay.overlay];
+        # }
         ./home.nix
       ];
 

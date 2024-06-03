@@ -1,0 +1,7 @@
+#!/usr/bin/env elixir
+
+[package, task | args] = System.argv()
+
+Mix.install([String.to_atom(package)])
+
+Mix.Task.run(task, args)

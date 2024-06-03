@@ -7,7 +7,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = {
@@ -15,7 +15,7 @@
     nix-darwin,
     nixpkgs,
     home-manager,
-    neovim-nightly-overlay,
+    # neovim-nightly-overlay,
   }: let
     configuration = {pkgs, ...}: {
       # List packages installed in system profile. To search by name, run:
@@ -366,9 +366,9 @@
       modules = [
         configuration
         home-manager.darwinModules.home-manager
-        {
-          nixpkgs.overlays = [neovim-nightly-overlay.overlay];
-        }
+        # {
+        #   nixpkgs.overlays = [neovim-nightly-overlay.overlay];
+        # }
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
