@@ -86,21 +86,21 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".aprc".source = ./aprc;
-    ".asdfrc".source = ./asdfrc;
-    ".bin".source = ./bin;
+    ".aprc".source = ../aprc;
+    ".asdfrc".source = ../asdfrc;
+    ".bin".source = ../bin;
     ".bin".recursive = true;
-    ".config".source = ./config;
+    ".config".source = ../config;
     ".config".recursive = true;
-    ".ctags".source = ./ctags;
-    ".gitconfig".source = ./gitconfig;
-    ".gitignore_global".source = ./gitignore_global;
-    ".hammerspoon/Spoons/EmmyLua.spoon/init.lua".source = ./hammerspoon/Spoons/EmmyLua.spoon/init.lua;
-    ".hammerspoon/init.lua".source = ./hammerspoon/init.lua;
-    ".tmux.conf".source = ./tmux.conf;
-    ".vsnip/elixir.json".source = ./vsnip/elixir.json;
-    ".xterm-256color.terminfo".source = ./xterm-256color.terminfo;
-    ".zsh".source = ./zsh;
+    ".ctags".source = ../ctags;
+    ".gitconfig".source = ../gitconfig;
+    ".gitignore_global".source = ../gitignore_global;
+    ".hammerspoon/Spoons/EmmyLua.spoon/init.lua".source = ../hammerspoon/Spoons/EmmyLua.spoon/init.lua;
+    ".hammerspoon/init.lua".source = ../hammerspoon/init.lua;
+    ".tmux.conf".source = ../tmux.conf;
+    ".vsnip/elixir.json".source = ../vsnip/elixir.json;
+    ".xterm-256color.terminfo".source = ../xterm-256color.terminfo;
+    ".zsh".source = ../zsh;
     ".zsh".recursive = true;
     # ".zshrc".source = ./zshrc;
   };
