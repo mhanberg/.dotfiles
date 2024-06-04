@@ -17,8 +17,8 @@
     nix-darwin,
     nixpkgs,
     home-manager,
-  }: {
-    darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+  }: let
+    darwinSystem = {
       system = "aarch64-darwin";
       specialArgs = {inherit self;};
       modules = [
@@ -31,6 +31,10 @@
         }
       ];
     };
+  in {
+    darwinConfigurations."alt-mhanberg" = nix-darwin.lib.darwinSystem darwinSystem;
+    darwinConfigurations."mitchells-mini" = nix-darwin.lib.darwinSystem darwinSystem;
+    darwinConfigurations."mitchells-air" = nix-darwin.lib.darwinSystem darwinSystem;
 
     homeConfigurations."mitchell" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
