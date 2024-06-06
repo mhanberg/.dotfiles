@@ -94,7 +94,6 @@
     ".config".source = ../../config;
     ".config".recursive = true;
     ".ctags".source = ../../ctags;
-    ".gitconfig".source = ../../gitconfig;
     ".gitignore_global".source = ../../gitignore_global;
     ".hammerspoon/Spoons/EmmyLua.spoon/init.lua".source = ../../hammerspoon/Spoons/EmmyLua.spoon/init.lua;
     ".hammerspoon/init.lua".source = ../../hammerspoon/init.lua;
@@ -103,7 +102,36 @@
     ".xterm-256color.terminfo".source = ../../xterm-256color.terminfo;
     ".zsh".source = ../../zsh;
     ".zsh".recursive = true;
-    # ".zshrc".source = ./zshrc;
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Mitchell Hanberg";
+    userEmail = "mitch@mitchellhanberg.com";
+    signing = {
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
+    };
+    delta = {
+      enable = true;
+    };
+    includes = [
+      {path = "~/.gitconfig.local";}
+    ];
+
+    extraConfig = {
+      push.default = "simple";
+      color.branch = "auto";
+      core = {
+        excludesFile = "~/.gitignore_global";
+        editor = "nvim";
+      };
+      pull.ff = "only";
+      init.defaultBranch = "main";
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "/Users/mitchell/.ssh/allowed_signers";
+      commit.gpgSign = true;
+      rebase.updateRefs = true;
+    };
   };
 
   programs.zsh = {
