@@ -7,5 +7,6 @@
 .projections.json
 .init.local.lua
 .direnv
+.mise.local.toml
 
 motch-tmp

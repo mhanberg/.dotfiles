@@ -7,7 +7,7 @@ fi
 
 alias tsr='tailscale serve reset'
 
-alias nublar="ssh mitchell@nublar"
+alias nublar="ssh -q mitchell@nublar -L 4999:localhost:4999"
 alias wtf='wtfutil'
 alias tmux='direnv exec / tmux'
 alias mux="tmuxinator"
