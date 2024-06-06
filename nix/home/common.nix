@@ -264,8 +264,6 @@
       selection-foreground = "#C8C093";
       selection-background = "#223249";
 
-      config-file = "/Users/mitchell/.config/ghostty/themes/KanagwaWave";
-
       font-family = "JetBrainsMono Nerd Font Mono";
       font-size = 14;
       font-thicken = false;

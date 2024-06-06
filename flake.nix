@@ -79,7 +79,7 @@
       pkgs = nixpkgs.legacyPackages."x86_64-linux";
       modules = [
         ghostty.homeModules.default
-        ./nix/home/personal.nix
+        ./nix/home/nublar.nix
       ];
     };
   };
