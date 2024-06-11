@@ -10,3 +10,8 @@ flake-update:
     git commit -m "nix: update flake.lock"
   fi
 
+hm:
+  home-manager switch --flake ~/.dotfiles
+
+darwin:
+  darwin-rebuild switch --flake ~/.dotfiles
