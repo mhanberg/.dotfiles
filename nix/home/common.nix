@@ -286,6 +286,7 @@
   programs.ghostty = {
     enable = true;
     settings = {
+      shell-integration-features = "no-cursor";
       background = "#181616";
       foreground = "#c5c9c5";
       cursor-color = "#C8C093";
