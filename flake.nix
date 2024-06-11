@@ -19,60 +19,47 @@
     nixpkgs,
     home-manager,
     ghostty,
-  } @ inputs: {
-    darwinConfigurations."alt-mhanberg" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      specialArgs = {inherit self;};
-      modules = [
-        ./nix/darwin.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mitchell = {
-            imports = [
-              ghostty.homeModules.default
-              ./nix/home/work.nix
-            ];
-          };
-        }
-      ];
-    };
-    darwinConfigurations."mitchells-mini" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      specialArgs = {inherit self;};
-      modules = [
-        ./nix/darwin.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mitchell = {
-            imports = [
-              ghostty.homeModules.default
-              ./nix/home/personal.nix
-            ];
-          };
-        }
-      ];
-    };
-    darwinConfigurations."mitchells-air" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      specialArgs = {inherit self;};
-      modules = [
-        ./nix/darwin.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mitchell = {
-            imports = [
-              ghostty.homeModules.default
-              ./nix/home/personal.nix
-            ];
-          };
-        }
-      ];
+  } @ inputs: let
+    mkDarwin = {
+      extraHmModules,
+      extraDarwinModules ? {},
+    }:
+      nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {inherit self;};
+        modules =
+          [./nix/darwin.nix]
+          ++ extraDarwinModules
+          ++ [
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.mitchell = {
+                imports = [ghostty.homeModules.default] ++ extraHmModules;
+              };
+            }
+          ];
+      };
+    mkHm = extraHmModules:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [ghostty.homeModules.default] ++ extraHmModules;
+      };
+  in {
+    darwinConfigurations = {
+      alt-mhanberg = mkDarwin {
+        extraDarwinModules = [./nix/darwin/alt-mhanberg.nix];
+        extraHmModules = [./nix/home/work.nix];
+      };
+      mitchells-mini = mkDarwin {
+        extraDarwinModules = [./nix/darwin/personal.nix];
+        extraHmModules = [./nix/home/work.nix];
+      };
+      mitchells-air = mkDarwin {
+        extraDarwinModules = [./nix/darwin/personal.nix];
+        extraHmModules = [./nix/home/work.nix];
+      };
     };
 
     nixosConfigurations = {
@@ -84,20 +71,8 @@
     };
 
     homeConfigurations = {
-      "mitchell@nublar" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [
-          ghostty.homeModules.default
-          ./nix/home/nublar.nix
-        ];
-      };
-      "mitchell@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [
-          ghostty.homeModules.default
-          ./nix/home/nixos.nix
-        ];
-      };
+      "mitchell@nublar" = mkHm [./nix/home/nublar.nix];
+      "mitchell@nixos" = mkHm [./nix/home/nixos.nix];
     };
   };
 }
