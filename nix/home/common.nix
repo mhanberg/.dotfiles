@@ -47,6 +47,7 @@
       gh
       git
       hyperfine
+      just
       jq
       lazydocker
       lazygit
