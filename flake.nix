@@ -19,7 +19,7 @@
     nixpkgs,
     home-manager,
     ghostty,
-  }: {
+  } @ inputs: {
     darwinConfigurations."alt-mhanberg" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       specialArgs = {inherit self;};
@@ -75,12 +75,29 @@
       ];
     };
 
-    homeConfigurations."mitchell" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      modules = [
-        ghostty.homeModules.default
-        ./nix/home/nublar.nix
-      ];
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        # > Our main nixos configuration file <
+        modules = [./nix/nixos/configuration.nix];
+      };
+    };
+
+    homeConfigurations = {
+      "mitchell@nublar" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          ghostty.homeModules.default
+          ./nix/home/nublar.nix
+        ];
+      };
+      "mitchell@nixos" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          ghostty.homeModules.default
+          ./nix/home/nixos.nix
+        ];
+      };
     };
   };
 }

@@ -13,5 +13,18 @@ flake-update:
 hm:
   home-manager switch --flake ~/.dotfiles
 
-darwin:
-  darwin-rebuild switch --flake ~/.dotfiles
+rebuild:
+  #!/usr/bin/env bash
+  set -euxo pipefail
+  case "{{ os() }}" in
+    macos)
+      darwin-rebuild switch --flake ~/.dotfiles;;
+
+    linux)
+      sudo nixos-rebuild switch --flake ~/.dotfiles;;
+
+     *)
+      echo "Unsupported operating system"
+      exit 1;;
+  esac
+
