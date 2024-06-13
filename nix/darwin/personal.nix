@@ -1,5 +1,5 @@
 {...}: let
-  commonCasks = import ./darwin/casks.nix;
+  commonCasks = import ./casks.nix;
 in {
   homebrew.casks = commonCasks;
 }
