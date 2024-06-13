@@ -29,8 +29,8 @@
       automake
       awscli2
       bat
-      beam_minimal.packages.erlang_26.elixir_1_16
-      beam_minimal.packages.erlang_26.erlang
+      beam_minimal.packages.erlang_27.elixir_1_16
+      beam_minimal.packages.erlang_27.erlang
       btop
       cachix
       chromedriver
