@@ -29,8 +29,8 @@
       automake
       awscli2
       bat
-      beam_minimal.packages.erlang_27.elixir_1_16
-      beam_minimal.packages.erlang_27.erlang
+      beam.packages.erlang_27.elixir_1_17
+      beam.packages.erlang_27.erlang
       btop
       cachix
       chromedriver
@@ -47,8 +47,8 @@
       gh
       git
       hyperfine
-      just
       jq
+      just
       lazydocker
       lazygit
       lua-language-server
@@ -56,7 +56,7 @@
       neovim
       neovim-remote
       nil
-      nodePackages.bash-language-server
+      bash-language-server
       nodejs
       openssl
       ripgrep
@@ -75,6 +75,7 @@
       tokei
       tree-sitter
       vim
+      vscode-langservers-extracted
       yarn
       zk
       zsh
