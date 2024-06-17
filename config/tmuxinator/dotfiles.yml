@@ -4,5 +4,5 @@ name: dotfiles
 root: ~/.dotfiles
 
 windows:
-  - editor: v
+  - editor: nvim
   - shell: 
