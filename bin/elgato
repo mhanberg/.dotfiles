@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+max() {
+	local a, b
+	a="$1"
+	b="$2"
+	echo $((a > b ? a : b))
+}
+
+min() {
+	local a, b
+	a="$1"
+	b="$2"
+	echo $((a < b ? a : b))
+}
+
+state() {
+	curl --silent -XGET http://192.168.1.153:9123/elgato/lights
+}
+
+jq() {
+	/etc/profiles/per-user/mitchell/bin/jq "$@"
+}
+
+is_on() {
+	local state
+	state=$(state | jq .lights[0].on)
+
+	if [[ state -eq "1" ]]; then
+		echo "true"
+	else
+		echo "false"
+	fi
+}
+
+on() {
+	curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d '
+{
+  "lights": [
+    {
+      "on": 1
+    }
+  ]
+}' >/dev/null 2>&1
+}
+
+off() {
+	curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d '
+{
+  "lights": [
+    {
+      "on": 0
+    }
+  ]
+}' >/dev/null 2>&1
+}
+set-brightness() {
+	curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d "
+{
+  \"lights\": [
+    {
+      \"brightness\": $1
+    }
+  ]
+}" >/dev/null 2>&1
+}
+
+toggle() {
+	if [[ $(is_on) == "true" ]]; then
+		off
+	else
+		on
+	fi
+}
+
+brightness() {
+	local type
+	local bvalue
+	local new_bvalue
+	type="$1"
+	bvalue=$(state | jq .lights[0].brightness)
+
+	case $type in
+	incr)
+		new_bvalue=$(min 100 $((bvalue + 5)))
+		set-brightness "$new_bvalue"
+		;;
+	decr)
+		new_bvalue=$(max 2 $((bvalue - 5)))
+		set-brightness "$new_bvalue"
+		;;
+
+	esac
+}
+
+main() {
+	case "$1" in
+	state)
+		state
+		;;
+
+	toggle)
+		toggle
+		;;
+
+	increase-brightness)
+		brightness "incr"
+		;;
+
+	decrease-brightness)
+		brightness "decr"
+		;;
+	esac
+}
+
+main "$1"
