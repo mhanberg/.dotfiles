@@ -139,14 +139,6 @@
     enableVteIntegration = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    sessionVariables = {
-      FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/'";
-      EDITOR = "nvim";
-      ERL_AFLAGS = "-kernel shell_history enabled";
-      KERL_BUILD_DOCS = "yes";
-      CLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs/";
-      ICLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs";
-    };
     shellAliases = {
       tsr = "tailscale serve reset";
 
@@ -395,7 +387,12 @@
   #  /etc/profiles/per-user/mitchell/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/'";
+    EDITOR = "nvim";
+    ERL_AFLAGS = "-kernel shell_history enabled";
+    KERL_BUILD_DOCS = "yes";
+    CLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs/";
+    ICLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs";
   };
 
   # Let Home Manager install and manage itself.
