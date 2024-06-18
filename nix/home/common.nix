@@ -93,13 +93,10 @@
     ".bin".recursive = true;
     ".config".source = ../../config;
     ".config".recursive = true;
-    ".ctags".source = ../../ctags;
     ".gitignore_global".source = ../../gitignore_global;
     ".tmux.conf".source = ../../tmux.conf;
     ".vsnip/elixir.json".source = ../../vsnip/elixir.json;
     ".xterm-256color.terminfo".source = ../../xterm-256color.terminfo;
-    ".zsh".source = ../../zsh;
-    ".zsh".recursive = true;
   };
 
   programs.git = {
@@ -139,127 +136,98 @@
   programs.zsh = {
     enable = true;
     autocd = true;
+    enableVteIntegration = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    sessionVariables = {
+      FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/'";
+      EDITOR = "nvim";
+      ERL_AFLAGS = "-kernel shell_history enabled";
+      KERL_BUILD_DOCS = "yes";
+      CLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs/";
+      ICLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs";
+    };
+    shellAliases = {
+      tsr = "tailscale serve reset";
+
+      nublar = "ssh -q mitchell@nublar -L 4999:localhost:4999";
+      tmux = "direnv exec / tmux";
+      mux = "tmuxinator";
+      blog = "cd ~/Development/blog";
+      dotfiles = "mux start dotfiles --suppress-tmux-version-warning";
+      em = "mix ecto.migrate";
+      git-trigger-build = "git commit --allow-empty -m 'Trigger Build'";
+      gpu = "git push -u origin";
+      gd = "git diff";
+      gs = "git status";
+      gwip = "git add . && git commit -m 'WIP'";
+      gtb = "git-trigger-build";
+      home = "cd $HOME";
+      tree = "tree | less";
+      unwrap-last-commit = "git reset HEAD~1";
+      rebuild-blog = "curl -X POST -d {} https://api.netlify.com/build_hooks/\"$NETLIFY_BLOG_ID\"";
+      mxi = "mix";
+      shfmt = "shfmt -i 2";
+      ls = "eza";
+
+      dadbod = "nvim -c ':DBUI'";
+
+      # docker
+      dc = "docker-compose";
+      docker-image-remove = "docker image rm $(docker image ls -q) --force";
+
+      # gh aliases
+      ghc = "gh repo clone";
+      ghv = "gh repo view -w";
+
+      # wallaby
+      mtc = "WALLABY_DRIVER=chrome mix test";
+      mts = "WALLABY_DRIVER=selenium mix test";
+
+      ## elixir
+      icloud = "cd $HOME/Library/Mobile Documents/com~apple~CloudDocs";
+
+      # zk
+      notes = "zk edit --match=README --tag=startup";
+    };
 
     initExtra = ''
-      #                   __
-      #     ____   _____ / /_   _____ _____
-      #    /_  /  / ___// __ \ / ___// ___/
-      #  _  / /_ (__  )/ / / // /   / /__
-      # (_)/___//____//_/ /_//_/    \___/
-      #
-
-
-      export HOMEBREW_NO_GOOGLE_ANALYTICS=1
-      export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
-
       if uname -a | grep -i "darwin" > /dev/null; then
-        export CLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs/"
-        export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-        brew_prefix='/opt/homebrew'
-
         eval $(/opt/homebrew/bin/brew shellenv)
       fi
 
-      export TMPDIR="$(mktemp -d)"
-      export EDITOR="nvim"
-      export FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/'"
+      path() {
+        echo $PATH | tr ':' '\n'
+      }
 
-      function maybe_touch() {
-        if [ ! -f "$1" ]; then
-          touch "$1"
+      tp() {
+        session="$(tmux ls | fzf --reverse | awk '{ print $1 }' | sed 's/://g')"
+
+        if [ -n "$session" ] && tmux attach -t "$session"
+      }
+
+      dev() {
+        if [ -z "$1" ]; then
+          cd ~/src
+        else
+          if [ -d "$HOME/src/$1" ]; then
+            mux start --suppress-tmux-version-warning=0 code "$1"
+          else
+            echo "$HOME/src/$1 does not exist"
+          fi
         fi
       }
 
-      unset -v GEM_HOME
+      _dev() { _arguments "1: :($(ls $HOME/src))" }
 
-      maybe_touch "$HOME/.zsh/aliases.local"
-      maybe_touch "$HOME/.zsh/zshrc.local"
+      compdef _dev dev
 
-      ZINIT_HOME="''${XDG_DATA_HOME:-''${HOME}/.local/share}/zinit/zinit.git"
-      [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-      [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-      source "''${ZINIT_HOME}/zinit.zsh"
+      # export PATH="$HOME/.bin:$PATH"
+      # export PATH="$HOME/.local/bin:$PATH"
 
-      zinit ice wait lucid
-      zinit light-mode for \
-          zdharma-continuum/zinit-annex-as-monitor \
-          zdharma-continuum/zinit-annex-bin-gem-node \
-          zdharma-continuum/zinit-annex-patch-dl \
-          zdharma-continuum/zinit-annex-rust
-
-
-      zinit wait lucid for \
-       atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-          zdharma-continuum/fast-syntax-highlighting \
-       blockf \
-          zsh-users/zsh-completions \
-       atload"!_zsh_autosuggest_start" \
-          zsh-users/zsh-autosuggestions
-      zinit snippet OMZL::key-bindings.zsh
-      zinit snippet OMZL::history.zsh
-      zinit snippet OMZP::colored-man-pages
-      zinit snippet OMZP::fzf
-
-      zinit ice wait lucid
-      zinit ice as'completion'
-      zinit snippet OMZP::gh
-
-      # autoload -U compinit && compinit
-
-      # echo "sourcing zsh files"
-      for file (~/.zsh/*); do
-        source $file
-      done
-
-      disable r
-      setopt nohistignoredups
-      setopt ignoreeof
-
-      export PATH="/opt/homebrew/bin/qt@5.5/bin:$PATH"
-      export PATH="$HOME/.bin:$PATH"
-      export PATH="$HOME/.cargo/bin:$PATH"
-      # export PATH="$HOME/Library/Python/3.9/bin:$PATH"
-      # export PATH="$brew_prefix/opt/python@3.9/libexec/bin:$PATH"
-      # export PATH="$HOME/Library/Python/3.8/bin:$PATH"
-      # export PATH="$HOME/Library/Python/2.7/bin:$PATH"
-      # export PATH="$HOME/go/bin:$PATH"
-      # export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-      # export PATH="$HOME/zls/zig-out/bin:$PATH"
-      export PATH="$HOME/.local/bin:$PATH"
-
-      # Enable shell history in iex
-      export ERL_AFLAGS="-kernel shell_history enabled"
-      export KERL_BUILD_DOCS=yes
-
-      # source "$brew_prefix"/opt/fzf/shell/key-bindings.zsh
-      # echo "sourcing fzf.zsh"
-      [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-      #compdef gt
-      ###-begin-gt-completions-###
-      #
-      # yargs command completion script
-      #
-      # Installation: /opt/homebrew/bin/gt completion >> ~/.zshrc
-      #    or /opt/homebrew/bin/gt completion >> ~/.zprofile on OSX.
-      #
-      _gt_yargs_completions()
-      {
-        local reply
-        local si=$IFS
-        IFS=$'
-      ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" /opt/homebrew/bin/gt --get-yargs-completions "''${words[@]}"))
-        IFS=$si
-        _describe 'values' reply
-      }
-      compdef _gt_yargs_completions gt
-      ###-end-gt-completions-###
-      if [[ "$(uname)" == "Linux" ]]; then
-        export LC_ALL="C.UTF-8"
-      fi
-      eval "$(starship init zsh)"
-
-      eval "$(direnv hook zsh)"
+      # if [[ "$(uname)" == "Linux" ]]; then
+      # export LC_ALL="C.UTF-8"
+      # fi
     '';
   };
 
@@ -278,6 +246,114 @@
 
   programs.bat.config = {
     theme = "kanagawa";
+  };
+
+  programs.fzf.enable = true;
+  programs.direnv.enable = true;
+
+  programs.starship = {
+    enable = true;
+    settings = {
+      format = ''
+        [┌](bold white) $time
+        [│](bold white)$all'';
+      command_timeout = 1000;
+      character = {
+        format = "[└ ](bold white)$symbol ";
+        success_symbol = "[](bold yellow)";
+        error_symbol = "[](bold red)";
+      };
+      cmd_duration = {
+        min_time = 5000;
+        format = "took [$duration](bold yellow)";
+      };
+      git_metrics = {
+        disabled = false;
+      };
+      time = {
+        disabled = false;
+        use_12hr = true;
+        format = "[$time](bold yellow)";
+      };
+      aws = {
+        symbol = "  ";
+      };
+      conda = {
+        symbol = " ";
+      };
+      dart = {
+        symbol = " ";
+      };
+      directory = {
+        read_only = " ";
+        style = "bold blue";
+        substitutions = {
+          "com~apple~CloudDocs" = "/iCloud";
+        };
+      };
+      docker_context = {
+        disabled = true;
+        symbol = " ";
+      };
+      elixir = {
+        symbol = " ";
+      };
+      elm = {
+        symbol = " ";
+      };
+      git_branch = {
+        symbol = " ";
+      };
+      golang = {
+        symbol = " ";
+      };
+      hg_branch = {
+        symbol = " ";
+      };
+      java = {
+        symbol = " ";
+      };
+      julia = {
+        symbol = " ";
+      };
+      memory_usage = {
+        symbol = " ";
+      };
+      nim = {
+        symbol = " ";
+      };
+      nix_shell = {
+        symbol = " ";
+      };
+      package = {
+        symbol = " ";
+        disabled = true;
+      };
+      perl = {
+        symbol = " ";
+      };
+      php = {
+        symbol = " ";
+      };
+      python = {
+        symbol = " ";
+      };
+      ruby = {
+        symbol = " ";
+      };
+      rust = {
+        symbol = "󱘗 ";
+      };
+      scala = {
+        symbol = " ";
+      };
+      shlvl = {
+        symbol = " ";
+      };
+      swift = {
+        symbol = "󰛥 ";
+      };
+    };
   };
 
   programs.mise = {
@@ -300,8 +376,6 @@
       font-thicken = false;
 
       cursor-style-blink = false;
-
-      macos-titlebar-tabs = false;
     };
   };
 
