@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
 case "$1" in
-  .dotfiles)
-    echo "$HOME/.dotfiles"
-    ;;
+.dotfiles)
+  echo "$HOME/.dotfiles"
+  ;;
 
-  notes)
-    echo "$ICLOUD/notes/personal"
-    ;;
+notes)
+  echo "$ICLOUD/notes/personal"
+  ;;
 
-  elixir-from-scratch)
-    echo "$ICLOUD/notes/elixir-from-scratch"
-    ;;
+elixir-from-scratch)
+  echo "$ICLOUD/notes/elixir-from-scratch"
+  ;;
 
-  work-notes)
-    echo "$ICLOUD/notes/work"
-    ;;
+work-notes)
+  echo "$ICLOUD/notes/work"
+  ;;
 
-  *)
-    echo "$HOME/src/$1"
-    ;;
+*)
+  echo "$HOME/src/$1"
+  ;;
 esac

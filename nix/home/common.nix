@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -157,18 +161,16 @@
       tmux = "direnv exec / tmux";
       mux = "tmuxinator";
       blog = "cd ~/Development/blog";
-      dotfiles = "mux start dotfiles --suppress-tmux-version-warning";
-      em = "mix ecto.migrate";
+      dotfiles = "tmuxinator start dotfiles --suppress-tmux-version-warning";
+
+      # git
       git-trigger-build = "git commit --allow-empty -m 'Trigger Build'";
       gpu = "git push -u origin";
       gd = "git diff";
-      gs = "git status";
       gwip = "git add . && git commit -m 'WIP'";
       gtb = "git-trigger-build";
-      home = "cd $HOME";
       tree = "tree | less";
       unwrap-last-commit = "git reset HEAD~1";
-      rebuild-blog = "curl -X POST -d {} https://api.netlify.com/build_hooks/\"$NETLIFY_BLOG_ID\"";
       mxi = "mix";
       shfmt = "shfmt -i 2";
       ls = "eza";
@@ -183,18 +185,18 @@
       ghc = "gh repo clone";
       ghv = "gh repo view -w";
 
-      # wallaby
+      # elixir
       mtc = "WALLABY_DRIVER=chrome mix test";
       mts = "WALLABY_DRIVER=selenium mix test";
-
-      ## elixir
-      icloud = "cd $HOME/Library/Mobile Documents/com~apple~CloudDocs";
+      em = "mix ecto.migrate";
 
       # zk
       notes = "zk edit --match=README --tag=startup";
     };
 
     initExtra = ''
+      export EDITOR=nvim
+
       if uname -a | grep -i "darwin" > /dev/null; then
         eval $(/opt/homebrew/bin/brew shellenv)
       fi
@@ -214,7 +216,7 @@
           cd ~/src
         else
           if [ -d "$HOME/src/$1" ]; then
-            mux start --suppress-tmux-version-warning=0 code "$1"
+            tmuxinator start --suppress-tmux-version-warning=0 code "$1"
           else
             echo "$HOME/src/$1 does not exist"
           fi
@@ -225,12 +227,12 @@
 
       compdef _dev dev
 
-      # export PATH="$HOME/.bin:$PATH"
-      # export PATH="$HOME/.local/bin:$PATH"
+      # aliases that use env vars or spaces
+      alias icloud="cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
+      alias home="cd $HOME"
+      alias rebuild-blog="curl -X POST -d {} https://api.netlify.com/build_hooks/$NETLIFY_BLOG_ID"
 
-      # if [[ "$(uname)" == "Linux" ]]; then
-      # export LC_ALL="C.UTF-8"
-      # fi
+      export PATH="$HOME/.bin:$PATH"
     '';
   };
 
@@ -291,7 +293,7 @@
         read_only = " ";
         style = "bold blue";
         substitutions = {
-          "com~apple~CloudDocs" = "/iCloud";
+          "/Library/Mobile Documents/com~apple~CloudDocs" = "/iCloud";
         };
       };
       docker_context = {
@@ -382,25 +384,5 @@
     };
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. If you don't want to manage your shell through Home
-  # Manager then you have to manually source 'hm-session-vars.sh' located at
-  # either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/mitchell/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
