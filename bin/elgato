@@ -1,40 +1,40 @@
 #!/usr/bin/env bash
 
 max() {
-	local a, b
-	a="$1"
-	b="$2"
-	echo $((a > b ? a : b))
+  local a, b
+  a="$1"
+  b="$2"
+  echo $((a > b ? a : b))
 }
 
 min() {
-	local a, b
-	a="$1"
-	b="$2"
-	echo $((a < b ? a : b))
+  local a, b
+  a="$1"
+  b="$2"
+  echo $((a < b ? a : b))
 }
 
 state() {
-	curl --silent -XGET http://192.168.1.153:9123/elgato/lights
+  curl --silent -XGET http://192.168.1.153:9123/elgato/lights
 }
 
 jq() {
-	/etc/profiles/per-user/mitchell/bin/jq "$@"
+  /etc/profiles/per-user/mitchell/bin/jq "$@"
 }
 
 is_on() {
-	local state
-	state=$(state | jq .lights[0].on)
+  local state
+  state=$(state | jq .lights[0].on)
 
-	if [[ state -eq "1" ]]; then
-		echo "true"
-	else
-		echo "false"
-	fi
+  if [[ state -eq "1" ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
 }
 
 on() {
-	curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d '
+  curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d '
 {
   "lights": [
     {
@@ -45,7 +45,7 @@ on() {
 }
 
 off() {
-	curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d '
+  curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d '
 {
   "lights": [
     {
@@ -55,7 +55,7 @@ off() {
 }' >/dev/null 2>&1
 }
 set-brightness() {
-	curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d "
+  curl --silent -XPUT http://192.168.1.153:9123/elgato/lights -d "
 {
   \"lights\": [
     {
@@ -66,51 +66,51 @@ set-brightness() {
 }
 
 toggle() {
-	if [[ $(is_on) == "true" ]]; then
-		off
-	else
-		on
-	fi
+  if [[ $(is_on) == "true" ]]; then
+    off
+  else
+    on
+  fi
 }
 
 brightness() {
-	local type
-	local bvalue
-	local new_bvalue
-	type="$1"
-	bvalue=$(state | jq .lights[0].brightness)
+  local type
+  local bvalue
+  local new_bvalue
+  type="$1"
+  bvalue=$(state | jq .lights[0].brightness)
 
-	case $type in
-	incr)
-		new_bvalue=$(min 100 $((bvalue + 5)))
-		set-brightness "$new_bvalue"
-		;;
-	decr)
-		new_bvalue=$(max 2 $((bvalue - 5)))
-		set-brightness "$new_bvalue"
-		;;
+  case $type in
+  incr)
+    new_bvalue=$(min 100 $((bvalue + 5)))
+    set-brightness "$new_bvalue"
+    ;;
+  decr)
+    new_bvalue=$(max 2 $((bvalue - 5)))
+    set-brightness "$new_bvalue"
+    ;;
 
-	esac
+  esac
 }
 
 main() {
-	case "$1" in
-	state)
-		state
-		;;
+  case "$1" in
+  state)
+    state
+    ;;
 
-	toggle)
-		toggle
-		;;
+  toggle)
+    toggle
+    ;;
 
-	increase-brightness)
-		brightness "incr"
-		;;
+  increase-brightness)
+    brightness "incr"
+    ;;
 
-	decrease-brightness)
-		brightness "decr"
-		;;
-	esac
+  decrease-brightness)
+    brightness "decr"
+    ;;
+  esac
 }
 
 main "$1"
