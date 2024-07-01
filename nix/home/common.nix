@@ -150,6 +150,15 @@
         };
       }
     ];
+    sessionVariables = {
+      FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/'";
+      EDITOR = "nvim";
+      ERL_AFLAGS = "-kernel shell_history enabled";
+      KERL_BUILD_DOCS = "yes";
+      CLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs/";
+      ICLOUD = "$HOME/Library/Mobile Documents/com~apple~CloudDocs";
+    };
+
     shellAliases = {
       tsr = "tailscale serve reset";
 
