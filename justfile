@@ -28,3 +28,15 @@ rebuild:
       exit 1;;
   esac
 
+brew:
+  #!/usr/bin/env bash
+  set -euxo pipefail
+  case "{{ os() }}" in
+    macos)
+      brew update && brew upgrade;;
+
+     *)
+      echo "Unsupported operating system"
+      exit 1;;
+  esac
+
