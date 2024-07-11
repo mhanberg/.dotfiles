@@ -1,0 +1,66 @@
+## name: simple_ghostty
+## license: MIT
+## author: Mitchell Hanberg
+
+
+#		[50] = "#eeedfd",
+#		[100] = "#dedafb",
+#		[200] = "#bcb5f7",
+#		[300] = "#9b91f4",
+#		[400] = "#796cf0",
+#		[500] = "#5847ec",
+#		[600] = "#4639bd",
+#		[700] = "#352b8e",
+#		[800] = "#231c5e",
+#		[900] = "#120e2f",
+
+#	base00 = theme.purple[900],
+#	base01 = theme.purple[800],
+#	base02 = theme.purple[700],
+#	base03 = theme.purple[400],
+#	base04 = theme.purple[300],
+#	base05 = theme.purple[200],
+#	base06 = theme.purple[100],
+#	base07 = theme.purple[50],
+#	base08 = "#C26460",
+#	base09 = "#cc7e46",
+#	base0A = "#156D6D",
+#	base0B = "#9ff895",
+#	base0C = "#ca6ecf",
+#	base0D = "#2CECE6",
+#	base0E = "#ffc4ff",
+#	base0F = "#00a5c5",
+
+background = #120e2f
+foreground = #dedafb
+selection-background = #796cf0
+selection-foreground = #dedafb
+cursor-color = #dedafb
+
+# Tabs
+#tab_bar_background #15161E
+
+# normal
+palette = 0=#727169
+palette = 1=#C26460
+palette = 2=#9ff895
+palette = 3=#cc7e46
+palette = 4=#00a5c5
+palette = 5=#ca6ecf
+palette = 6=#2CECE6
+palette = 7=#156D6D
+
+# bright
+palette = 8=#727169
+palette = 9=#E82424
+palette = 10=#98BB6C
+palette = 11=#E6C384
+palette = 12=#7FB4CA
+palette = 13=#938AA9
+palette = 14=#7AA89F
+palette = 15=#DCD7BA
+
+
+# extended colors
+palette = 16=#FFA066
+palette = 17=#FF5D62
