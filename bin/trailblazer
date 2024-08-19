@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+function call() {
+  curl --location "https://odds.simplebet.io/api/v1/$1" \
+     --header 'Content-Type: application/json' \
+     --header "Authorization: Bearer $TRAILBLAZER_API_KEY"
+}
+
+function main() {
+  case $1 in
+    "match-states")
+      shift
+      call "matches/$1/match_states"
+      ;;
+  esac
+}
+
+main "$@"
