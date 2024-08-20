@@ -9,4 +9,8 @@
 .direnv
 .mise.local.toml
 
+todo.txt
+
+.elixir-tools/
+
 motch-tmp
