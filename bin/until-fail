@@ -9,7 +9,7 @@
 
 ((count = 0))
 
-while "$@"; do
+while eval "$1"; do
   ((count++))
 done
 
