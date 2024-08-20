@@ -3,7 +3,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     ghostty.url = "github:clo4/ghostty-hm-module";
@@ -27,38 +27,26 @@
       nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit self;};
-        modules =
-          [./nix/darwin.nix]
-          ++ extraDarwinModules
-          ++ [
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.mitchell = {
-                imports = [ghostty.homeModules.default] ++ extraHmModules;
-              };
-            }
-          ];
+        modules = [./nix/darwin.nix] ++ extraDarwinModules;
       };
-    mkHm = extraHmModules:
+    mkHm = {
+      extraModules ? [],
+      arch,
+    }:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [ghostty.homeModules.default] ++ extraHmModules;
+        pkgs = nixpkgs.legacyPackages.${arch};
+        modules = [ghostty.homeModules.default] ++ extraModules;
       };
   in {
     darwinConfigurations = {
       alt-mhanberg = mkDarwin {
         extraDarwinModules = [./nix/darwin/alt-mhanberg.nix];
-        extraHmModules = [./nix/home/work.nix];
       };
       mitchells-mini = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix];
-        extraHmModules = [./nix/home/work.nix];
       };
       mitchells-air = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix];
-        extraHmModules = [./nix/home/work.nix];
       };
     };
 
@@ -71,8 +59,26 @@
     };
 
     homeConfigurations = {
-      "mitchell@nublar" = mkHm [./nix/home/nublar.nix];
-      "mitchell@nixos" = mkHm [./nix/home/nixos.nix];
+      "mitchell@nublar" = mkHm {
+        extraModules = [./nix/home/nublar.nix];
+        arch = "x86_64-linux";
+      };
+      "mitchell@nixos" = mkHm {
+        extraModules = [./nix/home/nixos.nix];
+        arch = "x86_64-linux";
+      };
+      "mitchell@alt-mhanberg" = mkHm {
+        extraModules = [./nix/home/work.nix];
+        arch = "aarch64-darwin";
+      };
+      "mitchell@mitchells-mini" = mkHm {
+        extraModules = [./nix/home/personal.nix];
+        arch = "aarch64-darwin";
+      };
+      "mitchell@mitchells-air" = mkHm {
+        extraModules = [./nix/home/personal.nix];
+        arch = "aarch64-darwin";
+      };
     };
   };
 }
