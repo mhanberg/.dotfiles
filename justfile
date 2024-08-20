@@ -40,3 +40,11 @@ brew:
       exit 1;;
   esac
 
+fix-shell-files:
+  #!/usr/bin/env bash
+  set -euxo pipefail
+
+  sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
+  sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
+  sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+
