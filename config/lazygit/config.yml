@@ -126,7 +126,7 @@ keybinding:
         scrollDownMain-alt1: J
         scrollUpMain-alt2: <c-u>
         scrollDownMain-alt2: <c-d>
-        executeCustomCommand: ":"
+        executeShellCommand: ":"
         createRebaseOptionsMenu: m
         pushFiles: P
         pullFiles: p
@@ -222,8 +222,8 @@ keybinding:
         update: u
         bulkMenu: b
 os:
-    openCommand: open -- {{filename}}
-    openLinkCommand: open {{link}}
+    open: open -- {{filename}}
+    openLink: open {{link}}
 disableStartupPopups: false
 customCommands:
     - key: "<c-g>"
