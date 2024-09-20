@@ -25,6 +25,7 @@
       gawk
       gh
       git
+      git-lfs
       hyperfine
       jq
       just

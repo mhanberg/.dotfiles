@@ -20,10 +20,7 @@
     home-manager,
     ghostty,
   } @ inputs: let
-    mkDarwin = {
-      extraHmModules,
-      extraDarwinModules ? {},
-    }:
+    mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit self;};

@@ -4,6 +4,6 @@ name: <%= @args[0].gsub("\.", "") %>
 root: <%= `project-dir #{@args[0]}` %>
 
 windows:
-  - editor: nvim
+  - editor: <%= @args[0] == "notes" ? 'notes' : 'nvim' %>
   - shell: 
   <%= "- docker: docker-compose up -d && lazydocker" if ["freeroll", "play_by_play"].include?(args[0]) %>
