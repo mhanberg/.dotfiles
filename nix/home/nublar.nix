@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  common = pkgs.callPackage ./packages.nix;
+  common = pkgs.callPackage ./packages.nix {inherit pkgs;};
 in {
   imports = [./common.nix];
   home.packages = common.packages;

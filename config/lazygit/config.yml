@@ -236,7 +236,3 @@ customCommands:
 services: {}
 notARepository: prompt
 promptToReturnFromSubprocess: false
-os:
-  openCommand: open -- {{filename}}
-  openLinkCommand: open {{link}}
-  copyToClipboardCmd: "echo {{text}} | ssh \"mitchell@$(echo $SSH_CONNECTION | awk '{ print $1}')\" pbcopy"
