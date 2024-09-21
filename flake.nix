@@ -6,7 +6,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    ghostty.url = "github:clo4/ghostty-hm-module";
+    ghostty-hm.url = "github:clo4/ghostty-hm-module";
+    ghostty = {
+      url = "git+ssh://git@github.com/ghostty-org/ghostty";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +23,7 @@
     nix-darwin,
     nixpkgs,
     home-manager,
+    ghostty-hm,
     ghostty,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
@@ -32,7 +38,7 @@
     }:
       home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${arch};
-        modules = [ghostty.homeModules.default] ++ extraModules;
+        modules = [ghostty-hm.homeModules.default] ++ extraModules;
       };
   in {
     darwinConfigurations = {
@@ -57,7 +63,12 @@
 
     homeConfigurations = {
       "mitchell@nublar" = mkHm {
-        extraModules = [./nix/home/nublar.nix];
+        extraModules = [
+          ./nix/home/nublar.nix
+          {
+            home.packages = [ghostty.packages.x86_64-linux.default];
+          }
+        ];
         arch = "x86_64-linux";
       };
       "mitchell@nixos" = mkHm {

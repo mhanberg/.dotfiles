@@ -15,7 +15,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup {
   spec = {
-    { "mhanberg/motchvim", import = "motchvim.plugins" },
+    { dev = true, "mhanberg/motchvim", import = "motchvim.plugins" },
   },
   concurrency = 30,
   dev = { path = "~/src" },

@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-gh api graphql --paginate -f query='
+function query() {
+  local user
+  user="$1"
+  echo "
 {
-  viewer {
+  user(login: \"$user\") {
     hasSponsorsListing
     sponsors(first: 100, orderBy: {field: LOGIN, direction: ASC}) {
       edges {
@@ -17,13 +20,32 @@ gh api graphql --paginate -f query='
       }
     }
   }
-}' | elixir -e '
+}"
+}
+
+function main() {
+  local dir
+
+  dir="$(mktemp -d)"
+
+  gh api graphql --paginate -f query="$(query "mhanberg")" >"$dir/mhanberg.json"
+  gh api graphql --paginate -f query="$(query "scohen")" >"$dir/scohen.json"
+  gh api graphql --paginate -f query="$(query "lukassamson")" >"$dir/lukassamson.json"
+
+  echo "$dir" | /usr/bin/env elixir -e '
 Mix.install([:jason])
 
-input = IO.read(:eof) |> Jason.decode!(keys: :atoms)
+dir = IO.read(:eof) |> String.trim()
+
+mhanberg = File.read!(Path.join(dir, "mhanberg.json")) |> Jason.decode!(keys: :atoms)
+steve = File.read!(Path.join(dir, "scohen.json")) |> Jason.decode!(keys: :atoms)
+lukasz = File.read!(Path.join(dir, "lukassamson.json")) |> Jason.decode!(keys: :atoms)
 
 rows = 
-  input.data.viewer.sponsors.edges
+  (mhanberg.data.user.sponsors.edges
+  ++ steve.data.user.sponsors.edges
+  ++ lukasz.data.user.sponsors.edges)
+  |> Enum.uniq()
   |> Enum.chunk_every(3)
   |> Enum.map_join("\n", fn row ->
     "| " <> Enum.map_join(row, " | ", fn cell ->
@@ -37,3 +59,6 @@ IO.puts("""
 #{rows}
 """)
 '
+}
+
+main

@@ -99,8 +99,7 @@
       mux = "tmuxinator";
       blog = "cd ~/Development/blog";
       dotfiles = "tmuxinator start dotfiles --suppress-tmux-version-warning";
-
-      # git
+      em = "mix ecto.migrate";
       git-trigger-build = "git commit --allow-empty -m 'Trigger Build'";
       gpu = "git push -u origin";
       gd = "git diff";
@@ -125,7 +124,6 @@
       # elixir
       mtc = "WALLABY_DRIVER=chrome mix test";
       mts = "WALLABY_DRIVER=selenium mix test";
-      em = "mix ecto.migrate";
 
       # zk
       notes = "zk edit --match=README --tag=startup";
@@ -168,6 +166,8 @@
       alias icloud="cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
       alias home="cd $HOME"
       alias rebuild-blog="curl -X POST -d {} https://api.netlify.com/build_hooks/$NETLIFY_BLOG_ID"
+      export PATH="$HOME/.bin:$PATH"
+      # export PATH="$HOME/.local/bin:$PATH"
 
       export PATH="$HOME/.bin:$PATH"
     '';
@@ -314,7 +314,6 @@
       selection-background = "#223249";
 
       font-family = "JetBrainsMono Nerd Font Mono";
-      font-size = 14;
       font-thicken = false;
 
       cursor-style-blink = false;

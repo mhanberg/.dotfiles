@@ -11,7 +11,7 @@ flake-update:
   fi
 
 hm:
-  home-manager switch --flake ~/.dotfiles
+  home-manager switch --flake ~/.dotfiles --show-trace
 
 rebuild:
   #!/usr/bin/env bash
