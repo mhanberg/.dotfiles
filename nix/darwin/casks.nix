@@ -17,6 +17,7 @@
   "font-jetbrains-mono-nerd-font"
   "font-work-sans"
   "gitpigeon"
+  "jordanbaird-ice"
   "karabiner-elements"
   "kindle"
   "loopback"
