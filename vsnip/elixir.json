@@ -1,6 +1,36 @@
 {
+  "temple component": {
+    "prefix": [
+      "tc"
+    ],
+    "body": [
+      "c &$1/1 do",
+      "  $2",
+      "end"
+    ]
+  },
+  "simple form": {
+    "prefix": [
+      "tsf"
+    ],
+    "body": [
+      "c &simple_form/1, for: @form, id: \"${1:form}\", phx_submit: \"save\" do",
+      "  $2",
+      "end"
+    ]
+  },
+  "input": {
+    "prefix": [
+      "ti"
+    ],
+    "body": [
+      "c &input/1, field: @form[:$1], placeholder: \"$2\""
+    ]
+  },
   "HEEx Template": {
-    "prefix": ["heex"],
+    "prefix": [
+      "heex"
+    ],
     "body": [
       "~H\"\"\"",
       "$1",
@@ -8,8 +38,10 @@
     ]
   },
   "Mix Task": {
-    "prefix": ["mtask"],
-    "body":[
+    "prefix": [
+      "mtask"
+    ],
+    "body": [
       "defmodule Mix.Tasks.$1 do",
       "  use Mix.Task",
       "",
@@ -25,8 +57,10 @@
     "description": "Create a new mix task"
   },
   "GenServer": {
-    "prefix": ["gserver"],
-    "body":[
+    "prefix": [
+      "gserver"
+    ],
+    "body": [
       "defmodule $1 do",
       "  use GenServer",
       "",
@@ -42,7 +76,9 @@
     "description": "Create a new mix task"
   },
   "Feature Test": {
-    "prefix": ["feature"],
+    "prefix": [
+      "feature"
+    ],
     "body": [
       "feature \"$1\", %{session: session} do",
       "  $2",
