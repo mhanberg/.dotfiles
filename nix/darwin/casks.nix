@@ -26,6 +26,7 @@
   "slack"
   "soundsource"
   "tailscale"
+  "tuple"
   "via"
   "visual-studio-code"
   "zed"
