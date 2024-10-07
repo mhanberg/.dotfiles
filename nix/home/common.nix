@@ -96,9 +96,7 @@
 
       nublar = "ssh -q mitchell@nublar -L 4999:localhost:4999";
       tmux = "direnv exec / tmux";
-      mux = "tmuxinator";
       blog = "cd ~/Development/blog";
-      dotfiles = "tmuxinator start dotfiles --suppress-tmux-version-warning";
       em = "mix ecto.migrate";
       git-trigger-build = "git commit --allow-empty -m 'Trigger Build'";
       gpu = "git push -u origin";
@@ -151,7 +149,7 @@
           cd ~/src
         else
           if [ -d "$HOME/src/$1" ]; then
-            tmuxinator start --suppress-tmux-version-warning=0 code "$1"
+           twm --path "$HOME/src/$1"
           else
             echo "$HOME/src/$1 does not exist"
           fi

@@ -1,7 +1,0 @@
-# /Users/mitchellhanberg/.config/tmuxinator/scratch.yml
-
-name: scratch
-root: ~/
-
-windows:
-  - scratch: clear

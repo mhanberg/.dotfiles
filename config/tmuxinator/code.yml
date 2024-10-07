@@ -1,9 +1,0 @@
-# /Users/mitchellhanberg/.config/tmuxinator/code.yml
-
-name: <%= @args[0].gsub("\.", "") %>
-root: <%= `project-dir #{@args[0]}` %>
-
-windows:
-  - editor: <%= @args[0] == "notes" ? 'notes' : 'nvim' %>
-  - shell: 
-  <%= "- docker: docker-compose up -d && lazydocker" if ["freeroll", "play_by_play"].include?(args[0]) %>
