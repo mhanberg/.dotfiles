@@ -1,0 +1,30 @@
+2024/10/03 09:22:08 [emerg] 1504900#1504900: open() "/nix/store/s13inrbla7zfllqywq9dvhh3bi3ycvix-nginx-1.26.2/stream.nginx" failed (2: No such file or directory)
+2024/10/03 09:22:17 [emerg] 1505127#1505127: open() "/var/log/nginx/access.log" failed (2: No such file or directory)
+2024/10/03 09:23:18 [emerg] 1506366#1506366: open() "/var/log/nginx/access.log" failed (2: No such file or directory)
+2024/10/03 09:24:39 [emerg] 1508222#1508222: open() "/var/log/nginx/access.log" failed (2: No such file or directory)
+2024/10/03 09:25:33 [emerg] 1509359#1509359: open() "/var/log/nginx/access.log" failed (2: No such file or directory)
+2024/10/03 09:26:18 [emerg] 1510229#1510229: bind() to 0.0.0.0:80 failed (13: Permission denied)
+2024/10/03 09:26:33 [emerg] 1510541#1510541: open() "/var/log/nginx/nginx.pid" failed (2: No such file or directory)
+2024/10/03 09:28:07 [emerg] 1512432#1512432: directive "pid" is not terminated by ";" in /home/mitchell/.dotfiles/stream.nginx:4
+2024/10/03 09:28:59 [notice] 1513664#1513664: signal process started
+2024/10/03 09:29:01 [notice] 1513744#1513744: signal process started
+2024/10/03 09:29:01 [error] 1513744#1513744: open() "/home/mitchell/.dotfiles/./nginx.pid" failed (2: No such file or directory)
+2024/10/03 09:58:34 [notice] 1547315#1547315: signal process started
+2024/10/03 10:00:15 [alert] 1532962#1532962: unknown process 1539329 exited on signal 9
+2024/10/03 10:04:12 [notice] 1553807#1553807: signal process started
+2024/10/03 10:04:22 [alert] 1547317#1547317: unknown process 1553150 exited on signal 9
+2024/10/03 10:04:22 [alert] 1547317#1547317: unknown process 1553151 exited on signal 9
+2024/10/03 10:05:21 [alert] 1553885#1553885: unknown process 1554074 exited on signal 9
+2024/10/03 10:05:21 [alert] 1553885#1553885: unknown process 1554075 exited on signal 9
+2024/10/03 10:08:46 [alert] 1553885#1553885: unknown process 1555419 exited on signal 9
+2024/10/03 10:08:46 [alert] 1553885#1553885: unknown process 1555420 exited on signal 9
+2024/10/03 10:08:53 [notice] 1559312#1559312: signal process started
+2024/10/03 10:11:15 [alert] 1559415#1559415: unknown process 1559481 exited on signal 9
+2024/10/03 10:11:15 [alert] 1559415#1559415: unknown process 1559482 exited on signal 9
+2024/10/03 10:11:23 [notice] 1562207#1562207: signal process started
+2024/10/03 10:18:06 [notice] 1569473#1569473: signal process started
+2024/10/03 10:18:11 [alert] 1562261#1562261: unknown process 1562339 exited on signal 9
+2024/10/03 10:18:11 [alert] 1562261#1562261: unknown process 1562340 exited on signal 9
+2024/10/03 10:19:04 [alert] 1569527#1569527: unknown process 1569648 exited on signal 9
+2024/10/03 10:19:04 [alert] 1569527#1569527: unknown process 1569649 exited on signal 9
+2024/10/03 10:19:24 [notice] 1571097#1571097: signal process started
