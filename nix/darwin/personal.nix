@@ -9,4 +9,5 @@ in {
       "screenflow"
     ]
     ++ commonCasks;
+  homebrew.brews = import ./brews.nix;
 }

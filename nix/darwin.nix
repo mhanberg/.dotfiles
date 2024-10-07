@@ -25,7 +25,9 @@
   programs.zsh.enable = true;
   homebrew.enable = true;
   homebrew.onActivation.cleanup = "uninstall";
-  homebrew.brews = import ./darwin/brews.nix;
+  homebrew.taps = [
+    "homebrew/services"
+  ];
 
   nixpkgs.config.allowUnfree = true;
   # The platform the configuration will be used on.

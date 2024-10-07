@@ -54,6 +54,7 @@
       tailwindcss-language-server
       tmux
       tmuxinator
+      twm
       tokei
       tree-sitter
       vim
