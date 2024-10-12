@@ -1,5 +1,6 @@
 search_paths:
   - "~/src"
+  - "~/.dotfiles"
   - "~/Library/Mobile Documents/com~apple~CloudDocs/notes"
 exclude_path_components:
   - .git
