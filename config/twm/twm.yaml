@@ -17,6 +17,7 @@ workspace_definitions:
     default_layout: code
     has_any_file:
       - .git
+
   - name: notes
     default_layout: notes
     has_any_file:
