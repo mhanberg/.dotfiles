@@ -31,6 +31,8 @@
       just
       lazydocker
       lazygit
+      lua5_1
+      luarocks
       lua-language-server
       mise
       neovim
