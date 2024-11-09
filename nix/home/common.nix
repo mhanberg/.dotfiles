@@ -153,7 +153,7 @@
     shellAliases = {
       tsr = "tailscale serve reset";
 
-      nublar = "ssh -q mitchell@nublar -L 4999:localhost:4999";
+      nublar = "ssh -q mitchell@nublar -L 4999:localhost:4999 -L 8000:localhost:8000";
       tmux = "direnv exec / tmux";
       blog = "cd ~/Development/blog";
       em = "mix ecto.migrate";
