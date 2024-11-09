@@ -29,7 +29,7 @@ layouts:
       - tmux new-window
       - tmux rename-window shell
       - tmux select-window -t editor
-      - tmux send-keys -t 0 'nvim' C-m
+      - tmux send-keys -t 1 'nvim' C-m
   - name: notes
     commands:
-      - tmux send-keys -t 0 'notes' C-m
+      - tmux send-keys -t 1 'notes' C-m

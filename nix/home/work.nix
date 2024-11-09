@@ -4,9 +4,11 @@
     docker-compose
   ];
 in {
-  imports = [./common.nix];
+  imports = [
+    ./common.nix
+    ./themes/rose-pine-moon.nix
+  ];
   home.packages = common.packages ++ work_packages;
 
-  programs.ghostty.settings.config-file = "/Users/mitchell/.config/ghostty/themes/KanagwaWave";
   programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
 }
