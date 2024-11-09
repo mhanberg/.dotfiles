@@ -10,8 +10,4 @@ in {
     ]
     ++ commonCasks;
   homebrew.brews = import ./brews.nix;
-  homebrew.masApps = {
-    Magnet = 441258766;
-    Dato = 1470584107;
-  };
 }
