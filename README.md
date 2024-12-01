@@ -4,16 +4,30 @@ These dotfiles are now managed using Nix on macOS and Linux.
 
 macOS utilizes nix-darwin in order to manage homebrew dependencies, and both macOS and Linux utilize home-manager for dotfiles and nixpkgs.
 
-I haven't yet set up a new computer with the Nix setup, so I don't have the fresh install instructions ready, but the maintenance instructions are documented.
+## Getting Started
 
-## macOS
+Install Nix
 
 ```bash
-just darwin
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-## Linux
+Run the installer
 
 ```bash
-just hm
+nix run github:mhanberg/.dotfiles
+```
+
+## Usage
+
+You can see the current tasks by running `just --list`
+
+```bash
+ just --list
+Available recipes:
+    brew            # update homebrew
+    fix-shell-files # fix shell files. this happens sometimes with nix-darwin
+    flake-update    # update your flake.lock
+    hm              # run home-manager switch
+    rebuild         # rebuild either nix-darwin or NixOS
 ```

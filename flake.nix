@@ -41,6 +41,31 @@
         modules = [ghostty-hm.homeModules.default] ++ extraModules;
       };
   in {
+    apps."aarch64-darwin".default = let
+      pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+      init = pkgs.writeShellApplication {
+        name = "init";
+        text = ''
+          nix run nix-darwin -- switch --flake ~/.dotfiles
+          nix run home-manager/master -- switch --flake ~/.dotfiles
+        '';
+      };
+    in {
+      type = "app";
+      program = "${init}/bin/init";
+    };
+    apps."x86_64-linux".default = let
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      init = pkgs.writeShellApplication {
+        name = "init";
+        text = ''
+          nix run home-manager/master -- switch --flake ~/.dotfiles
+        '';
+      };
+    in {
+      type = "app";
+      program = "${init}/bin/init";
+    };
     darwinConfigurations = {
       alt-mhanberg = mkDarwin {
         extraDarwinModules = [./nix/darwin/alt-mhanberg.nix];

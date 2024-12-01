@@ -1,3 +1,4 @@
+# update your flake.lock
 flake-update:
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -10,9 +11,12 @@ flake-update:
     git commit -m "nix: update flake.lock"
   fi
 
+
+# run home-manager switch
 hm:
   home-manager switch --flake ~/.dotfiles --show-trace
 
+# rebuild either nix-darwin or NixOS
 rebuild:
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -28,6 +32,7 @@ rebuild:
       exit 1;;
   esac
 
+# update homebrew
 brew:
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -40,6 +45,7 @@ brew:
       exit 1;;
   esac
 
+# fix shell files. this happens sometimes with nix-darwin
 fix-shell-files:
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -47,4 +53,3 @@ fix-shell-files:
   sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
   sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
   sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
-
