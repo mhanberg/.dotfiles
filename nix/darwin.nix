@@ -22,6 +22,13 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
+  system.defaults.NSGlobalDomain.KeyRepeat = 1;
+  system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
+  system.defaults.dock.autohide = true;
+  system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.show-recents = false;
+  system.defaults.dock.tilesize = 39;
+
   programs.zsh.enable = true;
   homebrew.enable = true;
   homebrew.onActivation.cleanup = "uninstall";

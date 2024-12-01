@@ -91,6 +91,11 @@
     '';
   };
 
+  programs.ssh = {
+    enable = true;
+    forwardAgent = true;
+  };
+
   programs.git = {
     enable = true;
     userName = "Mitchell Hanberg";
