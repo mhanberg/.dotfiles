@@ -53,3 +53,7 @@ fix-shell-files:
   sudo mv /etc/zshenv /etc/zshenv.before-nix-darwin
   sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
   sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+
+[linux]
+update-apt:
+  sudo apt update && sudo apt upgrade --yes
