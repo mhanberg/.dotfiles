@@ -14,7 +14,7 @@ flake-update:
 
 # run home-manager switch
 hm:
-  home-manager switch --flake ~/.dotfiles --show-trace
+  home-manager switch --flake ~/.dotfiles -b backup
 
 # rebuild either nix-darwin or NixOS
 rebuild:
