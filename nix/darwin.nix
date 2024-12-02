@@ -22,7 +22,7 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-  system.defaults.NSGlobalDomain.KeyRepeat = 1;
+  system.defaults.NSGlobalDomain.KeyRepeat = 2;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
   system.defaults.dock.autohide = true;
   system.defaults.dock.mru-spaces = false;
