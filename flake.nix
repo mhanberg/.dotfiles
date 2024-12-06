@@ -70,8 +70,11 @@
       program = "${init}/bin/init";
     };
     darwinConfigurations = {
+      dk-mhanberg = mkDarwin {
+        extraDarwinModules = [./nix/darwin/dk.nix];
+      };
       alt-mhanberg = mkDarwin {
-        extraDarwinModules = [./nix/darwin/alt-mhanberg.nix];
+        extraDarwinModules = [./nix/darwin/sb.nix];
       };
       mitchells-mini = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix];
@@ -103,8 +106,12 @@
         extraModules = [./nix/home/nixos.nix];
         arch = "x86_64-linux";
       };
+      "m.hanberg@dk-mhanberg" = mkHm {
+        extraModules = [./nix/home/dk.nix];
+        arch = "aarch64-darwin";
+      };
       "mitchell@alt-mhanberg" = mkHm {
-        extraModules = [./nix/home/work.nix];
+        extraModules = [./nix/home/sb.nix];
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-mini" = mkHm {

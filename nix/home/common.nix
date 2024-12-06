@@ -3,13 +3,6 @@
   nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "mitchell";
-  home.homeDirectory = pkgs.lib.mkForce (
-    if pkgs.stdenv.isLinux
-    then "/home/mitchell"
-    else "/Users/mitchell"
-  );
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -119,9 +112,6 @@
       };
       pull.ff = "only";
       init.defaultBranch = "main";
-      gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "/Users/mitchell/.ssh/allowed_signers";
-      commit.gpgSign = true;
       rebase.updateRefs = true;
     };
   };

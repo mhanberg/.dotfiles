@@ -8,6 +8,8 @@ in {
     ./common.nix
     ./themes/rose-pine-moon.nix
   ];
+  home.username = "mitchell";
+  home.homeDirectory = "/Users/mitchell";
   home.packages = common.packages ++ work_packages;
 
   programs.ssh.extraConfig = ''
@@ -16,4 +18,7 @@ in {
   '';
 
   programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+  programs.git.extraConfig.gpg.format = "ssh";
+  programs.git.extraConfig.gpg.ssh.allowedSignersFile = "/Users/mitchell/.ssh/allowed_signers";
+  programs.git.extraConfig.commit.gpgSign = true;
 }
