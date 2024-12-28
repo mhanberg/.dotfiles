@@ -112,6 +112,9 @@
       };
       pull.ff = "only";
       init.defaultBranch = "main";
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      commit.gpgSign = true;
       rebase.updateRefs = true;
     };
   };
