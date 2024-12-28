@@ -3,10 +3,12 @@
 in {
   homebrew.casks =
     [
+      "autodesk-fusion"
       "tailscale"
       "1password"
       "1password-cli"
       "audio-hijack"
+      "bambu-studio"
       "discord"
       "element"
       "elgato-control-center"

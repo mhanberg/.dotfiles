@@ -10,6 +10,7 @@
   "font-jetbrains-mono"
   "font-jetbrains-mono-nerd-font"
   "font-work-sans"
+  "ghostty"
   "jordanbaird-ice"
   "loopback"
   "monodraw"
