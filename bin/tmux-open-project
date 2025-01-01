@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-PATH="$HOME/src/rummage/target/release/:$PATH"
-
 dir="$(rummage | fzf --reverse --border=rounded --prompt='> ')"
 
 if [ "$dir" ]; then
