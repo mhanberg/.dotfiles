@@ -16,6 +16,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rummage = {
+      url = "github:mhanberg/rummage";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -23,6 +27,7 @@
     nix-darwin,
     nixpkgs,
     home-manager,
+    rummage,
     ghostty-hm,
     ghostty,
   } @ inputs: let
@@ -38,7 +43,15 @@
     }:
       home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${arch};
-        modules = [ghostty-hm.homeModules.default] ++ extraModules;
+        modules =
+          [
+            ghostty-hm.homeModules.default
+
+            {
+              home.packages = [rummage.packages.${arch}.default];
+            }
+          ]
+          ++ extraModules;
       };
   in {
     apps."aarch64-darwin".default = let

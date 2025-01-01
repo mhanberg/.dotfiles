@@ -14,22 +14,9 @@ session_name_path_components: 2
 follow_links: false
 workspace_definitions:
   - name: code
-    default_layout: code
     has_any_file:
       - .git
 
   - name: notes
-    default_layout: notes
     has_any_file:
       - .zk
-layouts:
-  - name: code
-    commands:
-      - tmux rename-window editor
-      - tmux new-window
-      - tmux rename-window shell
-      - tmux select-window -t editor
-      - tmux send-keys -t 1 'nvim' C-m
-  - name: notes
-    commands:
-      - tmux send-keys -t 1 'notes' C-m

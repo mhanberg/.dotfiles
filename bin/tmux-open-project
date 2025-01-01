@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+PATH="$HOME/src/rummage/target/release/:$PATH"
+
+dir="$(rummage | fzf --reverse --border=rounded --prompt='> ')"
+
+if [ "$dir" ]; then
+  session_name="$(basename "$dir")"
+  if ! tmux has-session -t "$session_name"; then
+    tmux new-session -d -c "$dir" -s "$session_name" "nvim"
+    tmux new-window -d -c "$dir" -t "$session_name" -n "shell"
+  fi
+
+  if [[ -z "$TMUX" ]]; then
+    tmux attach -t "$session_name"
+  else
+    tmux switch-client -t "$session_name"
+  fi
+fi

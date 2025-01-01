@@ -63,8 +63,8 @@
       set -g renumber-windows on
       bind-key b break-pane -d
 
-      bind C-j display-popup -E -w "25%" -h "100%" -y "100%" -x "0" "twm --existing"
-      bind C-y display-popup -E -w "25%" -h "100%" -y "100%" -x "0" "twm"
+      bind C-j display-popup -B -E -w "50%" -h "50%" -y "0"  "tmux-switch-clients"
+      bind C-y display-popup -B -E -w "50%" -h "50%" -y "0"  "tmux-open-project"
 
       bind C-m display-popup -E -w "90%" -h "90%" -e XDG_CONFIG_HOME="$HOME/.config" "lazygit"
       bind C-u display-popup -E -w "90%" -h "90%" "btop"
