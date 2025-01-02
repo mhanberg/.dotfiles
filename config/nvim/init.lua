@@ -16,6 +16,24 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.maplocalleader = ","
 
+if vim.fn.has("mac") and vim.env.TMUX ~= "" and vim.fn.executable("tmux") and vim.env.SSH_TTY ~= "" then
+  vim.notify("Setting special tmux clipboard provider")
+  local copy = { "tmux", "load-buffer", "-w", "-" }
+  local paste = { "tmux", "save-buffer", "-" }
+  vim.g.clipboard = {
+    name = "tmux",
+    copy = {
+      ["+"] = copy,
+      ["*"] = copy,
+    },
+    paste = {
+      ["+"] = paste,
+      ["*"] = paste,
+    },
+    cache_enabled = 1,
+  }
+end
+
 require("lazy").setup {
   spec = {
     { dev = true, "mhanberg/motchvim", import = "motchvim.plugins" },
