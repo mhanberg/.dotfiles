@@ -116,7 +116,7 @@
         extraModules = [./nix/home/nixos.nix];
         arch = "x86_64-linux";
       };
-      "m.hanberg@dk-mhanberg" = mkHm {
+      "m.hanberg" = mkHm {
         extraModules = [./nix/home/dk.nix];
         arch = "aarch64-darwin";
       };

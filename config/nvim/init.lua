@@ -41,7 +41,6 @@ require("lazy").setup {
   dev = { path = "~/src" },
   install = {
     missing = true,
-    colorscheme = { "kanagawa" },
   },
   performance = {
     rtp = {
