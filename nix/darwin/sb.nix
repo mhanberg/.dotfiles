@@ -10,6 +10,7 @@
     "elgato-stream-deck"
     "gitpigeon"
     "slack"
+    "tailscale"
     "zoom"
   ];
   commonBrews = import ./brews.nix;

@@ -41,6 +41,9 @@
       bind-key \\ split-window -h -c '#{pane_current_path}'
 
       set -a terminal-features '*:usstyle'
+      set -as terminal-features ',xterm-ghostty:clipboard'
+      set -g allow-passthrough on
+      set -s set-clipboard on
       set -g set-titles on
       set -g set-titles-string "#S (#W)"
       set-option -g focus-events on
@@ -93,9 +96,9 @@
     enable = true;
     userName = "Mitchell Hanberg";
     userEmail = "mitch@mitchellhanberg.com";
-    signing = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
-    };
+    # signing = {
+    #   key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
+    # };
     delta = {
       enable = true;
     };
