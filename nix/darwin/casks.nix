@@ -19,5 +19,6 @@
   "tuple"
   "via"
   "visual-studio-code"
+  "vlc"
   "zed"
 ]
