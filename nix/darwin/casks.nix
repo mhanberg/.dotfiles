@@ -1,7 +1,6 @@
 [
   "alfred"
   "chromedriver"
-  "cleanshot"
   "dash"
   "deckset"
   "dropbox"

@@ -6,7 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    ghostty-hm.url = "github:clo4/ghostty-hm-module";
     ghostty = {
       url = "git+ssh://git@github.com/ghostty-org/ghostty";
       inputs.nixpkgs-stable.follows = "nixpkgs";
@@ -28,7 +27,6 @@
     nixpkgs,
     home-manager,
     rummage,
-    ghostty-hm,
     ghostty,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
@@ -45,8 +43,6 @@
         pkgs = nixpkgs.legacyPackages.${arch};
         modules =
           [
-            ghostty-hm.homeModules.default
-
             {
               home.packages = [rummage.packages.${arch}.default];
             }

@@ -3,6 +3,7 @@
 in {
   homebrew.casks =
     [
+      "cleanshot"
       "autodesk-fusion"
       "tailscale"
       "1password"

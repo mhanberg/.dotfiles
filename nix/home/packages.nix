@@ -38,6 +38,7 @@
       neovim
       neovim-remote
       nil
+      nix-direnv
       bash-language-server
       nodejs
       openssl

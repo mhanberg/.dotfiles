@@ -248,7 +248,11 @@
     enable = true;
     defaultCommand = "rg --files --hidden --glob '!.git/'";
   };
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   programs.starship = {
     enable = true;
@@ -361,6 +365,7 @@
 
   programs.ghostty = {
     enable = true;
+    installBatSyntax = false;
     settings = {
       shell-integration-features = "no-cursor";
       font-family = "JetBrainsMono Nerd Font Mono";
