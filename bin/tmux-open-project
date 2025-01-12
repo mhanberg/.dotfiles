@@ -3,7 +3,7 @@
 dir="$(rummage | fzf --reverse --border=rounded --prompt='> ')"
 
 if [ "$dir" ]; then
-  session_name="$(basename "$dir")"
+  session_name="$(basename "$dir" | sed 's/[.-]/_/g')"
   if ! tmux has-session -t "$session_name"; then
     tmux new-session -d -c "$dir" -s "$session_name" "nvim"
     tmux new-window -d -c "$dir" -t "$session_name" -n "shell"

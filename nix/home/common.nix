@@ -183,6 +183,9 @@
       mtc = "WALLABY_DRIVER=chrome mix test";
       mts = "WALLABY_DRIVER=selenium mix test";
 
+      # tmux
+      tp = "tmux-switch-clients";
+
       # zk
       notes = "zk edit --match=README --tag=startup";
     };
@@ -196,12 +199,6 @@
 
       path() {
         echo $PATH | tr ':' '\n'
-      }
-
-      tp() {
-        session="$(tmux ls | fzf --reverse | awk '{ print $1 }' | sed 's/://g')"
-
-        if [ -n "$session" ] && tmux attach -t "$session"
       }
 
       dev() {
