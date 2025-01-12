@@ -10,7 +10,13 @@ in {
   home.packages = common.packages;
   programs.ghostty.settings.font-size = 11;
 
-  programs.git.extraConfig.gpg.ssh.program = "/opt/1Password/op-ssh-sign";
-  programs.git.extraConfig.gpg.format = "ssh";
-  programs.git.extraConfig.commit.gpgSign = true;
+  programs.git = {
+    signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
+
+    extraConfig.gpg = {
+      ssh.program = "/opt/1Password/op-ssh-sign";
+      gpg.format = "ssh";
+      commit.gpgSign = true;
+    };
+  };
 }
