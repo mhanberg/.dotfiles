@@ -154,6 +154,8 @@
     shellAliases = {
       tsr = "tailscale serve reset";
 
+      dev = "tmux-open-project";
+
       nublar = "ssh -q mitchell@nublar -L 4999:localhost:4999 -L 8000:localhost:8000";
       tmux = "direnv exec / tmux";
       blog = "cd ~/Development/blog";
@@ -200,22 +202,6 @@
       path() {
         echo $PATH | tr ':' '\n'
       }
-
-      dev() {
-        if [ -z "$1" ]; then
-          cd ~/src
-        else
-          if [ -d "$HOME/src/$1" ]; then
-           twm --path "$HOME/src/$1"
-          else
-            echo "$HOME/src/$1 does not exist"
-          fi
-        fi
-      }
-
-      _dev() { _arguments "1: :($(ls $HOME/src))" }
-
-      compdef _dev dev
 
       # aliases that use env vars or spaces
       alias icloud="cd $HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
@@ -362,6 +348,7 @@
 
   programs.ghostty = {
     enable = true;
+    package = null;
     installBatSyntax = false;
     settings = {
       shell-integration-features = "no-cursor";
