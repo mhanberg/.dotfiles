@@ -7,7 +7,7 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:anund/home-manager/ghostty_darwin_support";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rummage = {

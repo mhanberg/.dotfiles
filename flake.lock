@@ -47,15 +47,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1736785676,
-        "narHash": "sha256-TY0jUwR3EW0fnS0X5wXMAVy6h4Z7Y6a3m+Yq++C9AyE=",
-        "owner": "nix-community",
+        "lastModified": 1736575409,
+        "narHash": "sha256-OH8z5gc3jzFlLN6Blco17ENM4KabY0c2ZKjEzg79NLs=",
+        "owner": "anund",
         "repo": "home-manager",
-        "rev": "fc52a210b60f2f52c74eac41a8647c1573d2071d",
+        "rev": "6be244f88065149695f67bcbf78f01a5a8ac7a3b",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "anund",
+        "ref": "ghostty_darwin_support",
         "repo": "home-manager",
         "type": "github"
       }
