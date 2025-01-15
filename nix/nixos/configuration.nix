@@ -89,7 +89,7 @@
       git-crypt
       gh
       docker
-      docker-compose_1
+      docker-compose
       lazydocker
       killall
       vim
@@ -115,7 +115,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     _1password-gui
-    _1password
+    _1password-cli
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
