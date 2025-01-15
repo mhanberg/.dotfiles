@@ -14,6 +14,10 @@
       url = "github:mhanberg/rummage";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -21,13 +25,19 @@
     nix-darwin,
     nixpkgs,
     home-manager,
+    lix-module,
     rummage,
   } @ inputs: let
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit self;};
-        modules = [./nix/darwin.nix] ++ extraDarwinModules;
+        modules =
+          [
+            lix-module.nixosModules.default
+            ./nix/darwin.nix
+          ]
+          ++ extraDarwinModules;
       };
     mkHm = {
       extraModules ? [],
