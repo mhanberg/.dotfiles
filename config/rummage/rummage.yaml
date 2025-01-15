@@ -1,5 +1,5 @@
 search_paths:
-  - "~/src"
+  - "~/src/"
   - "~/.dotfiles"
   - "~/Library/Mobile Documents/com~apple~CloudDocs/notes"
 exclude_path_components:
@@ -9,10 +9,12 @@ exclude_path_components:
   - deps
   - venv
   - target
-max_search_depth: 1
-session_name_path_components: 2
+max_search_depth: 3
 follow_links: false
 workspace_definitions:
+  - name: elixir
+    has_any_file:
+      - mix.exs
   - name: code
     has_any_file:
       - .git
