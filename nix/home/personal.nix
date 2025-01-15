@@ -15,6 +15,5 @@ in {
   '';
   programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
   programs.git.extraConfig.gpg.format = "ssh";
-  programs.git.extraConfig.gpg.ssh.allowedSignersFile = "/Users/mitchell/.ssh/allowed_signers";
   programs.git.extraConfig.commit.gpgSign = true;
 }
