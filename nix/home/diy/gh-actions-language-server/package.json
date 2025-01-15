@@ -1,0 +1,35 @@
+{
+	"name": "gh-actions-language-server",
+	"license": "MIT",
+	"type": "commonjs",
+	"version": "0.0.3",
+	"bin": "./bin/gh-actions-language-server",
+	"files": [
+		"./index.js",
+		"./bin/gh-actions-language-server"
+	],
+	"main": "index.js",
+	"engines": {
+		"node": ">=13.2.0"
+	},
+	"engineStrict": true,
+	"scripts": {
+		"build:node": "bun ./build/node.ts"
+	},
+	"dependencies": {
+		"@actions/languageserver": "^0.3.13",
+		"@actions/workflow-parser": "^0.3.13",
+		"@octokit/rest": "^19.0.7",
+		"@octokit/types": "^9.0.0",
+		"vscode-languageserver": "^8.0.2",
+		"vscode-languageserver-textdocument": "^1.0.7",
+		"yaml": "^2.1.3"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	}
+}

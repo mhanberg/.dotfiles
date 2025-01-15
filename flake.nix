@@ -111,7 +111,10 @@
         arch = "aarch64-darwin";
       };
       "mitchell@alt-mhanberg" = mkHm {
-        extraModules = [./nix/home/sb.nix];
+        extraModules = [
+          ./nix/home/sb.nix
+          ./nix/home/diy/gh-actions-language-server
+        ];
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-mini" = mkHm {
