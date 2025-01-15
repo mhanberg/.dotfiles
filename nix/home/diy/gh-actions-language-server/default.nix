@@ -4,7 +4,7 @@
     gh-actions-language-server = pkgs.buildNpmPackage {
       name = "gh-actions-language-server";
       version = "0.0.3";
-      buildInputs = [pkgs.bun];
+      nativeBuildInputs = [pkgs.bun];
 
       src = pkgs.fetchFromGitHub {
         owner = "lttb";
