@@ -21,7 +21,12 @@ function attach_to_session() {
 }
 
 function main() {
-  attach_to_session "$(pick_session)"
+  local session
+  session="$(pick_session)"
+
+  if [[ -n "$session" ]]; then
+    attach_to_session "$session"
+  fi
 }
 
 main
