@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   common = pkgs.callPackage ./packages.nix {inherit pkgs;};
 in {
   home.username = "mitchell";
@@ -9,7 +13,14 @@ in {
   ];
 
   home.packages = common.packages;
-  programs.git.extraConfig.gpg.ssh.program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
-  programs.git.extraConfig.gpg.format = "ssh";
-  programs.git.extraConfig.commit.gpgSign = true;
+
+  programs.git = {
+    signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
+
+    extraConfig.gpg = {
+      ssh.program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+      gpg.format = "ssh";
+      commit.gpgSign = true;
+    };
+  };
 }
