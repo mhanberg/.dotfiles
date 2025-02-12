@@ -16,6 +16,8 @@
       cmake
       delta
       direnv
+      docker
+      docker-compose
       eza
       fastfetch
       fd
@@ -40,6 +42,7 @@
       nil
       nix-direnv
       bash-language-server
+      yaml-language-server
       nodejs
       openssl
       ripgrep
