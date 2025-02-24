@@ -7,12 +7,11 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
-      url = "github:anund/home-manager/ghostty_darwin_support";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rummage = {
       url = "github:mhanberg/rummage";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
