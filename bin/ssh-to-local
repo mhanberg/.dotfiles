@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+function main() {
+  local ip
+  local code
+
+  code="$1"
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    ip="$(echo "$SSH_CONNECTION" | awk '{ print $1 }')"
+
+    ssh "mitchell@$ip" sh -c "$code"
+  else
+    echo "ERROR: not in an ssh session" >&2
+    exit 1
+  fi
+}
+
+main "$@"

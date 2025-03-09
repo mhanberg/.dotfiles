@@ -26,7 +26,7 @@
     home-manager,
     lix-module,
     rummage,
-  } @ inputs: let
+  }: let
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
@@ -93,14 +93,6 @@
       };
       mitchells-air = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix];
-      };
-    };
-
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        # > Our main nixos configuration file <
-        modules = [./nix/nixos/configuration.nix];
       };
     };
 

@@ -40,6 +40,7 @@
       neovim
       neovim-remote
       nil
+      nixd
       nix-direnv
       bash-language-server
       yaml-language-server

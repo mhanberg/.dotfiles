@@ -19,7 +19,6 @@
     ".config".source = ../../config;
     ".config".recursive = true;
     ".gitignore_global".source = ../../gitignore_global;
-    ".vsnip/elixir.json".source = ../../vsnip/elixir.json;
     ".xterm-256color.terminfo".source = ../../xterm-256color.terminfo;
   };
 
@@ -41,7 +40,7 @@
 
       set -a terminal-features '*:usstyle'
       set -as terminal-features ',xterm-ghostty:clipboard'
-      set -g allow-passthrough on
+      set -g allow-passthrough all
       set -s set-clipboard on
       set -g set-titles on
       set -g set-titles-string "#S (#W)"
