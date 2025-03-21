@@ -74,6 +74,20 @@
       init = pkgs.writeShellApplication {
         name = "init";
         text = ''
+          git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
+          nix run home-manager/master -- switch --flake ~/.dotfiles
+        '';
+      };
+    in {
+      type = "app";
+      program = "${init}/bin/init";
+    };
+    apps."aarch64-linux".default = let
+      pkgs = nixpkgs.legacyPackages."aarch64-linux";
+      init = pkgs.writeShellApplication {
+        name = "init";
+        text = ''
+          git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
           nix run home-manager/master -- switch --flake ~/.dotfiles
         '';
       };
