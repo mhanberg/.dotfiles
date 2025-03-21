@@ -117,6 +117,12 @@
         ];
         arch = "x86_64-linux";
       };
+      "ubuntu@ubuntu" = mkHm {
+        extraModules = [
+          ./nix/home/ubuntu.nix
+        ];
+        arch = "aarch64-linux";
+      };
       "mitchell@nixos" = mkHm {
         extraModules = [./nix/home/nixos.nix];
         arch = "x86_64-linux";
