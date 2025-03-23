@@ -49,6 +49,7 @@
             {
               home.packages = [rummage.packages.${arch}.default];
             }
+            ./nix/home/diy/gh-actions-language-server
           ]
           ++ extraModules;
       };
@@ -134,7 +135,6 @@
       "mitchell@alt-mhanberg" = mkHm {
         extraModules = [
           ./nix/home/sb.nix
-          ./nix/home/diy/gh-actions-language-server
         ];
         arch = "aarch64-darwin";
       };
