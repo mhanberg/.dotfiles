@@ -41,6 +41,7 @@
     MenuBarStats = 714196447;
     Things = 904280696;
     Keynote = 409183694;
+    AmazonKindle = 302584613;
   };
 
   nixpkgs.config.allowUnfree = true;

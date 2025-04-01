@@ -16,11 +16,12 @@ in {
       "elgato-stream-deck"
       "farrago"
       "fission"
-      "kindle"
       "nordvpn"
       "obs"
+      "pikopixel"
       "screenflow"
       "slack"
+      "wacom-tablet"
       "zoom"
     ]
     ++ commonCasks;
