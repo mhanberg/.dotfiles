@@ -27,6 +27,7 @@
   programs.tmux = {
     enable = true;
     sensibleOnTop = false;
+    historyLimit = 20000;
     escapeTime = 0;
     keyMode = "vi";
     mouse = true;
