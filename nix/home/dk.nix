@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   common = pkgs.callPackage ./packages.nix {inherit pkgs;};
   work_packages = [];
 in {
@@ -10,7 +14,38 @@ in {
   home.homeDirectory = "/Users/m.hanberg";
 
   home.packages = common.packages ++ work_packages;
-  programs.git.extraConfig.gpg.format = "ssh";
-  programs.git.extraConfig.commit.gpgSign = true;
-  programs.git.extraConfig.user.signingkey = "~/.ssh/id_ed25519.pub";
+  services.syncthing = {
+    enable = true;
+    settings = {
+      options = {
+        globalAnnounceServers = [
+          "https://syncthing-discovery.motch.systems"
+        ];
+      };
+      folders = {
+        "${config.home.homeDirectory}/shared/notes" = {
+          id = "notes";
+        };
+      };
+    };
+  };
+
+  programs.git = let
+    mkWorkConfig = dir: {
+      condition = "gitdir:${dir}";
+      contents = {
+        user.email = "m.hanberg@draftkings.com";
+      };
+    };
+  in {
+    includes = [
+      (mkWorkConfig "~/src/draftkings/")
+      (mkWorkConfig "~/src/simplebet/")
+    ];
+    extraConfig = {
+      gpg.format = "ssh";
+      commit.gpgSign = true;
+      user.signingkey = "~/.ssh/id_ed25519.pub";
+    };
+  };
 }
