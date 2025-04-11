@@ -1,16 +1,14 @@
-{...}: let
-  commonCasks = import ./casks.nix;
-  workCasks = [
+{...}: {
+  homebrew.casks = [
     "cleanshot"
     "aws-vpn-client"
     "podman-desktop"
+    "postgres-unofficial"
+    "elgato-control-center"
+    "elgato-stream-deck"
   ];
-  commonBrews = import ./brews.nix;
-  workBrews = [
+  homebrew.brews = [
     "podman"
     "podman-compose"
   ];
-in {
-  homebrew.casks = commonCasks ++ workCasks;
-  homebrew.brews = commonBrews ++ workBrews;
 }
