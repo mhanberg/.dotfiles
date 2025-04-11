@@ -129,6 +129,14 @@ in {
   programs.ssh = {
     enable = true;
     forwardAgent = true;
+    matchBlocks = {
+      "motch-ds-423" = {
+        hostname = "motch-ds-423";
+        setEnv = {
+          TERM = "xterm-256color";
+        };
+      };
+    };
   };
 
   programs.git = {
