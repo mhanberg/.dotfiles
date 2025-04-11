@@ -1,4 +1,5 @@
 search_paths:
+  - "~/shared"
   - "~/src/"
   - "~/.dotfiles"
   - "~/Library/Mobile Documents/com~apple~CloudDocs/notes"

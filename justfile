@@ -1,5 +1,5 @@
 # update your flake.lock
-flake-update:
+update-flake:
   #!/usr/bin/env bash
   set -euxo pipefail
   nix flake update
