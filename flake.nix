@@ -97,7 +97,7 @@
       program = "${init}/bin/init";
     };
     darwinConfigurations = {
-      dk-mhanberg = mkDarwin {
+      mhanberg-GQJNV7J4QY = mkDarwin {
         extraDarwinModules = [./nix/darwin/dk.nix];
       };
       alt-mhanberg = mkDarwin {
