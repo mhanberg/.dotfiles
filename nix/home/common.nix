@@ -24,6 +24,40 @@
 
   xdg.enable = true;
 
+  programs.rummage = {
+    enable = true;
+    settings = {
+      search_paths = [
+        "~/shared"
+        "~/.dotfiles"
+      ];
+      exclude_path_components = [
+        ".git"
+        ".direnv"
+        "node_modules"
+        "deps"
+        "venv"
+        "target"
+      ];
+      max_search_depth = 3;
+      follow_links = true;
+      workspace_definitions = [
+        {
+          name = "elixir";
+          has_any_file = ["mix.exs"];
+        }
+        {
+          name = "code";
+          has_any_file = [".git"];
+        }
+        {
+          name = "notes";
+          has_any_file = [".zk"];
+        }
+      ];
+    };
+  };
+
   programs.tmux = {
     enable = true;
     sensibleOnTop = false;
@@ -185,7 +219,7 @@
       mts = "WALLABY_DRIVER=selenium mix test";
 
       # tmux
-      tp = "tmux-switch-clients";
+      tp = "tmux ls -F #S";
 
       # zk
       notes = "zk edit --match=README --tag=startup";
@@ -350,6 +384,7 @@
     package = null;
     installBatSyntax = false;
     settings = {
+      macos-icon = "retro";
       shell-integration-features = "no-cursor";
       font-family = "JetBrainsMono Nerd Font Mono";
       font-thicken = false;

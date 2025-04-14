@@ -14,6 +14,15 @@ in {
   home.homeDirectory = "/Users/m.hanberg";
 
   home.packages = common.packages ++ work_packages;
+  programs.rummage = {
+    settings.search_paths = [
+      "~/src/simplebet/"
+      "~/src/draftkings/"
+      "~/src/other/"
+      "~/src/motchvim"
+    ];
+  };
+
   services.syncthing = {
     enable = true;
     settings = {
