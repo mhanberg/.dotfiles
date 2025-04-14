@@ -50,6 +50,7 @@
               home.packages = [rummage.packages.${arch}.default];
             }
             ./nix/home/diy/gh-actions-language-server
+            ./nix/home/modules/rummage.nix
           ]
           ++ extraModules;
       };
