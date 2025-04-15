@@ -1,5 +1,5 @@
-{config, ...}: let
-  myLib = import ../lib.nix {inherit config;};
+{...} @ args: let
+  myLib = import ../lib.nix args;
 in {
   imports = [
     ./themes/rose-pine-moon.nix
@@ -23,11 +23,6 @@ in {
         globalAnnounceServers = [
           "https://syncthing-discovery.motch.systems"
         ];
-      };
-      folders = {
-        "${config.home.homeDirectory}/shared/notes" = {
-          id = "notes";
-        };
       };
     };
   };

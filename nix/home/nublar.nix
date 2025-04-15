@@ -1,5 +1,5 @@
-{config, ...}: let
-  myLib = import ../lib.nix {inherit config;};
+{...} @ args: let
+  myLib = import ../lib.nix args;
 in {
   home.username = "mitchell";
   home.homeDirectory = "/home/mitchell";
@@ -7,11 +7,12 @@ in {
     ./themes/rose-pine.nix
     ./services/syncthing.nix
   ];
-  programs.ghostty.settings.font-size = 11;
 
   services.syncthing = {
     guiAddress = "0.0.0.0:8384";
   };
+
+  programs.ghostty.settings.font-size = 11;
 
   programs.rummage = {
     settings.search_paths = [

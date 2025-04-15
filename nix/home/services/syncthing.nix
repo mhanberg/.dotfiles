@@ -1,12 +1,14 @@
-{config, ...}: {
+{...} @ args: let
+  myLib = import ../../lib.nix args;
+in {
   services.syncthing = {
     enable = true;
     settings = {
       options = {
         globalAnnounceServers = ["https://syncthing-discovery.motch.systems"];
       };
-      folders = {
-        "${config.home.homeDirectory}/shared/notes" = {
+      folders = myLib.fromHome {
+        "/shared/notes" = {
           id = "notes";
         };
       };

@@ -1,9 +1,17 @@
-{...}: {
+{...} @ args: let
+  myLib = import ../lib.nix args;
+in {
   home.username = "mitchell";
   home.homeDirectory = "/Users/mitchell";
   imports = [
     ./themes/rose-pine.nix
+    ./services/syncthing.nix
   ];
+  programs.rummage = {
+    settings.search_paths = [
+      (myLib.joinHome "/src")
+    ];
+  };
   programs.ghostty.settings.font-size = 14;
   programs.ssh.extraConfig = ''
     Host * "test -z $SSH_TTY"

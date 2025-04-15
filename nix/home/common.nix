@@ -1,9 +1,5 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
-  myLib = import ../lib.nix {inherit config;};
+{pkgs, ...} @ args: let
+  myLib = import ../lib.nix args;
 in {
   nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
