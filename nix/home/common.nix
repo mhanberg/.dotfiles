@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: let
+  myLib = import ../lib.nix {inherit config;};
+in {
   nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -10,6 +16,10 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
+
+  imports = [
+    ./packages.nix
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -28,8 +38,8 @@
     enable = true;
     settings = {
       search_paths = [
-        "~/shared"
-        "~/.dotfiles"
+        (myLib.joinHome "/shared/notes")
+        (myLib.joinHome "/.dotfiles")
       ];
       exclude_path_components = [
         ".git"

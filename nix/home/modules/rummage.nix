@@ -23,7 +23,7 @@ in {
         lib.literalExpression ''
         '';
       description = ''
-        Configuration written to {file}`$XDG_CONFIG_HOME/rummage/rummage.yml`.
+        Configuration written to {file}`$XDG_CONFIG_HOME/rummage/rummage.yaml`.
       '';
     };
   };
@@ -31,7 +31,7 @@ in {
   config = mkIf cfg.enable {
     # home.packages = mkIf (cfg.package != null) [cfg.package];
 
-    xdg.configFile."rummage/rummage.yml" =
+    xdg.configFile."rummage/rummage.yaml" =
       mkIf (cfg.settings != {})
       {
         source = yamlFormat.generate "rummage-config" cfg.settings;

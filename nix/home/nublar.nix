@@ -1,14 +1,12 @@
-{pkgs, ...}: let
-  common = pkgs.callPackage ./packages.nix {inherit pkgs;};
+{config, ...}: let
+  myLib = import ../lib.nix {inherit config;};
 in {
   home.username = "mitchell";
   home.homeDirectory = "/home/mitchell";
   imports = [
-    ./common.nix
     ./themes/rose-pine.nix
     ./services/syncthing.nix
   ];
-  home.packages = common.packages;
   programs.ghostty.settings.font-size = 11;
 
   services.syncthing = {
@@ -17,7 +15,7 @@ in {
 
   programs.rummage = {
     settings.search_paths = [
-      "~/src"
+      (myLib.joinHome "/src")
     ];
   };
 

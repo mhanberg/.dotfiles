@@ -46,9 +46,8 @@
         pkgs = nixpkgs.legacyPackages.${arch};
         modules =
           [
-            {
-              home.packages = [rummage.packages.${arch}.default];
-            }
+            ./nix/home/common.nix
+            {home.packages = [rummage.packages.${arch}.default];}
             ./nix/home/diy/gh-actions-language-server
             ./nix/home/modules/rummage.nix
           ]

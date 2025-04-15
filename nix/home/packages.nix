@@ -1,5 +1,5 @@
-{pkgs, ...}: let
-  packages = with pkgs;
+{pkgs, ...}: {
+  home.packages = with pkgs;
     [
       actionlint
       alejandra
@@ -74,6 +74,4 @@
       then [gcc coreutils xclip unixtools.ifconfig inotify-tools ncurses5]
       else []
     );
-in {
-  inherit packages;
 }

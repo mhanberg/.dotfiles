@@ -1,13 +1,9 @@
-{pkgs, ...}: let
-  common = pkgs.callPackage ./packages.nix {inherit pkgs;};
-in {
+{...}: {
   home.username = "mitchell";
   home.homeDirectory = "/Users/mitchell";
   imports = [
-    ./common.nix
     ./themes/rose-pine.nix
   ];
-  home.packages = common.packages;
   programs.ghostty.settings.font-size = 14;
   programs.ssh.extraConfig = ''
     Host * "test -z $SSH_TTY"

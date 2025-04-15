@@ -3,10 +3,6 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [];
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
-
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
@@ -16,6 +12,8 @@
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
+
+  ids.gids.nixbld = 350;
 
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
@@ -30,6 +28,9 @@
   homebrew.taps = [
     "homebrew/services"
   ];
+
+  homebrew.casks = import ./darwin/casks.nix;
+  homebrew.brews = import ./darwin/brews.nix;
 
   homebrew.masApps = {
     Magnet = 441258766;

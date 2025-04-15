@@ -1,25 +1,18 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
-  common = pkgs.callPackage ./packages.nix {inherit pkgs;};
-  work_packages = [];
+{config, ...}: let
+  myLib = import ../lib.nix {inherit config;};
 in {
   imports = [
-    ./common.nix
     ./themes/rose-pine-moon.nix
   ];
   home.username = "m.hanberg";
   home.homeDirectory = "/Users/m.hanberg";
 
-  home.packages = common.packages ++ work_packages;
   programs.rummage = {
     settings.search_paths = [
-      "~/src/simplebet/"
-      "~/src/draftkings/"
-      "~/src/other/"
-      "~/src/motchvim"
+      (myLib.joinHome "/src/simplebet/")
+      (myLib.joinHome "/src/draftkings/")
+      (myLib.joinHome "/src/other/")
+      (myLib.joinHome "/src/motchvim")
     ];
   };
 
