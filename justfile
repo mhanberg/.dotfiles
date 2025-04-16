@@ -11,6 +11,15 @@ update-flake:
     git commit -m "nix: update flake.lock"
   fi
 
+update-lix version:
+  #!/usr/bin/env bash
+
+  sudo --preserve-env=PATH $(which nix) run \
+     --experimental-features "nix-command flakes" \
+     --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
+     'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/{{version}}' -- \
+     upgrade-nix \
+     --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
 
 # run home-manager switch
 hm:
