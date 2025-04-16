@@ -11,4 +11,5 @@
     "podman"
     "podman-compose"
   ];
+  nix.settings.trusted-users = ["m.hanberg"];
 }

@@ -6,7 +6,6 @@
       autoconf
       autogen
       automake
-      awscli2
       bat
       beam.packages.erlang_27.elixir_1_17
       beam.packages.erlang_27.erlang

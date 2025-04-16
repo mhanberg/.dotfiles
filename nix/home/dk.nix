@@ -1,4 +1,4 @@
-{...} @ args: let
+{pkgs, ...} @ args: let
   myLib = import ../lib.nix args;
 in {
   imports = [
@@ -6,6 +6,9 @@ in {
   ];
   home.username = "m.hanberg";
   home.homeDirectory = "/Users/m.hanberg";
+  home.packages = with pkgs; [
+    awscli2
+  ];
 
   programs.rummage = {
     settings.search_paths = [

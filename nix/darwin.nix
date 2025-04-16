@@ -1,18 +1,14 @@
 {self, ...}: {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
+  imports = [
+    ./darwin/brew.nix
+  ];
   environment.systemPackages = [];
 
-  # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
-  # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
   system.stateVersion = 4;
-
   ids.gids.nixbld = 350;
 
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
@@ -23,27 +19,6 @@
   system.defaults.dock.tilesize = 39;
 
   programs.zsh.enable = true;
-  homebrew.enable = true;
-  homebrew.onActivation.cleanup = "uninstall";
-  homebrew.taps = [
-    "homebrew/services"
-  ];
-
-  homebrew.casks = import ./darwin/casks.nix;
-  homebrew.brews = import ./darwin/brews.nix;
-
-  homebrew.masApps = {
-    Magnet = 441258766;
-    Dato = 1470584107;
-    Reeder = 1529448980;
-    Blackout = 1319884285;
-    Shareful = 1522267256;
-    Actions = 1586435171;
-    MenuBarStats = 714196447;
-    Things = 904280696;
-    Keynote = 409183694;
-    AmazonKindle = 302584613;
-  };
 
   nixpkgs.config.allowUnfree = true;
   # The platform the configuration will be used on.
