@@ -11,6 +11,8 @@ update-flake:
     git commit -m "nix: update flake.lock"
   fi
 
+# update Lix on non-NixOS linux systems
+[linux]
 update-lix version:
   #!/usr/bin/env bash
 
@@ -25,36 +27,23 @@ update-lix version:
 hm:
   home-manager switch --flake ~/.dotfiles -b backup
 
-# rebuild either nix-darwin or NixOS
+# rebuild nix darwin
+[macos]
 rebuild:
-  #!/usr/bin/env bash
-  set -euxo pipefail
-  case "{{ os() }}" in
-    macos)
-      darwin-rebuild switch --flake ~/.dotfiles;;
+  darwin-rebuild switch --flake ~/.dotfiles
 
-    linux)
-      sudo nixos-rebuild switch --flake ~/.dotfiles;;
+# rebuild nixos
+[linux]
+rebuild:
+  sudo nixos-rebuild switch --flake ~/.dotfiles
 
-     *)
-      echo "Unsupported operating system"
-      exit 1;;
-  esac
-
-# update homebrew
+# update and upgrade homebrew packages
+[macos]
 brew:
-  #!/usr/bin/env bash
-  set -euxo pipefail
-  case "{{ os() }}" in
-    macos)
-      brew update && brew upgrade;;
-
-     *)
-      echo "Unsupported operating system"
-      exit 1;;
-  esac
+  brew update && brew upgrade
 
 # fix shell files. this happens sometimes with nix-darwin
+[macos]
 fix-shell-files:
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -63,6 +52,7 @@ fix-shell-files:
   sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
   sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
 
+# update and upgrade apt packages
 [linux]
 update-apt:
   sudo apt update && sudo apt upgrade --yes
