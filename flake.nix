@@ -17,6 +17,7 @@
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {
@@ -25,6 +26,7 @@
     nixpkgs,
     home-manager,
     lix-module,
+    agenix,
     rummage,
   }: let
     mkDarwin = {extraDarwinModules ? {}}:
@@ -47,7 +49,13 @@
         modules =
           [
             ./nix/home/common.nix
-            {home.packages = [rummage.packages.${arch}.default];}
+            agenix.homeManagerModules.default
+            {
+              home.packages = [
+                rummage.packages.${arch}.default
+                agenix.packages.${arch}.default
+              ];
+            }
             ./nix/home/diy/gh-actions-language-server
             ./nix/home/modules/rummage.nix
           ]
