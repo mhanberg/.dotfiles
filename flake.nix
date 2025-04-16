@@ -61,55 +61,38 @@
           ]
           ++ extraModules;
       };
+    mkInit = {
+      system,
+      script ? ''
+        git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
+        nix run home-manager/master -- switch --flake ~/.dotfiles
+      '',
+    }: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      init = pkgs.writeShellApplication {
+        name = "init";
+        text = script;
+      };
+    in {
+      type = "app";
+      program = "${init}/bin/init";
+    };
   in {
-    apps."aarch64-darwin".default = let
-      pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-      init = pkgs.writeShellApplication {
-        name = "init";
-        runtimeInputs = with pkgs; [git curl bash];
-        text = ''
-          git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          nix run nix-darwin -- switch --flake ~/.dotfiles
-          nix run home-manager/master -- switch --flake ~/.dotfiles
-        '';
-      };
-    in {
-      type = "app";
-      program = "${init}/bin/init";
+    apps."aarch64-darwin".default = mkInit {
+      system = "aarch64-darwin";
+      script = ''
+        git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        nix run nix-darwin -- switch --flake ~/.dotfiles
+        nix run home-manager/master -- switch --flake ~/.dotfiles
+      '';
     };
-    apps."x86_64-linux".default = let
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      init = pkgs.writeShellApplication {
-        name = "init";
-        text = ''
-          git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
-          nix run home-manager/master -- switch --flake ~/.dotfiles
-        '';
-      };
-    in {
-      type = "app";
-      program = "${init}/bin/init";
-    };
-    apps."aarch64-linux".default = let
-      pkgs = nixpkgs.legacyPackages."aarch64-linux";
-      init = pkgs.writeShellApplication {
-        name = "init";
-        text = ''
-          git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
-          nix run home-manager/master -- switch --flake ~/.dotfiles
-        '';
-      };
-    in {
-      type = "app";
-      program = "${init}/bin/init";
-    };
+    apps."x86_64-linux".default = mkInit {system = "x86_64-linux";};
+    apps."aarch64-linux".default = mkInit {system = "aarch64-linux";};
+
     darwinConfigurations = {
       mhanberg-GQJNV7J4QY = mkDarwin {
         extraDarwinModules = [./nix/darwin/dk.nix];
-      };
-      alt-mhanberg = mkDarwin {
-        extraDarwinModules = [./nix/darwin/sb.nix];
       };
       mitchells-mini = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix];
@@ -121,15 +104,11 @@
 
     homeConfigurations = {
       "mitchell@nublar" = mkHm {
-        extraModules = [
-          ./nix/home/nublar.nix
-        ];
+        extraModules = [./nix/home/nublar.nix];
         arch = "x86_64-linux";
       };
       "ubuntu@ubuntu" = mkHm {
-        extraModules = [
-          ./nix/home/ubuntu.nix
-        ];
+        extraModules = [./nix/home/ubuntu.nix];
         arch = "aarch64-linux";
       };
       "mitchell@nixos" = mkHm {
@@ -138,12 +117,6 @@
       };
       "m.hanberg" = mkHm {
         extraModules = [./nix/home/dk.nix];
-        arch = "aarch64-darwin";
-      };
-      "mitchell@alt-mhanberg" = mkHm {
-        extraModules = [
-          ./nix/home/sb.nix
-        ];
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-mini" = mkHm {
