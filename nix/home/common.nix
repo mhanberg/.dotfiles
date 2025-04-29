@@ -231,7 +231,7 @@ in {
       notes = "zk edit --match=README --tag=startup";
     };
 
-    initExtra = ''
+    initContent = ''
       export EDITOR=nvim
 
       if uname -a | grep -i "darwin" > /dev/null; then
