@@ -158,6 +158,7 @@ in {
       gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       commit.gpgSign = true;
       rebase.updateRefs = true;
+      rerere.enabled = true;
     };
   };
 
