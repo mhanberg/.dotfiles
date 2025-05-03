@@ -39,7 +39,7 @@ rebuild:
 
 # update and upgrade homebrew packages
 [macos]
-brew:
+update-brew:
   brew update && brew upgrade
 
 # fix shell files. this happens sometimes with nix-darwin
@@ -56,3 +56,13 @@ fix-shell-files:
 [linux]
 update-apt:
   sudo apt update && sudo apt upgrade --yes
+
+# updates apt, flake, and runs home-manager
+[linux]
+update: update-apt update-flake hm
+
+# updates brew, flake, and runs home-manager
+[macos]
+update: update-brew update-flake hm
+  
+
