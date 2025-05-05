@@ -13,6 +13,21 @@ in {
     ];
   };
   programs.ghostty.settings.font-size = 14;
+  services.syncthing = {
+    enable = true;
+    settings = {
+      options = {
+        globalAnnounceServers = [
+          "https://syncthing-discovery.motch.systems"
+        ];
+      };
+      folders = {
+        "${config.home.homeDirectory}/shared/notes" = {
+          id = "notes";
+        };
+      };
+    };
+  };
   programs.ssh.extraConfig = ''
     Host * "test -z $SSH_TTY"
       IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
