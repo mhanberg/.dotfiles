@@ -57,7 +57,7 @@
               ];
             }
             ./nix/home/diy/gh-actions-language-server
-            ./nix/home/modules/rummage.nix
+            rummage.homeManagerModules.default
           ]
           ++ extraModules;
       };
