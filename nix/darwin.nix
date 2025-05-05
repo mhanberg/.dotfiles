@@ -9,7 +9,6 @@
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
   system.stateVersion = 4;
-  ids.gids.nixbld = 350;
 
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
