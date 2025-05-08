@@ -14,13 +14,12 @@ in {
 
   home.packages = with pkgs; [
     librewolf
-
     (writeShellApplication {
       name = "export-aws-keys";
-      runtimeInputs = [pkgs.awscli2];
+      runtimeInputs = [awscli2];
       text = ''
         main() {
-          cmd="aws sts assume-role $(cat "${config.age.secrets.export-aws-keys.path}")"
+          cmd="AWS_PROFILE=dag-default aws sts assume-role $(cat "${config.age.secrets.export-aws-keys.path}")"
           creds="$(eval "$cmd")"
 
           access_key_id=$(echo "$creds" | jq -r .Credentials.AccessKeyId)
@@ -61,11 +60,9 @@ in {
 
   programs.zsh = {
     sessionVariables = {
-      AWS_PROFILE = "default";
-    };
-    shellAliases = {
-      remove-aws-credentials = "rm ~/Downloads/credentials";
-      cp-aws-credentials = "cp ~/Downloads/credentials ~/.aws/config";
+      AWS_PROFILE = "dag-default";
+      PATH = "$PATH:${config.home.homeDirectory}/.dotnet/tools";
+      DOTNET_ROOT = "/opt/homebrew/Cellar/dotnet@8/8.0.15/libexec/";
     };
   };
 
