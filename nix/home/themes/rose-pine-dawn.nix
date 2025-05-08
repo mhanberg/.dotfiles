@@ -1,20 +1,5 @@
-{pkgs, ...}: {
-  programs.ghostty.settings.theme = "rose-pine-dawn";
-  home.file = {
-    ".motchvim-theme".text = "rose-pine-dawn";
-  };
-  programs.bat.themes = {
-    rose-pine-dawn = {
-      src = pkgs.fetchFromGitHub {
-        owner = "rose-pine";
-        repo = "tm-theme";
-        rev = "c4235f9a65fd180ac0f5e4396e3a86e21a0884ec";
-        sha256 = "sha256-jji8WOKDkzAq8K+uSZAziMULI8Kh7e96cBRimGvIYKY=";
-      };
-      file = "dist/themes/rose-pine-dawn.tmTheme";
-    };
-  };
-  programs.fzf.colors = {
+{pkgs, ...}: let
+  colors = {
     "fg" = "#797593";
     "bg" = "#faf4ed";
     "hl" = "#d7827e";
@@ -30,6 +15,25 @@
     "marker" = "#b4637a";
     "prompt" = "#797593";
   };
+in {
+  imports = [
+    (import ../modules/fzf.nix {inherit colors;})
+  ];
+  programs.ghostty.settings.theme = "rose-pine-dawn";
+  home.file = {
+    ".motchvim-theme".text = "rose-pine-dawn";
+  };
+  programs.bat.themes = {
+    rose-pine-dawn = {
+      src = pkgs.fetchFromGitHub {
+        owner = "rose-pine";
+        repo = "tm-theme";
+        rev = "c4cab0c431f55a3c4f9897407b7bdad363bbb862";
+        sha256 = "sha256-maQp4QTJOlK24eid7mUsoS7kc8P0gerKcbvNaxO8Mic=";
+      };
+      file = "dist/themes/rose-pine-dawn.tmTheme";
+    };
+  };
   programs.tmux = {
     plugins = with pkgs.tmuxPlugins; [
       {
@@ -43,5 +47,9 @@
     ];
   };
   programs.bat.config.theme = "rose-pine-dawn";
-  programs.git.delta.options.syntax-theme = "rose-pine-dawn";
+  programs.git.delta.options = {
+    syntax-theme = "rose-pine-dawn";
+    light = true;
+  };
+  programs.lazygit.settings.git.paging.pager = "delta --paging=never --light";
 }

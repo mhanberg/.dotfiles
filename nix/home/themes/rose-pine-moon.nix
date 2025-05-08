@@ -1,20 +1,5 @@
-{pkgs, ...}: {
-  programs.ghostty.settings.theme = "rose-pine-moon";
-  home.file = {
-    ".motchvim-theme".text = "rose-pine-moon";
-  };
-  programs.bat.themes = {
-    rose-pine-moon = {
-      src = pkgs.fetchFromGitHub {
-        owner = "rose-pine";
-        repo = "tm-theme"; # Bat uses sublime syntax for its themes
-        rev = "c4235f9a65fd180ac0f5e4396e3a86e21a0884ec";
-        sha256 = "sha256-jji8WOKDkzAq8K+uSZAziMULI8Kh7e96cBRimGvIYKY=";
-      };
-      file = "dist/themes/rose-pine-moon.tmTheme";
-    };
-  };
-  programs.fzf.colors = {
+{pkgs, ...}: let
+  colors = {
     "fg" = "#908caa";
     "bg" = "#232136";
     "hl" = "#ea9a97";
@@ -30,6 +15,26 @@
     "marker" = "#eb6f92";
     "prompt" = "#908caa";
   };
+in {
+  imports = [
+    (import ../modules/fzf.nix {inherit colors;})
+  ];
+  programs.ghostty.settings.theme = "rose-pine-moon";
+  home.file = {
+    ".motchvim-theme".text = "rose-pine-moon";
+  };
+
+  programs.bat.themes = {
+    rose-pine-moon = {
+      src = pkgs.fetchFromGitHub {
+        owner = "rose-pine";
+        repo = "tm-theme"; # Bat uses sublime syntax for its themes
+        rev = "c4cab0c431f55a3c4f9897407b7bdad363bbb862";
+        sha256 = "sha256-maQp4QTJOlK24eid7mUsoS7kc8P0gerKcbvNaxO8Mic=";
+      };
+      file = "dist/themes/rose-pine-moon.tmTheme";
+    };
+  };
   programs.tmux = {
     plugins = with pkgs.tmuxPlugins; [
       {
@@ -43,5 +48,9 @@
     ];
   };
   programs.bat.config.theme = "rose-pine-moon";
-  programs.git.delta.options.syntax-theme = "rose-pine-moon";
+  programs.git.delta.options = {
+    syntax-theme = "rose-pine-moon";
+    dark = true;
+  };
+  programs.lazygit.settings.git.paging.pager = "delta --paging=never --dark";
 }

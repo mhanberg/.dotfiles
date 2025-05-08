@@ -22,7 +22,6 @@
       fd
       figlet
       fswatch
-      fzf
       gawk
       gh
       git
