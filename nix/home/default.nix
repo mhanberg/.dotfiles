@@ -1,4 +1,8 @@
-{pkgs, ...} @ args: let
+{
+  pkgs,
+  lib,
+  ...
+} @ args: let
   myLib = import ../lib.nix args;
 in {
   nixpkgs.config.allowUnfree = true;
@@ -26,6 +30,34 @@ in {
     ".config".recursive = true;
     ".gitignore_global".source = ../../gitignore_global;
     ".xterm-256color.terminfo".source = ../../xterm-256color.terminfo;
+  };
+
+  home.activation = {
+    neovim = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      main() {
+        instances=$(${pkgs.neovim-remote}/bin/nvr --serverlist)
+        theme="$(cat $HOME/.motchvim-theme)"
+
+        for inst in $instances; do
+          # fzf-lua starts remote nvim instances that don't need to be killed
+          if echo "$inst" | grep -i "fzf-lua" >/dev/null; then
+            echo "==> Don't care about $inst"
+          else
+            echo "==> ${pkgs.neovim-remote}/bin/nvr --servername $inst --remote-send ':colorscheme $theme<cr>' --nostart"
+            ${pkgs.neovim-remote}/bin/nvr --servername "$inst" --remote-send ":colorscheme $theme<cr>" --nostart
+          fi
+        done
+      }
+
+      run main
+    '';
+    tmux = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      main() {
+        run ${pkgs.tmux}/bin/tmux source-file $HOME/.config/tmux/tmux.conf
+      }
+
+      run main
+    '';
   };
 
   xdg.enable = true;
@@ -414,7 +446,7 @@ in {
       git = {
         paging = {
           colorArg = "always";
-          pager = "delta --paging=never";
+          # pager = "delta --paging=never";
           useConfig = false;
         };
         commit = {

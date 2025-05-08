@@ -48,7 +48,7 @@
         pkgs = nixpkgs.legacyPackages.${arch};
         modules =
           [
-            ./nix/home/common.nix
+            ./nix/home
             agenix.homeManagerModules.default
             {
               home.packages = [
