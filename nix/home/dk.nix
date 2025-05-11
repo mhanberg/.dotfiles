@@ -12,8 +12,10 @@ in {
   home.homeDirectory = "/Users/m.hanberg";
   age.secrets.export-aws-keys.file = ./export-aws-keys.age;
 
-  home.packages = [
-    (pkgs.writeShellApplication {
+  home.packages = with pkgs; [
+    librewolf
+
+    (writeShellApplication {
       name = "export-aws-keys";
       runtimeInputs = [pkgs.awscli2];
       text = ''
