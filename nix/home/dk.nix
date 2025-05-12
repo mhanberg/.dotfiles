@@ -36,6 +36,20 @@ in {
         main "$@"
       '';
     })
+    (writeShellApplication {
+      name = "unset-aws-vars";
+      text = ''
+        main() {
+          echo "
+        unset AWS_ACCESS_KEY_ID
+        unset AWS_SECRET_ACCESS_KEY
+        unset AWS_SESSION_TOKEN
+        "
+        }
+
+        main "$@"
+      '';
+    })
   ];
 
   programs.rummage = {
