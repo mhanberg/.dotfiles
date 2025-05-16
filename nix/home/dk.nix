@@ -13,9 +13,8 @@ in {
   age.secrets.export-aws-keys.file = ./export-aws-keys.age;
 
   home.packages = with pkgs; [
-    librewolf
     (writeShellApplication {
-      name = "export-aws-keys";
+      name = "export-aws-vars";
       runtimeInputs = [awscli2];
       text = ''
         main() {
@@ -77,6 +76,10 @@ in {
       AWS_PROFILE = "dag-default";
       PATH = "$PATH:${config.home.homeDirectory}/.dotnet/tools";
       DOTNET_ROOT = "/opt/homebrew/Cellar/dotnet@8/8.0.15/libexec/";
+    };
+    shellAliases = {
+      uav = "eval $(unset-aws-vars)";
+      eav = "eval $(export-aws-vars)";
     };
   };
 

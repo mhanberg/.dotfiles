@@ -1,15 +1,8 @@
-{
-  config,
-  pkgs,
-  ...
-} @ args: let
+{config, ...} @ args: let
   myLib = import ../lib.nix args;
 in {
   home.username = "mitchell";
   home.homeDirectory = "/Users/mitchell";
-  home.packages = with pkgs; [
-    librewolf
-  ];
   imports = [
     ./themes/rose-pine.nix
     ./services/syncthing.nix
