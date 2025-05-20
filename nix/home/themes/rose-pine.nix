@@ -51,5 +51,5 @@ in {
     syntax-theme = "rose-pine";
     dark = true;
   };
-  programs.lazygit.settings.git.paging.pager = "delta --paging=never --light";
+  programs.lazygit.settings.git.paging.pager = "delta --paging=never --dark";
 }
