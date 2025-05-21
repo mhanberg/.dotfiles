@@ -1,4 +1,5 @@
 {...}: {
+  system.primaryUser = "m.hanberg";
   homebrew.casks = [
     "cleanshot"
     "aws-vpn-client"

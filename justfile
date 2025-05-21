@@ -1,3 +1,5 @@
+default:
+  @just --list
 # update your flake.lock
 update-flake:
   #!/usr/bin/env bash
