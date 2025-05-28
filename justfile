@@ -32,7 +32,7 @@ hm:
 # rebuild nix darwin
 [macos]
 rebuild:
-  darwin-rebuild switch --flake ~/.dotfiles
+  sudo darwin-rebuild switch --flake ~/.dotfiles
 
 # rebuild nixos
 [linux]
