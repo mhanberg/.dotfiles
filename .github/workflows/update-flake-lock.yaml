@@ -1,0 +1,28 @@
+name: Update flake.lock
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  update-flake:
+    runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Determinate Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Update flake.lock
+        run: |
+          nix flake update
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(nix): update flake.lock [skip ci]"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
