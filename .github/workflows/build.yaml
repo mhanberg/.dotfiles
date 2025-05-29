@@ -24,7 +24,7 @@ jobs:
           name: mhanberg
           # If you chose API tokens for write access OR if you have a private cache
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix run home-manager/master -- build --flake ".#homeConfigurations.${{ matrix.host }}"
+      - run: nix run home-manager/master -- build --flake ".#${{ matrix.host }}"
 
   nix-darwin:
     runs-on: macos-latest
@@ -42,4 +42,4 @@ jobs:
           name: mhanberg
           # If you chose API tokens for write access OR if you have a private cache
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix run nix-darwin -- build --flake ".#darwinConfigurations.${{ matrix.host }}"
+      - run: nix run nix-darwin -- build --flake ".#${{ matrix.host }}"
