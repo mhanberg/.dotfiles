@@ -23,7 +23,7 @@ nix run github:mhanberg/.dotfiles
 You can see the current tasks by running `just --list`
 
 ```bash
- just --list
+$ just --list
 Available recipes:
     default
     hm                 # run home-manager switch
