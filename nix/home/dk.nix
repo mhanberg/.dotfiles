@@ -7,6 +7,7 @@
 in {
   imports = [
     ./themes/rose-pine-moon.nix
+    ./services/syncthing.nix
   ];
   home.username = "m.hanberg";
   home.homeDirectory = "/Users/m.hanberg";
@@ -58,17 +59,6 @@ in {
       (myLib.joinHome "/src/other/")
       (myLib.joinHome "/src/motchvim")
     ];
-  };
-
-  services.syncthing = {
-    enable = true;
-    settings = {
-      options = {
-        globalAnnounceServers = [
-          "https://syncthing-discovery.motch.systems"
-        ];
-      };
-    };
   };
 
   programs.zsh = {
