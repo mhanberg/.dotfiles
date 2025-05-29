@@ -1,4 +1,5 @@
 {...}: {
+  system.primaryUser = "mitchell";
   homebrew.casks = [
     "cleanshot"
     "autodesk-fusion"
