@@ -20,6 +20,15 @@
     agenix.url = "github:ryantm/agenix";
   };
 
+  nixConfig = {
+    extra-substituters = [
+      "https://mhanberg.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "mhanberg.cachix.org-1:79NEcMjgy/pHeWQA5E+hsMA1QFCyt5SRDXA7EGjK8aY="
+    ];
+  };
+
   outputs = {
     self,
     nix-darwin,
