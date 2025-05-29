@@ -1,4 +1,4 @@
-![Open Graph Image](https://res.cloudinary.com/mhanberg/image/upload/v1590506591/dotfiles-social.png)
+# .dotfiles
 
 These dotfiles are now managed using Nix on macOS and Linux.
 
@@ -6,10 +6,10 @@ macOS utilizes nix-darwin in order to manage homebrew dependencies, and both mac
 
 ## Getting Started
 
-Install Nix
+Install [Lix](https://lix.systems/), an implementation of Nix.
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 ```
 
 Run the installer
@@ -25,9 +25,11 @@ You can see the current tasks by running `just --list`
 ```bash
  just --list
 Available recipes:
-    brew            # update homebrew
-    fix-shell-files # fix shell files. this happens sometimes with nix-darwin
-    flake-update    # update your flake.lock
-    hm              # run home-manager switch
-    rebuild         # rebuild either nix-darwin or NixOS
+    default
+    hm                 # run home-manager switch
+    rebuild            # rebuild nixos
+    update             # updates apt, flake, and runs home-manager
+    update-apt         # update and upgrade apt packages
+    update-flake       # update your flake.lock
+    update-lix version # update Lix on non-NixOS linux systems
 ```
