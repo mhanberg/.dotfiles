@@ -25,7 +25,7 @@
       "https://mhanberg.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "mhanberg.cachix.org-1:79NEcMjgy/pHeWQA5E+hsMA1QFCyt5SRDXA7EGjK8aY="
+      "mhanberg.cachix.org-1:tpHVw70kbGnO5mGv4rA3pjxpqeEiP/vWfJT4tVaK85o="
     ];
   };
 
