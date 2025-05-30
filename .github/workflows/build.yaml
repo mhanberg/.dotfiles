@@ -30,7 +30,7 @@ jobs:
           # If you chose API tokens for write access OR if you have a private cache
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           useDaemon: false
-          cachixArgs: "--versbose"
+          cachixArgs: "--verbose"
       - run: nix run home-manager/master -- build --flake ".#${{ matrix.host }}"
 
   nix-darwin:
@@ -54,5 +54,5 @@ jobs:
           # If you chose API tokens for write access OR if you have a private cache
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           useDaemon: false
-          cachixArgs: "--versbose"
+          cachixArgs: "--verbose"
       - run: sudo nix run nix-darwin -- build --flake ".#${{ matrix.host }}"
