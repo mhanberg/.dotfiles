@@ -40,10 +40,8 @@ in {
 
         for inst in $instances; do
           # fzf-lua starts remote nvim instances that don't need to be killed
-          if echo "$inst" | grep -i "fzf-lua" >/dev/null; then
-            echo "==> Don't care about $inst"
-          else
-            echo "==> ${pkgs.neovim-remote}/bin/nvr --servername $inst --remote-send ':colorscheme $theme<cr>' --nostart"
+          if [[ ! "$inst" =~ "fzf" ]]; then
+            # echo "==> ${pkgs.neovim-remote}/bin/nvr --servername $inst --remote-send ':colorscheme $theme<cr>' --nostart"
             ${pkgs.neovim-remote}/bin/nvr --servername "$inst" --remote-send ":colorscheme $theme<cr>" --nostart
           fi
         done
