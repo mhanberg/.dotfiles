@@ -5,6 +5,7 @@
   environment.systemPackages = [];
 
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.accept-flake-config = true;
 
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
