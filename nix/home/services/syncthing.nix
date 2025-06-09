@@ -14,6 +14,11 @@ in {
           name = "mitchells-mini";
           autoAcceptFolders = true;
         };
+        "mitchells-mini.local" = {
+          id = "KHWIZFK-Z3RTI2H-QINY5TP-SBITUWH-7FL3IAI-4LSKT7M-VJ44WDM-VHJQAAI";
+          name = "mitchells-air";
+          autoAcceptFolders = true;
+        };
         nublar = {
           id = "TITLNRM-IXYBGRC-5LXSH3T-AIMZAK5-JP3GNLD-BH66LFN-RV55GHJ-XE5ZGQM";
           autoAcceptFolders = true;
