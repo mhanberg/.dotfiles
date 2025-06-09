@@ -9,10 +9,6 @@
     "elgato-stream-deck"
   ];
   homebrew.brews = [
-    {
-      name = "dotnet@8";
-      link = true;
-    }
     "podman"
     "podman-compose"
   ];
