@@ -10,7 +10,7 @@ update-flake:
   else
     echo "committing flake.lock"
     git add flake.lock
-    git commit -m "nix: update flake.lock"
+    git commit -m "chore(nix): update flake.lock"
   fi
 
 # update Lix on non-NixOS linux systems
