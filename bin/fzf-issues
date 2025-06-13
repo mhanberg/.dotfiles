@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-gh issue list --limit 10000 \
-  | fzf \
+gh issue list --limit 10000 |
+  fzf \
     --delimiter "\t" \
     --reverse \
     --preview="GH_FORCE_TTY=true CLICOLOR_FORCE=1 gh issue view {1}" \
-    --bind="enter:become(gh issue view -w {1}),ctrl-t:reload(gh issue list --state=all --limit=10000)"
+    --bind="enter:become(gh issue view -w {1})" \
+    --bind="ctrl-t:reload(gh issue list --state=all --limit=10000)"
