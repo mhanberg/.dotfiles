@@ -56,6 +56,9 @@ in {
       (mkWorkConfig "~/src/draftkings/")
       (mkWorkConfig "~/src/simplebet/")
     ];
+    aliases = {
+      proddiff = "log --pretty=format:\"%h - %an: %s\"";
+    };
     extraConfig = {
       gpg.format = "ssh";
       commit.gpgSign = true;
