@@ -66,5 +66,8 @@ update: update-apt update-flake hm
 # updates brew, flake, and runs home-manager
 [macos]
 update: update-brew update-flake hm
+
+news:
+  home-manager news --flake .
   
 
