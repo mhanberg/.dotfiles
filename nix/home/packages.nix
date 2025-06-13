@@ -27,6 +27,7 @@
       gh
       git
       git-lfs
+      harper
       hyperfine
       jq
       just
