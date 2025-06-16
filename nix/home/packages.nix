@@ -8,8 +8,8 @@
       autogen
       automake
       bat
-      beam.packages.erlang_27.elixir_1_17
-      beam.packages.erlang_27.erlang
+      beam.packages.erlang_28.elixir_1_18
+      beam.packages.erlang_28.erlang
       btop
       cachix
       chromedriver
