@@ -18,6 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
+    nixpkgs-update.url = "github:ryantm/nixpkgs-update";
   };
 
   nixConfig = {
@@ -37,6 +38,7 @@
     lix-module,
     agenix,
     rummage,
+    nixpkgs-update,
   }: let
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
@@ -113,7 +115,14 @@
 
     homeConfigurations = {
       "mitchell@nublar" = mkHm {
-        extraModules = [./nix/home/nublar.nix];
+        extraModules = [
+          ./nix/home/nublar.nix
+          {
+            home.packages = [
+              nixpkgs-update.packages.x86_64-linux.default
+            ];
+          }
+        ];
         arch = "x86_64-linux";
       };
       "ubuntu@ubuntu" = mkHm {
