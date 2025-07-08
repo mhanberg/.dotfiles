@@ -271,6 +271,7 @@ in {
     };
 
     initContent = ''
+      setopt ignore_eof
       export EDITOR=nvim
 
       if uname -a | grep -i "darwin" > /dev/null; then
