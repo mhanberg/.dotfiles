@@ -430,7 +430,6 @@ in {
     package = null;
     installBatSyntax = false;
     settings = {
-      macos-icon = "retro";
       shell-integration-features = "no-cursor";
       font-family = "JetBrainsMono Nerd Font Mono";
       font-thicken = false;
