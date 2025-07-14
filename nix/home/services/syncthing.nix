@@ -20,7 +20,7 @@ in {
           autoAcceptFolders = true;
         };
         nublar = {
-          id = "TITLNRM-IXYBGRC-5LXSH3T-AIMZAK5-JP3GNLD-BH66LFN-RV55GHJ-XE5ZGQM";
+          id = "UKBJHDO-YOFWJCX-UMXTEOS-ZBFBDNS-KXVIACN-L2ULD2N-PEJUSSA-E2VI7AM";
           autoAcceptFolders = true;
         };
         "m.hanberg-GQJNV7J4QY" = {

@@ -40,6 +40,16 @@
     rummage,
     nixpkgs-update,
   }: let
+    mkNixos = {extraNixosModules ? {}}:
+      nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit self;};
+        modules =
+          [
+            lix-module.nixosModules.default
+          ]
+          ++ extraNixosModules;
+      };
     mkDarwin = {extraDarwinModules ? {}}:
       nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
@@ -100,6 +110,12 @@
     };
     apps."x86_64-linux".default = mkInit {system = "x86_64-linux";};
     apps."aarch64-linux".default = mkInit {system = "aarch64-linux";};
+
+    nixosConfigurations = {
+      nublar = mkNixos {
+        extraNixosModules = [./nix/nixos/nublar];
+      };
+    };
 
     darwinConfigurations = {
       mhanberg-GQJNV7J4QY = mkDarwin {

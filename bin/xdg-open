@@ -1,17 +1,33 @@
 #!/usr/bin/env bash
 
+path_append() {
+  path_remove "$1"
+  export PATH="$PATH:$1"
+}
+path_prepend() {
+  path_remove "$1"
+  export PATH="$1:$PATH"
+}
+path_remove() {
+  # shellcheck disable=SC2155
+  # shellcheck disable=SC2086
+  export PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//')
+}
+
 function main() {
-	local ip
-	local uri
+  local ip
+  local uri
 
-	uri="$1"
-	if [[ -n "$SSH_CONNECTION" ]]; then
-		ip="$(echo "$SSH_CONNECTION" | awk '{ print $1 }')"
+  uri="$1"
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    ip="$(echo "$SSH_CONNECTION" | awk '{ print $1 }')"
 
-		ssh "mitchell@$ip" open "$uri"
-	else
-		xdg-open "$uri"
-	fi
+    # shellcheck disable=SC2029
+    ssh "mitchell@$ip" open "$uri"
+  else
+    path_remove "/home/mitchell/.bin"
+    xdg-open "$uri"
+  fi
 }
 
 main "$@"

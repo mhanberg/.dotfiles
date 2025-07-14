@@ -54,15 +54,6 @@ fix-shell-files:
   sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
   sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
 
-# update and upgrade apt packages
-[linux]
-update-apt:
-  sudo apt update && sudo apt upgrade --yes
-
-# updates apt, flake, and runs home-manager
-[linux]
-update: update-apt update-flake hm
-
 # updates brew, flake, and runs home-manager
 [macos]
 update: update-brew update-flake hm

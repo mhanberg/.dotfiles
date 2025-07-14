@@ -1,8 +1,22 @@
-{...} @ args: let
+{pkgs, ...} @ args: let
   myLib = import ../lib.nix args;
 in {
   home.username = "mitchell";
   home.homeDirectory = "/home/mitchell";
+
+  home.packages = with pkgs; [
+    _1password-cli
+    _1password-gui
+    ghostty
+    nerd-fonts.jetbrains-mono
+    zeal
+    albert
+    gnome-boxes
+    qemu_kvm
+    libvirt
+    virt-manager
+  ];
+
   imports = [
     ./themes/rose-pine.nix
     ./services/syncthing.nix
@@ -12,6 +26,8 @@ in {
     guiAddress = "0.0.0.0:8384";
   };
 
+  programs.zsh.enable = true;
+
   programs.ghostty.settings.font-size = 11;
 
   programs.rummage = {
@@ -20,13 +36,23 @@ in {
     ];
   };
 
+  programs.ssh.extraConfig = ''
+    Host *
+      IdentityAgent ~/.1password/agent.sock
+  '';
+
   programs.git = {
     signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
 
     extraConfig.gpg = {
-      ssh.program = "/opt/1Password/op-ssh-sign";
+      ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
       gpg.format = "ssh";
       commit.gpgSign = true;
+    };
+  };
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-key-theme = "Default";
     };
   };
 }

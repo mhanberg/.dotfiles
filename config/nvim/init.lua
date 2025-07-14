@@ -35,7 +35,7 @@ end
 
 require("lazy").setup {
   spec = {
-    { dev = true, "mhanberg/motchvim", import = "motchvim.plugins" },
+    { "mhanberg/motchvim", import = "motchvim.plugins" },
   },
   concurrency = 30,
   dev = { path = "~/src" },
