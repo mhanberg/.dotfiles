@@ -35,7 +35,7 @@
       lua5_1
       luarocks
       lua-language-server
-      mise
+      # mise
       neovim
       neovim-remote
       nil

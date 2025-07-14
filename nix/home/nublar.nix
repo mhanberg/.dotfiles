@@ -7,14 +7,15 @@ in {
   home.packages = with pkgs; [
     _1password-cli
     _1password-gui
-    ghostty
-    nerd-fonts.jetbrains-mono
-    zeal
     albert
+    flameshot
+    ghostty
     gnome-boxes
-    qemu_kvm
     libvirt
+    nerd-fonts.jetbrains-mono
+    qemu_kvm
     virt-manager
+    zeal
   ];
 
   imports = [
