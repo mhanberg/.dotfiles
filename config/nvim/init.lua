@@ -33,9 +33,13 @@ if vim.fn.has("mac") and vim.env.TMUX ~= "" and vim.fn.executable("tmux") and vi
   }
 end
 
+local motchvim_exists = vim.fn.isdirectory(vim.fn.expand("~/src/motchvim/")) == 1
+
+vim.print(motchvim_exists)
+
 require("lazy").setup {
   spec = {
-    { "mhanberg/motchvim", import = "motchvim.plugins" },
+    { dev = motchvim_exists, "mhanberg/motchvim", import = "motchvim.plugins" },
   },
   concurrency = 30,
   dev = { path = "~/src" },
