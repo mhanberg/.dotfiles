@@ -4,6 +4,10 @@ gh issue list --limit 10000 |
   fzf \
     --delimiter "\t" \
     --reverse \
+    --footer-label="Help" \
+    --footer-label-pos=3 \
+    --footer-border \
+    --footer=$'[ENTER] Open in GitHub\n[CTRL-T] Toggle open/all' \
     --preview="GH_FORCE_TTY=true CLICOLOR_FORCE=1 gh issue view {1}" \
     --bind="enter:become(gh issue view -w {1})" \
     --bind="ctrl-t:reload(gh issue list --state=all --limit=10000)"
