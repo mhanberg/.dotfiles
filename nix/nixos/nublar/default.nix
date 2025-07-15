@@ -130,6 +130,19 @@
     # ];
   };
 
+  age.secrets = {
+    smb-secrets.file = ./secrets/smb-secrets.age;
+  };
+
+  fileSystems."/mnt/synology/Media" = {
+    device = "//motch-ds-423/Media";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+    in ["${automount_opts},credentials=${config.age.secrets.smb-secrets.path},uid=1000,gid=100,noperm"];
+  };
+
   programs.zsh.enable = true;
 
   services.tailscale.enable = true;

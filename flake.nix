@@ -47,6 +47,7 @@
         modules =
           [
             lix-module.nixosModules.default
+            agenix.nixosModules.default
           ]
           ++ extraNixosModules;
       };
