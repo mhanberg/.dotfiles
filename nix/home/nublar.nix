@@ -5,12 +5,16 @@ in {
   home.homeDirectory = "/home/mitchell";
 
   home.packages = with pkgs; [
+    (flameshot.override {enableWlrSupport = true;})
     _1password-cli
     _1password-gui
     albert
-    flameshot
+    bambu-studio
+    discord
     ghostty
     gnome-boxes
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.vitals
     libvirt
     nerd-fonts.jetbrains-mono
     qemu_kvm
@@ -51,9 +55,20 @@ in {
       commit.gpgSign = true;
     };
   };
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      gtk-key-theme = "Default";
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        gtk-key-theme = "Default";
+      };
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          dash-to-panel.extensionUuid
+          vitals.extensionUuid
+        ];
+        disabled-extensions = [];
+      };
     };
   };
 }

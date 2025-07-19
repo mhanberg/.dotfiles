@@ -123,7 +123,7 @@
   users.users.mitchell = {
     isNormalUser = true;
     description = "Mitchell Hanberg";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "libvirtd"];
     shell = pkgs.zsh;
     # packages = with pkgs; [
     #   #  thunderbird
@@ -155,10 +155,10 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   #  wget
-  # ];
+
+  environment.systemPackages = with pkgs; [
+    gnome-tweaks
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
