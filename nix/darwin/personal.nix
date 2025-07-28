@@ -10,7 +10,6 @@
     "bambu-studio"
     "discord"
     "element"
-    "elgato-control-center"
     "elgato-stream-deck"
     "farrago"
     "fission"
