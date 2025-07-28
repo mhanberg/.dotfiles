@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+gh release list --json name,tagName --template \
+  '{{tablerow "NAME" "\x01 " "TAG"}}{{range .}}{{tablerow .name "\x01 " .tagName}}{{end}}' |
+  fzf \
+    --delimiter "\x01 " \
+    --reverse \
+    --header-lines=1 \
+    --footer-label="Help" \
+    --footer-label-pos=3 \
+    --footer-border \
+    --footer=$'[ENTER] Open in GitHub' \
+    --preview="GH_FORCE_TTY=true CLICOLOR_FORCE=1 gh release view {2}" \
+    --bind="enter:become(gh release view -w {2})"
