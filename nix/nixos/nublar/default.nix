@@ -89,6 +89,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -174,6 +175,9 @@
   services.openssh = {
     enable = true;
     openFirewall = true;
+    settings = {
+      AllowAgentForwarding = true;
+    };
   };
 
   # This value determines the NixOS release from which the default

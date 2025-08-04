@@ -13,10 +13,6 @@
     rummage = {
       url = "github:mhanberg/rummage";
     };
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     agenix.url = "github:ryantm/agenix";
     nixpkgs-update.url = "github:ryantm/nixpkgs-update";
   };
@@ -35,7 +31,6 @@
     nix-darwin,
     nixpkgs,
     home-manager,
-    lix-module,
     agenix,
     rummage,
     nixpkgs-update,
@@ -46,7 +41,6 @@
         specialArgs = {inherit self;};
         modules =
           [
-            lix-module.nixosModules.default
             agenix.nixosModules.default
           ]
           ++ extraNixosModules;
@@ -57,7 +51,6 @@
         specialArgs = {inherit self;};
         modules =
           [
-            lix-module.nixosModules.default
             ./nix/darwin.nix
           ]
           ++ extraDarwinModules;

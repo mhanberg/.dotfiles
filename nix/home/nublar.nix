@@ -18,6 +18,7 @@ in {
     libvirt
     nerd-fonts.jetbrains-mono
     qemu_kvm
+    thunderbird
     virt-manager
     zeal
   ];
@@ -42,7 +43,7 @@ in {
   };
 
   programs.ssh.extraConfig = ''
-    Host *
+    Host * "test -z $SSH_TTY"
       IdentityAgent ~/.1password/agent.sock
   '';
 
@@ -68,6 +69,9 @@ in {
           vitals.extensionUuid
         ];
         disabled-extensions = [];
+      };
+      "org/gnome/settings-daemon/plugins/power" = {
+        sleep-inactive-ac-type = "nothing";
       };
     };
   };
