@@ -7,6 +7,16 @@
   nix.settings.experimental-features = "nix-command flakes";
   nix.settings.accept-flake-config = true;
 
+  nix.gc = {
+    automatic = true;
+    interval = {
+      Weekday = 1;
+      Hour = 0;
+      Minute = 0;
+    };
+    options = "--delete-older-than 8d";
+  };
+
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
   system.stateVersion = 4;
