@@ -1,8 +1,17 @@
-{config, ...} @ args: let
+{
+  config,
+  pkgs,
+  ...
+} @ args: let
   myLib = import ../lib.nix args;
 in {
   home.username = "mitchell";
   home.homeDirectory = "/Users/mitchell";
+
+  home.packages = with pkgs; [
+    openscad-lsp
+    openscad-unstable
+  ];
   imports = [
     ./themes/rose-pine.nix
     ./services/syncthing.nix
