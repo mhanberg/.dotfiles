@@ -9,7 +9,6 @@ in {
     _1password-cli
     _1password-gui
     albert
-    bambu-studio
     discord
     ghostty
     gnome-boxes
