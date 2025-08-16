@@ -171,6 +171,23 @@ in {
           TERM = "xterm-256color";
         };
       };
+      nublar = {
+        hostname = "nublar";
+        user = "mitchell";
+
+        localForwards = [
+          {
+            bind.port = 4999;
+            host.address = "localhost";
+            host.port = 4999;
+          }
+          {
+            bind.port = 8000;
+            host.address = "localhost";
+            host.port = 8000;
+          }
+        ];
+      };
     };
   };
 
@@ -239,7 +256,7 @@ in {
 
       dev = "tmux-open-project";
 
-      nublar = "ssh -q mitchell@nublar -L 4999:localhost:4999 -L 8000:localhost:8000";
+      # nublar = "ssh -q mitchell@nublar -L 4999:localhost:4999 -L 8000:localhost:8000";
       tmux = "direnv exec / tmux";
       blog = "cd ~/Development/blog";
       em = "mix ecto.migrate";
