@@ -20,6 +20,8 @@
     "slack"
     "wacom-tablet"
     "zoom"
+
+    "protonvpn"
   ];
   nix.settings.trusted-users = ["mitchell"];
 }

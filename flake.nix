@@ -149,7 +149,7 @@
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-air" = mkHm {
-        extraModules = [./nix/home/personal.nix];
+        extraModules = [./nix/home/personal.nix ./nix/home/macbook-air.nix];
         arch = "aarch64-darwin";
       };
     };
