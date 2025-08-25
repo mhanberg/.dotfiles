@@ -26,10 +26,12 @@ You can see the current tasks by running `just --list`
 $ just --list
 Available recipes:
     default
-    hm                 # run home-manager switch
-    rebuild            # rebuild nixos
-    update             # updates apt, flake, and runs home-manager
-    update-apt         # update and upgrade apt packages
-    update-flake       # update your flake.lock
-    update-lix version # update Lix on non-NixOS linux systems
+    fix-shell-files # fix shell files. this happens sometimes with nix-darwin
+    hm              # run home-manager switch
+    news
+    rebuild         # rebuild nix darwin
+    update          # updates brew, flake, and runs home-manager
+    update-brew     # update and upgrade homebrew packages
+    update-flake    # update your flake.lock
+
 ```
