@@ -1,27 +1,24 @@
 {...}: {
   system.primaryUser = "mitchell";
   homebrew.casks = [
-    "cleanshot"
-    "autodesk-fusion"
-    "tailscale"
     "1password"
     "1password-cli"
     "audio-hijack"
     "bambu-studio"
+    "cleanshot"
     "discord"
     "element"
     "elgato-stream-deck"
     "farrago"
     "fission"
-    "nordvpn"
     "obs"
     "pikopixel"
+    "protonvpn"
     "screenflow"
     "slack"
+    "tailscale-app"
     "wacom-tablet"
     "zoom"
-
-    "protonvpn"
   ];
   nix.settings.trusted-users = ["mitchell"];
 }
