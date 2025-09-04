@@ -6,10 +6,10 @@ macOS utilizes nix-darwin in order to manage homebrew dependencies, and both mac
 
 ## Getting Started
 
-Install [Lix](https://lix.systems/), an implementation of Nix.
+Install Nix with the determinate nix installer
 
 ```bash
-curl -sSf -L https://install.lix.systems/lix | sh -s -- install
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate
 ```
 
 Run the installer
