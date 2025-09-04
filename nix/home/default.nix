@@ -163,6 +163,7 @@ in {
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "motch-ds-423" = {
         hostname = "motch-ds-423";
