@@ -163,7 +163,6 @@ in {
 
   programs.ssh = {
     enable = true;
-    forwardAgent = true;
     matchBlocks = {
       "motch-ds-423" = {
         hostname = "motch-ds-423";
@@ -174,6 +173,7 @@ in {
       nublar = {
         hostname = "nublar";
         user = "mitchell";
+        forwardAgent = true;
 
         localForwards = [
           {
