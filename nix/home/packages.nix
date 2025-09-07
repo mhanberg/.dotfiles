@@ -53,7 +53,6 @@
       silicon
       charm-freeze
       silver-searcher
-      sqlite
       sqlite-interactive
       starship
       stylua
