@@ -35,8 +35,6 @@ end
 
 local motchvim_exists = vim.fn.isdirectory(vim.fn.expand("~/src/motchvim/")) == 1
 
-vim.print(motchvim_exists)
-
 require("lazy").setup {
   spec = {
     { dev = motchvim_exists, "mhanberg/motchvim", import = "motchvim.plugins" },
