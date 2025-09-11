@@ -3,7 +3,6 @@
   age-secrets,
   ...
 }: let
-  aws-profile = "dag-default";
   dotnet-root = "${pkgs.dotnetCorePackages.dotnet_8.sdk}/share/dotnet/";
 in
   with pkgs;
@@ -14,6 +13,9 @@ in
         awscli2
         dotnetCorePackages.dotnet_8.sdk
         jq
+      ];
+      excludeShellChecks = [
+        "SC2154"
       ];
       text = ''
         # @describe A tool to fetch and store your AWS credentials
@@ -36,15 +38,17 @@ in
         }
 
         # @cmd Login with aws-cia
+        # @option --aws-profile <AWS_PROFILE> The AWS profile to use when logging in
         function aws-cia:login() {
           export PATH="$PATH:$HOME/.dotnet/tools"
-          export AWS_PROFILE="${aws-profile}"
+          export AWS_PROFILE="$argc_aws_profile"
           export DOTNET_ROOT="${dotnet-root}"
 
           aws-cia login
         }
 
         # @cmd Change roles and export creds as env vars
+        # @option --aws-profile <AWS_PROFILE> Then AWS profile to use when assuming roles
         function set-vars() {
           local arn
           local name
@@ -54,7 +58,7 @@ in
 
           arn=$(cat "${age-secrets.secrets.aws-role-arn.path}")
           name=$(cat "${age-secrets.secrets.aws-role-session-name.path}")
-          creds="$(AWS_PROFILE=${aws-profile} aws sts assume-role --role-arn "$arn" --role-session-name "$name")"
+          creds="$(AWS_PROFILE="$argc_aws_profile" aws sts assume-role --role-arn "$arn" --role-session-name "$name")"
           access_key_id=$(echo "$creds" | jq -r .Credentials.AccessKeyId)
           secret_access_key=$(echo "$creds" | jq -r .Credentials.SecretAccessKey)
           session_token=$(echo "$creds" | jq -r .Credentials.SessionToken)
