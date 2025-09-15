@@ -43,9 +43,9 @@ fix-shell-files:
   sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
   sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
 
-# updates brew, flake, and runs home-manager
+# updates brew, darwin, and runs home-manager
 [macos]
-update: update-brew update-flake hm
+update: update-brew hm rebuild
 
 news:
   home-manager news --flake .
