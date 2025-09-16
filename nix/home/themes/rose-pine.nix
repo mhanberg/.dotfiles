@@ -19,7 +19,7 @@ in {
   imports = [
     (import ../modules/fzf.nix {inherit colors;})
   ];
-  programs.ghostty.settings.theme = "rose-pine";
+  programs.ghostty.settings.theme = "Rose Pine";
   home.file = {
     ".motchvim-theme".text = "rose-pine-main";
   };
