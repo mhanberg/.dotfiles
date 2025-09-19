@@ -17,15 +17,6 @@
     nixpkgs-update.url = "github:ryantm/nixpkgs-update";
   };
 
-  nixConfig = {
-    extra-substituters = [
-      "https://mhanberg.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "mhanberg.cachix.org-1:tpHVw70kbGnO5mGv4rA3pjxpqeEiP/vWfJT4tVaK85o="
-    ];
-  };
-
   outputs = {
     self,
     nix-darwin,

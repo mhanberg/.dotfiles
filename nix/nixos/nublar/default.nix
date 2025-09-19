@@ -15,8 +15,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nix.settings.experimental-features = "nix-command flakes";
-  nix.settings.accept-flake-config = true;
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    accept-flake-config = true;
+    extra-substituters = [
+      "https://mhanberg.cachix.org"
+      "https://nix-beam-flakes.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "mhanberg.cachix.org-1:tpHVw70kbGnO5mGv4rA3pjxpqeEiP/vWfJT4tVaK85o="
+      "nix-beam-flakes.cachix.org-1:iRMzLmb/dZFw7v08Rp3waYlWqYZ8nR3fmtFwq2prdk4="
+    ];
+  };
+
   nix.settings.trusted-users = ["mitchell"];
   # Enable OpenGL
   hardware.graphics = {

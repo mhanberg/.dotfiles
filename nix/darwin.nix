@@ -16,6 +16,16 @@
     };
     options = "--delete-older-than 8d";
   };
+  nix.settings = {
+    extra-substituters = [
+      "https://mhanberg.cachix.org"
+      "https://nix-beam-flakes.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "mhanberg.cachix.org-1:tpHVw70kbGnO5mGv4rA3pjxpqeEiP/vWfJT4tVaK85o="
+      "nix-beam-flakes.cachix.org-1:iRMzLmb/dZFw7v08Rp3waYlWqYZ8nR3fmtFwq2prdk4="
+    ];
+  };
 
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
