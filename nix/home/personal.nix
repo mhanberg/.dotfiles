@@ -37,7 +37,7 @@ in {
       };
     };
   };
-  programs.ssh.matchBlocks."* \"test -z $SSH_TTY\"".identityAgent = "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+  programs.ssh.matchBlocks."* \"test -z $SSH_TTY\"".identityAgent = "'~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'";
 
   programs.git.extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
   programs.git.extraConfig.gpg.format = "ssh";

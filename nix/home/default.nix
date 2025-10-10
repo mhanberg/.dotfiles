@@ -175,16 +175,19 @@ in {
         hostname = "nublar";
         user = "mitchell";
         forwardAgent = true;
+        extraOptions = {
+          LogLevel = "Quiet";
+        };
 
         localForwards = [
           {
             bind.port = 4999;
-            host.address = "localhost";
+            host.address = "127.0.0.1";
             host.port = 4999;
           }
           {
             bind.port = 8000;
-            host.address = "localhost";
+            host.address = "127.0.0.1";
             host.port = 8000;
           }
         ];
