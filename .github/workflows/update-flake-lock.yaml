@@ -22,7 +22,7 @@ jobs:
         run: |
           nix flake update
       - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore(nix): update flake.lock [skip ci]"
           commit_user_name: "github-actions[bot]"
