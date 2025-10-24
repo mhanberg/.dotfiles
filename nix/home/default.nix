@@ -195,21 +195,25 @@ in {
     };
   };
 
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
+
   programs.git = {
     enable = true;
-    userName = "Mitchell Hanberg";
-    userEmail = "mitch@mitchellhanberg.com";
     # signing = {
     #   key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
     # };
-    delta = {
-      enable = true;
-    };
     includes = [
       {path = "~/.gitconfig.local";}
     ];
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Mitchell Hanberg";
+        email = "mitch@mitchellhanberg.com";
+      };
       push.default = "simple";
       color.branch = "auto";
       core = {

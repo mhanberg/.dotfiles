@@ -56,10 +56,10 @@ in {
       (mkWorkConfig "~/src/draftkings/")
       (mkWorkConfig "~/src/simplebet/")
     ];
-    aliases = {
-      proddiff = "log --pretty=format:\"%h - %an: %s\"";
-    };
-    extraConfig = {
+    settings = {
+      aliases = {
+        proddiff = "log --pretty=format:\"%h - %an: %s\"";
+      };
       gpg.format = "ssh";
       commit.gpgSign = true;
       user.signingkey = "~/.ssh/id_ed25519.pub";

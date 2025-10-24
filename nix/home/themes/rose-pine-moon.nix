@@ -48,7 +48,7 @@ in {
     ];
   };
   programs.bat.config.theme = "rose-pine-moon";
-  programs.git.delta.options = {
+  programs.delta.options = {
     syntax-theme = "rose-pine-moon";
     dark = true;
   };
