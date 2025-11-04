@@ -171,6 +171,11 @@ in {
           TERM = "xterm-256color";
         };
       };
+      sorna.forwardAgent = true;
+      ingen.forwardAgent = true;
+      ray.forwardAgent = true;
+      nedry.forwardAgent = true;
+      hammond.forwardAgent = true;
       nublar = {
         hostname = "nublar";
         user = "mitchell";
