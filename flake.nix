@@ -15,6 +15,7 @@
     };
     agenix.url = "github:ryantm/agenix";
     nixpkgs-update.url = "github:ryantm/nixpkgs-update";
+    expert.url = "github:elixir-lang/expert";
   };
 
   outputs = {
@@ -23,6 +24,7 @@
     nixpkgs,
     home-manager,
     agenix,
+    expert,
     rummage,
     nixpkgs-update,
   }: let
@@ -60,6 +62,7 @@
               home.packages = [
                 rummage.packages.${arch}.default
                 agenix.packages.${arch}.default
+                expert.packages.${arch}.default
               ];
             }
             ./nix/home/diy/gh-actions-language-server
