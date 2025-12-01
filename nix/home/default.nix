@@ -88,6 +88,10 @@ in {
           has_any_file = ["mix.exs"];
         }
         {
+          name = "rust";
+          has_any_file = ["Cargo.toml"];
+        }
+        {
           name = "code";
           has_any_file = [".git"];
         }
@@ -477,11 +481,13 @@ in {
     enable = true;
     settings = {
       git = {
-        paging = {
-          colorArg = "always";
-          # pager = "delta --paging=never";
-          useConfig = false;
-        };
+        pagers = [
+          {
+            colorArg = "always";
+            # pager = "delta --paging=never";
+            useConfig = false;
+          }
+        ];
         commit = {
           signOff = false;
           verbose = "default";
