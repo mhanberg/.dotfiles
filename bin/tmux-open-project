@@ -8,7 +8,7 @@ function main() {
     session_name="$(basename "$dir" | sed 's/[.-]/_/g')"
     if ! tmux has-session -t "=$session_name"; then
       tmux new-session -d -c "$dir" -s "$session_name" -n "editor"
-      tmux send-keys -t "$session_name:editor" "nvim" "Enter"
+      tmux send-keys -t "$session_name:editor" 'eval ${TMUXINATOR_STARTUP_COMMAND-nvim}' "Enter"
       tmux new-window -d -c "$dir" -t "$session_name" -n "shell"
     fi
 
