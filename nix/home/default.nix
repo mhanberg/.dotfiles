@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 } @ args: let
   myLib = import ../lib.nix args;
@@ -246,6 +247,7 @@ in {
   programs.zsh = {
     enable = true;
     autocd = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     enableVteIntegration = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
