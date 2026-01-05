@@ -111,7 +111,7 @@
         extraDarwinModules = [./nix/darwin/dk.nix];
       };
       mitchells-mini = mkDarwin {
-        extraDarwinModules = [./nix/darwin/personal.nix];
+        extraDarwinModules = [./nix/darwin/personal.nix ./nix/darwin/link-apps];
       };
       mitchells-air = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix];
@@ -139,7 +139,9 @@
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-mini" = mkHm {
-        extraModules = [./nix/home/personal.nix];
+        extraModules = [
+            ./nix/home/personal.nix
+          ];
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-air" = mkHm {

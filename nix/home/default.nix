@@ -186,6 +186,7 @@ in {
         user = "mitchell";
         forwardAgent = true;
         extraOptions = {
+          RequestTTY = "yes";
           LogLevel = "Quiet";
         };
 

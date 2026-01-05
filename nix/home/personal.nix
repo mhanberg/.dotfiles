@@ -12,6 +12,10 @@ in {
     openscad-lsp
     openscad-unstable
   ];
+
+  environment.systemPackages = with pkgs; [
+    librewolf
+  ];
   imports = [
     ./themes/rose-pine.nix
     ./services/syncthing.nix
