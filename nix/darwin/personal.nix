@@ -32,6 +32,7 @@
     "element"
     "elgato-stream-deck"
     "farrago"
+    "fastmail"
     "fission"
     "freecad"
     "obs"
