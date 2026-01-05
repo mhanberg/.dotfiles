@@ -66,7 +66,7 @@
               ];
             }
             ./nix/home/diy/gh-actions-language-server
-            ./nix/home/diy/scadformat
+            # ./nix/home/diy/scadformat
             rummage.homeManagerModules.default
           ]
           ++ extraModules;
