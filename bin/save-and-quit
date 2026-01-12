@@ -4,7 +4,7 @@ instances=$(nvr --serverlist)
 
 for inst in $instances; do
   # fzf-lua starts remote nvim instances that don't need to be killed
-  if echo "$inst" | grep -i "fzf-lua" >/dev/null; then
+  if [[ ! -f "$inst" ]] && echo "$inst" | grep -iq "fzf-lua"; then
     echo "==> Don't care about $inst"
   else
     echo "==> Quitting $inst"
