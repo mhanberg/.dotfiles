@@ -14,6 +14,19 @@ update-flake:
     git commit -m "chore(nix): update flake.lock"
   fi
 
+# update your flake.lock
+update-expert-flake:
+  #!/usr/bin/env bash
+  set -euxo pipefail
+  nix flake update expert
+  if git diff --exit-code flake.lock > /dev/null 2>&1; then
+    echo "no changes to flake.lock"
+  else
+    echo "committing flake.lock"
+    git add flake.lock
+    git commit -m "chore(nix): update expert flake.lock"
+  fi
+
 # run home-manager switch
 hm:
   home-manager switch --flake ~/.dotfiles -b backup
