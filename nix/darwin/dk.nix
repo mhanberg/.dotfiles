@@ -10,6 +10,7 @@
   homebrew.brews = [
     "podman"
     "podman-compose"
+    "slp/krunkit/krunkit"
   ];
   ids.gids.nixbld = 350;
   nix.settings.trusted-users = ["m.hanberg"];
