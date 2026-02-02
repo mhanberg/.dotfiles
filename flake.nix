@@ -3,7 +3,9 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # temp until https://github.com/NixOS/nixpkgs/issues/483584 is fixed
+    nixpkgs.url = "github:NixOS/nixpkgs/70801e06d9730c4f1704fbd3bbf5b8e11c03a2a7";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
@@ -16,6 +18,10 @@
     agenix.url = "github:ryantm/agenix";
     nixpkgs-update.url = "github:ryantm/nixpkgs-update";
     expert.url = "github:elixir-lang/expert";
+    dk = {
+      url = "github:mhanberg/dk-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -27,6 +33,7 @@
     expert,
     rummage,
     nixpkgs-update,
+    dk,
   }: let
     mkNixos = {extraNixosModules ? {}}:
       nixpkgs.lib.nixosSystem {
@@ -135,13 +142,15 @@
         arch = "aarch64-linux";
       };
       "m.hanberg" = mkHm {
-        extraModules = [./nix/home/dk.nix];
+        extraModules = [
+          (import ./nix/home/dk.nix {dk = dk;})
+        ];
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-mini" = mkHm {
         extraModules = [
-            ./nix/home/personal.nix
-          ];
+          ./nix/home/personal.nix
+        ];
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-air" = mkHm {

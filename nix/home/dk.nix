@@ -1,12 +1,13 @@
-{
+{dk, ...}: {
   pkgs,
   config,
   ...
 } @ args: let
   myLib = import ../lib.nix args;
-  dk-aws = import ./dk/aws.nix {
+  dk-aws = dk.mkAws {
     inherit pkgs;
-    age-secrets = config.age;
+    aws-role-arn-path = config.age.secrets.aws-role-arn.path;
+    aws-role-session-name-path = config.age.secrets.aws-role-session-name.path;
   };
 in {
   imports = [

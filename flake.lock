@@ -68,6 +68,26 @@
         "type": "github"
       }
     },
+    "dk": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770052157,
+        "narHash": "sha256-GCxrw5BYxG2zUD77FjHjMsvP9z8k0lyRTYIVxC5wfbY=",
+        "owner": "mhanberg",
+        "repo": "dk-flake",
+        "rev": "ed6aa49c51df5ac7b414a7e2d7955415ceeb5f81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mhanberg",
+        "repo": "dk-flake",
+        "type": "github"
+      }
+    },
     "expert": {
       "inputs": {
         "beam-flakes": "beam-flakes",
@@ -319,9 +339,9 @@
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
+        "owner": "NixOS",
         "repo": "nixpkgs",
+        "rev": "70801e06d9730c4f1704fbd3bbf5b8e11c03a2a7",
         "type": "github"
       }
     },
@@ -358,6 +378,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "dk": "dk",
         "expert": "expert",
         "home-manager": "home-manager_2",
         "nix-darwin": "nix-darwin",
