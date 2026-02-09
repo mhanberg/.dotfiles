@@ -472,7 +472,7 @@ in {
     package = null;
     installBatSyntax = false;
     settings = {
-      shell-integration-features = "no-cursor";
+      shell-integration-features = "no-cursor,ssh-env,ssh-terminfo";
       font-family = "JetBrainsMono Nerd Font Mono";
       font-thicken = false;
 
