@@ -6,6 +6,7 @@
     "podman-desktop"
     "postgres-unofficial"
     "elgato-stream-deck"
+    "focus"
   ];
   homebrew.brews = [
     "podman"
