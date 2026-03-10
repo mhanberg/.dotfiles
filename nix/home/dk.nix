@@ -21,10 +21,9 @@ in {
     aws-role-session-name.file = ./dk/secrets/aws-role-session-name.age;
   };
 
-  home.packages = [
+  home.packages = with pkgs; [
     dk-aws
-    # dotnetCorePackages.dotnet_8.sdk
-    # dotnetCorePackages.runtime_8_0-bin
+    helm-ls
   ];
 
   programs.rummage = {
@@ -38,7 +37,6 @@ in {
 
   programs.zsh = {
     sessionVariables = {
-      AWS_PROFILE = "dag-default";
     };
     shellAliases = {
       eav = "eval $(export-aws-vars)";
