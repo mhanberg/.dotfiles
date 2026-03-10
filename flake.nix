@@ -3,9 +3,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    # temp until https://github.com/NixOS/nixpkgs/issues/483584 is fixed
-    nixpkgs.url = "github:NixOS/nixpkgs/70801e06d9730c4f1704fbd3bbf5b8e11c03a2a7";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
@@ -35,7 +33,7 @@
     nixpkgs-update,
     dk,
   }: let
-    mkNixos = {extraNixosModules ? {}}:
+    mkNixos = {extraNixosModules ? []}:
       nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit self;};
@@ -45,7 +43,7 @@
           ]
           ++ extraNixosModules;
       };
-    mkDarwin = {extraDarwinModules ? {}}:
+    mkDarwin = {extraDarwinModules ? []}:
       nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = {inherit self;};
