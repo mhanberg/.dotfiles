@@ -31,6 +31,7 @@ in {
       (myLib.joinHome "/src/simplebet/")
       (myLib.joinHome "/src/draftkings/")
       (myLib.joinHome "/src/other/")
+      (myLib.joinHome "/src/tools/")
       (myLib.joinHome "/src/motchvim")
     ];
   };
