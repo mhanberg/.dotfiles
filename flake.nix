@@ -18,6 +18,7 @@
     expert.url = "github:elixir-lang/expert";
     dk = {
       url = "github:mhanberg/dk-flake";
+      # url = "git+file:/Users/m.hanberg/src/tools/dk-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -1,68 +1,14 @@
-{dk, ...}: {
-  pkgs,
-  config,
-  ...
-} @ args: let
+{dk, ...}: {...} @ args: let
   myLib = import ../lib.nix args;
-  dk-aws = dk.mkAws {
-    inherit pkgs;
-    aws-role-arn-path = config.age.secrets.aws-role-arn.path;
-    aws-role-session-name-path = config.age.secrets.aws-role-session-name.path;
-  };
 in {
   imports = [
     ./themes/rose-pine-moon.nix
     ./services/syncthing.nix
+    (import dk.homeManagerModules.default {inherit myLib;})
   ];
-  home.username = "m.hanberg";
-  home.homeDirectory = "/Users/m.hanberg";
+
   age.secrets = {
     aws-role-arn.file = ./dk/secrets/aws-role-arn.age;
     aws-role-session-name.file = ./dk/secrets/aws-role-session-name.age;
-  };
-
-  home.packages = with pkgs; [
-    dk-aws
-    helm-ls
-  ];
-
-  programs.rummage = {
-    settings.search_paths = [
-      (myLib.joinHome "/src/simplebet/")
-      (myLib.joinHome "/src/draftkings/")
-      (myLib.joinHome "/src/other/")
-      (myLib.joinHome "/src/tools/")
-      (myLib.joinHome "/src/motchvim")
-    ];
-  };
-
-  programs.zsh = {
-    sessionVariables = {
-    };
-    shellAliases = {
-      eav = "eval $(export-aws-vars)";
-    };
-  };
-
-  programs.git = let
-    mkWorkConfig = dir: {
-      condition = "gitdir:${dir}";
-      contents = {
-        user.email = "m.hanberg@draftkings.com";
-      };
-    };
-  in {
-    includes = [
-      (mkWorkConfig "~/src/draftkings/")
-      (mkWorkConfig "~/src/simplebet/")
-    ];
-    settings = {
-      aliases = {
-        proddiff = "log --pretty=format:\"%h - %an: %s\"";
-      };
-      gpg.format = "ssh";
-      commit.gpgSign = true;
-      user.signingkey = "~/.ssh/id_ed25519.pub";
-    };
   };
 }
