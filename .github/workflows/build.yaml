@@ -8,6 +8,8 @@ on:
     branches:
       - main
 
+permissions: {}
+
 jobs:
   build-hm:
     strategy:
@@ -20,18 +22,20 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Setup SSH key
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@1ca7d21a94afc7c957383a2d217460d980de4934 # v31.10.1
         with:
           extra_nix_config: |
             extra-substituters = https://mhanberg.cachix.org
             extra-trusted-public-keys = mhanberg.cachix.org-1:tpHVw70kbGnO5mGv4rA3pjxpqeEiP/vWfJT4tVaK85o=
             accept-flake-config = true
-      - uses: cachix/cachix-action@v16
+      - uses: cachix/cachix-action@3ba601ff5bbb07c7220846facfa2cd81eeee15a1 # v16
         with:
           name: mhanberg
           # If you chose API tokens for write access OR if you have a private cache
@@ -49,17 +53,19 @@ jobs:
           - "mitchells-mini"
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Setup SSH key
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - uses: cachix/install-nix-action@v31
+      - uses: cachix/install-nix-action@1ca7d21a94afc7c957383a2d217460d980de4934 # v31.10.1
         with:
           extra_nix_config: |
             extra-substituters = https://mhanberg.cachix.org
             extra-trusted-public-keys = mhanberg.cachix.org-1:tpHVw70kbGnO5mGv4rA3pjxpqeEiP/vWfJT4tVaK85o=
-      - uses: cachix/cachix-action@v16
+      - uses: cachix/cachix-action@3ba601ff5bbb07c7220846facfa2cd81eeee15a1 # v16
         with:
           name: mhanberg
           # If you chose API tokens for write access OR if you have a private cache
