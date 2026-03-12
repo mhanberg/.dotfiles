@@ -469,7 +469,6 @@ in {
 
   programs.ghostty = {
     enable = true;
-    package = null;
     installBatSyntax = false;
     settings = {
       shell-integration-features = "no-cursor,ssh-env,ssh-terminfo";

@@ -22,7 +22,10 @@ in {
       (myLib.joinHome "/src")
     ];
   };
-  programs.ghostty.settings.font-size = 14;
+  programs.ghostty = {
+    package = null;
+    settings.font-size = 14;
+  };
   services.syncthing = {
     enable = true;
     settings = {

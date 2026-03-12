@@ -7,6 +7,8 @@ in {
     (import dk.homeManagerModules.default {inherit myLib;})
   ];
 
+  programs.ghostty.package = null;
+
   age.secrets = {
     aws-role-arn.file = ./dk/secrets/aws-role-arn.age;
     aws-role-session-name.file = ./dk/secrets/aws-role-session-name.age;
