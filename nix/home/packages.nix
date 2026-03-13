@@ -69,7 +69,7 @@
     ]
     ++ (
       if pkgs.stdenv.isLinux
-      then [gcc coreutils xclip unixtools.ifconfig inotify-tools ncurses5]
+      then [gcc coreutils xclip unixtools.ifconfig inotify-tools]
       else []
     );
 }
