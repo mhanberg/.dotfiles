@@ -77,15 +77,15 @@
       "locked": {
         "lastModified": 1773260251,
         "narHash": "sha256-u0DGmWZL6CXNItN5uEtWCZagzV6jsuf0AgVNxKAiue8=",
-        "owner": "mhanberg",
-        "repo": "dk-flake",
+        "ref": "refs/heads/main",
         "rev": "d4cfd42871136d48017075aade7627c6c0ce5abb",
-        "type": "github"
+        "revCount": 3,
+        "type": "git",
+        "url": "ssh://git@github.com/mhanberg/dk-flake"
       },
       "original": {
-        "owner": "mhanberg",
-        "repo": "dk-flake",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@github.com/mhanberg/dk-flake"
       }
     },
     "expert": {
