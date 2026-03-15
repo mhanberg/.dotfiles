@@ -235,18 +235,25 @@ defmodule UpdateActions do
 
     case gh_api("repos/#{action_name}/tags", ".[].name") do
       {:ok, tags} ->
-        tag =
-          Enum.flat_map(tags, fn tag ->
-            case Version.parse(tag) do
-              {:ok, version} -> [version]
+        {tag, _} =
+          tags
+          |> String.trim()
+          |> String.split("\n")
+          |> Enum.flat_map(fn tag ->
+            if String.match?(tag, ~r/^v\d+$/) do
+              tag <> ".0.0"
+            else
+              tag
+            end
+            |> String.replace_prefix("v", "")
+            |> Version.parse()
+            |> case do
+              {:ok, version} -> [{tag, version}]
               :error -> []
             end
           end)
-          |> Enum.sort(&Version.compare/2, :desc)
+          |> Enum.sort_by(fn {_, version} -> version end, {:desc, Version})
           |> List.first()
-
-        tag = String.trim(tag)
-        IO.puts(tag)
 
         case resolve_tag_to_commit_sha(action_name, tag) do
           {:ok, sha} -> {:ok, {tag, sha}}
