@@ -99,7 +99,10 @@ defmodule UpdateActions do
     comment_suffix = if(comment != "", do: " # #{comment}", else: "")
 
     IO.puts(
-      IO.ANSI.format([:bright, "#{file}:#{line_no}", :reset, " - #{action_name}@#{ref}#{comment_suffix}"], color)
+      IO.ANSI.format(
+        [:bright, "#{file}:#{line_no}", :reset, " - #{action_name}@#{ref}#{comment_suffix}"],
+        color
+      )
     )
 
     if forcibly_pinned?(comment) do
@@ -230,8 +233,18 @@ defmodule UpdateActions do
   defp do_fetch_latest(action_name) do
     IO.write("  Fetching latest release for #{action_name}... ")
 
-    case gh_api("repos/#{action_name}/releases/latest", ".tag_name") do
-      {:ok, tag} ->
+    case gh_api("repos/#{action_name}/tags", ".[].name") do
+      {:ok, tags} ->
+        tag =
+          Enum.flat_map(tags, fn tag ->
+            case Version.parse(tag) do
+              {:ok, version} -> [version]
+              :error -> []
+            end
+          end)
+          |> Enum.sort(&Version.compare/2, :desc)
+          |> List.first()
+
         tag = String.trim(tag)
         IO.puts(tag)
 
@@ -247,7 +260,7 @@ defmodule UpdateActions do
   end
 
   defp resolve_tag_to_commit_sha(action_name, tag) do
-    case gh_api( "repos/#{action_name}/git/ref/tags/#{tag}", ".object.type + \" \" + .object.sha") do
+    case gh_api("repos/#{action_name}/git/ref/tags/#{tag}", ".object.type + \" \" + .object.sha") do
       {:ok, output} ->
         [type, sha] = output |> String.trim() |> String.split(" ", parts: 2)
 
@@ -265,7 +278,10 @@ defmodule UpdateActions do
   end
 
   defp dereference_annotated_tag(action_name, tag_object_sha) do
-    case gh_api( "repos/#{action_name}/git/tags/#{tag_object_sha}", ".object.type + \" \" + .object.sha") do
+    case gh_api(
+           "repos/#{action_name}/git/tags/#{tag_object_sha}",
+           ".object.type + \" \" + .object.sha"
+         ) do
       {:ok, output} ->
         [type, sha] = output |> String.trim() |> String.split(" ", parts: 2)
 
