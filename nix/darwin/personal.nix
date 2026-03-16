@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   system.primaryUser = "mitchell";
 
   users.users.mitchell = {
@@ -6,9 +10,7 @@
     home = "/Users/mitchell";
   };
 
-  environment.systemPackages = with pkgs; [
-    librewolf
-  ];
+  environment.systemPackages = [];
   # Add home-manager applications to `system.build.applications` so they will be linked
   # by services.link-apps.
   system.build.applications = pkgs.lib.mkForce (pkgs.buildEnv {
@@ -45,5 +47,4 @@
     "zoom"
   ];
   nix.settings.trusted-users = ["mitchell"];
-
 }
