@@ -305,7 +305,7 @@ defmodule UpdateActions do
   end
 
   defp gh_api(endpoint, jq_filter) do
-    case System.cmd("gh", ["api", endpoint, "--jq", jq_filter], stderr_to_stdout: true) do
+    case System.cmd("gh", ["api", "--paginate", endpoint, "--jq", jq_filter], stderr_to_stdout: true) do
       {output, 0} -> {:ok, output}
       {output, _} -> {:error, String.trim(output)}
     end
