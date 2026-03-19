@@ -1,4 +1,4 @@
-{dk, ...}: {...} @ args: let
+{dk, ...}: {pkgs, ...} @ args: let
   myLib = import ../lib.nix args;
 in {
   imports = [
@@ -6,6 +6,8 @@ in {
     ./services/syncthing.nix
     (import dk.homeManagerModules.default {inherit myLib;})
   ];
+
+  home.packages = with pkgs; [yq-go];
 
   programs.ghostty.package = null;
 
