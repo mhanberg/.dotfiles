@@ -213,9 +213,10 @@ in {
 
   programs.git = {
     enable = true;
-    # signing = {
-    #   key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
-    # };
+    signing = {
+      #   key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
+      format = "openpgp";
+    };
     includes = [
       {path = "~/.gitconfig.local";}
     ];
