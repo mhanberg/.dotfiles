@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs;
     [
+      google-chrome
       argc
       actionlint
       alejandra
@@ -58,7 +59,6 @@
       stylua
       tailwindcss-language-server
       tmux
-      twm
       tokei
       tree-sitter
       vim
