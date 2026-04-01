@@ -14,6 +14,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # for pi builds
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   nix.settings = {
     experimental-features = "nix-command flakes";
