@@ -4,7 +4,7 @@ on:
   schedule:
     # weekly
     - cron: "0 0 * * 0"
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   update-flake:
@@ -18,6 +18,10 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Install Determinate Nix
         uses: DeterminateSystems/determinate-nix-action@a18f73c54ca8525de051e73c31512a67f44df919 # v3.17.1
       - name: Update flake.lock
