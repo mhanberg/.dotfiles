@@ -10,7 +10,6 @@ in {
     _1password-gui
     albert
     discord
-    ghostty
     gnome-boxes
     gnomeExtensions.dash-to-panel
     gnomeExtensions.vitals
@@ -34,6 +33,7 @@ in {
   programs.zsh.enable = true;
 
   programs.ghostty.settings.font-size = 11;
+  programs.ghostty.systemd.enable = false;
 
   programs.rummage = {
     settings.search_paths = [
@@ -46,7 +46,7 @@ in {
   programs.git = {
     signing.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDckxDud0PGdGd60v/1SUa0pbWWe46FcVIbuTijwzeZR";
 
-    extraConfig.gpg = {
+    settings.gpg = {
       ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
       gpg.format = "ssh";
       commit.gpgSign = true;
