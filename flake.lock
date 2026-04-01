@@ -75,11 +75,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774625595,
-        "narHash": "sha256-ilgqrsov8FeyVAYRUxY7ljhsOBke94IpMKyOpFzJYG0=",
+        "lastModified": 1775064289,
+        "narHash": "sha256-TQ1WTioD0j34KzeVyJ8mu8GLCQ9/+lZV3ya/aJrfWlU=",
         "ref": "refs/heads/main",
-        "rev": "c961b289e5234cdcdfaa7dc93b5db79ee83c5148",
-        "revCount": 5,
+        "rev": "408e85c56279d4c3dd485effabde76728d5299a4",
+        "revCount": 6,
         "type": "git",
         "url": "ssh://git@github.com/mhanberg/dk-flake"
       },
