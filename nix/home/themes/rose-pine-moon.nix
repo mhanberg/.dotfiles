@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   colors = {
     "fg" = "#908caa";
     "bg" = "#232136";
@@ -16,12 +20,10 @@
     "prompt" = "#908caa";
   };
 in {
-  imports = [
-    (import ../modules/fzf.nix {inherit colors;})
-  ];
   programs.ghostty.settings.theme = "Rose Pine Moon";
   home.file = {
     ".motchvim-theme".text = "rose-pine-moon";
+    ".fzf-colors".text = lib.concatStringsSep "," (lib.mapAttrsToList (name: value: "${name}:${value}") colors);
   };
 
   programs.bat.themes = {

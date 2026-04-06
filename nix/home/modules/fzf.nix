@@ -1,20 +1,17 @@
-{colors}: {
-  lib,
+{
   pkgs,
+  config,
   ...
-}: let
-  renderedColors = colors: lib.concatStringsSep "," (lib.mapAttrsToList (name: value: "${name}:${value}") colors);
-in {
-  programs.fzf.package = pkgs.fzf.overrideAttrs (prev: {
-    nativeBuildInputs =
-      prev.nativeBuildInputs
-      ++ [
-        pkgs.makeWrapper
-      ];
-
-    postFixup = ''
+}: {
+  programs.fzf.package = pkgs.symlinkJoin {
+    name = "fzf";
+    version = pkgs.fzf.version;
+    paths = [pkgs.fzf];
+    buildInputs = [pkgs.makeWrapper];
+    postBuild = ''
       wrapProgram "$out/bin/fzf" \
-        --add-flags "--color ${renderedColors colors}"
+        --add-flags '--color "$(cat ${config.home.file.".fzf-colors".source})"'
     '';
-  });
+    meta.mainProgram = "fzf";
+  };
 }

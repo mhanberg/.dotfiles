@@ -20,6 +20,7 @@ in {
 
   imports = [
     ./packages.nix
+    ./modules/fzf.nix
   ];
 
   services.home-manager.autoExpire = {
