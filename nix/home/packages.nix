@@ -58,6 +58,7 @@
       starship
       stylua
       tailwindcss-language-server
+      tree-sitter
       tmux
       tokei
       tree-sitter
