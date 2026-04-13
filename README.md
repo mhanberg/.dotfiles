@@ -9,6 +9,8 @@ macOS utilizes nix-darwin in order to manage homebrew dependencies, and both mac
 Install Nix with the determinate nix installer
 
 ```bash
+# if on a mac
+xcode-select --install
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate
 ```
 

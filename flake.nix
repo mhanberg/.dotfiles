@@ -99,7 +99,7 @@
       script = ''
         git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        nix run nix-darwin -- switch --flake ~/.dotfiles
+        sudo nix run nix-darwin -- switch --flake ~/.dotfiles
         nix run home-manager/master -- switch --flake ~/.dotfiles
       '';
     };
