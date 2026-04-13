@@ -113,7 +113,7 @@
     };
 
     darwinConfigurations = {
-      Mitchells-MBP = mkDarwin {
+      Mitchells-MacBook-Pro = mkDarwin {
         extraDarwinModules = [./nix/darwin/work.nix];
       };
       mitchells-mini = mkDarwin {
@@ -140,7 +140,7 @@
         extraModules = [./nix/home/ubuntu.nix];
         arch = "aarch64-linux";
       };
-      "mhanberg@Mitchells-MBP" = mkHm {
+      "mhanberg@Mitchells-MacBook-Pro" = mkHm {
         extraModules = [
           (import ./nix/home/work.nix {work = work;})
         ];
