@@ -23,9 +23,9 @@ in {
           id = "UKBJHDO-YOFWJCX-UMXTEOS-ZBFBDNS-KXVIACN-L2ULD2N-PEJUSSA-E2VI7AM";
           autoAcceptFolders = true;
         };
-        "m.hanberg-GQJNV7J4QY" = {
-          id = "U5VHTUT-HCCK5RV-VIMOTAE-OEK55W2-XA74TGH-RIVVQ6B-OOJKUBG-A2KPFQG";
-          name = "mitchells-work";
+        "Mitchells-MPB.localdomain" = {
+          id = "5ANLBWH-TOOHZWK-ELC47G3-33PTHZ3-EUUQ7WP-F7UU5JZ-J7GUCSN-5FM53QZ";
+          name = "mitchells-work-adobe";
           autoAcceptFolders = true;
         };
       };
