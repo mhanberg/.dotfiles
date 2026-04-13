@@ -34,7 +34,7 @@ in {
           id = "notes";
         };
         "/shared/dash".id = "dash";
-        "/shared/alfred".id = "dash";
+        "/shared/alfred".id = "alfred";
       };
     };
   };
