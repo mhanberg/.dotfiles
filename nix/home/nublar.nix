@@ -28,6 +28,20 @@ in {
 
   services.syncthing = {
     guiAddress = "0.0.0.0:8384";
+    settings = {
+      folders = let
+        devices = [
+          "mitchells-mini"
+          "mitchells-work-adobe"
+          "mitchells-air"
+        ];
+      in
+        myLib.fromHome {
+          "/shared/notes".devices = devices;
+          "/shared/dash".devices = devices;
+          "/shared/alfred".devices = devices;
+        };
+    };
   };
 
   programs.zsh.enable = true;
