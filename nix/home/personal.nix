@@ -34,11 +34,6 @@ in {
           "https://syncthing-discovery.motch.systems"
         ];
       };
-      folders = {
-        "${config.home.homeDirectory}/shared/notes" = {
-          id = "notes";
-        };
-      };
     };
   };
   programs.ssh.matchBlocks."* \"test -z $SSH_TTY\"".identityAgent = "'~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'";
