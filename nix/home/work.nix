@@ -11,8 +11,8 @@ in {
 
   services.syncthing.settings.folders = let
     devices = [
-      "mitchells-mini.localdomain"
-      "mitchells-air.local"
+      "mitchells-mini"
+      "mitchells-air"
       "nublar"
     ];
   in
