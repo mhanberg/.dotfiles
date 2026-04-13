@@ -6,6 +6,7 @@
     "postgres-unofficial"
     "elgato-stream-deck"
     "focus"
+    "slack"
   ];
   homebrew.brews = [
     "docker"
