@@ -14,7 +14,7 @@ in {
           name = "mitchells-mini";
           autoAcceptFolders = true;
         };
-        "mitchells-mini.local" = {
+        "mitchells-air.local" = {
           id = "KHWIZFK-Z3RTI2H-QINY5TP-SBITUWH-7FL3IAI-4LSKT7M-VJ44WDM-VHJQAAI";
           name = "mitchells-air";
           autoAcceptFolders = true;
@@ -30,9 +30,7 @@ in {
         };
       };
       folders = myLib.fromHome {
-        "/shared/notes" = {
-          id = "notes";
-        };
+        "/shared/notes".id = "notes";
         "/shared/dash".id = "dash";
         "/shared/alfred".id = "alfred";
       };
