@@ -68,26 +68,6 @@
         "type": "github"
       }
     },
-    "dk": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1775064289,
-        "narHash": "sha256-TQ1WTioD0j34KzeVyJ8mu8GLCQ9/+lZV3ya/aJrfWlU=",
-        "ref": "refs/heads/main",
-        "rev": "408e85c56279d4c3dd485effabde76728d5299a4",
-        "revCount": 6,
-        "type": "git",
-        "url": "ssh://git@github.com/mhanberg/dk-flake"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/mhanberg/dk-flake"
-      }
-    },
     "expert": {
       "inputs": {
         "beam-flakes": "beam-flakes",
@@ -378,13 +358,13 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "dk": "dk",
         "expert": "expert",
         "home-manager": "home-manager_2",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-update": "nixpkgs-update",
-        "rummage": "rummage"
+        "rummage": "rummage",
+        "work": "work"
       }
     },
     "rummage": {
@@ -489,6 +469,26 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
+      }
+    },
+    "work": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1776102165,
+        "narHash": "sha256-YkaZrlAf1Rl3VAsb/lLchjpC4dvdkq89CglUMD3gIQM=",
+        "ref": "refs/heads/main",
+        "rev": "71d4fcd36b7bae775d4b86134bfe75622d179570",
+        "revCount": 7,
+        "type": "git",
+        "url": "ssh://git@github.com/mhanberg/work-flake"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/mhanberg/work-flake"
       }
     }
   },

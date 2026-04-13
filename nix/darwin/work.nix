@@ -1,8 +1,7 @@
 {...}: {
-  system.primaryUser = "m.hanberg";
+  system.primaryUser = "mhanberg";
   homebrew.casks = [
     "cleanshot"
-    "aws-vpn-client"
     "podman-desktop"
     "postgres-unofficial"
     "elgato-stream-deck"
@@ -11,8 +10,7 @@
   homebrew.brews = [
     "podman"
     "podman-compose"
-    "slp/krunkit/krunkit"
   ];
   ids.gids.nixbld = 350;
-  nix.settings.trusted-users = ["m.hanberg"];
+  nix.settings.trusted-users = ["mhanberg"];
 }

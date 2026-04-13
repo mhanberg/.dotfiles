@@ -16,9 +16,9 @@
     agenix.url = "github:ryantm/agenix";
     nixpkgs-update.url = "github:ryantm/nixpkgs-update";
     expert.url = "github:elixir-lang/expert";
-    dk = {
-      url = "git+ssh://git@github.com/mhanberg/dk-flake";
-      # url = "git+file:/Users/m.hanberg/src/tools/dk-flake";
+    work = {
+      url = "git+ssh://git@github.com/mhanberg/work-flake";
+      # url = "git+file:/Users/mhanberg/src/tools/work-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -32,7 +32,7 @@
     expert,
     rummage,
     nixpkgs-update,
-    dk,
+    work,
   }: let
     mkNixos = {extraNixosModules ? []}:
       nixpkgs.lib.nixosSystem {
@@ -113,8 +113,8 @@
     };
 
     darwinConfigurations = {
-      mhanberg-GQJNV7J4QY = mkDarwin {
-        extraDarwinModules = [./nix/darwin/dk.nix];
+      Mitchells-MBP = mkDarwin {
+        extraDarwinModules = [./nix/darwin/work.nix];
       };
       mitchells-mini = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix ./nix/darwin/link-apps];
@@ -140,9 +140,9 @@
         extraModules = [./nix/home/ubuntu.nix];
         arch = "aarch64-linux";
       };
-      "m.hanberg" = mkHm {
+      "mhanberg@Mitchells-MBP" = mkHm {
         extraModules = [
-          (import ./nix/home/dk.nix {dk = dk;})
+          (import ./nix/home/work.nix {work = work;})
         ];
         arch = "aarch64-darwin";
       };
