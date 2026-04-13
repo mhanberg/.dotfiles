@@ -3,7 +3,7 @@
   homebrew.casks = [
     "cleanshot"
     "docker-desktop"
-    "postgres-unofficial"
+    "postgres-app"
     "elgato-stream-deck"
     "focus"
     "slack"

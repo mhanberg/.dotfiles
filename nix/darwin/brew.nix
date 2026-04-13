@@ -13,9 +13,7 @@
     Keynote = 409183694;
     AmazonKindle = 302584613;
   };
-  homebrew.taps = [
-    "homebrew/services"
-  ];
+  homebrew.taps = [];
   homebrew.brews = [
     "openssl@3" # needed for compiling OTP with mise
     "php" # needed for Alfred

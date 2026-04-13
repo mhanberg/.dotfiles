@@ -140,7 +140,7 @@
         extraModules = [./nix/home/ubuntu.nix];
         arch = "aarch64-linux";
       };
-      "mhanberg@Mitchells-MacBook-Pro" = mkHm {
+      "mhanberg" = mkHm {
         extraModules = [
           (import ./nix/home/work.nix {work = work;})
         ];
