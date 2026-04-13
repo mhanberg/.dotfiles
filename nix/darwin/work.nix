@@ -1,6 +1,8 @@
 {...}: {
   system.primaryUser = "mhanberg";
   homebrew.casks = [
+    "1password"
+    "1password-cli"
     "cleanshot"
     "docker-desktop"
     "postgres-app"
