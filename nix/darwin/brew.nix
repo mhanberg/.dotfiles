@@ -11,7 +11,7 @@
     MenuBarStats = 714196447;
     Things = 904280696;
     Keynote = 409183694;
-    AmazonKindle = 302584613;
+    MindNode = 6446116532;
   };
   homebrew.taps = [];
   homebrew.brews = [
