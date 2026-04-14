@@ -1,8 +1,8 @@
 default:
   @just --list
 
-# update your flake.lock
-update-flake:
+# update all flake inputs flake.lock
+update-flake-inputs:
   #!/usr/bin/env bash
   set -euxo pipefail
   nix flake update
@@ -14,17 +14,17 @@ update-flake:
     git commit -m "chore(nix): update flake.lock"
   fi
 
-# update your flake.lock
-update-expert-flake:
+# update one input in flake.lock
+update-flake-input input:
   #!/usr/bin/env bash
   set -euxo pipefail
-  nix flake update expert
+  nix flake update {{ input }}
   if git diff --exit-code flake.lock > /dev/null 2>&1; then
     echo "no changes to flake.lock"
   else
     echo "committing flake.lock"
     git add flake.lock
-    git commit -m "chore(nix): update expert flake.lock"
+    git commit -m "chore(nix): update {{ input }} flake.lock"
   fi
 
 # run home-manager switch
