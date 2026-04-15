@@ -30,6 +30,7 @@ in {
         "/shared/notes".id = "notes";
         "/shared/dash".id = "dash";
         "/shared/alfred".id = "alfred";
+        "/shared/streamdeck".id = "streamdeck";
       };
     };
   };
