@@ -30,16 +30,15 @@ in {
     guiAddress = "0.0.0.0:8384";
     settings = {
       folders = let
-        devices = [
+        work = ["mitchells-work-adobe"];
+        macs = [
           "mitchells-mini"
-          "mitchells-work-adobe"
           "mitchells-air"
         ];
+        all = work ++ macs;
       in
         myLib.fromHome {
-          "/shared/notes".devices = devices;
-          "/shared/dash".devices = devices;
-          "/shared/alfred".devices = devices;
+          "/shared/notes".devices = all;
         };
     };
   };

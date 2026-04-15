@@ -54,4 +54,16 @@ in {
     light = true;
   };
   programs.lazygit.settings.git.paging.pager = "delta --paging=never --light";
+  programs.btop = {
+    settings.color_theme = "rose-pine-dawn";
+    themes.rose-pine = let
+      src = pkgs.fetchFromGitHub {
+        owner = "rose-pine";
+        repo = "btop";
+        rev = "c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e";
+        hash = "sha256-vtqqMEQbPOSRfQ28RIln5zZ4cZlyB3sMc2NaLUcITWo=";
+      };
+    in
+      builtins.readFile "${src}/rose-pine-dawn.theme";
+  };
 }

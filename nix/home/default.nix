@@ -244,7 +244,6 @@ in {
   };
 
   programs.btop.enable = true;
-  programs.btop.settings.color_theme = "tokyo-night";
   programs.btop.settings.theme_background = true;
 
   programs.zsh = {

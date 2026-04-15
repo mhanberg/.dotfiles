@@ -10,16 +10,16 @@ in {
   home.packages = with pkgs; [yq-go];
 
   services.syncthing.settings.folders = let
-    devices = [
-      "mitchells-mini"
-      "mitchells-air"
-      "nublar"
-    ];
+    macs = ["mitchells-mini" "mitchells-air"];
+    linux = ["nublar"];
+
+    all = macs ++ linux;
   in
     myLib.fromHome {
-      "/shared/notes".devices = devices;
-      "/shared/dash".devices = devices;
-      "/shared/alfred".devices = devices;
+      "/shared/notes".devices = all;
+      "/shared/dash".devices = macs;
+      "/shared/alfred".devices = macs;
+      "/shared/streamdeck".devices = macs;
     };
 
   programs.ghostty.package = null;

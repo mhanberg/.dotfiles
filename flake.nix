@@ -148,12 +148,16 @@
       };
       "mitchell@mitchells-mini" = mkHm {
         extraModules = [
-          ./nix/home/personal.nix
+          ./nix/home/personal-mac.nix
+          ./nix/home/mitchells-mini.nix
         ];
         arch = "aarch64-darwin";
       };
       "mitchell@mitchells-air" = mkHm {
-        extraModules = [./nix/home/personal.nix ./nix/home/macbook-air.nix];
+        extraModules = [
+          ./nix/home/personal-mac.nix
+          ./nix/home/mitchells-air.nix
+        ];
         arch = "aarch64-darwin";
       };
     };
