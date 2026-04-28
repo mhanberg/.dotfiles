@@ -16,7 +16,7 @@ jobs:
       matrix:
         include:
           - { host: "mitchell@nublar", os: "ubuntu-latest" }
-          - { host: "mhanberg@Mitchells-MacBook-Pro", os: "macos-latest" }
+          - { host: "mhanberg@Mitchells-MBP.localdomain", os: "macos-latest" }
           - { host: "mitchell@mitchells-mini", os: "macos-latest" }
     runs-on: ${{ matrix.os }}
 

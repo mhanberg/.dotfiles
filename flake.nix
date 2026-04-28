@@ -140,7 +140,7 @@
         extraModules = [./nix/home/ubuntu.nix];
         arch = "aarch64-linux";
       };
-      "mhanberg" = mkHm {
+      "mhanberg@Mitchells-MBP.localdomain" = mkHm {
         extraModules = [
           (import ./nix/home/work.nix {work = work;})
         ];
