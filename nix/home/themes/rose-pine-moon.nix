@@ -57,7 +57,7 @@ in {
   programs.lazygit.settings.git.paging.pager = "delta --paging=never --dark";
   programs.btop = {
     settings.color_theme = "rose-pine-moon";
-    themes.rose-pine = let
+    themes.rose-pine-moon = let
       src = pkgs.fetchFromGitHub {
         owner = "rose-pine";
         repo = "btop";
