@@ -114,7 +114,7 @@
 
     darwinConfigurations = {
       Mitchells-MacBook-Pro = mkDarwin {
-        extraDarwinModules = [./nix/darwin/work.nix];
+        extraDarwinModules = [work.darwinModules.default];
       };
       mitchells-mini = mkDarwin {
         extraDarwinModules = [./nix/darwin/personal.nix ./nix/darwin/link-apps];

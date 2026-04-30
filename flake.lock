@@ -478,11 +478,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776187888,
-        "narHash": "sha256-t8Go8GQu/w58OklcjLTmCaxonr5anccm0YeFQaASLa8=",
+        "lastModified": 1777382721,
+        "narHash": "sha256-lcT56YmCozOuSYyDwVg6TkMYbnBMdoFsZzr2jeclvAM=",
         "ref": "refs/heads/main",
-        "rev": "6eb7a158d951cb5b79c640d88121b5c38cb2a075",
-        "revCount": 10,
+        "rev": "f9533f01ea8e1b1f60b5af7582478f4314dfebd9",
+        "revCount": 11,
         "type": "git",
         "url": "ssh://git@github.com/mhanberg/work-flake"
       },
