@@ -115,7 +115,7 @@ in {
     prefix = "C-s";
     baseIndex = 1;
     terminal = "xterm-ghostty";
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "/bin/zsh";
     extraConfig = ''
       bind-key - split-window -v -c '#{pane_current_path}'
       bind-key \\ split-window -h -c '#{pane_current_path}'
@@ -313,13 +313,16 @@ in {
       notes = "zk edit --match=README --tag=startup";
     };
 
+    profileExtra =
+      if pkgs.stdenv.isDarwin
+      then ''
+        eval $(/opt/homebrew/bin/brew shellenv zsh)
+      ''
+      else "";
+
     initContent = ''
       setopt ignore_eof
       export EDITOR=nvim
-
-      if uname -a | grep -i "darwin" > /dev/null; then
-        eval $(/opt/homebrew/bin/brew shellenv)
-      fi
 
       path() {
         echo $PATH | tr ':' '\n'
