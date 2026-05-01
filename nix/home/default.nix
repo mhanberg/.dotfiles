@@ -58,6 +58,8 @@ in {
     '';
     tmux = lib.hm.dag.entryAfter ["writeBoundary"] ''
       main() {
+        ${pkgs.tmux}/bin/tmux has-session || return 0
+
         run ${pkgs.tmux}/bin/tmux source-file $HOME/.config/tmux/tmux.conf
       }
 
