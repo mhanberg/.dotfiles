@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+#
+# Summary: Show which process owns a port
+#
+# Usage: process-on-port PORT
+#
+# Prints the process that is listening on a TCP port or bound to a UDP port.
+# If your OS hides process details for sockets you do not own, rerun with sudo.
+#
+# Tested on macOS
+#
+# Created using GPT-5.4/OpenCode
+
+set -euo pipefail
+
+usage() {
+  echo "Usage: process-on-port PORT" >&2
+}
+
+port="${1:-}"
+
+if [[ "$port" == "-h" || "$port" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ $# -ne 1 ]]; then
+  usage
+  exit 1
+fi
+
+if ! [[ "$port" =~ ^[0-9]+$ ]] || ((port < 1 || port > 65535)); then
+  echo "PORT must be a number between 1 and 65535." >&2
+  exit 1
+fi
+
+if command -v lsof >/dev/null 2>&1; then
+  tcp_output="$(lsof -nP -iTCP:"$port" -sTCP:LISTEN 2>/dev/null || true)"
+  udp_output="$(lsof -nP -iUDP:"$port" 2>/dev/null || true)"
+
+  if [[ -n "$tcp_output" ]]; then
+    printf '%s\n' "$tcp_output"
+  fi
+
+  if [[ -n "$udp_output" ]]; then
+    if [[ -n "$tcp_output" ]]; then
+      printf '\n'
+    fi
+
+    printf '%s\n' "$udp_output"
+  fi
+
+  if [[ -n "$tcp_output" || -n "$udp_output" ]]; then
+    exit 0
+  fi
+elif command -v ss >/dev/null 2>&1; then
+  tcp_output="$(ss -Hltnp "sport = :$port" 2>/dev/null || true)"
+  udp_output="$(ss -Hlunp "sport = :$port" 2>/dev/null || true)"
+
+  if [[ -n "$tcp_output" ]]; then
+    printf '%s\n' "$tcp_output"
+  fi
+
+  if [[ -n "$udp_output" ]]; then
+    if [[ -n "$tcp_output" ]]; then
+      printf '\n'
+    fi
+
+    printf '%s\n' "$udp_output"
+  fi
+
+  if [[ -n "$tcp_output" || -n "$udp_output" ]]; then
+    exit 0
+  fi
+else
+  echo "Neither lsof nor ss is available on PATH." >&2
+  exit 1
+fi
+
+echo "No process is bound to port $port." >&2
+exit 1
