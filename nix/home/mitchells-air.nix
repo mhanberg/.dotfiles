@@ -1,15 +1,18 @@
-{...} @ args: let
+{ ... }@args:
+let
   myLib = import ../lib.nix args;
-in {
+in
+{
   services.syncthing = {
     settings = {
-      folders = let
-        work = ["mitchells-work-adobe"];
-        macs = ["mitchells-mini"];
-        linux = ["nublar"];
+      folders =
+        let
+          work = [ "mitchells-work-adobe" ];
+          macs = [ "mitchells-mini" ];
+          linux = [ "nublar" ];
 
-        all = work ++ macs ++ linux;
-      in
+          all = work ++ macs ++ linux;
+        in
         myLib.fromHome {
           "/shared/notes".devices = all;
           "/shared/dash".devices = macs ++ work;

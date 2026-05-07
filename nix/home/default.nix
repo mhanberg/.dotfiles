@@ -3,9 +3,11 @@
   lib,
   config,
   ...
-} @ args: let
+}@args:
+let
   myLib = import ../lib.nix args;
-in {
+in
+{
   nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -40,7 +42,7 @@ in {
   };
 
   home.activation = {
-    neovim = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       main() {
         instances=$(${pkgs.neovim-remote}/bin/nvr --serverlist)
         theme="$(cat $HOME/.motchvim-theme)"
@@ -56,7 +58,7 @@ in {
 
       run main
     '';
-    tmux = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    tmux = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       main() {
         ${pkgs.tmux}/bin/tmux has-session || return 0
 
@@ -89,19 +91,19 @@ in {
       workspace_definitions = [
         {
           name = "elixir";
-          has_any_file = ["mix.exs"];
+          has_any_file = [ "mix.exs" ];
         }
         {
           name = "rust";
-          has_any_file = ["Cargo.toml"];
+          has_any_file = [ "Cargo.toml" ];
         }
         {
           name = "code";
-          has_any_file = [".git"];
+          has_any_file = [ ".git" ];
         }
         {
           name = "notes";
-          has_any_file = [".zk"];
+          has_any_file = [ ".zk" ];
         }
       ];
     };
@@ -221,7 +223,7 @@ in {
       format = "openpgp";
     };
     includes = [
-      {path = "~/.gitconfig.local";}
+      { path = "~/.gitconfig.local"; }
     ];
 
     settings = {
@@ -316,11 +318,12 @@ in {
     };
 
     profileExtra =
-      if pkgs.stdenv.isDarwin
-      then ''
-        eval $(/opt/homebrew/bin/brew shellenv zsh)
-      ''
-      else "";
+      if pkgs.stdenv.isDarwin then
+        ''
+          eval $(/opt/homebrew/bin/brew shellenv zsh)
+        ''
+      else
+        "";
 
     initContent = ''
       setopt ignore_eof
@@ -501,7 +504,9 @@ in {
           verbose = "default";
         };
         branchLogCmd = "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --";
-        allBranchesLogCmds = ["git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium"];
+        allBranchesLogCmds = [
+          "git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium"
+        ];
         overrideGpg = false;
         disableForcePushing = false;
         confirmOnQuit = false;

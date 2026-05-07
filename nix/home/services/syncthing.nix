@@ -1,11 +1,13 @@
-{...} @ args: let
+{ ... }@args:
+let
   myLib = import ../../lib.nix args;
-in {
+in
+{
   services.syncthing = {
     enable = true;
     settings = {
       options = {
-        globalAnnounceServers = ["https://syncthing-discovery.motch.systems"];
+        globalAnnounceServers = [ "https://syncthing-discovery.motch.systems" ];
         urAccepted = -1;
       };
       devices = {

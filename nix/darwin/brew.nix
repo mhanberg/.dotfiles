@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   homebrew.enable = true;
   homebrew.onActivation.cleanup = "uninstall";
   homebrew.masApps = {
@@ -13,7 +14,7 @@
     Keynote = 409183694;
     MindNode = 6446116532;
   };
-  homebrew.taps = [];
+  homebrew.taps = [ ];
   homebrew.brews = [
     "openssl@3" # needed for compiling OTP with mise
     "php" # needed for Alfred

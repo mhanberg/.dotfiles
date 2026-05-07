@@ -1,11 +1,13 @@
-{pkgs, ...} @ args: let
+{ pkgs, ... }@args:
+let
   myLib = import ../lib.nix args;
-in {
+in
+{
   home.username = "mitchell";
   home.homeDirectory = "/home/mitchell";
 
   home.packages = with pkgs; [
-    (flameshot.override {enableWlrSupport = true;})
+    (flameshot.override { enableWlrSupport = true; })
     _1password-cli
     _1password-gui
     albert
@@ -29,14 +31,15 @@ in {
   services.syncthing = {
     guiAddress = "0.0.0.0:8384";
     settings = {
-      folders = let
-        work = ["mitchells-work-adobe"];
-        macs = [
-          "mitchells-mini"
-          "mitchells-air"
-        ];
-        all = work ++ macs;
-      in
+      folders =
+        let
+          work = [ "mitchells-work-adobe" ];
+          macs = [
+            "mitchells-mini"
+            "mitchells-air"
+          ];
+          all = work ++ macs;
+        in
         myLib.fromHome {
           "/shared/notes".devices = all;
         };
@@ -77,7 +80,7 @@ in {
           dash-to-panel.extensionUuid
           vitals.extensionUuid
         ];
-        disabled-extensions = [];
+        disabled-extensions = [ ];
       };
       "org/gnome/settings-daemon/plugins/power" = {
         sleep-inactive-ac-type = "nothing";

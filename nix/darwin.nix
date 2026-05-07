@@ -1,8 +1,9 @@
-{self, ...}: {
+{ self, ... }:
+{
   imports = [
     ./darwin/brew.nix
   ];
-  environment.systemPackages = [];
+  environment.systemPackages = [ ];
 
   nix.settings.experimental-features = "nix-command flakes";
   nix.settings.accept-flake-config = true;

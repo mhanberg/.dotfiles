@@ -5,7 +5,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -15,7 +16,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # for pi builds
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -30,14 +31,14 @@
     ];
   };
 
-  nix.settings.trusted-users = ["mitchell"];
+  nix.settings.trusted-users = [ "mitchell" ];
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -137,7 +138,11 @@
   users.users.mitchell = {
     isNormalUser = true;
     description = "Mitchell Hanberg";
-    extraGroups = ["networkmanager" "wheel" "libvirtd"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+    ];
     shell = pkgs.zsh;
     # packages = with pkgs; [
     #   #  thunderbird
@@ -151,10 +156,12 @@
   fileSystems."/mnt/synology/Media" = {
     device = "//motch-ds-423/Media";
     fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-    in ["${automount_opts},credentials=${config.age.secrets.smb-secrets.path},uid=1000,gid=100,noperm"];
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [ "${automount_opts},credentials=${config.age.secrets.smb-secrets.path},uid=1000,gid=100,noperm" ];
   };
 
   programs.zsh.enable = true;

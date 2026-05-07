@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   system.primaryUser = "mitchell";
 
   users.users.mitchell = {
@@ -10,14 +11,16 @@
     home = "/Users/mitchell";
   };
 
-  environment.systemPackages = [];
+  environment.systemPackages = [ ];
   # Add home-manager applications to `system.build.applications` so they will be linked
   # by services.link-apps.
-  system.build.applications = pkgs.lib.mkForce (pkgs.buildEnv {
-    name = "applications";
-    paths = config.environment.systemPackages;
-    pathsToLink = ["/Applications"];
-  });
+  system.build.applications = pkgs.lib.mkForce (
+    pkgs.buildEnv {
+      name = "applications";
+      paths = config.environment.systemPackages;
+      pathsToLink = [ "/Applications" ];
+    }
+  );
 
   services.link-apps = {
     enable = true;
@@ -46,5 +49,5 @@
     "wacom-tablet"
     "zoom"
   ];
-  nix.settings.trusted-users = ["mitchell"];
+  nix.settings.trusted-users = [ "mitchell" ];
 }

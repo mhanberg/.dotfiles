@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   colors = {
     "fg" = "#797593";
     "bg" = "#faf4ed";
@@ -19,11 +20,14 @@
     "marker" = "#b4637a";
     "prompt" = "#797593";
   };
-in {
+in
+{
   programs.ghostty.settings.theme = "Rose Pine Dawn";
   home.file = {
     ".motchvim-theme".text = "rose-pine-dawn";
-    ".fzf-colors".text = lib.concatStringsSep "," (lib.mapAttrsToList (name: value: "${name}:${value}") colors);
+    ".fzf-colors".text = lib.concatStringsSep "," (
+      lib.mapAttrsToList (name: value: "${name}:${value}") colors
+    );
   };
   programs.bat.themes = {
     rose-pine-dawn = {
@@ -56,14 +60,15 @@ in {
   programs.lazygit.settings.git.paging.pager = "delta --paging=never --light";
   programs.btop = {
     settings.color_theme = "rose-pine-dawn";
-    themes.rose-pine-dawn = let
-      src = pkgs.fetchFromGitHub {
-        owner = "rose-pine";
-        repo = "btop";
-        rev = "c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e";
-        hash = "sha256-vtqqMEQbPOSRfQ28RIln5zZ4cZlyB3sMc2NaLUcITWo=";
-      };
-    in
+    themes.rose-pine-dawn =
+      let
+        src = pkgs.fetchFromGitHub {
+          owner = "rose-pine";
+          repo = "btop";
+          rev = "c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e";
+          hash = "sha256-vtqqMEQbPOSRfQ28RIln5zZ4cZlyB3sMc2NaLUcITWo=";
+        };
+      in
       builtins.readFile "${src}/rose-pine-dawn.theme";
   };
 }

@@ -1,6 +1,8 @@
-{pkgs, ...} @ args: let
+{ pkgs, ... }@args:
+let
   myLib = import ../lib.nix args;
-in {
+in
+{
   home.username = "mitchell";
   home.homeDirectory = "/Users/mitchell";
 
@@ -32,7 +34,8 @@ in {
       };
     };
   };
-  programs.ssh.matchBlocks."* \"test -z $SSH_TTY\"".identityAgent = "'~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'";
+  programs.ssh.matchBlocks."* \"test -z $SSH_TTY\"".identityAgent =
+    "'~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'";
 
   programs.git.settings.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
   programs.git.settings.gpg.format = "ssh";

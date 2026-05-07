@@ -1,18 +1,21 @@
-{pkgs, ...}: {
-  home.packages = with pkgs;
+{ pkgs, ... }:
+{
+  home.packages =
+    with pkgs;
     [
-      google-chrome
-      argc
       actionlint
       alejandra
+      argc
       autoconf
       autogen
       automake
+      bash-language-server
       bat
       beam.packages.erlang_28.elixir_1_18
       beam.packages.erlang_28.erlang
       btop
       cachix
+      charm-freeze
       chromedriver
       cmake
       delta
@@ -28,22 +31,21 @@
       gh
       git
       git-lfs
+      google-chrome
       hyperfine
       jq
       just
       lazydocker
       lazygit
+      lua-language-server
       lua5_1
       luarocks
-      lua-language-server
-      # mise
       neovim
       neovim-remote
       nil
-      nixd
       nix-direnv
-      bash-language-server
-      yaml-language-server
+      nixd
+      nixfmt
       nodejs
       openssl
       ripgrep
@@ -52,25 +54,32 @@
       shellcheck
       shfmt
       silicon
-      charm-freeze
       silver-searcher
       sqlite-interactive
       starship
       stylua
       tailwindcss-language-server
-      tree-sitter
       tmux
       tokei
       tree-sitter
+      tree-sitter
       vim
       vscode-langservers-extracted
+      yaml-language-server
       yarn
       zk
       zsh
     ]
     ++ (
-      if pkgs.stdenv.isLinux
-      then [gcc coreutils xclip unixtools.ifconfig inotify-tools]
-      else []
+      if pkgs.stdenv.isLinux then
+        [
+          gcc
+          coreutils
+          xclip
+          unixtools.ifconfig
+          inotify-tools
+        ]
+      else
+        [ ]
     );
 }

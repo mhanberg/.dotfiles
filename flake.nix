@@ -23,45 +23,51 @@
     };
   };
 
-  outputs = {
-    self,
-    nix-darwin,
-    nixpkgs,
-    home-manager,
-    agenix,
-    expert,
-    rummage,
-    nixpkgs-update,
-    work,
-  }: let
-    mkNixos = {extraNixosModules ? []}:
-      nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit self;};
-        modules =
-          [
+  outputs =
+    {
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+      agenix,
+      expert,
+      rummage,
+      nixpkgs-update,
+      work,
+    }:
+    let
+      mkNixos =
+        {
+          extraNixosModules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit self; };
+          modules = [
             agenix.nixosModules.default
           ]
           ++ extraNixosModules;
-      };
-    mkDarwin = {extraDarwinModules ? []}:
-      nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit self;};
-        modules =
-          [
+        };
+      mkDarwin =
+        {
+          extraDarwinModules ? [ ],
+        }:
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit self; };
+          modules = [
             ./nix/darwin.nix
           ]
           ++ extraDarwinModules;
-      };
-    mkHm = {
-      extraModules ? [],
-      arch,
-    }:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${arch};
-        modules =
-          [
+        };
+      mkHm =
+        {
+          extraModules ? [ ],
+          arch,
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${arch};
+          modules = [
             ./nix/home
             agenix.homeManagerModules.default
             {
@@ -76,90 +82,97 @@
             rummage.homeManagerModules.default
           ]
           ++ extraModules;
+        };
+      mkInit =
+        {
+          system,
+          script ? ''
+            git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
+            nix run home-manager/master -- switch --flake ~/.dotfiles
+          '',
+        }:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          init = pkgs.writeShellApplication {
+            name = "init";
+            text = script;
+          };
+        in
+        {
+          type = "app";
+          program = "${init}/bin/init";
+        };
+    in
+    {
+      apps."aarch64-darwin".default = mkInit {
+        system = "aarch64-darwin";
+        script = ''
+          git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          sudo nix run nix-darwin -- switch --flake ~/.dotfiles
+          nix run home-manager/master -- switch --flake ~/.dotfiles
+        '';
       };
-    mkInit = {
-      system,
-      script ? ''
-        git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
-        nix run home-manager/master -- switch --flake ~/.dotfiles
-      '',
-    }: let
-      pkgs = nixpkgs.legacyPackages.${system};
-      init = pkgs.writeShellApplication {
-        name = "init";
-        text = script;
-      };
-    in {
-      type = "app";
-      program = "${init}/bin/init";
-    };
-  in {
-    apps."aarch64-darwin".default = mkInit {
-      system = "aarch64-darwin";
-      script = ''
-        git clone https://github.com/mhanberg/.dotfiles ~/.dotfiles
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        sudo nix run nix-darwin -- switch --flake ~/.dotfiles
-        nix run home-manager/master -- switch --flake ~/.dotfiles
-      '';
-    };
-    apps."x86_64-linux".default = mkInit {system = "x86_64-linux";};
-    apps."aarch64-linux".default = mkInit {system = "aarch64-linux";};
+      apps."x86_64-linux".default = mkInit { system = "x86_64-linux"; };
+      apps."aarch64-linux".default = mkInit { system = "aarch64-linux"; };
 
-    nixosConfigurations = {
-      nublar = mkNixos {
-        extraNixosModules = [./nix/nixos/nublar];
+      nixosConfigurations = {
+        nublar = mkNixos {
+          extraNixosModules = [ ./nix/nixos/nublar ];
+        };
       };
-    };
 
-    darwinConfigurations = {
-      Mitchells-MacBook-Pro = mkDarwin {
-        extraDarwinModules = [work.darwinModules.default];
+      darwinConfigurations = {
+        Mitchells-MacBook-Pro = mkDarwin {
+          extraDarwinModules = [ work.darwinModules.default ];
+        };
+        mitchells-mini = mkDarwin {
+          extraDarwinModules = [
+            ./nix/darwin/personal.nix
+            ./nix/darwin/link-apps
+          ];
+        };
+        mitchells-air = mkDarwin {
+          extraDarwinModules = [ ./nix/darwin/personal.nix ];
+        };
       };
-      mitchells-mini = mkDarwin {
-        extraDarwinModules = [./nix/darwin/personal.nix ./nix/darwin/link-apps];
-      };
-      mitchells-air = mkDarwin {
-        extraDarwinModules = [./nix/darwin/personal.nix];
-      };
-    };
 
-    homeConfigurations = {
-      "mitchell@nublar" = mkHm {
-        extraModules = [
-          ./nix/home/nublar.nix
-          {
-            home.packages = [
-              nixpkgs-update.packages.x86_64-linux.default
-            ];
-          }
-        ];
-        arch = "x86_64-linux";
-      };
-      "ubuntu@ubuntu" = mkHm {
-        extraModules = [./nix/home/ubuntu.nix];
-        arch = "aarch64-linux";
-      };
-      "mhanberg@Mitchells-MBP.localdomain" = mkHm {
-        extraModules = [
-          (import ./nix/home/work.nix {work = work;})
-        ];
-        arch = "aarch64-darwin";
-      };
-      "mitchell@mitchells-mini" = mkHm {
-        extraModules = [
-          ./nix/home/personal-mac.nix
-          ./nix/home/mitchells-mini.nix
-        ];
-        arch = "aarch64-darwin";
-      };
-      "mitchell@mitchells-air" = mkHm {
-        extraModules = [
-          ./nix/home/personal-mac.nix
-          ./nix/home/mitchells-air.nix
-        ];
-        arch = "aarch64-darwin";
+      homeConfigurations = {
+        "mitchell@nublar" = mkHm {
+          extraModules = [
+            ./nix/home/nublar.nix
+            {
+              home.packages = [
+                nixpkgs-update.packages.x86_64-linux.default
+              ];
+            }
+          ];
+          arch = "x86_64-linux";
+        };
+        "ubuntu@ubuntu" = mkHm {
+          extraModules = [ ./nix/home/ubuntu.nix ];
+          arch = "aarch64-linux";
+        };
+        "mhanberg@Mitchells-MBP.localdomain" = mkHm {
+          extraModules = [
+            (import ./nix/home/work.nix { work = work; })
+          ];
+          arch = "aarch64-darwin";
+        };
+        "mitchell@mitchells-mini" = mkHm {
+          extraModules = [
+            ./nix/home/personal-mac.nix
+            ./nix/home/mitchells-mini.nix
+          ];
+          arch = "aarch64-darwin";
+        };
+        "mitchell@mitchells-air" = mkHm {
+          extraModules = [
+            ./nix/home/personal-mac.nix
+            ./nix/home/mitchells-air.nix
+          ];
+          arch = "aarch64-darwin";
+        };
       };
     };
-  };
 }
