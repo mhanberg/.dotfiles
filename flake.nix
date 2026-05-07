@@ -43,10 +43,7 @@
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit self; };
-          modules = [
-            agenix.nixosModules.default
-          ]
-          ++ extraNixosModules;
+          modules = [ agenix.nixosModules.default ] ++ extraNixosModules;
         };
       mkDarwin =
         {
@@ -55,10 +52,7 @@
         nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = { inherit self; };
-          modules = [
-            ./nix/darwin.nix
-          ]
-          ++ extraDarwinModules;
+          modules = [ ./nix/darwin.nix ] ++ extraDarwinModules;
         };
       mkHm =
         {
@@ -117,35 +111,25 @@
       apps."aarch64-linux".default = mkInit { system = "aarch64-linux"; };
 
       nixosConfigurations = {
-        nublar = mkNixos {
-          extraNixosModules = [ ./nix/nixos/nublar ];
-        };
+        nublar = mkNixos { extraNixosModules = [ ./nix/nixos/nublar ]; };
       };
 
       darwinConfigurations = {
-        Mitchells-MacBook-Pro = mkDarwin {
-          extraDarwinModules = [ work.darwinModules.default ];
-        };
+        Mitchells-MacBook-Pro = mkDarwin { extraDarwinModules = [ work.darwinModules.default ]; };
         mitchells-mini = mkDarwin {
           extraDarwinModules = [
             ./nix/darwin/personal.nix
             ./nix/darwin/link-apps
           ];
         };
-        mitchells-air = mkDarwin {
-          extraDarwinModules = [ ./nix/darwin/personal.nix ];
-        };
+        mitchells-air = mkDarwin { extraDarwinModules = [ ./nix/darwin/personal.nix ]; };
       };
 
       homeConfigurations = {
         "mitchell@nublar" = mkHm {
           extraModules = [
             ./nix/home/nublar.nix
-            {
-              home.packages = [
-                nixpkgs-update.packages.x86_64-linux.default
-              ];
-            }
+            { home.packages = [ nixpkgs-update.packages.x86_64-linux.default ]; }
           ];
           arch = "x86_64-linux";
         };
@@ -154,9 +138,7 @@
           arch = "aarch64-linux";
         };
         "mhanberg@Mitchells-MBP.localdomain" = mkHm {
-          extraModules = [
-            (import ./nix/home/work.nix { work = work; })
-          ];
+          extraModules = [ (import ./nix/home/work.nix { work = work; }) ];
           arch = "aarch64-darwin";
         };
         "mitchell@mitchells-mini" = mkHm {

@@ -40,9 +40,7 @@ in
           ];
           all = work ++ macs;
         in
-        myLib.fromHome {
-          "/shared/notes".devices = all;
-        };
+        myLib.fromHome { "/shared/notes".devices = all; };
     };
   };
 
@@ -52,9 +50,7 @@ in
   programs.ghostty.systemd.enable = false;
 
   programs.rummage = {
-    settings.search_paths = [
-      (myLib.joinHome "/src")
-    ];
+    settings.search_paths = [ (myLib.joinHome "/src") ];
   };
 
   # programs.ssh.matchBlocks."* exec \"exit 1\"".identityAgent = "~/.1password/agent.sock";

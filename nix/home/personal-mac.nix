@@ -16,9 +16,7 @@ in
     ./services/syncthing.nix
   ];
   programs.rummage = {
-    settings.search_paths = [
-      (myLib.joinHome "/src")
-    ];
+    settings.search_paths = [ (myLib.joinHome "/src") ];
   };
   programs.ghostty = {
     package = null;
@@ -28,9 +26,7 @@ in
     enable = true;
     settings = {
       options = {
-        globalAnnounceServers = [
-          "https://syncthing-discovery.motch.systems"
-        ];
+        globalAnnounceServers = [ "https://syncthing-discovery.motch.systems" ];
       };
     };
   };

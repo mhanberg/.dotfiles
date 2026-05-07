@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 rec {
   joinHome = path: config.home.homeDirectory + path;
   fromHome =

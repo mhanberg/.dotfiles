@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}:
+{ pkgs, config, ... }:
 {
   programs.fzf.package = pkgs.symlinkJoin {
     name = "fzf";

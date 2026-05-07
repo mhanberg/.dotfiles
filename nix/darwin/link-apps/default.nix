@@ -11,10 +11,7 @@ let
   createMacOSAlias = (
     (toString (
       pkgs.callPackage (
-        {
-          stdenv,
-          lib,
-        }:
+        { stdenv, lib }:
         stdenv.mkDerivation {
           name = "create-macos-alias";
 
@@ -48,13 +45,9 @@ in
     services.link-apps = {
       enable = mkEnableOption "create aliases (not symlinks) for macOS Apps at activation time";
 
-      userName = mkOption {
-        type = types.str;
-      };
+      userName = mkOption { type = types.str; };
 
-      userHome = mkOption {
-        type = types.path;
-      };
+      userHome = mkOption { type = types.path; };
 
       dest = mkOption {
         type = types.path;

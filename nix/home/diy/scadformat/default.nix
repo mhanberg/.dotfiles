@@ -19,9 +19,7 @@
           hash = "sha256-X8STNxywwu3AirR0yrVGaduIU/P9ryJoLJXeBp64qJs=";
         };
 
-        subPackages = [
-          "cmd/scadformat.go"
-        ];
+        subPackages = [ "cmd/scadformat.go" ];
 
         vendorHash = "sha256-HOjfKFDG4otwu5TGXNtQCBQ7PURtPoeN8M8+uVHn5+4=";
 
