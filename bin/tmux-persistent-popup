@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+main() {
+  local key=$1
+  local current_pane_path=$2
+  local cmd=$3
+  local hash
+  hash="$(echo "$2" | md5sum | cut -c1-8)"
+  local session="persistent-tmux-popup-$key-$hash"
+
+  tmux has-session -t "$session" 2>/dev/null || tmux new-session -d -s "$session" -c "$current_pane_path" "$cmd"
+  tmux display-popup -w80% -h80% -E "tmux attach-session -t $session"
+}
+
+main "$1" "$2" "$3"

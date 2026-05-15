@@ -16,8 +16,8 @@ jobs:
       matrix:
         include:
           - { host: "mitchell@nublar", os: "ubuntu-latest" }
-          - { host: "mhanberg@Mitchells-MBP.localdomain", os: "macos-latest" }
           - { host: "mitchell@mitchells-mini", os: "macos-latest" }
+          - { host: "mitchell@mitchells-air", os: "macos-latest" }
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -49,8 +49,8 @@ jobs:
     strategy:
       matrix:
         host:
-          - "Mitchells-MacBook-Pro"
           - "mitchells-mini"
+          - "mitchells-air"
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
