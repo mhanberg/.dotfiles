@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-gh pr list |
+# shellcheck disable=SC2016
+gh pr list --json number,title,headRefName,updatedAt,author --template '{{range .}}{{$author := .author.login}}{{if .author.name}}{{$author = printf "%s (%s)" .author.name .author.login}}{{end}}{{printf "%s\t%s\t%s\t%s\t%s\n" (printf "#%v" .number | autocolor "green") $author .title .headRefName (timeago .updatedAt)}}{{end}}' |
   fzf \
     --delimiter "\t" \
     --reverse \
