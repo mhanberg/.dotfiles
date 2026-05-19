@@ -12,6 +12,10 @@ in
 
   home.packages = with pkgs; [ yq-go ];
 
+  programs.k9s = {
+    enable = true;
+  };
+
   services.syncthing.settings.folders =
     let
       macs = [

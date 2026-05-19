@@ -25,6 +25,19 @@ in
       lib.mapAttrsToList (name: value: "${name}:${value}") colors
     );
   };
+  programs.k9s =
+    let
+      skins = pkgs.fetchFromGitHub {
+        owner = "derailed";
+        repo = "k9s";
+        rev = "6dbf571c59fd48dc5b384aa46ee7f3e5decfae2b"; # v0.50.18
+        sha256 = "sha256-WIcT4LfoIZ8BctwrUgn+mLbqwJ2NZx6Sc5sJeT9fsus=";
+      };
+    in
+    {
+      settings.k9s.ui.skin = "rose-pine-dawn";
+      skins.rose-pine-moon = "${skins}/skins/rose-pine-dawn.yaml";
+    };
   programs.bat.themes = {
     rose-pine-dawn = {
       src = pkgs.fetchFromGitHub {
