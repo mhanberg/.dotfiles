@@ -3,6 +3,10 @@ let
   myLib = import ../lib.nix args;
 in
 {
+  imports = [
+    ./ssh.nix
+    ./ssh-nublar.nix
+  ];
   services.syncthing = {
     settings = {
       folders =

@@ -24,6 +24,7 @@ in
   ];
 
   imports = [
+    ./ssh.nix
     ./themes/rose-pine.nix
     ./services/syncthing.nix
   ];

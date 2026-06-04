@@ -174,41 +174,6 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
-      "motch-ds-423" = {
-        hostname = "motch-ds-423";
-        setEnv = {
-          TERM = "xterm-256color";
-        };
-      };
-      sorna.forwardAgent = true;
-      ingen.forwardAgent = true;
-      ray.forwardAgent = true;
-      nedry.forwardAgent = true;
-      hammond.forwardAgent = true;
-      nublar = {
-        hostname = "nublar";
-        user = "mitchell";
-        forwardAgent = true;
-        extraOptions = {
-          RequestTTY = "yes";
-          LogLevel = "Quiet";
-        };
-
-        localForwards = [
-          {
-            bind.port = 4999;
-            host.address = "127.0.0.1";
-            host.port = 4999;
-          }
-          {
-            bind.port = 8000;
-            host.address = "127.0.0.1";
-            host.port = 8000;
-          }
-        ];
-      };
-    };
   };
 
   programs.delta = {
