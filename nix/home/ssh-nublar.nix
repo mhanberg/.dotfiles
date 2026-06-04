@@ -2,7 +2,7 @@
   programs.ssh = {
     settings = {
       nublar = {
-        HostNmae = "nublar";
+        HostName = "nublar";
         User = "mitchell";
         ForwardAgent = true;
         RequestTTY = "yes";
