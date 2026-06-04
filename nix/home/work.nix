@@ -44,4 +44,7 @@ in
     settings.gpg.format = "ssh";
     settings.commit.gpgSign = true;
   };
+  programs.lazygit = {
+    settings.git.autofetch = false;
+  };
 }
