@@ -6,12 +6,12 @@ macOS utilizes nix-darwin in order to manage homebrew dependencies, and both mac
 
 ## Getting Started
 
-Install Nix with the determinate nix installer
+Install Nix with the new official nix-installer
 
 ```bash
 # if on a mac
 xcode-select --install
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --determinate
+curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install --enable-flakes
 ```
 
 Run the installer
