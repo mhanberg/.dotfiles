@@ -54,7 +54,6 @@
       shellcheck
       shfmt
       silicon
-      silver-searcher
       sqlite-interactive
       starship
       stylua
