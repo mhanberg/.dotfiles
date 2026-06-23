@@ -15,7 +15,7 @@
     };
     agenix.url = "github:ryantm/agenix";
     nixpkgs-update.url = "github:ryantm/nixpkgs-update";
-    expert.url = "github:elixir-lang/expert";
+    expert.url = "github:expert-lsp/expert";
     work = {
       url = "git+ssh://git@github.com/mhanberg/work-flake";
       # url = "git+file:/Users/mhanberg/src/tools/work-flake";
