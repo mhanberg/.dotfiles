@@ -75,15 +75,15 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1781876091,
-        "narHash": "sha256-FG0HNOEhQGe6gLh/85jXHwWLVKzfhc0M2thEgtYcN1c=",
-        "owner": "elixir-lang",
+        "lastModified": 1782205120,
+        "narHash": "sha256-gRJCveS/F+uhAz+vdIK+CxTZnF4V/SNquAsXWAzH3vc=",
+        "owner": "expert-lsp",
         "repo": "expert",
-        "rev": "c0494e9f338233d1c3909224c0b57d862eb46aeb",
+        "rev": "5b30ad62e950bb82c37e3a3cca76494c93bb6bfe",
         "type": "github"
       },
       "original": {
-        "owner": "elixir-lang",
+        "owner": "expert-lsp",
         "repo": "expert",
         "type": "github"
       }
@@ -673,11 +673,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778867914,
-        "narHash": "sha256-qCV6zayaIV8CTbX1NvTt43FxB80PmjOzz1Fg08k01v0=",
+        "lastModified": 1782225430,
+        "narHash": "sha256-AmU5xaslh1JzEDxRR7qT9GU1nKFVz14IkYn1jaU9g58=",
         "ref": "refs/heads/main",
-        "rev": "cb23420b6a6eda29eaf02948d19c9700e5c90ac1",
-        "revCount": 40,
+        "rev": "5f73338c556a082b68b50b0ffcc8d715b612bd3c",
+        "revCount": 41,
         "type": "git",
         "url": "ssh://git@github.com/mhanberg/work-flake"
       },
