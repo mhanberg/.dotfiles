@@ -1,8 +1,8 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home.packages =
     with pkgs;
     [
+      (pkgs.callPackage ../home/diy/weave/default.nix { })
       actionlint
       alejandra
       argc
