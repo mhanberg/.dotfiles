@@ -119,7 +119,7 @@ in
     prefix = "C-s";
     baseIndex = 1;
     terminal = "xterm-ghostty";
-    shell = "/bin/zsh";
+    shell = if pkgs.stdenv.isDarwin then "/bin/zsh" else "~/.nix-profile/bin/zsh";
     extraConfig = ''
       bind-key - split-window -v -c '#{pane_current_path}'
       bind-key \\ split-window -h -c '#{pane_current_path}'
