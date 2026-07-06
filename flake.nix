@@ -110,6 +110,8 @@
       };
       apps."x86_64-linux".default = mkInit { system = "x86_64-linux"; };
       apps."aarch64-linux".default = mkInit { system = "aarch64-linux"; };
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-linux.nixfmt-tree;
 
       nixosConfigurations = {
         nublar = mkNixos { extraNixosModules = [ ./nix/nixos/nublar ]; };
