@@ -120,6 +120,11 @@ in
     enableGitIntegration = true;
   };
 
+  programs.gh = {
+    enable = true;
+    extensions = with pkgs; [ gh-notify ];
+  };
+
   programs.git = {
     enable = true;
     signing = {

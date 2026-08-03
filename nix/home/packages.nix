@@ -28,7 +28,6 @@
       figlet
       fswatch
       gawk
-      gh
       git
       git-lfs
       google-chrome
