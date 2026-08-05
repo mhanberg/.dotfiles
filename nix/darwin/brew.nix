@@ -21,6 +21,7 @@
   ];
   homebrew.casks = [
     "alfred"
+    "dbngin"
     "chromedriver"
     "cleanshot"
     "dash"
