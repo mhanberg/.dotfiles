@@ -163,7 +163,8 @@ in
     dotDir = "${config.xdg.configHome}/zsh";
     enableVteIntegration = true;
     autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    fastSyntaxHighlighting.enable = true;
+
     plugins = [
       {
         name = "ohmyzsh-key-bindings";
