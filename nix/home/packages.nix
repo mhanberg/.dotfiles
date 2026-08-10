@@ -3,6 +3,7 @@
     with pkgs;
     [
       (pkgs.callPackage ../home/diy/weave/default.nix { })
+      (pkgs.callPackage ../home/diy/zk-graph-view/default.nix { })
       actionlint
       alejandra
       argc
