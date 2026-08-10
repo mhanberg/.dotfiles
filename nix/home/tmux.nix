@@ -41,15 +41,15 @@
       set -g renumber-windows on
       bind-key b break-pane -d
 
-      bind C-j display-popup -B -E -w "50%" -h "50%" -y "0"  "tmux-switch-clients"
-      bind C-y display-popup -B -E -w "50%" -h "50%" -y "0"  "tmux-open-project"
+      bind C-j new-pane -x "50%" -y "50%" -X "25%" -Y 1 -S "fg=#c4a7e7" "tmux-switch-clients"
+      bind C-y new-pane -x "50%" -y "50%" -X "25%" -Y 1 -S "fg=#c4a7e7" "tmux-open-project"
 
-      bind C-m run-shell "XDG_CONFIG_HOME="$HOME/.config" tmux-persistent-popup lazygit #{pane_current_path} lazygit"
-      bind C-, run-shell "XDG_CONFIG_HOME="$HOME/.config" tmux-persistent-popup lazyjira #{pane_current_path} lazyjira"
-      bind C-o run-shell "tmux-persistent-popup clanker #{pane_current_path} zsh"
-      bind C-u display-popup -E -w "90%" -h "90%" "btop"
-      bind C-h display-popup -E -w "90%" -h "90%"  "fzf-prs"
-      bind C-i display-popup -E -w "90%" -h "90%"  "fzf-issues"
+      bind C-m new-pane -x "80%" -y "80%" -X "10%" -Y "10%" -S "fg=#c4a7e7" -c "#{pane_current_path}" "lazygit"
+      bind C-, new-pane -x "80%" -y "80%" -X "10%" -Y "10%" -S "fg=#c4a7e7" -c "#{pane_current_path}" "lazyjira"
+      bind C-o new-pane -x "80%" -y "80%" -X "10%" -Y "10%" -S "fg=#c4a7e7" -c "#{pane_current_path}" "zsh"
+      bind C-u new-pane -x "90%" -y "90%" -X "5%" -Y "5%" -S "fg=#c4a7e7" "btop"
+      bind C-h new-pane -x "90%" -y "90%" -X "5%" -Y "5%" -S "fg=#c4a7e7" "fzf-prs"
+      bind C-i new-pane -x "90%" -y "90%" -X "5%" -Y "5%" -S "fg=#c4a7e7" "fzf-issues"
 
       unbind-key C-d
 

@@ -2,7 +2,7 @@
 
 function main() {
 
-  dir="$(rummage | fzf --reverse --border=rounded --prompt='> ')"
+  dir="$(rummage | fzf --reverse --border=rounded --prompt='> ' --border none)"
 
   if [ "$dir" ]; then
     session_name="$(basename "$dir" | sed 's/[.-]/_/g')"

@@ -4,7 +4,7 @@ function pick_session() {
   tmux-list-sessions |
     fzf \
       --reverse \
-      --border=rounded \
+      --border=none \
       --prompt='Go to> ' \
       --header="[CTRL-X] Kill Session" \
       --bind='ctrl-x:execute(tmux kill-session -t {})+reload(tmux-list-sessions)'
