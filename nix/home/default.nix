@@ -399,8 +399,9 @@ in
     enable = true;
     settings = {
       git = {
-        pagers = [
+        diffRenderers = [
           {
+            type = "rawGit";
             colorArg = "always";
             # pager = "delta --paging=never";
             useConfig = false;
