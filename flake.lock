@@ -75,11 +75,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1786225406,
-        "narHash": "sha256-G1M4M4dhjO/BM7n/qVM5QZgQ3RmE6juT/KoSeCJZ/LA=",
+        "lastModified": 1786741356,
+        "narHash": "sha256-M2djZhlCdHyRUocqSQWHTD2qqt+3QPePID/8JHqdu2w=",
         "owner": "expert-lsp",
         "repo": "expert",
-        "rev": "ccc548ad77355d679302c3dfdb5f472043e2e27c",
+        "rev": "0f766d007555c0470f8a9393926b72e2dcbeb755",
         "type": "github"
       },
       "original": {
@@ -269,11 +269,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786031233,
-        "narHash": "sha256-TIDlLTLI1/pB7IqgjzcKQjpODQsZE2oII4XGG9B6KjI=",
+        "lastModified": 1786826571,
+        "narHash": "sha256-nNqmXIFmESRnU91KARtiekSox0+o+E3AS0d1TuUQ/9o=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7834e82588860aaf780cec1366524456a70898d7",
+        "rev": "c8058ecc1329a71a3c99c4d0353dba4009a66152",
         "type": "github"
       },
       "original": {
@@ -475,11 +475,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1785975029,
-        "narHash": "sha256-X44cn5rzytELc3NNoQsh0aLkjWA/QzPfc6HPQmsG3sU=",
+        "lastModified": 1786593342,
+        "narHash": "sha256-smTKQXMLLStzc8zJevMCckbk3My7SvbbLmPYZUJJKW4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "70ce234312134a463ba7728e94da2486a1d237ac",
+        "rev": "6b5e5b7a6631f065bf6908986990b37d845f847f",
         "type": "github"
       },
       "original": {
@@ -723,11 +723,11 @@
         "zk-slack-canvas": "zk-slack-canvas"
       },
       "locked": {
-        "lastModified": 1784124150,
-        "narHash": "sha256-V8Z1WA8vw4oM3udARipSOY+vkO4Z4l0rHYj7oNENaws=",
+        "lastModified": 1786653984,
+        "narHash": "sha256-OlPumASj8+TqGWAzKswptbkq8KK7mSBUp74I0gaQvJY=",
         "ref": "refs/heads/main",
-        "rev": "52a383eaf849a2c34fce6e2f8215c3f663db5338",
-        "revCount": 52,
+        "rev": "4c53583dd2705ce52c9e2d289a5a7265b15a2726",
+        "revCount": 53,
         "type": "git",
         "url": "ssh://git@github.com/mhanberg/work-flake"
       },
