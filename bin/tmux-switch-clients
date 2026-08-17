@@ -6,7 +6,10 @@ function pick_session() {
       --reverse \
       --border=none \
       --prompt='Go to> ' \
-      --header="[CTRL-X] Kill Session" \
+      --header="[CTRL-X] Kill Session  [CTRL-T] Toggle Preview" \
+      --preview='tmux capture-pane -ep -t {}' \
+      --preview-window='bottom,80%,border-top' \
+      --bind='ctrl-t:toggle-preview' \
       --bind='ctrl-x:execute(tmux kill-session -t {})+reload(tmux-list-sessions)'
 }
 

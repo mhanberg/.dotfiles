@@ -41,12 +41,11 @@
       set -g renumber-windows on
       bind-key b break-pane -d
 
-      bind C-j new-pane -x "50%" -y "50%" -X "25%" -Y 1 -S "fg=#c4a7e7" "tmux-switch-clients"
+      bind C-j new-pane -x "90%" -y "90%" -X "5%" -Y 1 -S "fg=#c4a7e7" "tmux-switch-clients"
       bind C-y new-pane -x "50%" -y "50%" -X "25%" -Y 1 -S "fg=#c4a7e7" "tmux-open-project"
 
       bind C-m new-pane -x "80%" -y "80%" -X "10%" -Y "10%" -S "fg=#c4a7e7" -c "#{pane_current_path}" "lazygit"
       bind C-, new-pane -x "80%" -y "80%" -X "10%" -Y "10%" -S "fg=#c4a7e7" -c "#{pane_current_path}" "lazyjira"
-      bind C-o new-pane -x "80%" -y "80%" -X "10%" -Y "10%" -S "fg=#c4a7e7" -c "#{pane_current_path}" "zsh"
       bind C-u new-pane -x "90%" -y "90%" -X "5%" -Y "5%" -S "fg=#c4a7e7" "btop"
       bind C-h new-pane -x "90%" -y "90%" -X "5%" -Y "5%" -S "fg=#c4a7e7" "fzf-prs"
       bind C-i new-pane -x "90%" -y "90%" -X "5%" -Y "5%" -S "fg=#c4a7e7" "fzf-issues"
