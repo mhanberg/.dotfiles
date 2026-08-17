@@ -34,8 +34,10 @@ in
     };
 
   programs.tmux.extraConfig = ''
+    bind C-l display-popup -E "nix run nixpkgs#gum input | xargs zk --working-dir=$HOME/notes/adobe til --title"
     bind C-o new-pane -x "90%" -y "90%" -X "5%" -Y 1 -S "fg=#c4a7e7" "tmux-switch-agents"
   '';
+
   programs.ghostty.package = null;
 
   programs.ssh.settings."*".identityAgent =
