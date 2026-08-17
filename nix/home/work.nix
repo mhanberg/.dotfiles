@@ -33,6 +33,9 @@ in
       "/shared/streamdeck".devices = macs;
     };
 
+  programs.tmux.extraConfig = ''
+    bind C-o new-pane -x "90%" -y "90%" -X "5%" -Y 1 -S "fg=#c4a7e7" "tmux-switch-agents"
+  '';
   programs.ghostty.package = null;
 
   programs.ssh.settings."*".identityAgent =

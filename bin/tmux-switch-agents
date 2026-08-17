@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+function list_agent_windows() {
+  local sep=$'\t'
+  local fmt="#{pane_current_command}${sep}#{session_name}${sep}#{window_index}${sep}#{window_name}"
+
+  tmux list-panes -a -F "$fmt" 2>/dev/null |
+    awk -F'\t' '
+      $1 ~ /claude|opencode|codex/ {
+        key = $2 ":" $3
+        if (seen[key]++) next
+        agent = $1; sub(/^\./, "", agent); sub(/-wrapped.*/, "", agent)
+        printf "%s:%s\t%-8s  %-22s  #%s %s\n", $2, $3, agent, $2, $3, $4
+      }
+    '
+}
+
+function pick_window() {
+  fzf \
+    --delimiter='\t' \
+    --with-nth='2..' \
+    --reverse \
+    --border=none \
+    --prompt='Agents> ' \
+    --header='[CTRL-T] Toggle Preview' \
+    --preview='tmux capture-pane -ep -t {1}' \
+    --preview-window='bottom,80%,border-top' \
+    --bind='ctrl-t:toggle-preview'
+}
+
+function switch_to() {
+  local target="$1"
+
+  if [[ -z "$TMUX" ]]; then
+    tmux attach -t "$target"
+  else
+    tmux switch-client -t "$target"
+  fi
+}
+
+function main() {
+  local windows selection
+
+  windows="$(list_agent_windows)"
+
+  if [[ -z "$windows" ]]; then
+    echo "No tmux windows are running claude, opencode, or codex." >&2
+    exit 1
+  fi
+
+  selection="$(pick_window <<<"$windows")" || exit 0
+  [[ -z "$selection" ]] && exit 0
+
+  switch_to "${selection%%$'\t'*}"
+}
+
+main
