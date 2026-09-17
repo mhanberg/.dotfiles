@@ -68,7 +68,10 @@ in
     syntax-theme = "rose-pine-moon";
     dark = true;
   };
-  programs.lazygit.settings.git.paging.pager = "delta --paging=never --dark";
+  programs.lazygit.settings.git.paging = {
+    colorArg = "always";
+    pager = "delta --dark --paging=never ";
+  };
   programs.btop = {
     settings.color_theme = "rose-pine-moon";
     themes.rose-pine-moon =

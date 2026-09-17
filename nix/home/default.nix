@@ -402,10 +402,10 @@ in
       git = {
         diffRenderers = [
           {
-            type = "rawGit";
+            name = "delta";
+            type = "stdinFilter";
             colorArg = "always";
-            # pager = "delta --paging=never";
-            useConfig = false;
+            command = "delta --dark --paging=never";
           }
         ];
         commit = {
@@ -416,7 +416,7 @@ in
         allBranchesLogCmds = [
           "git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium"
         ];
-        overrideGpg = false;
+        overrideGpg = true;
         disableForcePushing = false;
         confirmOnQuit = false;
         os = {
