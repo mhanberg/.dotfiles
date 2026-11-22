@@ -50,11 +50,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1794498549,
-        "narHash": "sha256-w3mVv1CM2/WIMWmbAslxp6gAyMKTclUy1x1IQ5FY0aU=",
+        "lastModified": 1795224031,
+        "narHash": "sha256-cMoC7MXDSstcxTO+N9MIjGRgZ4M1tbLRIAh7+cBQ0qs=",
         "owner": "expert-lsp",
         "repo": "expert",
-        "rev": "254310edd7da0690d6a368a66271f282e4c21e21",
+        "rev": "44db935b2e786418b36935b6d5954091a51393bd",
         "type": "github"
       },
       "original": {
@@ -223,11 +223,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794715309,
-        "narHash": "sha256-awkBBs5ctFKgEYjpNGpi3t/VqF589n5EWfdinRb2gNI=",
+        "lastModified": 1795325944,
+        "narHash": "sha256-dOPB2dprqzQTkfE8dUpFAD93oeOqT/yQzUXs52yGjJk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a1293da7dd8e497e08d26173f97e2976b36a31ea",
+        "rev": "cf726ddc129f140991c2011a02d336933d0c4c4c",
         "type": "github"
       },
       "original": {
@@ -304,11 +304,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793418699,
-        "narHash": "sha256-+RpTlcdh9KqZ+ZiLkNSTvibQWm935EcIdBzRPCTFsrQ=",
+        "lastModified": 1795309925,
+        "narHash": "sha256-xpgrKyUvEMz0yCb+zklEpOFd0VnHyH0oBYce4Umj4e8=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "ff0e21a414d4547183396da1b44a66f2577b65e9",
+        "rev": "f673885103fa92c1c5b1d16b8bf2b858906809e2",
         "type": "github"
       },
       "original": {
@@ -429,11 +429,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1794495034,
-        "narHash": "sha256-E0hYoioqUtM2XmPPvYYpJgdADF5AW9oOoPSEiM9dTHQ=",
+        "lastModified": 1795249095,
+        "narHash": "sha256-8JDgyVvWUZg5m9hNlL8Ge9aT647ng3Ukc8NPMiKNTPQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2074cc672349f14240fb7ea90d509e0b643e9dd4",
+        "rev": "93a9ed0a866099a230ed5146a5bb7d16fd5c9b14",
         "type": "github"
       },
       "original": {
@@ -662,11 +662,11 @@
         "zk-slack-canvas": "zk-slack-canvas"
       },
       "locked": {
-        "lastModified": 1794418177,
-        "narHash": "sha256-VeoxDwqsUoGRCASI49EWtdnhWDoT5qEzMVVJz7e0YlQ=",
+        "lastModified": 1795031356,
+        "narHash": "sha256-vnS6sUNqqFGvXVrl+KJIcOsGwffunDPFaIzMWCC8AG8=",
         "ref": "refs/heads/main",
-        "rev": "78f27306cc0b249444205a7be04d26c6fd215cfb",
-        "revCount": 74,
+        "rev": "f65ff8b09183e01728319e24f2d094b5f73adf51",
+        "revCount": 76,
         "type": "git",
         "url": "ssh://git@github.com/mhanberg/work-flake"
       },
